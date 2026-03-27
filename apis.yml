@@ -1,0 +1,35 @@
+aid: snow-software
+name: Snow Software
+description: >-
+  Snow Software is an IT asset and SaaS management platform providing visibility into software licenses, cloud spend, and SaaS usage across the enterprise.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - SaaS Management
+  - IT Asset Management
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: snow-software:snow-software
+    name: Snow Software
+    description: >-
+      Snow Software is an IT asset and SaaS management platform providing visibility into software licenses, cloud spend, and SaaS usage across the enterprise.
+    humanURL: https://www.snowsoftware.com
+    tags:
+      - SaaS Management
+    properties:
+      - type: Documentation
+        url: https://docs.snowsoftware.com/
+common:
+  - type: Website
+    url: https://www.snowsoftware.com
+  - type: Documentation
+    url: https://docs.snowsoftware.com/
+  - type: GitHub Organization
+    url: https://github.com/SnowSoftware
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
