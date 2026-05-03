@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.snowsoftware.com/schemas/snow-atlas/saas-application.json",
+  "title": "Snow Atlas SaaS Application",
+  "description": "Schema for Snow Atlas SaaS application objects including KPIs, subscriptions, and user data",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the SaaS application"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the SaaS application"
+    },
+    "vendor": {
+      "type": "string",
+      "description": "SaaS application vendor name"
+    },
+    "category": {
+      "type": "string",
+      "description": "SaaS application category (e.g., Productivity, Security, CRM)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["managed", "unmanaged", "shadow_it"],
+      "description": "Management status of the SaaS application"
+    },
+    "discoverySource": {
+      "type": "string",
+      "description": "How the SaaS application was discovered (e.g., SSO, email, web traffic)"
+    },
+    "totalUsers": {
+      "type": "integer",
+      "description": "Total number of users with access to the application"
+    },
+    "activeUsers": {
+      "type": "integer",
+      "description": "Number of users who actively used the application in the period"
+    },
+    "annualSpend": {
+      "type": "number",
+      "description": "Annual spend on the application in the org's default currency"
+    },
+    "currency": {
+      "type": "string",
+      "description": "Currency code for spend values (ISO 4217)"
+    },
+    "subscriptions": {
+      "type": "array",
+      "description": "Subscription contracts associated with the application",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "format": "uuid"},
+          "name": {"type": "string"},
+          "vendor": {"type": "string"},
+          "annualCost": {"type": "number"},
+          "renewalDate": {"type": "string", "format": "date"},
+          "contractEndDate": {"type": "string", "format": "date"},
+          "licenseCount": {"type": "integer"}
+        }
+      }
+    },
+    "kpis": {
+      "type": "object",
+      "description": "Key performance indicators for the application",
+      "properties": {
+        "utilizationRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage of licensed seats actively used"
+        },
+        "costPerUser": {
+          "type": "number",
+          "description": "Annual cost per active user"
+        },
+        "unusedLicenses": {
+          "type": "integer",
+          "description": "Number of purchased licenses not actively used"
+        },
+        "potentialSavings": {
+          "type": "number",
+          "description": "Estimated savings from right-sizing unused licenses"
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["id", "name", "vendor"]
+}

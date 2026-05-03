@@ -1,0 +1,131 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "snow": "https://api-evangelist.github.io/snow-software/vocabulary/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "Organization": "schema:Organization",
+    "SoftwareApplication": "schema:SoftwareApplication",
+    "Product": "schema:Product",
+    "ITAssetManagementPlatform": {
+      "@id": "snow:ITAssetManagementPlatform",
+      "@type": "schema:SoftwareApplication"
+    },
+    "SoftwareLicense": {
+      "@id": "snow:SoftwareLicense",
+      "@type": "schema:Permit"
+    },
+    "SaaSApplication": {
+      "@id": "snow:SaaSApplication",
+      "@type": "schema:SoftwareApplication"
+    },
+    "SaaSSubscription": {
+      "@id": "snow:SaaSSubscription",
+      "@type": "schema:Order"
+    },
+    "Computer": {
+      "@id": "snow:Computer",
+      "@type": "schema:ComputerSystem"
+    },
+    "LicensePolicy": {
+      "@id": "snow:LicensePolicy",
+      "@type": "schema:CreativeWork"
+    },
+    "Agreement": {
+      "@id": "snow:Agreement",
+      "@type": "schema:Contract"
+    },
+    "licenseType": {
+      "@id": "snow:licenseType",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "snow:quantity",
+      "@type": "xsd:integer"
+    },
+    "usedQuantity": {
+      "@id": "snow:usedQuantity",
+      "@type": "xsd:integer"
+    },
+    "availableQuantity": {
+      "@id": "snow:availableQuantity",
+      "@type": "xsd:integer"
+    },
+    "expirationDate": {
+      "@id": "snow:expirationDate",
+      "@type": "xsd:date"
+    },
+    "maintenanceExpirationDate": {
+      "@id": "snow:maintenanceExpirationDate",
+      "@type": "xsd:date"
+    },
+    "utilizationRate": {
+      "@id": "snow:utilizationRate",
+      "@type": "xsd:decimal"
+    },
+    "costPerUser": {
+      "@id": "snow:costPerUser",
+      "@type": "xsd:decimal"
+    },
+    "annualSpend": {
+      "@id": "snow:annualSpend",
+      "@type": "xsd:decimal"
+    },
+    "potentialSavings": {
+      "@id": "snow:potentialSavings",
+      "@type": "xsd:decimal"
+    },
+    "activeUsers": {
+      "@id": "snow:activeUsers",
+      "@type": "xsd:integer"
+    },
+    "totalUsers": {
+      "@id": "snow:totalUsers",
+      "@type": "xsd:integer"
+    },
+    "discoverySource": {
+      "@id": "snow:discoverySource",
+      "@type": "xsd:string"
+    },
+    "dataRegion": {
+      "@id": "snow:dataRegion",
+      "@type": "xsd:string"
+    },
+    "hostname": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "operatingSystem": {
+      "@id": "schema:operatingSystem",
+      "@type": "xsd:string"
+    },
+    "vendor": {
+      "@id": "schema:manufacturer",
+      "@type": "xsd:string"
+    },
+    "renewalDate": {
+      "@id": "snow:renewalDate",
+      "@type": "xsd:date"
+    },
+    "contractEndDate": {
+      "@id": "snow:contractEndDate",
+      "@type": "xsd:date"
+    },
+    "licenseCount": {
+      "@id": "snow:licenseCount",
+      "@type": "xsd:integer"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

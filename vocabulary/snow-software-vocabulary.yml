@@ -1,0 +1,164 @@
+name: Snow Software Vocabulary
+description: >-
+  Domain vocabulary for Snow Software (now Flexera Snow) IT asset management,
+  SaaS management, software license compliance, and FinOps platform covering
+  Snow Atlas, Snow License Manager, and the Snow Atlas REST APIs.
+tags:
+  - Cloud License Management
+  - FinOps
+  - IT Asset Management
+  - SaaS Management
+  - Software Asset Management
+created: '2026-05-02'
+modified: '2026-05-02'
+
+terms:
+  - term: Snow Atlas
+    definition: >-
+      The cloud-native IT asset and SaaS management platform from Snow Software
+      (now Flexera). Provides SAM (Software Asset Management), SaaS Management,
+      Cloud License Management, and Commander (hybrid cloud management) in a
+      unified platform with REST APIs for programmatic access.
+    tags:
+      - Platform
+
+  - term: Software Asset Management (SAM)
+    abbreviation: SAM
+    definition: >-
+      The practice of managing and optimizing the purchase, deployment, maintenance,
+      utilization, and disposal of software applications within an organization.
+      SAM helps ensure license compliance, reduce overspend, and manage software
+      risk. Snow Atlas provides SAM Core APIs covering licenses, computers,
+      agreements, applications, and user accounts.
+    tags:
+      - Core Concept
+      - Compliance
+
+  - term: SaaS Management
+    definition: >-
+      The practice of discovering, managing, and optimizing cloud SaaS application
+      usage and spend across an enterprise. Snow Atlas's SaaS Management module
+      discovers apps via SSO, email scanning, and web traffic, providing visibility
+      into shadow IT, user activity, and subscription costs.
+    tags:
+      - Core Concept
+      - SaaS
+
+  - term: License Compliance
+    definition: >-
+      The state of having valid software license entitlements for all installed
+      and used software. Snow Atlas tracks license consumption against entitlements
+      to identify over-licensed (waste) and under-licensed (risk) positions.
+    tags:
+      - Compliance
+      - Risk Management
+
+  - term: License Metric
+    definition: >-
+      The unit by which a software license is measured and enforced, such as
+      Named User, Concurrent User, Device, Processor Core, or Enterprise. Snow
+      Atlas tracks consumption against each license's specific metric type.
+    tags:
+      - License Management
+
+  - term: License Upgrade
+    definition: >-
+      An upgrade path from one software license to a newer version or edition.
+      Available upgrade paths are retrievable via the Snow Atlas SAM Licenses API
+      (/api/sam/v1/licenses/{id}/upgrades).
+    tags:
+      - License Management
+
+  - term: License Policy
+    definition: >-
+      A set of rules in Snow Atlas governing how licenses are allocated, tracked,
+      and reported. License policies enforce compliance rules and define how
+      Snow calculates license consumption.
+    tags:
+      - Compliance
+      - License Management
+
+  - term: Right-Sizing
+    definition: >-
+      The practice of adjusting software license and SaaS subscription quantities
+      to match actual usage, eliminating over-provisioned licenses and recovering
+      spend on unused seats.
+    tags:
+      - FinOps
+      - Optimization
+
+  - term: Shadow IT
+    definition: >-
+      Software applications, SaaS subscriptions, or cloud services used within
+      an organization without explicit IT department approval or knowledge.
+      Snow Atlas's SaaS Management module detects shadow IT through multiple
+      discovery sources.
+    tags:
+      - Governance
+      - Risk Management
+      - SaaS
+
+  - term: Snow Commander
+    definition: >-
+      The hybrid cloud management component of Snow Atlas providing governance,
+      cost management, and operations for multi-cloud environments including
+      AWS, Azure, GCP, and private cloud.
+    tags:
+      - Cloud Management
+      - FinOps
+
+  - term: Groundplex (Snow context)
+    disambiguation: "Unrelated to SnapLogic Groundplex"
+    definition: >-
+      Not applicable to Snow Software. Snow uses the term Snowball or Snow
+      Inventory Agent for on-premises data collection, not Groundplex.
+    tags:
+      - Disambiguation
+
+  - term: Snow Inventory Agent
+    definition: >-
+      Software installed on endpoint devices (Windows, macOS, Linux, Unix) to
+      collect hardware and software inventory data and report it to Snow Atlas.
+      Available as standalone installer or via configuration templates on GitHub.
+    tags:
+      - Data Collection
+      - Infrastructure
+
+  - term: HATEOAS Pagination (Snow Atlas)
+    definition: >-
+      Snow Atlas REST APIs return collection responses with HATEOAS-style
+      pagination links including self, next, previous, first, and last link
+      relations. Responses include items array and pagination metadata with
+      page_number, page_size, total_pages, and total_count.
+    tags:
+      - API Design
+      - Integration
+
+  - term: Data Region
+    definition: >-
+      Snow Atlas is deployed across multiple geographic regions (westeurope,
+      australiasoutheast, eastus2, uksouth). The customer's data region determines
+      the API base URL (e.g., https://westeurope.snowsoftware.io). Visible in
+      Snow Atlas Settings > License Details > General Information.
+    tags:
+      - Infrastructure
+      - Data Residency
+
+  - term: SAM KPI
+    definition: >-
+      Key performance indicators for software asset management in Snow Atlas,
+      including license utilization rate, compliance position, potential savings,
+      and cost per user. Available via the SAM and SaaS Applications APIs.
+    tags:
+      - Analytics
+      - Reporting
+
+  - term: Flexera (Snow Software acquirer)
+    definition: >-
+      Flexera acquired Snow Software in 2023, integrating Snow Atlas into the
+      Flexera One platform. Snow Atlas APIs are now hosted at
+      docs.flexera.com/snow-atlas and docs-snow.flexera.com. Legacy Snow
+      documentation at docs.snowsoftware.com redirects to Flexera documentation.
+    tags:
+      - Company
+      - Platform

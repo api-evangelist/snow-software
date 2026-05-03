@@ -1,0 +1,162 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Snow Atlas SaaS Applications API"
+  description: >-
+    The Snow Atlas SaaS Applications API provides visibility and management
+    for SaaS applications across the enterprise. Enables listing, updating,
+    and analyzing SaaS apps, application KPIs, users, and consumption data.
+  tags:
+    - SaaS Management
+    - Snow Software
+    - Spend Optimization
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SNOW_ACCESS_TOKEN: SNOW_ACCESS_TOKEN
+      SNOW_REGION: SNOW_REGION
+
+capability:
+  consumes:
+    - type: http
+      namespace: snow-saas
+      baseUri: https://{{SNOW_REGION}}.snowsoftware.io
+      description: "Snow Atlas SaaS Applications API for SaaS portfolio management"
+      authentication:
+        type: bearer
+        token: "{{SNOW_ACCESS_TOKEN}}"
+      resources:
+        - name: saas-applications
+          path: /api/saas/v1/applications
+          description: "List and manage SaaS applications"
+          operations:
+            - name: get-saas-applications
+              method: GET
+              description: "Get Applications"
+              inputParameters:
+                - name: page_number
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number"
+                - name: page_size
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page size"
+                - name: filter
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter expression"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: saas-application-kpis
+          path: /api/saas/v1/applications/{id}/kpis
+          description: "Application KPIs and usage metrics"
+          operations:
+            - name: get-application-kpis
+              method: GET
+              description: "Get Application KPIs"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: saas-application-users
+          path: /api/saas/v1/applications/{id}/users
+          description: "Users with access to a SaaS application"
+          operations:
+            - name: get-application-users
+              method: GET
+              description: "Get Application Users"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: saas-overview-kpis
+          path: /api/saas/v1/applications/overview/kpis
+          description: "Organization-wide SaaS overview KPIs"
+          operations:
+            - name: get-saas-overview-kpis
+              method: GET
+              description: "Get Applications Overview KPIs"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: snow-saas-api
+      resources:
+        - path: /v1/saas-applications
+          name: saas-applications
+          description: "List SaaS applications in the portfolio"
+          operations:
+            - method: GET
+              name: get-saas-applications
+              description: "Get Applications"
+              call: "snow-saas.get-saas-applications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: snow-saas-mcp
+      transport: http
+      tools:
+        - name: get-saas-applications
+          description: "List all SaaS applications discovered in the Snow Atlas portfolio"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-saas.get-saas-applications"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-application-kpis
+          description: "Get key performance indicators for a specific SaaS application"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-saas.get-application-kpis"
+          with:
+            id: "tools.application_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-saas-overview-kpis
+          description: "Get organization-wide SaaS portfolio KPIs and spend overview"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-saas.get-saas-overview-kpis"
+          outputParameters:
+            - type: object
+              mapping: "$."

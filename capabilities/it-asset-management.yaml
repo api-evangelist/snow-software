@@ -1,0 +1,215 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Snow Software IT Asset Management"
+  description: >-
+    Unified workflow capability for IT asset management using Snow Atlas APIs.
+    Combines software license management and SaaS application visibility to
+    support SAM analysts, IT procurement teams, and FinOps practitioners in
+    managing software spend, license compliance, and SaaS portfolio optimization.
+    Covers license upgrades, policy management, computer license tracking,
+    SaaS application discovery, and spend KPIs.
+  tags:
+    - FinOps
+    - IT Asset Management
+    - License Compliance
+    - SaaS Management
+    - Snow Software
+    - Software Asset Management
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SNOW_ACCESS_TOKEN: SNOW_ACCESS_TOKEN
+      SNOW_REGION: SNOW_REGION
+
+capability:
+  consumes:
+    - import: snow-licenses
+      location: ./shared/licenses-api.yaml
+    - import: snow-saas
+      location: ./shared/saas-applications-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: snow-itam-api
+      description: "Unified REST API for Snow Software IT asset management and SaaS portfolio visibility."
+      resources:
+        - path: /v1/licenses/{id}/upgrades
+          name: license-upgrades
+          description: "Get upgrade options for a software license"
+          operations:
+            - method: GET
+              name: get-license-upgrades
+              description: "Get License Upgrades"
+              call: "snow-licenses.get-license-upgrades"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/license-policies
+          name: license-policies
+          description: "List configured license policies"
+          operations:
+            - method: GET
+              name: get-license-policies
+              description: "Get License Policies"
+              call: "snow-licenses.get-license-policies"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/licenses/{id}/computer-tracking
+          name: computer-license-tracking
+          description: "Track which computers are using a license"
+          operations:
+            - method: GET
+              name: get-computer-license-tracking
+              description: "Get Computer License Tracking"
+              call: "snow-licenses.get-computer-license-tracking"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/saas-applications
+          name: saas-applications
+          description: "List all discovered SaaS applications"
+          operations:
+            - method: GET
+              name: get-saas-applications
+              description: "Get Applications"
+              call: "snow-saas.get-saas-applications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/saas-applications/{id}/kpis
+          name: saas-application-kpis
+          description: "SaaS application usage KPIs"
+          operations:
+            - method: GET
+              name: get-application-kpis
+              description: "Get Application KPIs"
+              call: "snow-saas.get-application-kpis"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/saas-applications/{id}/users
+          name: saas-application-users
+          description: "Users with access to a SaaS application"
+          operations:
+            - method: GET
+              name: get-application-users
+              description: "Get Application Users"
+              call: "snow-saas.get-application-users"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/saas/overview
+          name: saas-overview
+          description: "Organization-wide SaaS portfolio overview"
+          operations:
+            - method: GET
+              name: get-saas-overview
+              description: "Get Applications Overview KPIs"
+              call: "snow-saas.get-saas-overview-kpis"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: snow-itam-mcp
+      transport: http
+      description: "MCP server for AI-assisted Snow Software IT asset management and SaaS portfolio analysis."
+      tools:
+        - name: get-license-upgrades
+          description: "Get available upgrade paths for a Snow Atlas software license"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-licenses.get-license-upgrades"
+          with:
+            id: "tools.license_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-license-policies
+          description: "List all software license policies configured in Snow Atlas"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-licenses.get-license-policies"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-computer-license-tracking
+          description: "Get computer-level tracking for a specific software license in Snow Atlas"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-licenses.get-computer-license-tracking"
+          with:
+            id: "tools.license_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-saas-applications
+          description: "List all SaaS applications discovered in the Snow Atlas portfolio"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-saas.get-saas-applications"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-saas-application-kpis
+          description: "Get key performance indicators for a specific SaaS application including usage and spend"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-saas.get-application-kpis"
+          with:
+            id: "tools.application_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-saas-application-users
+          description: "Get users with access to a specific SaaS application for license right-sizing"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-saas.get-application-users"
+          with:
+            id: "tools.application_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-saas-portfolio-overview
+          description: "Get organization-wide SaaS portfolio KPIs, total spend, and application count"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "snow-saas.get-saas-overview-kpis"
+          outputParameters:
+            - type: object
+              mapping: "$."

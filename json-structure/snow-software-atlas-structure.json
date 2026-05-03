@@ -1,0 +1,151 @@
+{
+  "name": "Snow Atlas Platform Structure",
+  "description": "Hierarchical structure of Snow Atlas IT asset management objects including licenses, computers, SaaS applications, and subscriptions",
+  "version": "1.0",
+  "structure": {
+    "Organization": {
+      "description": "Snow Atlas tenant representing an enterprise customer's IT environment",
+      "fields": {
+        "id": "string (UUID)",
+        "name": "string",
+        "region": "enum: westeurope | australiasoutheast | eastus2 | uksouth",
+        "dataRegion": "string",
+        "createdAt": "datetime"
+      },
+      "domains": {
+        "SAM (Software Asset Management)": {
+          "description": "Tracks software licenses, usage, and compliance",
+          "entities": {
+            "Application": {
+              "description": "A software application tracked in the Snow catalog",
+              "fields": {
+                "id": "string (UUID)",
+                "name": "string",
+                "vendor": "string",
+                "version": "string",
+                "category": "string",
+                "licenseRequired": "boolean"
+              },
+              "children": {
+                "License": {
+                  "description": "A software license entitlement",
+                  "fields": {
+                    "id": "string (UUID)",
+                    "name": "string",
+                    "licenseType": "string",
+                    "quantity": "integer",
+                    "usedQuantity": "integer",
+                    "status": "enum: active | inactive | expired",
+                    "expirationDate": "date",
+                    "maintenanceExpirationDate": "date"
+                  },
+                  "children": {
+                    "LicenseUpgrade": {
+                      "description": "An upgrade path from this license to a newer version/edition",
+                      "fields": {
+                        "targetApplicationId": "string (UUID)",
+                        "targetApplicationName": "string",
+                        "upgradeType": "string"
+                      }
+                    },
+                    "LicensePolicy": {
+                      "description": "Rules governing license allocation and compliance",
+                      "fields": {
+                        "id": "string (UUID)",
+                        "name": "string",
+                        "description": "string",
+                        "policyType": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Computer": {
+              "description": "A hardware asset (server, workstation, laptop) in the IT estate",
+              "fields": {
+                "id": "string (UUID)",
+                "hostname": "string",
+                "ipAddress": "string",
+                "operatingSystem": "string",
+                "manufacturer": "string",
+                "model": "string",
+                "status": "enum: active | inactive | retired",
+                "lastSeen": "datetime"
+              },
+              "children": {
+                "InstalledApplication": {
+                  "description": "A software application installed on the computer",
+                  "fields": {
+                    "applicationId": "string (UUID)",
+                    "applicationName": "string",
+                    "version": "string",
+                    "installDate": "date",
+                    "lastUsed": "datetime",
+                    "usageMinutes": "integer"
+                  }
+                }
+              }
+            },
+            "Agreement": {
+              "description": "A software agreement or contract with a vendor",
+              "fields": {
+                "id": "string (UUID)",
+                "name": "string",
+                "vendor": "string",
+                "startDate": "date",
+                "endDate": "date",
+                "status": "enum: active | expired | pending"
+              }
+            }
+          }
+        },
+        "SaaS Management": {
+          "description": "Tracks SaaS application portfolio, spend, and usage",
+          "entities": {
+            "SaaSApplication": {
+              "description": "A cloud SaaS application in use by the organization",
+              "fields": {
+                "id": "string (UUID)",
+                "name": "string",
+                "vendor": "string",
+                "category": "string",
+                "status": "enum: managed | unmanaged | shadow_it",
+                "discoverySource": "string",
+                "totalUsers": "integer",
+                "activeUsers": "integer",
+                "annualSpend": "decimal",
+                "currency": "string (ISO 4217)"
+              },
+              "children": {
+                "SaaSSubscription": {
+                  "description": "A subscription contract for a SaaS application",
+                  "fields": {
+                    "id": "string (UUID)",
+                    "name": "string",
+                    "annualCost": "decimal",
+                    "renewalDate": "date",
+                    "contractEndDate": "date",
+                    "licenseCount": "integer",
+                    "billingCycle": "enum: monthly | annual"
+                  }
+                },
+                "SaaSUser": {
+                  "description": "A user with access to the SaaS application",
+                  "fields": {
+                    "id": "string (UUID)",
+                    "displayName": "string",
+                    "email": "string",
+                    "lastActivity": "datetime",
+                    "isActive": "boolean",
+                    "licenseType": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

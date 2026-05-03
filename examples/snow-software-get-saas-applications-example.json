@@ -1,0 +1,68 @@
+{
+  "title": "Get SaaS Applications",
+  "description": "Example request and response for listing SaaS applications in Snow Atlas",
+  "request": {
+    "method": "GET",
+    "url": "https://westeurope.snowsoftware.io/api/saas/v1/applications?page_number=1&page_size=10",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Microsoft 365",
+          "vendor": "Microsoft",
+          "category": "Productivity",
+          "status": "managed",
+          "discoverySource": "SSO",
+          "totalUsers": 2500,
+          "activeUsers": 2150,
+          "annualSpend": 1250000.00,
+          "currency": "USD"
+        },
+        {
+          "id": "b2c3d4e5-f6a7-8901-bcde-f01234567891",
+          "name": "Salesforce Sales Cloud",
+          "vendor": "Salesforce",
+          "category": "CRM",
+          "status": "managed",
+          "discoverySource": "SSO",
+          "totalUsers": 450,
+          "activeUsers": 380,
+          "annualSpend": 450000.00,
+          "currency": "USD"
+        },
+        {
+          "id": "c3d4e5f6-a7b8-9012-cdef-012345678902",
+          "name": "Slack",
+          "vendor": "Salesforce",
+          "category": "Collaboration",
+          "status": "managed",
+          "discoverySource": "SSO",
+          "totalUsers": 3200,
+          "activeUsers": 2800,
+          "annualSpend": 320000.00,
+          "currency": "USD"
+        }
+      ],
+      "pagination": {
+        "page_number": 1,
+        "page_size": 10,
+        "total_pages": 5,
+        "total_count": 47
+      },
+      "_links": {
+        "self": {"href": "/api/saas/v1/applications?page_number=1&page_size=10"},
+        "next": {"href": "/api/saas/v1/applications?page_number=2&page_size=10"}
+      }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.snowsoftware.com/schemas/snow-atlas/license.json",
+  "title": "Snow Atlas Software License",
+  "description": "Schema for Snow Atlas SAM software license objects including upgrade paths, policies, and tracking data",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the software license"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the software license"
+    },
+    "applicationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the associated software application"
+    },
+    "applicationName": {
+      "type": "string",
+      "description": "Name of the licensed software application"
+    },
+    "vendor": {
+      "type": "string",
+      "description": "Software vendor name"
+    },
+    "licenseType": {
+      "type": "string",
+      "description": "License metric type (e.g., Named User, Processor, Enterprise)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "inactive", "expired"],
+      "description": "Current status of the license"
+    },
+    "expirationDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "License expiration date"
+    },
+    "purchaseDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date the license was purchased"
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "Number of license entitlements"
+    },
+    "usedQuantity": {
+      "type": "integer",
+      "description": "Number of license entitlements currently in use"
+    },
+    "availableQuantity": {
+      "type": "integer",
+      "description": "Number of unused license entitlements"
+    },
+    "maintenanceExpirationDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Software maintenance and support expiration date"
+    },
+    "upgrades": {
+      "type": "array",
+      "description": "Available upgrade paths for this license",
+      "items": {
+        "type": "object",
+        "properties": {
+          "targetApplicationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "targetApplicationName": {
+            "type": "string"
+          },
+          "upgradeType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "policyIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "IDs of license policies applied to this license"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the license was created in Snow Atlas"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the license was last updated"
+    }
+  },
+  "required": ["id", "name", "status"]
+}
