@@ -4,147 +4,47 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Snow Software
 providerId: snow-software
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Cloud License Management
-  - FinOps
-  - IT Asset Management
   - SaaS Management
   - Software Asset Management
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Snow Software has been acquired by Flexera. The legacy snowsoftware.com pricing page now
+  redirects to flexera.com, which markets the Snow product family (Snow Atlas, Snow Commander, Snow Risk
+  Monitor, etc.) as enterprise SAM/SaaS-management solutions sold via Contact Sales. No public per-seat
+  or per-asset price list is published.
+sources:
+  - https://www.flexera.com/products/snow
+notes: snowsoftware.com/pricing redirects to flexera.com (301). Flexera does not publish a public price
+  sheet for the Snow product family; all editions require contacting Flexera sales. This artifact is
+  trimmed to a single Contact Sales plan and reconciled is false.
 plans:
-  - id: snow-software-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Snow Software API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Snow Atlas SAM Licenses API
-      - name: Snow Atlas SaaS Applications API
-      - name: Snow Atlas SaaS Subscriptions API
-      - name: Snow Atlas SAM Computers API
-  - id: snow-software-pro
-    name: Professional
-    type: paid
-    description: Production tier for Snow Software. Provides higher quotas, priority support, and access
-      to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Snow Atlas SAM Licenses API
-      - name: Snow Atlas SaaS Applications API
-      - name: Snow Atlas SaaS Subscriptions API
-      - name: Snow Atlas SAM Computers API
-  - id: snow-software-enterprise
-    name: Enterprise
+  - id: snow-software-contact-sales
+    name: Contact Sales
     type: enterprise
-    description: Custom-negotiated tier for Snow Software. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
+    description: Custom-quoted Flexera Snow subscription covering Snow Atlas-based SaaS Management, Software
+      Asset Management, and related Snow-branded modules (Snow Commander, Snow ITSM Enhancer, Snow Optimizer
+      for SAP, Snow Risk Monitor, License Analyzer by Open iT). Sized to the customer's managed-asset
+      and SaaS-application count.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Platform Subscription
+        name: platform_subscription
+        type: subscription
+        metric: varies
         limit: -1
-        timeFrame: month
-        geo: configurable
-        domains: []
+        timeFrame: year
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains: []
-        unit: 1
-        price: custom
+        price: contact sales
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Snow Atlas SAM Licenses API
-      - name: Snow Atlas SaaS Applications API
-      - name: Snow Atlas SaaS Subscriptions API
-      - name: Snow Atlas SAM Computers API
+      - name: Snow Atlas
+      - name: Snow Software Asset Management
+      - name: Snow SaaS Management
+      - name: Snow Commander
+      - name: Snow Optimizer for SAP Software
+      - name: Snow Risk Monitor
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
