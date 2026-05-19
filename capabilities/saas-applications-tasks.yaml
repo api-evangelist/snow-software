@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 'SaaS: Applications — Tasks'
+  description: 'SaaS: Applications — Tasks. 1 operations. Lead operation: Get Task. Self-contained Naftiko capability covering
+    one Snow Software business surface.'
+  tags:
+  - Snow Software
+  - Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SNOW_SOFTWARE_API_KEY: SNOW_SOFTWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: saas-applications-tasks
+    baseUri: https://{region}.snowsoftware.io
+    description: 'SaaS: Applications — Tasks business capability. Self-contained, no shared references.'
+    resources:
+    - name: api-saas-consolidated-view-v1-tasks-id
+      path: /api/saas/consolidated-view/v1/tasks/{id}
+      operations:
+      - name: gettask
+        method: GET
+        description: Get Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SNOW_SOFTWARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: saas-applications-tasks-rest
+    port: 8080
+    description: 'REST adapter for SaaS: Applications — Tasks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.'
+    resources:
+    - path: /v1/api/saas/consolidated-view/v1/tasks/{id}
+      name: api-saas-consolidated-view-v1-tasks-id
+      description: REST surface for api-saas-consolidated-view-v1-tasks-id.
+      operations:
+      - method: GET
+        name: gettask
+        description: Get Task
+        call: saas-applications-tasks.gettask
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: saas-applications-tasks-mcp
+    port: 9090
+    transport: http
+    description: 'MCP adapter for SaaS: Applications — Tasks. One tool per consumed operation, routed inline through this
+      capability''s consumes block.'
+    tools:
+    - name: get-task
+      description: Get Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-tasks.gettask
+      outputParameters:
+      - type: object
+        mapping: $.

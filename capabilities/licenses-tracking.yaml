@@ -1,0 +1,418 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 'SAM: Licenses — Tracking'
+  description: 'SAM: Licenses — Tracking. 6 operations. Lead operation: Get Computer License Tracking. Self-contained Naftiko
+    capability covering one Snow Software business surface.'
+  tags:
+  - Snow Software
+  - Tracking
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SNOW_SOFTWARE_API_KEY: SNOW_SOFTWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: licenses-tracking
+    baseUri: https://{region}.snowsoftware.io
+    description: 'SAM: Licenses — Tracking business capability. Self-contained, no shared references.'
+    resources:
+    - name: api-sam-v1-licenses-tracking-computers-computerId
+      path: /api/sam/v1/licenses/tracking-computers/{computerId}
+      operations:
+      - name: getapplicationscomputertrackingcollection
+        method: GET
+        description: Get Computer License Tracking
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: computerId
+          in: path
+          type: string
+          description: The unique ID of the computer.
+          required: true
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-tracking-applicationId
+      path: /api/sam/v1/licenses/tracking/{applicationId}
+      operations:
+      - name: getsiteassignment
+        method: GET
+        description: Get Application License Tracking Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: The unique ID of the application.
+          required: true
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-tracking-applicationId-computers
+      path: /api/sam/v1/licenses/tracking/{applicationId}/computers
+      operations:
+      - name: getcomputertrackingcollection
+        method: GET
+        description: Get Computer License Tracking for a Given Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: The unique ID of the application.
+          required: true
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-tracking-applicationId-computers-computerId
+      path: /api/sam/v1/licenses/tracking/{applicationId}/computers/{computerId}
+      operations:
+      - name: getcomputertrackingdetailscollection
+        method: GET
+        description: Get Application License Tracking for a Computer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: The unique ID of the application.
+          required: true
+        - name: computerId
+          in: path
+          type: string
+          description: The unique ID of the computer.
+          required: true
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-tracking-applicationId-users
+      path: /api/sam/v1/licenses/tracking/{applicationId}/users
+      operations:
+      - name: getusertrackingcollection
+        method: GET
+        description: Get User License Tracking for Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: The unique ID of the application.
+          required: true
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-tracking-applicationId-users-userId
+      path: /api/sam/v1/licenses/tracking/{applicationId}/users/{userId}
+      operations:
+      - name: getusertrackingdetailscollection
+        method: GET
+        description: Get User License Tracking for Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: The unique ID of the application.
+          required: true
+        - name: userId
+          in: path
+          type: string
+          description: The unique ID of the user.
+          required: true
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    authentication:
+      type: bearer
+      token: '{{env.SNOW_SOFTWARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: licenses-tracking-rest
+    port: 8080
+    description: 'REST adapter for SAM: Licenses — Tracking. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.'
+    resources:
+    - path: /v1/api/sam/v1/licenses/tracking-computers/{computerid}
+      name: api-sam-v1-licenses-tracking-computers-computerid
+      description: REST surface for api-sam-v1-licenses-tracking-computers-computerId.
+      operations:
+      - method: GET
+        name: getapplicationscomputertrackingcollection
+        description: Get Computer License Tracking
+        call: licenses-tracking.getapplicationscomputertrackingcollection
+        with:
+          computerId: rest.computerId
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses/tracking/{applicationid}
+      name: api-sam-v1-licenses-tracking-applicationid
+      description: REST surface for api-sam-v1-licenses-tracking-applicationId.
+      operations:
+      - method: GET
+        name: getsiteassignment
+        description: Get Application License Tracking Details
+        call: licenses-tracking.getsiteassignment
+        with:
+          applicationId: rest.applicationId
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses/tracking/{applicationid}/computers
+      name: api-sam-v1-licenses-tracking-applicationid-computers
+      description: REST surface for api-sam-v1-licenses-tracking-applicationId-computers.
+      operations:
+      - method: GET
+        name: getcomputertrackingcollection
+        description: Get Computer License Tracking for a Given Application
+        call: licenses-tracking.getcomputertrackingcollection
+        with:
+          applicationId: rest.applicationId
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses/tracking/{applicationid}/computers/{computerid}
+      name: api-sam-v1-licenses-tracking-applicationid-computers-computerid
+      description: REST surface for api-sam-v1-licenses-tracking-applicationId-computers-computerId.
+      operations:
+      - method: GET
+        name: getcomputertrackingdetailscollection
+        description: Get Application License Tracking for a Computer
+        call: licenses-tracking.getcomputertrackingdetailscollection
+        with:
+          applicationId: rest.applicationId
+          computerId: rest.computerId
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses/tracking/{applicationid}/users
+      name: api-sam-v1-licenses-tracking-applicationid-users
+      description: REST surface for api-sam-v1-licenses-tracking-applicationId-users.
+      operations:
+      - method: GET
+        name: getusertrackingcollection
+        description: Get User License Tracking for Application
+        call: licenses-tracking.getusertrackingcollection
+        with:
+          applicationId: rest.applicationId
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses/tracking/{applicationid}/users/{userid}
+      name: api-sam-v1-licenses-tracking-applicationid-users-userid
+      description: REST surface for api-sam-v1-licenses-tracking-applicationId-users-userId.
+      operations:
+      - method: GET
+        name: getusertrackingdetailscollection
+        description: Get User License Tracking for Application
+        call: licenses-tracking.getusertrackingdetailscollection
+        with:
+          applicationId: rest.applicationId
+          userId: rest.userId
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: licenses-tracking-mcp
+    port: 9090
+    transport: http
+    description: 'MCP adapter for SAM: Licenses — Tracking. One tool per consumed operation, routed inline through this capability''s
+      consumes block.'
+    tools:
+    - name: get-computer-license-tracking
+      description: Get Computer License Tracking
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-tracking.getapplicationscomputertrackingcollection
+      with:
+        computerId: tools.computerId
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-license-tracking-details
+      description: Get Application License Tracking Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-tracking.getsiteassignment
+      with:
+        applicationId: tools.applicationId
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-computer-license-tracking-given
+      description: Get Computer License Tracking for a Given Application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-tracking.getcomputertrackingcollection
+      with:
+        applicationId: tools.applicationId
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-license-tracking-computer
+      description: Get Application License Tracking for a Computer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-tracking.getcomputertrackingdetailscollection
+      with:
+        applicationId: tools.applicationId
+        computerId: tools.computerId
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-license-tracking-application
+      description: Get User License Tracking for Application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-tracking.getusertrackingcollection
+      with:
+        applicationId: tools.applicationId
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-license-tracking-application-2
+      description: Get User License Tracking for Application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-tracking.getusertrackingdetailscollection
+      with:
+        applicationId: tools.applicationId
+        userId: tools.userId
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.

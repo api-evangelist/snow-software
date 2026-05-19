@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 'SAM: Licenses — Compliance'
+  description: 'SAM: Licenses — Compliance. 3 operations. Lead operation: Get Compliance Summary. Self-contained Naftiko capability
+    covering one Snow Software business surface.'
+  tags:
+  - Snow Software
+  - Compliance
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SNOW_SOFTWARE_API_KEY: SNOW_SOFTWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: licenses-compliance
+    baseUri: https://{region}.snowsoftware.io
+    description: 'SAM: Licenses — Compliance business capability. Self-contained, no shared references.'
+    resources:
+    - name: api-sam-v1-compliance-summary-applicationId
+      path: /api/sam/v1/compliance/summary/{applicationId}
+      operations:
+      - name: getcompliancesummarycollection
+        method: GET
+        description: Get Compliance Summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: The unique ID of the application.
+          required: true
+    - name: api-sam-v1-compliance-summary-applicationId-allocation
+      path: /api/sam/v1/compliance/summary/{applicationId}/allocation
+      operations:
+      - name: getallocationsummarycollection
+        method: GET
+        description: Get Compliance Allocation Summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: The unique ID of the application.
+          required: true
+    - name: api-sam-v1-compliance-summary-applicationId-usage
+      path: /api/sam/v1/compliance/summary/{applicationId}/usage
+      operations:
+      - name: getcompliancesummaryusagecollection
+        method: GET
+        description: Get Compliance Usage Summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: The unique ID of the application.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SNOW_SOFTWARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: licenses-compliance-rest
+    port: 8080
+    description: 'REST adapter for SAM: Licenses — Compliance. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.'
+    resources:
+    - path: /v1/api/sam/v1/compliance/summary/{applicationid}
+      name: api-sam-v1-compliance-summary-applicationid
+      description: REST surface for api-sam-v1-compliance-summary-applicationId.
+      operations:
+      - method: GET
+        name: getcompliancesummarycollection
+        description: Get Compliance Summary
+        call: licenses-compliance.getcompliancesummarycollection
+        with:
+          applicationId: rest.applicationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/compliance/summary/{applicationid}/allocation
+      name: api-sam-v1-compliance-summary-applicationid-allocation
+      description: REST surface for api-sam-v1-compliance-summary-applicationId-allocation.
+      operations:
+      - method: GET
+        name: getallocationsummarycollection
+        description: Get Compliance Allocation Summary
+        call: licenses-compliance.getallocationsummarycollection
+        with:
+          applicationId: rest.applicationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/compliance/summary/{applicationid}/usage
+      name: api-sam-v1-compliance-summary-applicationid-usage
+      description: REST surface for api-sam-v1-compliance-summary-applicationId-usage.
+      operations:
+      - method: GET
+        name: getcompliancesummaryusagecollection
+        description: Get Compliance Usage Summary
+        call: licenses-compliance.getcompliancesummaryusagecollection
+        with:
+          applicationId: rest.applicationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: licenses-compliance-mcp
+    port: 9090
+    transport: http
+    description: 'MCP adapter for SAM: Licenses — Compliance. One tool per consumed operation, routed inline through this
+      capability''s consumes block.'
+    tools:
+    - name: get-compliance-summary
+      description: Get Compliance Summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-compliance.getcompliancesummarycollection
+      with:
+        applicationId: tools.applicationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-compliance-allocation-summary
+      description: Get Compliance Allocation Summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-compliance.getallocationsummarycollection
+      with:
+        applicationId: tools.applicationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-compliance-usage-summary
+      description: Get Compliance Usage Summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-compliance.getcompliancesummaryusagecollection
+      with:
+        applicationId: tools.applicationId
+      outputParameters:
+      - type: object
+        mapping: $.

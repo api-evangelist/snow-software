@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 'SaaS: Subscriptions — Subscriptions'
+  description: 'SaaS: Subscriptions — Subscriptions. 4 operations. Lead operation: Get Subscription Insight Users. Self-contained
+    Naftiko capability covering one Snow Software business surface.'
+  tags:
+  - Snow Software
+  - Subscriptions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SNOW_SOFTWARE_API_KEY: SNOW_SOFTWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: saas-subscriptions-subscriptions
+    baseUri: https://{region}.snowsoftware.io
+    description: 'SaaS: Subscriptions — Subscriptions business capability. Self-contained, no shared references.'
+    resources:
+    - name: api-saas-consolidated-view-v1-subscriptions-subscriptionId-insights-insightRuleI
+      path: /api/saas/consolidated-view/v1/subscriptions/{subscriptionId}/insights/{insightRuleId}/users
+      operations:
+      - name: getsaasconsolidatedviewv1applicationsidinsightsinsightruleidusers
+        method: GET
+        description: Get Subscription Insight Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-subscriptions-subscriptionId-users
+      path: /api/saas/consolidated-view/v1/subscriptions/{subscriptionId}/users
+      operations:
+      - name: getsubscriptionusers
+        method: GET
+        description: Get Subscription Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-subscriptions-subscriptionId-users-consumption
+      path: /api/saas/consolidated-view/v1/subscriptions/{subscriptionId}/users/consumption
+      operations:
+      - name: getsaasconsolidatedviewv1subscriptionusersconsumption
+        method: GET
+        description: Get Subscription User Consumptions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-subscriptions-subscriptionId-users-userIds
+      path: /api/saas/consolidated-view/v1/subscriptions/{subscriptionId}/users/{userIds}
+      operations:
+      - name: deletesaasconsolidatedviewv1usersdelete
+        method: DELETE
+        description: Delete Subscription Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SNOW_SOFTWARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: saas-subscriptions-subscriptions-rest
+    port: 8080
+    description: 'REST adapter for SaaS: Subscriptions — Subscriptions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.'
+    resources:
+    - path: /v1/api/saas/consolidated-view/v1/subscriptions/{subscriptionid}/insights/{insightruleid}/users
+      name: api-saas-consolidated-view-v1-subscriptions-subscriptionid-insights-insightrulei
+      description: REST surface for api-saas-consolidated-view-v1-subscriptions-subscriptionId-insights-insightRuleI.
+      operations:
+      - method: GET
+        name: getsaasconsolidatedviewv1applicationsidinsightsinsightruleidusers
+        description: Get Subscription Insight Users
+        call: saas-subscriptions-subscriptions.getsaasconsolidatedviewv1applicationsidinsightsinsightruleidusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/subscriptions/{subscriptionid}/users
+      name: api-saas-consolidated-view-v1-subscriptions-subscriptionid-users
+      description: REST surface for api-saas-consolidated-view-v1-subscriptions-subscriptionId-users.
+      operations:
+      - method: GET
+        name: getsubscriptionusers
+        description: Get Subscription Users
+        call: saas-subscriptions-subscriptions.getsubscriptionusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/subscriptions/{subscriptionid}/users/consumption
+      name: api-saas-consolidated-view-v1-subscriptions-subscriptionid-users-consumption
+      description: REST surface for api-saas-consolidated-view-v1-subscriptions-subscriptionId-users-consumption.
+      operations:
+      - method: GET
+        name: getsaasconsolidatedviewv1subscriptionusersconsumption
+        description: Get Subscription User Consumptions
+        call: saas-subscriptions-subscriptions.getsaasconsolidatedviewv1subscriptionusersconsumption
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/subscriptions/{subscriptionid}/users/{userids}
+      name: api-saas-consolidated-view-v1-subscriptions-subscriptionid-users-userids
+      description: REST surface for api-saas-consolidated-view-v1-subscriptions-subscriptionId-users-userIds.
+      operations:
+      - method: DELETE
+        name: deletesaasconsolidatedviewv1usersdelete
+        description: Delete Subscription Users
+        call: saas-subscriptions-subscriptions.deletesaasconsolidatedviewv1usersdelete
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: saas-subscriptions-subscriptions-mcp
+    port: 9090
+    transport: http
+    description: 'MCP adapter for SaaS: Subscriptions — Subscriptions. One tool per consumed operation, routed inline through
+      this capability''s consumes block.'
+    tools:
+    - name: get-subscription-insight-users
+      description: Get Subscription Insight Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-subscriptions-subscriptions.getsaasconsolidatedviewv1applicationsidinsightsinsightruleidusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-subscription-users
+      description: Get Subscription Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-subscriptions-subscriptions.getsubscriptionusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-subscription-user-consumptions
+      description: Get Subscription User Consumptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-subscriptions-subscriptions.getsaasconsolidatedviewv1subscriptionusersconsumption
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-subscription-users
+      description: Delete Subscription Users
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: saas-subscriptions-subscriptions.deletesaasconsolidatedviewv1usersdelete
+      outputParameters:
+      - type: object
+        mapping: $.

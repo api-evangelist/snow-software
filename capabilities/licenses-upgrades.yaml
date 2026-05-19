@@ -1,0 +1,148 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 'SAM: Licenses — Upgrades'
+  description: 'SAM: Licenses — Upgrades. 2 operations. Lead operation: Get License Upgrades. Self-contained Naftiko capability
+    covering one Snow Software business surface.'
+  tags:
+  - Snow Software
+  - Upgrades
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SNOW_SOFTWARE_API_KEY: SNOW_SOFTWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: licenses-upgrades
+    baseUri: https://{region}.snowsoftware.io
+    description: 'SAM: Licenses — Upgrades business capability. Self-contained, no shared references.'
+    resources:
+    - name: api-sam-v1-licenses-id-upgrades
+      path: /api/sam/v1/licenses/{id}/upgrades
+      operations:
+      - name: getlicenseupgradecollection
+        method: GET
+        description: Get License Upgrades
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The unique ID of the license.
+          required: true
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-id-upgrades-upgradedLicenseId
+      path: /api/sam/v1/licenses/{id}/upgrades/{upgradedLicenseId}
+      operations:
+      - name: getlicenseupgradedetails
+        method: GET
+        description: Get the Details of a License Upgrade
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The unique ID of the license.
+          required: true
+        - name: upgradedLicenseId
+          in: path
+          type: string
+          description: The unique ID of the upgraded license.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SNOW_SOFTWARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: licenses-upgrades-rest
+    port: 8080
+    description: 'REST adapter for SAM: Licenses — Upgrades. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.'
+    resources:
+    - path: /v1/api/sam/v1/licenses/{id}/upgrades
+      name: api-sam-v1-licenses-id-upgrades
+      description: REST surface for api-sam-v1-licenses-id-upgrades.
+      operations:
+      - method: GET
+        name: getlicenseupgradecollection
+        description: Get License Upgrades
+        call: licenses-upgrades.getlicenseupgradecollection
+        with:
+          id: rest.id
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses/{id}/upgrades/{upgradedlicenseid}
+      name: api-sam-v1-licenses-id-upgrades-upgradedlicenseid
+      description: REST surface for api-sam-v1-licenses-id-upgrades-upgradedLicenseId.
+      operations:
+      - method: GET
+        name: getlicenseupgradedetails
+        description: Get the Details of a License Upgrade
+        call: licenses-upgrades.getlicenseupgradedetails
+        with:
+          id: rest.id
+          upgradedLicenseId: rest.upgradedLicenseId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: licenses-upgrades-mcp
+    port: 9090
+    transport: http
+    description: 'MCP adapter for SAM: Licenses — Upgrades. One tool per consumed operation, routed inline through this capability''s
+      consumes block.'
+    tools:
+    - name: get-license-upgrades
+      description: Get License Upgrades
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-upgrades.getlicenseupgradecollection
+      with:
+        id: tools.id
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-details-license-upgrade
+      description: Get the Details of a License Upgrade
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-upgrades.getlicenseupgradedetails
+      with:
+        id: tools.id
+        upgradedLicenseId: tools.upgradedLicenseId
+      outputParameters:
+      - type: object
+        mapping: $.

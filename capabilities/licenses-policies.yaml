@@ -1,0 +1,244 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 'SAM: Licenses — Policies'
+  description: 'SAM: Licenses — Policies. 4 operations. Lead operation: Get License Policies. Self-contained Naftiko capability
+    covering one Snow Software business surface.'
+  tags:
+  - Snow Software
+  - Policies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SNOW_SOFTWARE_API_KEY: SNOW_SOFTWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: licenses-policies
+    baseUri: https://{region}.snowsoftware.io
+    description: 'SAM: Licenses — Policies business capability. Self-contained, no shared references.'
+    resources:
+    - name: api-sam-v1-licenses-policies
+      path: /api/sam/v1/licenses-policies
+      operations:
+      - name: getpolicycollection
+        method: GET
+        description: Get License Policies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-policies-policyId
+      path: /api/sam/v1/licenses-policies/{policyId}
+      operations:
+      - name: getpolicy
+        method: GET
+        description: Get License Policy Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          description: The unique ID of the policy.
+          required: true
+    - name: api-sam-v1-licenses-policies-policyId-fields
+      path: /api/sam/v1/licenses-policies/{policyId}/fields
+      operations:
+      - name: getlicensepolicyfieldcollection
+        method: GET
+        description: Get License Policy Fields
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          description: The unique ID of the policy.
+          required: true
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-policies-policyId-fields-fieldId
+      path: /api/sam/v1/licenses-policies/{policyId}/fields/{fieldId}
+      operations:
+      - name: getlicensepolicyfield
+        method: GET
+        description: Get License Policy Field Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          description: The unique ID of the policy.
+          required: true
+        - name: fieldId
+          in: path
+          type: string
+          description: The unique ID of the policy field.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SNOW_SOFTWARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: licenses-policies-rest
+    port: 8080
+    description: 'REST adapter for SAM: Licenses — Policies. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.'
+    resources:
+    - path: /v1/api/sam/v1/licenses-policies
+      name: api-sam-v1-licenses-policies
+      description: REST surface for api-sam-v1-licenses-policies.
+      operations:
+      - method: GET
+        name: getpolicycollection
+        description: Get License Policies
+        call: licenses-policies.getpolicycollection
+        with:
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses-policies/{policyid}
+      name: api-sam-v1-licenses-policies-policyid
+      description: REST surface for api-sam-v1-licenses-policies-policyId.
+      operations:
+      - method: GET
+        name: getpolicy
+        description: Get License Policy Details
+        call: licenses-policies.getpolicy
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses-policies/{policyid}/fields
+      name: api-sam-v1-licenses-policies-policyid-fields
+      description: REST surface for api-sam-v1-licenses-policies-policyId-fields.
+      operations:
+      - method: GET
+        name: getlicensepolicyfieldcollection
+        description: Get License Policy Fields
+        call: licenses-policies.getlicensepolicyfieldcollection
+        with:
+          policyId: rest.policyId
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses-policies/{policyid}/fields/{fieldid}
+      name: api-sam-v1-licenses-policies-policyid-fields-fieldid
+      description: REST surface for api-sam-v1-licenses-policies-policyId-fields-fieldId.
+      operations:
+      - method: GET
+        name: getlicensepolicyfield
+        description: Get License Policy Field Details
+        call: licenses-policies.getlicensepolicyfield
+        with:
+          policyId: rest.policyId
+          fieldId: rest.fieldId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: licenses-policies-mcp
+    port: 9090
+    transport: http
+    description: 'MCP adapter for SAM: Licenses — Policies. One tool per consumed operation, routed inline through this capability''s
+      consumes block.'
+    tools:
+    - name: get-license-policies
+      description: Get License Policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-policies.getpolicycollection
+      with:
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-license-policy-details
+      description: Get License Policy Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-policies.getpolicy
+      with:
+        policyId: tools.policyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-license-policy-fields
+      description: Get License Policy Fields
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-policies.getlicensepolicyfieldcollection
+      with:
+        policyId: tools.policyId
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-license-policy-field-details
+      description: Get License Policy Field Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-policies.getlicensepolicyfield
+      with:
+        policyId: tools.policyId
+        fieldId: tools.fieldId
+      outputParameters:
+      - type: object
+        mapping: $.

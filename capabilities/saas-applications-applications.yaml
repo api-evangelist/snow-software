@@ -1,0 +1,403 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 'SaaS: Applications — Applications'
+  description: 'SaaS: Applications — Applications. 11 operations. Lead operation: Get Applications. Self-contained Naftiko
+    capability covering one Snow Software business surface.'
+  tags:
+  - Snow Software
+  - Applications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SNOW_SOFTWARE_API_KEY: SNOW_SOFTWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: saas-applications-applications
+    baseUri: https://{region}.snowsoftware.io
+    description: 'SaaS: Applications — Applications business capability. Self-contained, no shared references.'
+    resources:
+    - name: api-saas-consolidated-view-v1-applications
+      path: /api/saas/consolidated-view/v1/applications
+      operations:
+      - name: getapplications
+        method: GET
+        description: Get Applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-applications-bulk-update
+      path: /api/saas/consolidated-view/v1/applications/bulk-update
+      operations:
+      - name: bulkupdateapplications
+        method: POST
+        description: Bulk Update Applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-saas-consolidated-view-v1-applications-kpi
+      path: /api/saas/consolidated-view/v1/applications/kpi
+      operations:
+      - name: getapplicationskpi
+        method: GET
+        description: Get Applications KPIs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-applications-lookup-values
+      path: /api/saas/consolidated-view/v1/applications/lookup-values
+      operations:
+      - name: getapplicationslookupvalues
+        method: GET
+        description: Get Applications Lookup Values
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-applications-applicationId
+      path: /api/saas/consolidated-view/v1/applications/{applicationId}
+      operations:
+      - name: getapplication
+        method: GET
+        description: Get Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateapplication
+        method: PATCH
+        description: Update Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-saas-consolidated-view-v1-applications-applicationId-kpi
+      path: /api/saas/consolidated-view/v1/applications/{applicationId}/kpi
+      operations:
+      - name: getsaasconsolidatedviewv1applicationsidkpi
+        method: GET
+        description: Get Application KPIs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-applications-applicationId-users
+      path: /api/saas/consolidated-view/v1/applications/{applicationId}/users
+      operations:
+      - name: getapplicationusers
+        method: GET
+        description: Get Application Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-applications-applicationId-users-consumption
+      path: /api/saas/consolidated-view/v1/applications/{applicationId}/users/consumption
+      operations:
+      - name: getsaasconsolidatedviewv1applicationusersconsumption
+        method: GET
+        description: Get Application Users Consumptions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-applications-applicationId-users-lookup-values
+      path: /api/saas/consolidated-view/v1/applications/{applicationId}/users/lookup-values
+      operations:
+      - name: getsaasconsolidatedviewv1userslookupvalues
+        method: GET
+        description: Get Application Users Lookup Values
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-saas-consolidated-view-v1-overview-applications-kpi
+      path: /api/saas/consolidated-view/v1/overview/applications/kpi
+      operations:
+      - name: getapplicationoverview
+        method: GET
+        description: Get Applications Overview KPIs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SNOW_SOFTWARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: saas-applications-applications-rest
+    port: 8080
+    description: 'REST adapter for SaaS: Applications — Applications. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.'
+    resources:
+    - path: /v1/api/saas/consolidated-view/v1/applications
+      name: api-saas-consolidated-view-v1-applications
+      description: REST surface for api-saas-consolidated-view-v1-applications.
+      operations:
+      - method: GET
+        name: getapplications
+        description: Get Applications
+        call: saas-applications-applications.getapplications
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/applications/bulk-update
+      name: api-saas-consolidated-view-v1-applications-bulk-update
+      description: REST surface for api-saas-consolidated-view-v1-applications-bulk-update.
+      operations:
+      - method: POST
+        name: bulkupdateapplications
+        description: Bulk Update Applications
+        call: saas-applications-applications.bulkupdateapplications
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/applications/kpi
+      name: api-saas-consolidated-view-v1-applications-kpi
+      description: REST surface for api-saas-consolidated-view-v1-applications-kpi.
+      operations:
+      - method: GET
+        name: getapplicationskpi
+        description: Get Applications KPIs
+        call: saas-applications-applications.getapplicationskpi
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/applications/lookup-values
+      name: api-saas-consolidated-view-v1-applications-lookup-values
+      description: REST surface for api-saas-consolidated-view-v1-applications-lookup-values.
+      operations:
+      - method: GET
+        name: getapplicationslookupvalues
+        description: Get Applications Lookup Values
+        call: saas-applications-applications.getapplicationslookupvalues
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/applications/{applicationid}
+      name: api-saas-consolidated-view-v1-applications-applicationid
+      description: REST surface for api-saas-consolidated-view-v1-applications-applicationId.
+      operations:
+      - method: GET
+        name: getapplication
+        description: Get Application
+        call: saas-applications-applications.getapplication
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateapplication
+        description: Update Application
+        call: saas-applications-applications.updateapplication
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/applications/{applicationid}/kpi
+      name: api-saas-consolidated-view-v1-applications-applicationid-kpi
+      description: REST surface for api-saas-consolidated-view-v1-applications-applicationId-kpi.
+      operations:
+      - method: GET
+        name: getsaasconsolidatedviewv1applicationsidkpi
+        description: Get Application KPIs
+        call: saas-applications-applications.getsaasconsolidatedviewv1applicationsidkpi
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/applications/{applicationid}/users
+      name: api-saas-consolidated-view-v1-applications-applicationid-users
+      description: REST surface for api-saas-consolidated-view-v1-applications-applicationId-users.
+      operations:
+      - method: GET
+        name: getapplicationusers
+        description: Get Application Users
+        call: saas-applications-applications.getapplicationusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/applications/{applicationid}/users/consumption
+      name: api-saas-consolidated-view-v1-applications-applicationid-users-consumption
+      description: REST surface for api-saas-consolidated-view-v1-applications-applicationId-users-consumption.
+      operations:
+      - method: GET
+        name: getsaasconsolidatedviewv1applicationusersconsumption
+        description: Get Application Users Consumptions
+        call: saas-applications-applications.getsaasconsolidatedviewv1applicationusersconsumption
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/applications/{applicationid}/users/lookup-values
+      name: api-saas-consolidated-view-v1-applications-applicationid-users-lookup-values
+      description: REST surface for api-saas-consolidated-view-v1-applications-applicationId-users-lookup-values.
+      operations:
+      - method: GET
+        name: getsaasconsolidatedviewv1userslookupvalues
+        description: Get Application Users Lookup Values
+        call: saas-applications-applications.getsaasconsolidatedviewv1userslookupvalues
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/saas/consolidated-view/v1/overview/applications/kpi
+      name: api-saas-consolidated-view-v1-overview-applications-kpi
+      description: REST surface for api-saas-consolidated-view-v1-overview-applications-kpi.
+      operations:
+      - method: GET
+        name: getapplicationoverview
+        description: Get Applications Overview KPIs
+        call: saas-applications-applications.getapplicationoverview
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: saas-applications-applications-mcp
+    port: 9090
+    transport: http
+    description: 'MCP adapter for SaaS: Applications — Applications. One tool per consumed operation, routed inline through
+      this capability''s consumes block.'
+    tools:
+    - name: get-applications
+      description: Get Applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.getapplications
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: bulk-update-applications
+      description: Bulk Update Applications
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: saas-applications-applications.bulkupdateapplications
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-applications-kpis
+      description: Get Applications KPIs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.getapplicationskpi
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-applications-lookup-values
+      description: Get Applications Lookup Values
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.getapplicationslookupvalues
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application
+      description: Get Application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.getapplication
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-application
+      description: Update Application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.updateapplication
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-kpis
+      description: Get Application KPIs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.getsaasconsolidatedviewv1applicationsidkpi
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-users
+      description: Get Application Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.getapplicationusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-users-consumptions
+      description: Get Application Users Consumptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.getsaasconsolidatedviewv1applicationusersconsumption
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-users-lookup-values
+      description: Get Application Users Lookup Values
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.getsaasconsolidatedviewv1userslookupvalues
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-applications-overview-kpis
+      description: Get Applications Overview KPIs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: saas-applications-applications.getapplicationoverview
+      outputParameters:
+      - type: object
+        mapping: $.

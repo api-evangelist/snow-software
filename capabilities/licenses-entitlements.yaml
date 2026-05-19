@@ -1,0 +1,247 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 'SAM: Licenses — Entitlements'
+  description: 'SAM: Licenses — Entitlements. 4 operations. Lead operation: Get License Entitlements. Self-contained Naftiko
+    capability covering one Snow Software business surface.'
+  tags:
+  - Snow Software
+  - Entitlements
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SNOW_SOFTWARE_API_KEY: SNOW_SOFTWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: licenses-entitlements
+    baseUri: https://{region}.snowsoftware.io
+    description: 'SAM: Licenses — Entitlements business capability. Self-contained, no shared references.'
+    resources:
+    - name: api-sam-v1-licenses-entitlements
+      path: /api/sam/v1/licenses-entitlements
+      operations:
+      - name: getlicenseentitlementcollection
+        method: GET
+        description: Get License Entitlements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-entitlements-computers
+      path: /api/sam/v1/licenses/entitlements/computers
+      operations:
+      - name: getcomputerapplicationentitlementcollection
+        method: GET
+        description: Get Computers Applications Entitlements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-entitlements-entitlement-states
+      path: /api/sam/v1/licenses/entitlements/entitlement-states
+      operations:
+      - name: getentitlementstatecollection
+        method: GET
+        description: Get License Entitlement States
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    - name: api-sam-v1-licenses-entitlements-users
+      path: /api/sam/v1/licenses/entitlements/users
+      operations:
+      - name: getuserapplicationentitlementcollection
+        method: GET
+        description: Get User License Entitlements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: For more information on the available operators and which data types those operators work on, see [Filter
+            API call results](https://docs.snowsoftware.io/snow-at
+        - name: page_number
+          in: query
+          type: integer
+          description: The page number.
+        - name: page_size
+          in: query
+          type: integer
+          description: The maximum number of items in the response.
+    authentication:
+      type: bearer
+      token: '{{env.SNOW_SOFTWARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: licenses-entitlements-rest
+    port: 8080
+    description: 'REST adapter for SAM: Licenses — Entitlements. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.'
+    resources:
+    - path: /v1/api/sam/v1/licenses-entitlements
+      name: api-sam-v1-licenses-entitlements
+      description: REST surface for api-sam-v1-licenses-entitlements.
+      operations:
+      - method: GET
+        name: getlicenseentitlementcollection
+        description: Get License Entitlements
+        call: licenses-entitlements.getlicenseentitlementcollection
+        with:
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses/entitlements/computers
+      name: api-sam-v1-licenses-entitlements-computers
+      description: REST surface for api-sam-v1-licenses-entitlements-computers.
+      operations:
+      - method: GET
+        name: getcomputerapplicationentitlementcollection
+        description: Get Computers Applications Entitlements
+        call: licenses-entitlements.getcomputerapplicationentitlementcollection
+        with:
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses/entitlements/entitlement-states
+      name: api-sam-v1-licenses-entitlements-entitlement-states
+      description: REST surface for api-sam-v1-licenses-entitlements-entitlement-states.
+      operations:
+      - method: GET
+        name: getentitlementstatecollection
+        description: Get License Entitlement States
+        call: licenses-entitlements.getentitlementstatecollection
+        with:
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/sam/v1/licenses/entitlements/users
+      name: api-sam-v1-licenses-entitlements-users
+      description: REST surface for api-sam-v1-licenses-entitlements-users.
+      operations:
+      - method: GET
+        name: getuserapplicationentitlementcollection
+        description: Get User License Entitlements
+        call: licenses-entitlements.getuserapplicationentitlementcollection
+        with:
+          filter: rest.filter
+          page_number: rest.page_number
+          page_size: rest.page_size
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: licenses-entitlements-mcp
+    port: 9090
+    transport: http
+    description: 'MCP adapter for SAM: Licenses — Entitlements. One tool per consumed operation, routed inline through this
+      capability''s consumes block.'
+    tools:
+    - name: get-license-entitlements
+      description: Get License Entitlements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-entitlements.getlicenseentitlementcollection
+      with:
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-computers-applications-entitlements
+      description: Get Computers Applications Entitlements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-entitlements.getcomputerapplicationentitlementcollection
+      with:
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-license-entitlement-states
+      description: Get License Entitlement States
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-entitlements.getentitlementstatecollection
+      with:
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-license-entitlements
+      description: Get User License Entitlements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-entitlements.getuserapplicationentitlementcollection
+      with:
+        filter: tools.filter
+        page_number: tools.page_number
+        page_size: tools.page_size
+      outputParameters:
+      - type: object
+        mapping: $.
