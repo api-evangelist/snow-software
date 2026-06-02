@@ -2,12 +2,20 @@
   "repo": "snow-software",
   "feeds": [
     {
-      "source": "https://www.snowsoftware.com/blog",
+      "source": "https://www.flexera.com/blog/feed/",
       "feed_url": "https://www.flexera.com/blog/feed/",
-      "title": "Flexera Blog",
-      "saved": 10
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://github.com/SnowSoftware/snowatlas-integrations",
+      "feed_url": "https://github.com/SnowSoftware/snowatlas-integrations",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-05-17T20:48:52Z",
-  "post_count": 10
+  "fetched": "2026-06-01T23:35:02Z",
+  "post_count": 14
 }
