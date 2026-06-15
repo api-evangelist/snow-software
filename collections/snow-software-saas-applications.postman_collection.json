@@ -1,0 +1,3571 @@
+{
+  "item": [
+    {
+      "id": "28929ccb-9d8f-4d1e-9923-c842fc6e0c27",
+      "name": "Applications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b5425167-5c09-4b1e-b93e-bfc186922a62",
+          "name": "Get Applications",
+          "request": {
+            "name": "Get Applications",
+            "description": {
+              "content": "Returns the details of a list of applications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of items in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results)."
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1416e5c5-cc42-4e58-9d0f-101729ed7613",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"19bb4eb7-3012-435a-9845-55626ef40460\",\n      \"name\": \"Teams\",\n      \"vendor\": \"Microsoft Corp.\",\n      \"vendorId\": \"365540e0-3150-48b9-9841-dbff43925065\",\n      \"licenses\": [\n        {\n          \"id\": \"e2e901ba-ad57-4433-a6ba-50178134852a\",\n          \"total\": 32,\n          \"assigned\": 27,\n          \"productId\": \"6a24e288-03f2-4237-8f1e-d6ed4e1ea0f4\",\n          \"collectionTargetId\": \"4770a19c-c789-4c10-82dd-062a4a23d6bb\"\n        },\n        {\n          \"id\": \"e2e901ba-ad57-4433-a6ba-50178134852a\",\n          \"total\": 32,\n          \"assigned\": 27,\n          \"productId\": \"6a24e288-03f2-4237-8f1e-d6ed4e1ea0f4\",\n          \"collectionTargetId\": \"4770a19c-c789-4c10-82dd-062a4a23d6bb\"\n        }\n      ],\n      \"licenseCount\": 10,\n      \"total\": 25,\n      \"purchased\": 12,\n      \"available\": 13,\n      \"yearlyCost\": 6.45,\n      \"assigned\": 5,\n      \"active\": 11,\n      \"bundle\": true,\n      \"inactive\": 7,\n      \"utilization\": 76.98,\n      \"totalUniqueUsers\": 21,\n      \"discoveryTypes\": [\n        1,\n        1\n      ],\n      \"discoveryDate\": \"2024-10-01\",\n      \"discoverySource\": \"Manual.\",\n      \"categoryName\": \"Digital Content Editing Platform\",\n      \"website\": \"http://www.adobe.com/\",\n      \"privacyPolicy\": \"https://www.adobe.com/privacy.html\",\n      \"primaryOwnerId\": \"906b7a69-597e-4e13-bbda-5fb2dd903cc6\",\n      \"primaryOwnerName\": \"Ryan Renolds\",\n      \"sanctioned\": true,\n      \"singleSignOn\": true,\n      \"notes\": \"Notes about Illustrator.\",\n      \"disServiceId\": \"a1a6f610-3a09-4ae4-87a0-7d4bf6218962\",\n      \"totalUniqueUsersFromActivities\": 12,\n      \"description\": \"Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.\",\n      \"aiCategory\": \"Graphic Design\",\n      \"aiSubcategory\": \"Vector Graphic Design\",\n      \"riskScore\": 5,\n      \"certifications\": [\n        \"SOC1\",\n        \"ISO27001\"\n      ]\n    },\n    {\n      \"id\": \"19bb4eb7-3012-435a-9845-55626ef40460\",\n      \"name\": \"Teams\",\n      \"vendor\": \"Microsoft Corp.\",\n      \"vendorId\": \"365540e0-3150-48b9-9841-dbff43925065\",\n      \"licenses\": [\n        {\n          \"id\": \"e2e901ba-ad57-4433-a6ba-50178134852a\",\n          \"total\": 32,\n          \"assigned\": 27,\n          \"productId\": \"6a24e288-03f2-4237-8f1e-d6ed4e1ea0f4\",\n          \"collectionTargetId\": \"4770a19c-c789-4c10-82dd-062a4a23d6bb\"\n        },\n        {\n          \"id\": \"e2e901ba-ad57-4433-a6ba-50178134852a\",\n          \"total\": 32,\n          \"assigned\": 27,\n          \"productId\": \"6a24e288-03f2-4237-8f1e-d6ed4e1ea0f4\",\n          \"collectionTargetId\": \"4770a19c-c789-4c10-82dd-062a4a23d6bb\"\n        }\n      ],\n      \"licenseCount\": 10,\n      \"total\": 25,\n      \"purchased\": 12,\n      \"available\": 13,\n      \"yearlyCost\": 6.45,\n      \"assigned\": 5,\n      \"active\": 11,\n      \"bundle\": true,\n      \"inactive\": 7,\n      \"utilization\": 76.98,\n      \"totalUniqueUsers\": 21,\n      \"discoveryTypes\": [\n        1,\n        1\n      ],\n      \"discoveryDate\": \"2024-10-01\",\n      \"discoverySource\": \"Manual.\",\n      \"categoryName\": \"Digital Content Editing Platform\",\n      \"website\": \"http://www.adobe.com/\",\n      \"privacyPolicy\": \"https://www.adobe.com/privacy.html\",\n      \"primaryOwnerId\": \"906b7a69-597e-4e13-bbda-5fb2dd903cc6\",\n      \"primaryOwnerName\": \"Ryan Renolds\",\n      \"sanctioned\": true,\n      \"singleSignOn\": true,\n      \"notes\": \"Notes about Illustrator.\",\n      \"disServiceId\": \"a1a6f610-3a09-4ae4-87a0-7d4bf6218962\",\n      \"totalUniqueUsersFromActivities\": 12,\n      \"description\": \"Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.\",\n      \"aiCategory\": \"Graphic Design\",\n      \"aiSubcategory\": \"Vector Graphic Design\",\n      \"riskScore\": 5,\n      \"certifications\": [\n        \"SOC1\",\n        \"ISO27001\"\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"page_size\": 100,\n    \"page_number\": 1,\n    \"total_pages\": 1,\n    \"total_items\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f31a332b-0b5e-4496-bb04-c6655272d7c4",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c393014-d96d-4318-b6aa-7df6d4a098aa",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6776636-c2d9-4cb5-b036-c33f6a49978f",
+          "name": "Get Applications Lookup Values",
+          "request": {
+            "name": "Get Applications Lookup Values",
+            "description": {
+              "content": "Returns the lookup values for applications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications",
+                "lookup-values"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "991b2809-0ed4-4e47-aada-29b9f69c2f94",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    "lookup-values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"certifications\": [\n    \"SOC1\",\n    \"ISO27001\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c0d0bf2-9e8b-40e6-9d44-00404f3aa203",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    "lookup-values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38e35296-829b-457d-9269-420ad1a4750b",
+          "name": "Get Application",
+          "request": {
+            "name": "Get Application",
+            "description": {
+              "content": "Returns the details of an application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications",
+                ":applicationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique ID of the application."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5fd85382-50ec-4d53-a529-aa19dd694fad",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"19bb4eb7-3012-435a-9845-55626ef40460\",\n  \"name\": \"Teams\",\n  \"vendor\": \"Microsoft Corp.\",\n  \"vendorId\": \"365540e0-3150-48b9-9841-dbff43925065\",\n  \"licenses\": [\n    {\n      \"id\": \"e2e901ba-ad57-4433-a6ba-50178134852a\",\n      \"total\": 32,\n      \"assigned\": 27,\n      \"productId\": \"6a24e288-03f2-4237-8f1e-d6ed4e1ea0f4\",\n      \"collectionTargetId\": \"4770a19c-c789-4c10-82dd-062a4a23d6bb\"\n    },\n    {\n      \"id\": \"e2e901ba-ad57-4433-a6ba-50178134852a\",\n      \"total\": 32,\n      \"assigned\": 27,\n      \"productId\": \"6a24e288-03f2-4237-8f1e-d6ed4e1ea0f4\",\n      \"collectionTargetId\": \"4770a19c-c789-4c10-82dd-062a4a23d6bb\"\n    }\n  ],\n  \"licenseCount\": 10,\n  \"total\": 25,\n  \"purchased\": 12,\n  \"available\": 13,\n  \"yearlyCost\": 6.45,\n  \"assigned\": 5,\n  \"active\": 11,\n  \"bundle\": true,\n  \"inactive\": 7,\n  \"utilization\": 76.98,\n  \"totalUniqueUsers\": 21,\n  \"discoveryTypes\": [\n    1,\n    1\n  ],\n  \"discoveryDate\": \"2024-10-01\",\n  \"discoverySource\": \"Manual.\",\n  \"categoryName\": \"Digital Content Editing Platform\",\n  \"website\": \"http://www.adobe.com/\",\n  \"privacyPolicy\": \"https://www.adobe.com/privacy.html\",\n  \"primaryOwnerId\": \"906b7a69-597e-4e13-bbda-5fb2dd903cc6\",\n  \"primaryOwnerName\": \"Ryan Renolds\",\n  \"sanctioned\": true,\n  \"singleSignOn\": true,\n  \"notes\": \"Notes about Illustrator.\",\n  \"disServiceId\": \"a1a6f610-3a09-4ae4-87a0-7d4bf6218962\",\n  \"totalUniqueUsersFromActivities\": 12,\n  \"description\": \"Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.\",\n  \"aiCategory\": \"Graphic Design\",\n  \"aiSubcategory\": \"Vector Graphic Design\",\n  \"riskScore\": 5,\n  \"certifications\": [\n    \"SOC1\",\n    \"ISO27001\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65524134-f05c-447e-bdef-27d988d46457",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76321be1-1e3c-4023-964e-b4b81c9234a2",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c884a77f-4fb4-4812-a12e-f0a30e50f90b",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f04be44-c1fc-46da-b22f-cedb22deaa33",
+          "name": "Update Application",
+          "request": {
+            "name": "Update Application",
+            "description": {
+              "content": "Modifies an application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications",
+                ":applicationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique ID of the application."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/merge-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"primaryOwnerId\": \"<string>\",\n  \"sanctioned\": \"<boolean>\",\n  \"singleSignOn\": \"<boolean>\",\n  \"notes\": \"<string>\",\n  \"description\": \"<string>\",\n  \"aiCategory\": \"<string>\",\n  \"aiSubcategory\": \"<string>\",\n  \"websiteDate\": {\n    \"website\": \"<string>\",\n    \"privacyPolicy\": \"<string>\",\n    \"categoryName\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "29f00c1e-e984-4bbf-94f4-050552b56c7f",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"primaryOwnerId\": \"906b7a69-597e-4e13-bbda-5fb2dd903cc6\",\n  \"sanctioned\": true,\n  \"singleSignOn\": true,\n  \"notes\": \"Notes about Illustrator.\",\n  \"description\": \"Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.\",\n  \"aiCategory\": \"Graphic Design\",\n  \"aiSubcategory\": \"Vector Graphic Design\",\n  \"websiteDate\": {\n    \"website\": \"http://www.adobe.com/\",\n    \"privacyPolicy\": \"https://www.adobe.com/privacy.html\",\n    \"categoryName\": \"Digital Content Editing Platform\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"19bb4eb7-3012-435a-9845-55626ef40460\",\n  \"name\": \"Teams\",\n  \"vendor\": \"Microsoft Corp.\",\n  \"vendorId\": \"365540e0-3150-48b9-9841-dbff43925065\",\n  \"licenses\": [\n    {\n      \"id\": \"e2e901ba-ad57-4433-a6ba-50178134852a\",\n      \"total\": 32,\n      \"assigned\": 27,\n      \"productId\": \"6a24e288-03f2-4237-8f1e-d6ed4e1ea0f4\",\n      \"collectionTargetId\": \"4770a19c-c789-4c10-82dd-062a4a23d6bb\"\n    },\n    {\n      \"id\": \"e2e901ba-ad57-4433-a6ba-50178134852a\",\n      \"total\": 32,\n      \"assigned\": 27,\n      \"productId\": \"6a24e288-03f2-4237-8f1e-d6ed4e1ea0f4\",\n      \"collectionTargetId\": \"4770a19c-c789-4c10-82dd-062a4a23d6bb\"\n    }\n  ],\n  \"licenseCount\": 10,\n  \"total\": 25,\n  \"purchased\": 12,\n  \"available\": 13,\n  \"yearlyCost\": 6.45,\n  \"assigned\": 5,\n  \"active\": 11,\n  \"bundle\": true,\n  \"inactive\": 7,\n  \"utilization\": 76.98,\n  \"totalUniqueUsers\": 21,\n  \"discoveryTypes\": [\n    1,\n    1\n  ],\n  \"discoveryDate\": \"2024-10-01\",\n  \"discoverySource\": \"Manual.\",\n  \"categoryName\": \"Digital Content Editing Platform\",\n  \"website\": \"http://www.adobe.com/\",\n  \"privacyPolicy\": \"https://www.adobe.com/privacy.html\",\n  \"primaryOwnerId\": \"906b7a69-597e-4e13-bbda-5fb2dd903cc6\",\n  \"primaryOwnerName\": \"Ryan Renolds\",\n  \"sanctioned\": true,\n  \"singleSignOn\": true,\n  \"notes\": \"Notes about Illustrator.\",\n  \"disServiceId\": \"a1a6f610-3a09-4ae4-87a0-7d4bf6218962\",\n  \"totalUniqueUsersFromActivities\": 12,\n  \"description\": \"Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.\",\n  \"aiCategory\": \"Graphic Design\",\n  \"aiSubcategory\": \"Vector Graphic Design\",\n  \"riskScore\": 5,\n  \"certifications\": [\n    \"SOC1\",\n    \"ISO27001\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d418223-4f49-46fe-91ff-bc6d473a48af",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"primaryOwnerId\": \"906b7a69-597e-4e13-bbda-5fb2dd903cc6\",\n  \"sanctioned\": true,\n  \"singleSignOn\": true,\n  \"notes\": \"Notes about Illustrator.\",\n  \"description\": \"Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.\",\n  \"aiCategory\": \"Graphic Design\",\n  \"aiSubcategory\": \"Vector Graphic Design\",\n  \"websiteDate\": {\n    \"website\": \"http://www.adobe.com/\",\n    \"privacyPolicy\": \"https://www.adobe.com/privacy.html\",\n    \"categoryName\": \"Digital Content Editing Platform\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc440045-6677-490e-a8f5-c0733332466f",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"primaryOwnerId\": \"906b7a69-597e-4e13-bbda-5fb2dd903cc6\",\n  \"sanctioned\": true,\n  \"singleSignOn\": true,\n  \"notes\": \"Notes about Illustrator.\",\n  \"description\": \"Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.\",\n  \"aiCategory\": \"Graphic Design\",\n  \"aiSubcategory\": \"Vector Graphic Design\",\n  \"websiteDate\": {\n    \"website\": \"http://www.adobe.com/\",\n    \"privacyPolicy\": \"https://www.adobe.com/privacy.html\",\n    \"categoryName\": \"Digital Content Editing Platform\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f12008f-10ba-41b3-bc66-0b5ce82ec463",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"primaryOwnerId\": \"906b7a69-597e-4e13-bbda-5fb2dd903cc6\",\n  \"sanctioned\": true,\n  \"singleSignOn\": true,\n  \"notes\": \"Notes about Illustrator.\",\n  \"description\": \"Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.\",\n  \"aiCategory\": \"Graphic Design\",\n  \"aiSubcategory\": \"Vector Graphic Design\",\n  \"websiteDate\": {\n    \"website\": \"http://www.adobe.com/\",\n    \"privacyPolicy\": \"https://www.adobe.com/privacy.html\",\n    \"categoryName\": \"Digital Content Editing Platform\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b33cbb00-baf1-4c40-b6ca-94d39a9595be",
+          "name": "Get Application KPIs",
+          "request": {
+            "name": "Get Application KPIs",
+            "description": {
+              "content": "Returns the details of an applications KPIs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications",
+                ":applicationId",
+                "kpi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique ID of the application."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "31bf5e21-b1c1-4d16-bda7-b0bae67c7dfd",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e5ea6f20-47ad-41be-a3c5-839409d89791\",\n  \"monthlyCost\": {\n    \"valueCurrent\": 10,\n    \"value30DaysAgo\": 20\n  },\n  \"subscriptions\": {\n    \"valueCurrent\": 10,\n    \"value30DaysAgo\": 20\n  },\n  \"subscriptionTypes\": {\n    \"valueCurrent\": 10,\n    \"value30DaysAgo\": 20\n  },\n  \"totalUsers\": {\n    \"valueCurrent\": 10,\n    \"value30DaysAgo\": 20\n  },\n  \"unassignedSubscriptions\": {\n    \"valueCurrent\": 10,\n    \"value30DaysAgo\": 20\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "631dc755-f72f-4d69-ae03-dfd0a060d0cb",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ac79bfe-1b55-4d6d-819d-2de2670ec9b1",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df8afe7a-18a1-489e-b033-21d367c578e5",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d957837c-c687-49e4-bce5-31429c5c17c7",
+          "name": "Get Applications Overview KPIs",
+          "request": {
+            "name": "Get Applications Overview KPIs",
+            "description": {
+              "content": "Returns the details of the applications overview key performance indicators.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "overview",
+                "applications",
+                "kpi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) Starting date from which to calculate KPI."
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "(Required) Starting date until which to calculate KPI."
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eb3d0255-d257-4586-a39b-4c8ae71d920d",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "overview",
+                    "applications",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2024-11-26"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2024-11-26"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": [\n    {\n      \"value\": 250,\n      \"trend\": -1000\n    },\n    {\n      \"value\": 250,\n      \"trend\": -1000\n    }\n  ],\n  \"notApproved\": {},\n  \"applicationDiscoveryLastSevenDays\": [\n    {\n      \"browserMeteringCount\": 250,\n      \"ssoCount\": 250,\n      \"deviceCount\": 250,\n      \"date\": \"2024-03-04T14:07:14.755837Z\",\n      \"connectorCount\": 250,\n      \"manuallyAddedCount\": 250\n    },\n    {\n      \"browserMeteringCount\": 250,\n      \"ssoCount\": 250,\n      \"deviceCount\": 250,\n      \"date\": \"2024-03-04T14:07:14.755837Z\",\n      \"connectorCount\": 250,\n      \"manuallyAddedCount\": 250\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86290011-f513-4bcd-81cc-9273f381d056",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "overview",
+                    "applications",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2024-11-26"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2024-11-26"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "702371db-c562-408f-8a12-ffadf821b540",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "overview",
+                    "applications",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2024-11-26"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2024-11-26"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "880b084f-73e3-40d3-9f87-f1947d18f191",
+          "name": "Get Applications KPIs",
+          "request": {
+            "name": "Get Applications KPIs",
+            "description": {
+              "content": "Returns the details of the KPIs for all applications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications",
+                "kpi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) Starting date from which to calculate KPI."
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "(Required) Starting date until which to calculate KPI."
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ca6dba82-f84a-4af7-ab13-e60f789b8823",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2024-11-26"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2024-11-26"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalApplications\": 15,\n  \"totalApplicationsTrend\": 7,\n  \"unsanctioned\": 2,\n  \"appCategories\": [\n    {\n      \"name\": \"Communication\",\n      \"total\": 10\n    },\n    {\n      \"name\": \"Communication\",\n      \"total\": 10\n    }\n  ],\n  \"aiAppCategories\": [\n    {\n      \"name\": \"Communication\",\n      \"total\": 10\n    },\n    {\n      \"name\": \"Communication\",\n      \"total\": 10\n    }\n  ],\n  \"appCategoriesUnsanctioned\": [\n    {\n      \"name\": \"Communication\",\n      \"total\": 10\n    },\n    {\n      \"name\": \"Communication\",\n      \"total\": 10\n    }\n  ],\n  \"aiAppCategoriesUnsanctioned\": [\n    {\n      \"name\": \"Communication\",\n      \"total\": 10\n    },\n    {\n      \"name\": \"Communication\",\n      \"total\": 10\n    }\n  ],\n  \"activeUserApplications\": [\n    {\n      \"name\": \"Communication\",\n      \"totalUsers\": 10\n    },\n    {\n      \"name\": \"Communication\",\n      \"totalUsers\": 10\n    }\n  ],\n  \"activeUserApplicationsUnsanctioned\": [\n    {\n      \"name\": \"Communication\",\n      \"totalUsers\": 10\n    },\n    {\n      \"name\": \"Communication\",\n      \"totalUsers\": 10\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd502913-7a51-4aa3-a765-d44456977529",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2024-11-26"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2024-11-26"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fab5917-fb9e-410a-a360-374dacf1a2d2",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    "kpi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2024-11-26"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2024-11-26"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2af6673-a5cd-4c32-8a1d-24afa2728deb",
+          "name": "Get Application Users",
+          "request": {
+            "name": "Get Application Users",
+            "description": {
+              "content": "Returns a collection of users assigned to an application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications",
+                ":applicationId",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of items in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique ID of the application."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "50df0f1d-b5ab-4780-b92c-c8e48962eef1",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"page_size\": 100,\n    \"page_number\": 1,\n    \"total_pages\": 1,\n    \"total_items\": 1\n  },\n  \"items\": [\n    {\n      \"id\": \"2f86b198-04f3-4770-ad08-b32518206da0\",\n      \"country\": \"Japan\",\n      \"discoveryTypes\": [\n        1,\n        2\n      ],\n      \"isInReview\": true,\n      \"isQualified\": true,\n      \"status\": \"Active\",\n      \"email\": \"john.doe@organization.com\",\n      \"department\": \"Engineering\",\n      \"createdDate\": \"2024-05-25T00:00:00Z\",\n      \"lastActive\": \"2024-06-28T00:00:00Z\",\n      \"userCostPerMonth\": 1000,\n      \"potentialSavings\": 500,\n      \"displayName\": \"John Doe\",\n      \"username\": \"john.doe_1@org.com\",\n      \"licenseCount\": 5,\n      \"isOnline\": true,\n      \"totalDaysUsed\": 10,\n      \"employmentStatus\": \"Employed\",\n      \"isEnabled\": true,\n      \"hireDate\": \"2024-06-28T00:00:00Z\",\n      \"terminationDate\": \"2024-06-28T00:00:00Z\",\n      \"roles\": [\n        \"Role1\",\n        \"Role1\"\n      ]\n    },\n    {\n      \"id\": \"2f86b198-04f3-4770-ad08-b32518206da0\",\n      \"country\": \"Japan\",\n      \"discoveryTypes\": [\n        1,\n        2\n      ],\n      \"isInReview\": true,\n      \"isQualified\": true,\n      \"status\": \"Active\",\n      \"email\": \"john.doe@organization.com\",\n      \"department\": \"Engineering\",\n      \"createdDate\": \"2024-05-25T00:00:00Z\",\n      \"lastActive\": \"2024-06-28T00:00:00Z\",\n      \"userCostPerMonth\": 1000,\n      \"potentialSavings\": 500,\n      \"displayName\": \"John Doe\",\n      \"username\": \"john.doe_1@org.com\",\n      \"licenseCount\": 5,\n      \"isOnline\": true,\n      \"totalDaysUsed\": 10,\n      \"employmentStatus\": \"Employed\",\n      \"isEnabled\": true,\n      \"hireDate\": \"2024-06-28T00:00:00Z\",\n      \"terminationDate\": \"2024-06-28T00:00:00Z\",\n      \"roles\": [\n        \"Role1\",\n        \"Role1\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e591bac-2bde-4345-b9e5-0245d9e3f2fb",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a700cff0-829b-4fa9-848c-0145e30d3eb3",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "336b1360-5c89-48b8-8a8f-a699eed7f3bc",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8808d716-68a8-4d73-a57e-e5c19c8cd5d2",
+          "name": "Get Application Users Lookup Values",
+          "request": {
+            "name": "Get Application Users Lookup Values",
+            "description": {
+              "content": "Returns a collection of distinct lookup values for application users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications",
+                ":applicationId",
+                "users",
+                "lookup-values"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique ID of the application."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "864c8ae5-e26a-4248-9ac5-319ef4ae0304",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users",
+                    "lookup-values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"roles\": [\n    \"Role1\",\n    \"Role1\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bcb0670-0af6-4e2c-ad6e-ba224f0fc907",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users",
+                    "lookup-values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1772ced-8127-4f91-ac42-8572065474b8",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users",
+                    "lookup-values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ef72bf1-7c14-4cde-b6fb-c59b7d26cef5",
+          "name": "Bulk Update Applications",
+          "request": {
+            "name": "Bulk Update Applications",
+            "description": {
+              "content": "Modifies a collection of application properties the provided applications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications",
+                "bulk-update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scope\": \"<string>\",\n  \"body\": {\n    \"singleSignOn\": \"<boolean>\",\n    \"approved\": \"<boolean>\"\n  },\n  \"filter\": \"<string>\",\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d8005ce-daa7-4d59-9b97-27cfcb215f24",
+              "name": "Accepted: Your request requires more time for the service to process.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    "bulk-update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scope\": \"All\",\n  \"body\": {\n    \"singleSignOn\": true,\n    \"approved\": true\n  },\n  \"filter\": \"name -eq Per\",\n  \"ids\": [\n    \"19bb4eb7-3012-435a-9845-55626ef40460\",\n    \"19bb4eb7-3012-435a-9845-55626ef40460\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"483c67cf-e247-4a82-bef7-b86a29560788\",\n  \"_links\": [\n    {\n      \"href\": \"api/saas/consolidated-view/v1/tasks/483c67cf-e247-4a82-bef7-b86a29560788\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65badde3-628f-4278-862e-7e5a9e2da785",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    "bulk-update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scope\": \"All\",\n  \"body\": {\n    \"singleSignOn\": true,\n    \"approved\": true\n  },\n  \"filter\": \"name -eq Per\",\n  \"ids\": [\n    \"19bb4eb7-3012-435a-9845-55626ef40460\",\n    \"19bb4eb7-3012-435a-9845-55626ef40460\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec074e25-00d7-45ac-8ff5-ba0635cdc3cf",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    "bulk-update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scope\": \"All\",\n  \"body\": {\n    \"singleSignOn\": true,\n    \"approved\": true\n  },\n  \"filter\": \"name -eq Per\",\n  \"ids\": [\n    \"19bb4eb7-3012-435a-9845-55626ef40460\",\n    \"19bb4eb7-3012-435a-9845-55626ef40460\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91815700-3c78-405e-99c5-a570d38290e4",
+          "name": "Get Application Users Consumptions",
+          "request": {
+            "name": "Get Application Users Consumptions",
+            "description": {
+              "content": "Returns a collection of application users and their consumption details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "applications",
+                ":applicationId",
+                "users",
+                "consumption"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of items in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationId",
+                  "description": "(Required) The unique ID of the application."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8237969a-e015-42f4-b4a5-65d031a65717",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"page_size\": 100,\n    \"page_number\": 1,\n    \"total_pages\": 1,\n    \"total_items\": 1\n  },\n  \"items\": [\n    {\n      \"createdDate\": \"2024-10-01\",\n      \"discoveryTypes\": [\n        1,\n        1\n      ],\n      \"isOnline\": true,\n      \"lastActiveValueType\": 5,\n      \"userCostPerMonth\": 1000,\n      \"displayName\": \"John Doe.\",\n      \"isInReview\": true,\n      \"lastActive\": \"2030-01-02T15:04:05\",\n      \"lastActiveValueInInt\": 1,\n      \"status\": \"Active\",\n      \"isMonitored\": true,\n      \"department\": \"Sales\",\n      \"email\": \"john.doe@organization.com\",\n      \"id\": \"19bb4eb7-3012-435a-9845-55626ef40460\",\n      \"isQualified\": true,\n      \"potentialSavings\": 500,\n      \"envelopeusage\": 2,\n      \"roles\": [\n        \"GCS Support Engineer\"\n      ]\n    },\n    {\n      \"createdDate\": \"2024-10-01\",\n      \"discoveryTypes\": [\n        1,\n        1\n      ],\n      \"isOnline\": true,\n      \"lastActiveValueType\": 5,\n      \"userCostPerMonth\": 1000,\n      \"displayName\": \"John Doe.\",\n      \"isInReview\": true,\n      \"lastActive\": \"2030-01-02T15:04:05\",\n      \"lastActiveValueInInt\": 1,\n      \"status\": \"Active\",\n      \"isMonitored\": true,\n      \"department\": \"Sales\",\n      \"email\": \"john.doe@organization.com\",\n      \"id\": \"19bb4eb7-3012-435a-9845-55626ef40460\",\n      \"isQualified\": true,\n      \"potentialSavings\": 500,\n      \"envelopeusage\": 2,\n      \"roles\": [\n        \"GCS Support Engineer\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ccba4d7-308b-4a7e-915f-829ffdbdaaad",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40b33f78-7da1-4fcc-8135-50a278aec79d",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b55bdcdc-e028-4cce-82bc-cb4ff73b3d39",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "applications",
+                    ":applicationId",
+                    "users",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationId",
+                      "description": "(Required) The unique ID of the application."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f4099dc9-503d-41bd-a9c5-57882d89206d",
+      "name": "Tasks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b323a58d-a543-4cd4-9ee1-c062d2ccf8ab",
+          "name": "Get Task",
+          "request": {
+            "name": "Get Task",
+            "description": {
+              "content": "Returns the details of the given task.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "tasks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique ID of the task."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5d2eaca7-06d7-4824-8dea-c055e8dad97f",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the task."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"483c67cf-e247-4a82-bef7-b86a29560788\",\n  \"name\": \"Bulk update applications\",\n  \"status\": \"Complete\",\n  \"_links\": [\n    {\n      \"href\": \"/api/saas/consolidated-view/v1/applications/bulk-update/483c67cf-e247-4a82-bef7-b86a29560788\",\n      \"rel\": \"bulk-update-users\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"description\": \"The export completed successfully.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99b1bc29-ab47-45a8-850b-5b8ea9a72ee3",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the task."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eeecfad-5a70-439d-b357-85a7b5303401",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the task."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "westeurope",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://{{region}}.snowsoftware.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3810cbf4-f37c-4bb6-a161-00929f576d23",
+    "name": "SaaS: Applications",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with SaaS applications.\n\nContact Support:\n Name: Flexera",
+      "type": "text/plain"
+    }
+  }
+}
