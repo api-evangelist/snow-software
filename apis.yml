@@ -7,7 +7,7 @@ description: >-
   Snow Atlas REST APIs enable programmatic access to licenses, computers, SaaS applications, subscriptions, user
   accounts, agreements, and audit logs.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Cloud License Management
   - FinOps
