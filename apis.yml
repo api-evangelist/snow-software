@@ -87,6 +87,10 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-computers-openapi.json
 common:
+  - type: DomainSecurity
+    url: security/snow-software-domain-security.yml
+  - type: Authentication
+    url: authentication/snow-software-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/snow-software-ab
   - type: Website

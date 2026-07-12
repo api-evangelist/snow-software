@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/snow-software-licenses-openapi.yml, openapi/snow-software-saas-applications-openapi.yml,
+  openapi/snow-software-saas-subscriptions-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/snow-software-licenses-openapi.yml
+  - openapi/snow-software-saas-applications-openapi.yml
+  - openapi/snow-software-saas-subscriptions-openapi.yml
