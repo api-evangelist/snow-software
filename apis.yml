@@ -87,6 +87,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-computers-openapi.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/snow-software-agentic-access.yml
   - type: DomainSecurity
     url: security/snow-software-domain-security.yml
   - type: Authentication

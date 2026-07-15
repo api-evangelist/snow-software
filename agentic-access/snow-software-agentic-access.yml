@@ -1,0 +1,1812 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/snow-software-computers-openapi.json, openapi/snow-software-licenses-openapi.yml,
+  openapi/snow-software-saas-applications-openapi.yml, openapi/snow-software-saas-subscriptions-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 130
+  by_action_class:
+    acting: 40
+    connected: 90
+  by_consequence:
+    write: 39
+    read: 90
+    safety-critical: 1
+  human_in_the_loop_required: 1
+operations:
+- path: /api/sam/estate/v1/computers/bulk-update
+  method: patch
+  operationId: BulkUpdateComputerStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/estate/v1/computers-metering
+  method: get
+  operationId: getApplicationMetering
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/metering
+  method: get
+  operationId: getComputerApplicationMetering
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/applications
+  method: get
+  operationId: getComputerApplications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/applications/{applicationid}
+  method: get
+  operationId: getComputerApplicationDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers-applications
+  method: get
+  operationId: getComputersApplications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers-application-usage
+  method: get
+  operationId: getApplicationUsages
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers-application-user-usage
+  method: get
+  operationId: getApplicationUserUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers-application-usage/summaries
+  method: get
+  operationId: getApplicationUsageSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/contracts
+  method: get
+  operationId: getComputerContracts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/costs
+  method: get
+  operationId: getComputerCosts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/hardware/displayadapters
+  method: get
+  operationId: getComputerDisplayAdapters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/hardware/harddrives
+  method: get
+  operationId: getComputerDrives
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/hardware/opticaldrives
+  method: get
+  operationId: getComputerOpticalDrives
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/hardware
+  method: get
+  operationId: getComputerHardwareDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/hardware/disks/logical
+  method: get
+  operationId: getComputerLogicalDisks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/logonhistory
+  method: get
+  operationId: getComputerLogonHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers-logonhistory/{userid}
+  method: get
+  operationId: getComputerLogonHistoryForUser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/logonhistory/{userid}
+  method: get
+  operationId: getComputerLogonHistoryDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/hardware/monitors
+  method: get
+  operationId: getComputerMonitors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/hardware/networkadapters
+  method: get
+  operationId: getComputerNetworkAdapters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers-networkadapters
+  method: get
+  operationId: getAllNetworkAdapters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/hardware/cpu
+  method: get
+  operationId: getComputerProcessors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/hardware/cpu/socketmap
+  method: get
+  operationId: getComputerSocketMapDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/registry
+  method: get
+  operationId: getComputerRegistries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/remote-clients
+  method: get
+  operationId: getComputerRemoteClients
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}
+  method: get
+  operationId: getComputer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}
+  method: delete
+  operationId: deleteComputer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.computer.d
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/estate/v1/computers/{id}
+  method: put
+  operationId: updateComputer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.computer.u
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/estate/v1/computers
+  method: get
+  operationId: getComputers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/archive
+  method: patch
+  operationId: archiveComputer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.computer.u
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/estate/v1/computers/patch-auto-editing/{id}
+  method: patch
+  operationId: updateComputer
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /api/sam/estate/v1/computers/patch-organization-assigment/{id}
+  method: patch
+  operationId: updateComputer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.computer.u
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/estate/v1/computers/{id}/virtual-machines
+  method: get
+  operationId: getComputerVirtualMachines
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers/{id}/environment-variables
+  method: get
+  operationId: getEnvironmentVariablesForComputer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/estate/v1/computers-environment-variables
+  method: get
+  operationId: getComputerEnvironmentVariables
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.computer.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/upgrades
+  method: get
+  operationId: getLicenseUpgradeCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/upgrades/{upgradedLicenseId}
+  method: get
+  operationId: getLicenseUpgradeDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/transfers/{applicationId}/computers
+  method: get
+  operationId: getComputerTransferCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/transfers/{applicationId}/computers/{computerId}
+  method: get
+  operationId: getComputerTransferDetailsCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/transfers/{applicationId}/custom-values
+  method: get
+  operationId: getCustomValueTransferCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/transfers/{applicationId}/custom-values/{customId}
+  method: get
+  operationId: getCustomValueTransferDetailsCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/transfers/{applicationId}
+  method: get
+  operationId: getLicenseTransferCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/transfers/{applicationId}/users
+  method: get
+  operationId: getUserTransferCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/transfers/{applicationId}/users/{userId}
+  method: get
+  operationId: getUserTransferDetailsCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/tracking-computers/{computerId}
+  method: get
+  operationId: getApplicationsComputerTrackingCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/tracking/{applicationId}/computers
+  method: get
+  operationId: getComputerTrackingCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/tracking/{applicationId}/computers/{computerId}
+  method: get
+  operationId: getComputerTrackingDetailsCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/tracking/{applicationId}
+  method: get
+  operationId: getSiteAssignment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/tracking/{applicationId}/users
+  method: get
+  operationId: getUserTrackingCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/tracking/{applicationId}/users/{userId}
+  method: get
+  operationId: getUserTrackingDetailsCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses-policies/{policyId}/fields
+  method: get
+  operationId: getLicensePolicyFieldCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses-policies/{policyId}/fields/{fieldId}
+  method: get
+  operationId: getLicensePolicyField
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses-policies
+  method: get
+  operationId: getPolicyCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses-policies/{policyId}
+  method: get
+  operationId: getPolicy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/maintenance-periods
+  method: get
+  operationId: getLicenseMaintenanceAndSupportPeriods
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/maintenance-periods
+  method: get
+  operationId: getLicenseMaintenanceAndSupportPeriodsByLicenseId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/maintenance-periods
+  method: post
+  operationId: addMaintenanceAndSupportPeriod
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/maintenance-periods
+  method: put
+  operationId: replaceMaintenanceAndSupportPeriods
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/maintenance-periods
+  method: delete
+  operationId: deleteMaintenanceAndSupportPeriods
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/maintenance-periods/{periodId}
+  method: put
+  operationId: replaceMaintenanceAndSupportPeriod
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/maintenance-periods/{periodId}
+  method: delete
+  operationId: deleteMaintenancePeriod
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses
+  method: get
+  operationId: getLicenseCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses
+  method: post
+  operationId: addLicense
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}
+  method: get
+  operationId: getLicenseById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}
+  method: put
+  operationId: replaceLicense
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}
+  method: delete
+  operationId: deleteLicense
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/bulk-update
+  method: post
+  operationId: bulkUpdateLicenses
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses-entitlements
+  method: get
+  operationId: getLicenseEntitlementCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/entitlements/computers
+  method: get
+  operationId: getComputerApplicationEntitlementCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/entitlements/entitlement-states
+  method: get
+  operationId: getEntitlementStateCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/entitlements/users
+  method: get
+  operationId: getUserApplicationEntitlementCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses-extended-coverage-types
+  method: get
+  operationId: getExtendedCoverageTypeCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/extended-coverage
+  method: get
+  operationId: getLicenseExtendedCoverageCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/extended-coverage/{coverageId}
+  method: get
+  operationId: getLicenseExtendedCoverageDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/costs
+  method: get
+  operationId: getLicenseCostCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/costs/{organizationId}
+  method: get
+  operationId: getLicenseCost
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/costs-summary
+  method: get
+  operationId: getLicenseCostSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/compliance/summary/{applicationId}/allocation
+  method: get
+  operationId: getAllocationSummaryCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/compliance/summary/{applicationId}
+  method: get
+  operationId: getComplianceSummaryCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/compliance/summary/{applicationId}/usage
+  method: get
+  operationId: getComplianceSummaryUsageCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/assignment-types
+  method: get
+  operationId: getAssignmentTypesCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/computers
+  method: get
+  operationId: getComputerAssignmentCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/computers
+  method: post
+  operationId: addComputerAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/computers
+  method: put
+  operationId: replaceComputerAssignmentCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/computers
+  method: delete
+  operationId: deleteComputerAssignmentCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/computers/{assignmentId}
+  method: get
+  operationId: getComputerAssignment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/computers/{assignmentId}
+  method: put
+  operationId: replaceComputerAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/computers/{assignmentId}
+  method: delete
+  operationId: deleteComputerAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/datacenters
+  method: get
+  operationId: getDatacenterAssignmentCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/datacenters
+  method: post
+  operationId: addDatacenterAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/datacenters
+  method: put
+  operationId: replaceDataCenterAssignmentCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/datacenters
+  method: delete
+  operationId: deleteDataCenterAssignmentCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/datacenters/{assignmentId}
+  method: get
+  operationId: getDatacenterAssignment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/datacenters/{assignmentId}
+  method: put
+  operationId: replaceDatacenterAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/datacenters/{assignmentId}
+  method: delete
+  operationId: deleteDatacenterAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments-summary
+  method: get
+  operationId: getLicenseAssignmentDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/organizations
+  method: get
+  operationId: getOrganizationAssignmentCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/organizations
+  method: post
+  operationId: addOrganizationAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/organizations
+  method: put
+  operationId: replaceOrganizationAssignmentCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/organizations
+  method: delete
+  operationId: deleteOrganizationAssignmentCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/organizations/{assignmentId}
+  method: get
+  operationId: getOrganizationAssignment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/organizations/{assignmentId}
+  method: put
+  operationId: replaceOrganizationAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/organizations/{assignmentId}
+  method: delete
+  operationId: deleteOrganizationAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/site
+  method: get
+  operationId: getSiteAssignment2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/site
+  method: post
+  operationId: createSiteAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/site/{assignmentId}
+  method: put
+  operationId: replaceSiteAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/site/{assignmentId}
+  method: delete
+  operationId: deleteSiteAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/users
+  method: get
+  operationId: getUserAssignmentCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/users
+  method: post
+  operationId: addUserAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/users
+  method: put
+  operationId: replaceUserAssignmentCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/users
+  method: delete
+  operationId: deleteUserAssignmentCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/sam/v1/licenses/{id}/assignments/users/{assignmentId}
+  method: get
+  operationId: getUserAssignment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - sam.license.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/sam/v1/licenses/{id}/assignments/users/{assignmentId}
+  method: delete
+  operationId: deleteUserAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - sam.license.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/saas/consolidated-view/v1/applications
+  method: get
+  operationId: getApplications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/applications/lookup-values
+  method: get
+  operationId: getApplicationsLookupValues
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/applications/{applicationId}
+  method: get
+  operationId: getApplication
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/applications/{applicationId}
+  method: patch
+  operationId: updateApplication
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - saas.consolidation.view.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/saas/consolidated-view/v1/applications/{applicationId}/kpi
+  method: get
+  operationId: getSaasConsolidatedViewV1ApplicationsIdKpi
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/overview/applications/kpi
+  method: get
+  operationId: getApplicationOverview
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/applications/kpi
+  method: get
+  operationId: getApplicationsKpi
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/applications/{applicationId}/users
+  method: get
+  operationId: getapplicationusers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/applications/{applicationId}/users/lookup-values
+  method: get
+  operationId: getSaasConsolidatedViewV1UsersLookupValues
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/applications/bulk-update
+  method: post
+  operationId: bulkUpdateApplications
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - saas.consolidation.view.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/saas/consolidated-view/v1/tasks/{id}
+  method: get
+  operationId: getTask
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/applications/{applicationId}/users/consumption
+  method: get
+  operationId: getSaasConsolidatedViewV1ApplicationUsersConsumption
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/subscriptions/{subscriptionId}/insights/{insightRuleId}/users
+  method: get
+  operationId: getSaasConsolidatedViewV1ApplicationsIdInsightsInsightruleidUsers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/subscriptions/{subscriptionId}/users/{userIds}
+  method: delete
+  operationId: deleteSaasConsolidatedViewV1UsersDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - saas.consolidation.view.crud
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/saas/consolidated-view/v1/subscriptions/{subscriptionId}/users
+  method: get
+  operationId: getSubscriptionUsers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/saas/consolidated-view/v1/subscriptions/{subscriptionId}/users/consumption
+  method: get
+  operationId: getSaasConsolidatedViewV1SubscriptionUsersConsumption
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - saas.consolidation.view.r
+    token:
+      max-ttl: 3600
+    audit: none
