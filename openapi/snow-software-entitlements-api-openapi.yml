@@ -1,0 +1,574 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Entitlements API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Entitlements
+paths:
+  /api/sam/v1/licenses-entitlements:
+    get:
+      tags:
+      - Entitlements
+      summary: Get License Entitlements
+      description: Returns a collection of license entitlements.
+      operationId: getLicenseEntitlementCollection
+      parameters:
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfLicenseEntitlement'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/entitlements/computers:
+    get:
+      tags:
+      - Entitlements
+      summary: Get Computers Applications Entitlements
+      description: Returns a collection of computers and applications entitlements.
+      operationId: getComputerApplicationEntitlementCollection
+      parameters:
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfComputerApplicationEntitlement'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/entitlements/entitlement-states:
+    get:
+      tags:
+      - Entitlements
+      summary: Get License Entitlement States
+      description: Returns a collection of entitlements states.
+      operationId: getEntitlementStateCollection
+      parameters:
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfEntitlementState'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/entitlements/users:
+    get:
+      tags:
+      - Entitlements
+      summary: Get User License Entitlements
+      description: Returns a collection of user entitlements.
+      operationId: getUserApplicationEntitlementCollection
+      parameters:
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfUserApplicationEntitlement'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+components:
+  schemas:
+    FilteredResponseOfComputerApplicationEntitlement:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ComputerApplicationEntitlement'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          nullable: true
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          nullable: true
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          nullable: true
+          example: GET
+    HateoasCollectionOfUserApplicationEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfUserApplicationEntitlement'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    FilteredResponseOfLicenseEntitlement:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseEntitlement'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    FilteredResponseOfEntitlementState:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/EntitlementState'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    EntitlementState:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the entitlement state.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          name:
+            type: string
+            description: The name of the entitlement state.
+            nullable: true
+            example: Partially covered
+          description:
+            type: string
+            description: The description of the entitlement state.
+            nullable: true
+            example: The virtual machine is licensed by the host it is running on.
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    LicenseEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        description: The license entitlement.
+        additionalProperties: false
+        properties:
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          assignmentType:
+            description: The assignment type.
+            example: Organization
+            oneOf:
+            - $ref: '#/components/schemas/AssignmentType'
+          quantity:
+            type: integer
+            description: The quantity.
+            format: int32
+            example: 1
+    ComputerApplicationEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          entitlementStateId:
+            type: string
+            description: The unique ID of the entitlement state.
+            format: guid
+            example: 6fb32edf-1d45-44e3-a55d-6df6068c0c08
+    HateoasCollectionOfComputerApplicationEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComputerApplicationEntitlement'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    HateoasCollectionOfLicenseEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseEntitlement'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    FilteredResponseOfUserApplicationEntitlement:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/UserApplicationEntitlement'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    HateoasCollectionOfEntitlementState:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfEntitlementState'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          format: int32
+          nullable: true
+          example: 5
+        total_items:
+          type: integer
+          description: The total number of items.
+          format: int32
+          nullable: true
+          example: 100
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    AssignmentType:
+      type: string
+      description: The assignment type.
+      x-enumNames:
+      - Organization
+      - Computer
+      - User
+      - Site
+      enum:
+      - Organization
+      - Computer
+      - User
+      - Site
+    UserApplicationEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          userId:
+            type: string
+            description: The unique ID of the user.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          entitlementStateId:
+            type: string
+            description: The unique ID of the entitlement state.
+            format: guid
+            example: 6fb32edf-1d45-44e3-a55d-6df6068c0c08
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

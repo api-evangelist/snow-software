@@ -1,0 +1,411 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Coverage API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Coverage
+paths:
+  /api/sam/v1/licenses-extended-coverage-types:
+    get:
+      tags:
+      - Coverage
+      summary: Get Licenses Extended Coverage Types
+      description: Returns a collection of extended coverage types.
+      operationId: getExtendedCoverageTypeCollection
+      parameters:
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfExtendedCoverageType'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/extended-coverage:
+    get:
+      tags:
+      - Coverage
+      summary: Get Extended Coverages
+      description: Returns a collection of extended coverages.
+      operationId: getLicenseExtendedCoverageCollection
+      parameters:
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfLicenseExtendedCoverage'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/extended-coverage/{coverageId}:
+    get:
+      tags:
+      - Coverage
+      summary: Get Extended Coverage
+      description: Returns the details of an extended coverage.
+      operationId: getLicenseExtendedCoverageDetails
+      parameters:
+      - name: coverageId
+        in: path
+        required: true
+        description: The unique ID of the coverage.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseExtendedCoverage'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+components:
+  schemas:
+    FilteredResponseOfLicenseExtendedCoverage:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseExtendedCoverage'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          nullable: true
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          nullable: true
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          nullable: true
+          example: GET
+    LicenseExtendedCoverage:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          parentComputerId:
+            type: string
+            description: The unique ID of the parent computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          isParentComputerDatacenter:
+            type: boolean
+            description: '```true``` if parent is datacenter; otherwise, ```false```.'
+            example: true
+          extendedComputerId:
+            type: string
+            description: The unique ID of the extended computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          coveredApplicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            nullable: true
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          reason:
+            description: The incomplete license reason.
+            example: Disaster
+            oneOf:
+            - $ref: '#/components/schemas/ExtendedCoverageReason'
+          reasonDescription:
+            type: string
+            description: The reason description.
+            nullable: true
+            example: The recovery reason description
+    HateoasCollectionOfLicenseExtendedCoverage:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseExtendedCoverage'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ExtendedCoverageType:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          name:
+            type: string
+            description: The type of the extended coverage.
+            nullable: true
+            example: Passive
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    HateoasCollectionOfExtendedCoverageType:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfExtendedCoverageType'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    FilteredResponseOfExtendedCoverageType:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ExtendedCoverageType'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          format: int32
+          nullable: true
+          example: 5
+        total_items:
+          type: integer
+          description: The total number of items.
+          format: int32
+          nullable: true
+          example: 100
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    ExtendedCoverageReason:
+      type: string
+      description: The extended coverage reason.
+      x-enumNames:
+      - Other
+      - Passive
+      - Disaster
+      - TestingOrDevelopment
+      enum:
+      - Other
+      - Passive
+      - Disaster
+      - TestingOrDevelopment
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

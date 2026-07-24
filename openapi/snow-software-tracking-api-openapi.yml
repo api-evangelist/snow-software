@@ -1,0 +1,986 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Tracking API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Tracking
+paths:
+  /api/sam/v1/licenses/tracking-computers/{computerId}:
+    get:
+      tags:
+      - Tracking
+      summary: Get Computer License Tracking
+      description: Returns a collection of application license tracking for a given computer.
+      operationId: getApplicationsComputerTrackingCollection
+      parameters:
+      - name: computerId
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfApplicationComputerTrackingCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/tracking/{applicationId}/computers:
+    get:
+      tags:
+      - Tracking
+      summary: Get Computer License Tracking for a Given Application
+      description: Returns a collection of computer license tracking.
+      operationId: getComputerTrackingCollection
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        description: The unique ID of the application.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfComputerTrackingCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/tracking/{applicationId}/computers/{computerId}:
+    get:
+      tags:
+      - Tracking
+      summary: Get Application License Tracking for a Computer
+      description: Returns a collection of application license tracking for a given computer.
+      operationId: getComputerTrackingDetailsCollection
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        description: The unique ID of the application.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: computerId
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfComputerTrackingDetailsCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/tracking/{applicationId}:
+    get:
+      tags:
+      - Tracking
+      summary: Get Application License Tracking Details
+      description: Returns a collection of license tracking for an application.
+      operationId: getSiteAssignment
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        description: The unique ID of the application.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfLicenseTracking'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/tracking/{applicationId}/users:
+    get:
+      tags:
+      - Tracking
+      summary: Get User License Tracking for Application
+      description: Returns a collection of users license tracking.
+      operationId: getUserTrackingCollection
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        description: The unique ID of the application.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfUserTrackingCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/tracking/{applicationId}/users/{userId}:
+    get:
+      tags:
+      - Tracking
+      summary: Get User License Tracking for Application
+      description: Returns a collection of license tracking for a given user.
+      operationId: getUserTrackingDetailsCollection
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        description: The unique ID of the application.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: userId
+        in: path
+        required: true
+        description: The unique ID of the user.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfUserTrackingDetailsCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+components:
+  schemas:
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          nullable: true
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          nullable: true
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          nullable: true
+          example: GET
+    HateoasCollectionOfComputerTrackingCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComputerTrackingCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    FilteredResponseOfUserTrackingCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/UserTrackingCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    ApplicationComputerTrackingCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the computer application tracking.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          primaryUseRights:
+            description: The primary user rights.
+            example:
+            - NamedComputer
+            oneOf:
+            - $ref: '#/components/schemas/UseRightType'
+    ComputerTrackingDetailsCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the computer application tracking.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          coverageTrait:
+            type: integer
+            description: The coverage tait.
+            format: int32
+            example: 1
+          initialRequirement:
+            type: integer
+            description: The initial requirement.
+            format: int32
+            example: 1
+          requirement:
+            type: integer
+            description: The requirement.
+            format: int32
+            example: 1
+          receivedCoverage:
+            type: integer
+            description: The received coverage.
+            format: int32
+            example: 1
+          primaryUseRights:
+            description: The primary user rights.
+            example:
+            - NamedComputer
+            oneOf:
+            - $ref: '#/components/schemas/UseRightType'
+          fullUseRights:
+            description: The full use rights.
+            example:
+            - NamedComputer
+            - UpgradeRights
+            oneOf:
+            - $ref: '#/components/schemas/UseRightType'
+    HateoasCollectionOfUserTrackingDetailsCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfUserTrackingDetailsCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    UserTrackingDetailsCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the user application tracking.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          userId:
+            type: string
+            description: The unique ID of the user.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          coverageTrait:
+            type: integer
+            description: The coverage tait.
+            format: int32
+            example: 1
+          initialRequirement:
+            type: integer
+            description: The initial requirement.
+            format: int32
+            example: 1
+          receivedCoverage:
+            type: integer
+            description: The received coverage.
+            format: int32
+            example: 1
+          primaryUseRights:
+            description: The primary user rights.
+            example:
+            - NamedComputer
+            oneOf:
+            - $ref: '#/components/schemas/UseRightType'
+          fullUseRights:
+            description: The full use rights.
+            example:
+            - NamedComputer
+            - UpgradeRights
+            oneOf:
+            - $ref: '#/components/schemas/UseRightType'
+    LicenseTracking:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          hasComputerTracking:
+            type: boolean
+            description: '```true``` if has computer tracking; otherwise, ```false```.'
+            example: true
+          hasUserTracking:
+            type: boolean
+            description: '```true``` if has user tracking; otherwise, ```false```.'
+            example: true
+    HateoasCollectionOfLicenseTracking:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseTracking'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    FilteredResponseOfUserTrackingDetailsCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/UserTrackingDetailsCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    FilteredResponseOfLicenseTracking:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseTracking'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    ComputerTrackingCollection:
+      allOf:
+      - $ref: '#/components/schemas/ComputerTrackingDetailsCollection'
+      - type: object
+        additionalProperties: false
+    FilteredResponseOfComputerTrackingCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ComputerTrackingCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    HateoasCollectionOfComputerTrackingDetailsCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComputerTrackingDetailsCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    FilteredResponseOfComputerTrackingDetailsCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ComputerTrackingDetailsCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    HateoasCollectionOfUserTrackingCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfUserTrackingCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    HateoasCollectionOfApplicationComputerTrackingCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfApplicationComputerTrackingCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    FilteredResponseOfApplicationComputerTrackingCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ApplicationComputerTrackingCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    UserTrackingCollection:
+      allOf:
+      - $ref: '#/components/schemas/UserTrackingDetailsCollection'
+      - type: object
+        additionalProperties: false
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          format: int32
+          nullable: true
+          example: 5
+        total_items:
+          type: integer
+          description: The total number of items.
+          format: int32
+          nullable: true
+          example: 100
+    UseRightType:
+      type: integer
+      description: The use rights type.
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - Standard
+      - UpgradeRights
+      - DowngradeRights
+      - CrossEdition
+      - VirtualDesktopAccess
+      - VmSupport
+      - NinetyDayRule
+      - ProcessorLimitations
+      - ProcessorCoreLimitations
+      - NamedComputer
+      - NamedDatacenter
+      - NamedApplicationCluster
+      - NamedUser
+      - Site
+      - CrossPlatform
+      enum:
+      - 0
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 32
+      - 256
+      - 512
+      - 1024
+      - 8192
+      - 16384
+      - 32768
+      - 65536
+      - 131072
+      - 262144
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

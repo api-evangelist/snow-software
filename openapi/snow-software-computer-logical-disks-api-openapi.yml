@@ -1,0 +1,274 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Computer logical disks API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Computer logical disks
+paths:
+  /api/sam/estate/v1/computers/{id}/hardware/disks/logical:
+    get:
+      tags:
+      - Computer logical disks
+      summary: Get Computer's Logical Disks
+      description: Returns a collection of logical disks for the given computer.
+      operationId: getComputerLogicalDisks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1.0
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1.0
+      - name: filter
+        in: query
+        description: 'The fields which you can use to filter the results. Format of the query string parameter:
+
+          ```
+
+          ?filter=<filter name> <operator> <value>
+
+          ```
+
+          Filter name | Description | Data type | Example
+
+          :--- | --- | --- | ---
+
+
+          For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+
+          '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteredResponseWithLinksOfComputerLogicalDisk'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+components:
+  schemas:
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/computers/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
+    FilteredResponseWithLinksOfComputerLogicalDisk:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerLogicalDisk'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type: string
+          description: Additional error message.
+          nullable: true
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    ComputerLogicalDisk:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response representing a logical disks of a computer.
+        additionalProperties: false
+        required:
+        - computerId
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 14783145-7ead-4f6a-8f56-b7c3969bfc16
+          name:
+            type: string
+            description: The name of the logical disk.
+            nullable: true
+            example: 'C:'
+          volumeName:
+            type: string
+            description: The name of the volume of the logical disk.
+            nullable: true
+            example: SYSTEM
+          isSystemDisk:
+            type: boolean
+            description: '```true``` if the logical disk is a system disk; otherwise, ```false```.'
+            example: true
+          diskSizeMB:
+            type: integer
+            description: The size of the logical disk in MB.
+            format: int32
+            example: 61087
+          freeSpaceMB:
+            type: integer
+            description: The free space on the logical disk in MB.
+            format: int32
+            example: 6243
+          isUpdated:
+            type: boolean
+            description: '```true``` if the logical disk is updated; otherwise, ```false```.'
+            example: true
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    PaginationResponse:
+      type: object
+      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          format: int32
+          nullable: true
+          example: 10
+        total_items:
+          type: integer
+          description: The total number of items.
+          format: int32
+          nullable: true
+          example: 240
+  responses:
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

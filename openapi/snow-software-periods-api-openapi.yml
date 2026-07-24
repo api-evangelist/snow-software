@@ -1,0 +1,753 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Periods API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Periods
+paths:
+  /api/sam/v1/licenses/maintenance-periods:
+    get:
+      tags:
+      - Periods
+      summary: Get Maintenance and Support Periods
+      description: Returns a collection of maintenance and support periods.
+      operationId: getLicenseMaintenanceAndSupportPeriods
+      parameters:
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfMaintenancePeriodCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/{id}/maintenance-periods:
+    get:
+      tags:
+      - Periods
+      summary: Get License's Maintenance and Support Periods
+      description: Returns a collection of maintenance and support periods.
+      operationId: getLicenseMaintenanceAndSupportPeriodsByLicenseId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfMaintenancePeriodCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    post:
+      tags:
+      - Periods
+      summary: Add Maintenance and Support Period
+      description: Creates a maintenance and support period.
+      operationId: addMaintenanceAndSupportPeriod
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenancePeriodRequest'
+      responses:
+        '201':
+          description: 'Created: Your request created something new. Usually, this is a call that used the POST method and will allow a GET method to retrieve it later.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedHateoasResponse'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    put:
+      tags:
+      - Periods
+      summary: Replace Maintenance and Support Periods
+      description: Replaces the given license’s maintenance and support periods.
+      operationId: replaceMaintenanceAndSupportPeriods
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOfMaintenancePeriodRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfMaintenancePeriodCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Periods
+      summary: Delete Maintenance and Support Periods
+      description: Removes the given license’s maintenance and support periods.
+      operationId: deleteMaintenanceAndSupportPeriods
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/maintenance-periods/{periodId}:
+    put:
+      tags:
+      - Periods
+      summary: Replace Maintenance and Support Period
+      description: Replaces the given maintenance and support period.
+      operationId: replaceMaintenanceAndSupportPeriod
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: periodId
+        in: path
+        required: true
+        description: The unique ID of the maintenance and support period.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenancePeriodRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenancePeriod'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Periods
+      summary: Delete Maintenance and Support Period
+      description: Removes the given maintenance and support period.
+      operationId: deleteMaintenancePeriod
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: periodId
+        in: path
+        required: true
+        description: The unique ID of the maintenance and support period.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+components:
+  schemas:
+    MaintenancePeriodCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the maintenance and support period.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          agreementPeriodId:
+            type: string
+            description: The unique ID of the agreement period.
+            format: guid
+            nullable: true
+            example: 17597d2f-ae4b-4505-a85d-52a78421873c
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          validFrom:
+            type: string
+            description: The valid form date.
+            format: date-time
+            nullable: true
+            example: '2024-01-01T00:00:00Z'
+          validTo:
+            type: string
+            description: The valid to date.
+            format: date-time
+            nullable: true
+            example: '2025-01-01T00:00:00Z'
+          hasUpgradeRights:
+            type: boolean
+            description: '```true``` if has upgrade rights; otherwise, ```false```.'
+            nullable: true
+            example: true
+          invoiceReference:
+            type: string
+            description: The invoice reference.
+            nullable: true
+            example: INV12345
+          notes:
+            type: string
+            description: The notes.
+            nullable: true
+            example: Notes
+          maintenanceCost:
+            type: number
+            description: The maintenance cost.
+            format: decimal
+            nullable: true
+            example: 1000
+          supportCost:
+            type: number
+            description: The support cost.
+            format: decimal
+            nullable: true
+            example: 1000
+          purchaseCurrency:
+            type: string
+            description: The purchase currency.
+            nullable: true
+            example: USD
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          nullable: true
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          nullable: true
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          nullable: true
+          example: GET
+    HateoasCollectionOfMaintenancePeriodCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfMaintenancePeriodCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    HateoasResponse:
+      type: object
+      description: Abstract class for IResource.
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    MaintenancePeriod:
+      allOf:
+      - $ref: '#/components/schemas/CreatedHateoasResponse'
+      - type: object
+        additionalProperties: false
+        properties:
+          validFrom:
+            type: string
+            description: The valid form date.
+            format: date-time
+            nullable: true
+            example: '2024-01-01T00:00:00Z'
+          validTo:
+            type: string
+            description: The valid to date.
+            format: date-time
+            nullable: true
+            example: '2025-01-01T00:00:00Z'
+          hasUpgradeRights:
+            type: boolean
+            description: '```true``` if has upgrade rights; otherwise, ```false```.'
+            example: true
+          maintenanceCost:
+            type: number
+            description: The maintenance cost.
+            format: decimal
+            nullable: true
+            example: 1000
+          supportCost:
+            type: number
+            description: The support cost.
+            format: decimal
+            nullable: true
+            example: 1000
+          purchaseCurrency:
+            type: string
+            description: The purchase currency.
+            nullable: true
+            example: USD
+          invoiceReference:
+            type: string
+            description: The invoice reference.
+            nullable: true
+            example: INV12345
+          notes:
+            type: string
+            description: The notes.
+            nullable: true
+            example: Notes
+    CreatedHateoasResponse:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResponse'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the resource.
+            format: guid
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    ListOfMaintenancePeriodRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/MaintenancePeriodRequest'
+    MaintenancePeriodRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        agreementPeriodId:
+          type: string
+          description: The unique ID of the agreement period.
+          format: guid
+          nullable: true
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        validFrom:
+          type: string
+          description: The valid form date.
+          format: date-time
+          nullable: true
+          example: '2024-01-01T00:00:00Z'
+        validTo:
+          type: string
+          description: The valid to date.
+          format: date-time
+          nullable: true
+          example: '2025-01-01T00:00:00Z'
+        hasUpgradeRights:
+          type: boolean
+          description: '```true``` if has upgrade rights; otherwise, ```false```.'
+          example: true
+        invoiceReference:
+          type: string
+          description: The invoice reference.
+          nullable: true
+          example: INV12345
+        notes:
+          type: string
+          description: The notes.
+          nullable: true
+          example: Notes
+        maintenanceCost:
+          type: number
+          description: The maintenance cost.
+          format: decimal
+          nullable: true
+          example: 1000
+        supportCost:
+          type: number
+          description: The support cost.
+          format: decimal
+          nullable: true
+          example: 1000
+    FilteredResponseOfMaintenancePeriodCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/MaintenancePeriodCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          format: int32
+          nullable: true
+          example: 5
+        total_items:
+          type: integer
+          description: The total number of items.
+          format: int32
+          nullable: true
+          example: 100
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

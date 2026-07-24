@@ -1,0 +1,2694 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Assignments API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Assignments
+paths:
+  /api/sam/v1/assignment-types:
+    get:
+      tags:
+      - Assignments
+      summary: Get Assignment Types
+      description: Returns a collection of assignment types.
+      operationId: getAssignmentTypesCollection
+      parameters:
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfAssignmentTypeCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/{id}/assignments/computers:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignments to Computers
+      description: Returns a collection of a license's assignments to computers.
+      operationId: getComputerAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfComputerAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    post:
+      tags:
+      - Assignments
+      summary: Add License Assignment to Computer
+      description: Creates a license assignment to computer.
+      operationId: addComputerAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComputerAssignmentRequest'
+      responses:
+        '201':
+          description: 'Created: Your request created something new. Usually, this is a call that used the POST method and will allow a GET method to retrieve it later.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedHateoasResponse'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    put:
+      tags:
+      - Assignments
+      summary: Replace License Assignments to Computers
+      description: Replaces the given license’s assignments to computers.
+      operationId: replaceComputerAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOfComputerAssignmentRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfComputerAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Assignments
+      summary: Delete License Assignments to Computers
+      description: Removes the given license’s assignments to computers.
+      operationId: deleteComputerAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/assignments/computers/{assignmentId}:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignment to Computer
+      description: Returns the details of the given license assignment to computer.
+      operationId: getComputerAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputerAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    put:
+      tags:
+      - Assignments
+      summary: Replace License Assignment to Computer
+      description: Replaces the given license assignment to computer.
+      operationId: replaceComputerAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComputerAssignmentRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputerAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Assignments
+      summary: Delete License Assignment to Computer
+      description: Removes the given license assignment to computer.
+      operationId: deleteComputerAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/assignments/datacenters:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignments to Datacenters
+      description: Returns a collection of a license's assignments to datacenters.
+      operationId: getDatacenterAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfDatacenterAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    post:
+      tags:
+      - Assignments
+      summary: Add License Assignment to Datacenter
+      description: Creates a license assignment to datacenter.
+      operationId: addDatacenterAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatacenterAssignmentRequest'
+      responses:
+        '201':
+          description: 'Created: Your request created something new. Usually, this is a call that used the POST method and will allow a GET method to retrieve it later.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedHateoasResponse'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    put:
+      tags:
+      - Assignments
+      summary: Replace License Assignments to Datacenters
+      description: Replaces the given license’s assignments to datacenters.
+      operationId: replaceDataCenterAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOfDatacenterAssignmentRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfDatacenterAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Assignments
+      summary: Delete License Assignments to Datacenters
+      description: Removes the given license’s assignments to datacenters.
+      operationId: deleteDataCenterAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/assignments/datacenters/{assignmentId}:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignment to Datacenter
+      description: Returns the details of the given license assignment to datacenter.
+      operationId: getDatacenterAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatacenterAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    put:
+      tags:
+      - Assignments
+      summary: Replace License Assignment to Datacenter
+      description: Replaces the given license assignment to datacenter.
+      operationId: replaceDatacenterAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatacenterAssignmentRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatacenterAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Assignments
+      summary: Delete License Assignment to Datacenter
+      description: Removes the given license assignment to datacenter.
+      operationId: deleteDatacenterAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/assignments-summary:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignments Summary
+      description: Returns the details of a license's assignments.
+      operationId: getLicenseAssignmentDetails
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseAssignmentDetails'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/licenses/{id}/assignments/organizations:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignments to Organizations
+      description: Returns a collection of a license's assignments to organizations.
+      operationId: getOrganizationAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfOrganizationAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    post:
+      tags:
+      - Assignments
+      summary: Add License Assignment to Organization
+      description: Creates a license assignment to organization.
+      operationId: addOrganizationAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationAssignmentRequest'
+      responses:
+        '201':
+          description: 'Created: Your request created something new. Usually, this is a call that used the POST method and will allow a GET method to retrieve it later.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedHateoasResponse'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    put:
+      tags:
+      - Assignments
+      summary: Replace License Assignments to Organizations
+      description: Replaces the given license’s assignments to organizations.
+      operationId: replaceOrganizationAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOfOrganizationAssignmentRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfOrganizationAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Assignments
+      summary: Delete License Assignments to Organizations
+      description: Removes the given license’s assignments to organizations.
+      operationId: deleteOrganizationAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/assignments/organizations/{assignmentId}:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignment to Organization
+      description: Returns the details of the given license assignment to organization.
+      operationId: getOrganizationAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    put:
+      tags:
+      - Assignments
+      summary: Replace License Assignment to Organization
+      description: Replaces the given license assignment to organization.
+      operationId: replaceOrganizationAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationAssignmentRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Assignments
+      summary: Delete License Assignment to Organization
+      description: Removes the given license assignment to organization.
+      operationId: deleteOrganizationAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/assignments/site:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignment to Site
+      description: Returns the details of the given license’s assignment to site.
+      operationId: getSiteAssignment2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SiteAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    post:
+      tags:
+      - Assignments
+      summary: Add License Assignment to Site
+      description: Creates a license assignment to site.
+      operationId: createSiteAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SiteAssignmentRequest'
+      responses:
+        '201':
+          description: 'Created: Your request created something new. Usually, this is a call that used the POST method and will allow a GET method to retrieve it later.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedHateoasResponse'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/assignments/site/{assignmentId}:
+    put:
+      tags:
+      - Assignments
+      summary: Replace License Assignment to Site
+      description: Replaces the given license assignment to site.
+      operationId: replaceSiteAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SiteAssignmentRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedHateoasResponse'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Assignments
+      summary: Delete License Assignment to Site
+      description: Removes the given license assignment to site.
+      operationId: deleteSiteAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/assignments/users:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignments to Users
+      description: Returns a collection of a license's assignments to users.
+      operationId: getUserAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: filter
+        in: query
+        description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        schema:
+          type: string
+        example: filter=status -eq "active"
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfUserAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    post:
+      tags:
+      - Assignments
+      summary: Add License Assignment to User
+      description: Creates a license assignment to user.
+      operationId: addUserAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAssignmentRequest'
+      responses:
+        '201':
+          description: 'Created: Your request created something new. Usually, this is a call that used the POST method and will allow a GET method to retrieve it later.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedHateoasResponse'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    put:
+      tags:
+      - Assignments
+      summary: Replace License Assignments to Users
+      description: Replaces the given license’s assignments to users.
+      operationId: replaceUserAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOfUserAssignmentRequest'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfUserAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+    delete:
+      tags:
+      - Assignments
+      summary: Delete License Assignments to Users
+      description: Removes the given license’s assignment to users.
+      operationId: deleteUserAssignmentCollection
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+  /api/sam/v1/licenses/{id}/assignments/users/{assignmentId}:
+    get:
+      tags:
+      - Assignments
+      summary: Get License Assignment to User
+      description: Returns the details of the given license assignment to user.
+      operationId: getUserAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAssignment'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+    delete:
+      tags:
+      - Assignments
+      summary: Delete License Assignment to User
+      description: Removes the given license assignment to user.
+      operationId: deleteUserAssignment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the license.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      - name: assignmentId
+        in: path
+        required: true
+        description: The unique ID of the assignment.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '204':
+          description: 'No Content: Your request succeeded, but the response message was empty.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.crud
+components:
+  schemas:
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          nullable: true
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          nullable: true
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          nullable: true
+          example: GET
+    HateoasResponse:
+      type: object
+      description: Abstract class for IResource.
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    HateoasCollectionOfOrganizationAssignment:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfOrganizationAssignment'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ListOfComputerAssignmentRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComputerAssignmentRequest'
+    FilteredResponseOfOrganizationAssignment:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/OrganizationAssignment'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    UserAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        userId:
+          type: string
+          description: The unique ID of the user.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    SiteAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        organizationId:
+          type: string
+          description: The unique ID of the organization.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+    FilteredResponseOfUserAssignment:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/UserAssignment'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    FilteredResponseOfComputerAssignment:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ComputerAssignment'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    UserAssignment:
+      allOf:
+      - $ref: '#/components/schemas/CreatedHateoasResponse'
+      - type: object
+        description: The user assignment.
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            nullable: true
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          userId:
+            type: string
+            description: The unique ID of the user.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          quantity:
+            type: integer
+            description: The assigned quantity of licenses.
+            format: int32
+            example: 1
+          invalidAssignmentReasons:
+            description: Invalid assignment reasons.
+            nullable: true
+            example:
+            - OverAssignment
+            oneOf:
+            - $ref: '#/components/schemas/InvalidAssignmentReasons'
+    SiteAssignment:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        description: The site assignment.
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the assignment.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            nullable: true
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          quantity:
+            type: integer
+            description: The assigned quantity of licenses.
+            format: int32
+            nullable: true
+            example: 1
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    HateoasCollectionOfUserAssignment:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfUserAssignment'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    FilteredResponseOfAssignmentTypeCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/AssignmentTypeCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    ListOfOrganizationAssignmentRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrganizationAssignmentRequest'
+    OrganizationAssignment:
+      allOf:
+      - $ref: '#/components/schemas/CreatedHateoasResponse'
+      - type: object
+        description: The organization assignment.
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            nullable: true
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          quantity:
+            type: integer
+            description: The assigned quantity of licenses.
+            format: int32
+            nullable: true
+            example: 1
+          isAutoAllocated:
+            type: boolean
+            description: '```true``` if has auto allocate selected; otherwise, ```false```.'
+            example: true
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    ComputerAssignmentRequest:
+      type: object
+      description: A collection of computer license assignments.
+      additionalProperties: false
+      properties:
+        computerId:
+          type: string
+          description: The unique ID of the computer.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The assigned quantity of licenses.
+          format: int32
+          example: 1
+        virtualMachines:
+          type: array
+          description: The list of virtual machines.
+          nullable: true
+          example:
+          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          items:
+            type: string
+            format: guid
+    InvalidAssignmentReasons:
+      type: integer
+      description: The invalid assignment reason.
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - SubscriptionExpired
+      - Unassigned
+      - ComputerMissing
+      - InactiveComputer
+      - UserMissing
+      - DatacenterMissing
+      - InvalidMetric
+      - NoEliglibleApplicationInstalled
+      - NoEligibleApplicationIsInstalledOnAnyComputerWhereUserIsPrimary
+      - UserHasNotUsedAnyEligibleApplication
+      - Incomplete
+      - OverAssignment
+      - InvalidQuantity
+      - UserHasNotUsedAnyEligibleApplicationWithinPeriod
+      - InvalidMetricGroup
+      - InvalidProcessorCount
+      enum:
+      - 0
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 32
+      - 64
+      - 128
+      - 256
+      - 512
+      - 1024
+      - 2048
+      - 4096
+      - 8192
+      - 16384
+      - 32768
+    CreatedHateoasResponse:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResponse'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the resource.
+            format: guid
+    AssignmentTypeCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          assignmentType:
+            type: integer
+            description: The assignment type.
+            format: int32
+            example: 0
+          assignmentTypeId:
+            type: string
+            description: The unique ID of the assignment type.
+            format: guid
+            example: 8e5d8f69-c818-4575-9a91-aebae9a9eacc
+          name:
+            type: string
+            description: The name of the assignment type.
+            nullable: true
+            example: Organization
+    HateoasCollectionOfComputerAssignment:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComputerAssignment'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    LicenseAssignmentDetails:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          hasOrganizationAssignment:
+            type: boolean
+            description: '```true``` if has organization assignment; otherwise, ```false```.'
+            example: true
+          hasComputerAssignment:
+            type: boolean
+            description: '```true``` if has computer assignment; otherwise, ```false```.'
+            example: true
+          hasUserAssignment:
+            type: boolean
+            description: '```true``` if has user assignment; otherwise, ```false```.'
+            example: true
+          hasSiteAssignment:
+            type: boolean
+            description: '```true``` if has site assignment; otherwise, ```false```.'
+            example: true
+    OrganizationAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        organizationId:
+          type: string
+          description: The unique ID of the organization.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The assigned quantity of licenses.
+          format: int32
+          example: 1
+    ListOfDatacenterAssignmentRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatacenterAssignmentRequest'
+    DatacenterAssignment:
+      allOf:
+      - $ref: '#/components/schemas/CreatedHateoasResponse'
+      - type: object
+        description: The DCC assignment.
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            nullable: true
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          datacenterId:
+            type: string
+            description: The unique ID of the DCC.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          quantity:
+            type: integer
+            description: The assigned quantity of licenses.
+            format: int32
+            nullable: true
+            example: 1
+          numberOfSupportedVirtualMachines:
+            type: integer
+            description: The number of supported virtual machines.
+            format: int32
+            nullable: true
+            example: 1
+          hasVmUseRights:
+            type: boolean
+            description: '```true``` if has VM use rights; otherwise, ```false```.'
+            nullable: true
+            example: true
+          invalidAssignmentReasons:
+            description: Invalid assignment reasons.
+            nullable: true
+            example:
+            - OverAssignment
+            oneOf:
+            - $ref: '#/components/schemas/InvalidAssignmentReasons'
+          virtualMachines:
+            type: array
+            description: The virtual machines.
+            nullable: true
+            example:
+            - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+            items:
+              type: string
+              format: guid
+    DatacenterAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        datacenterId:
+          type: string
+          description: The unique ID of the DCC.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The assigned quantity of licenses.
+          format: int32
+          example: 1
+        virtualMachines:
+          type: array
+          description: The list of virtual machines.
+          nullable: true
+          example:
+          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          items:
+            type: string
+            format: guid
+    HateoasCollectionOfAssignmentTypeCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfAssignmentTypeCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ComputerAssignment:
+      allOf:
+      - $ref: '#/components/schemas/CreatedHateoasResponse'
+      - type: object
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            nullable: true
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          quantity:
+            type: integer
+            description: The assigned quantity of licenses.
+            format: int32
+            nullable: true
+            example: 1
+          numberOfSupportedVirtualMachines:
+            type: integer
+            description: The number of supported virtual machines.
+            format: int32
+            nullable: true
+            example: 1
+          hasVmUseRights:
+            type: boolean
+            description: '```true``` if has VM use rights; otherwise, ```false```.'
+            nullable: true
+            example: true
+          invalidAssignmentReasons:
+            description: Invalid assignment reasons.
+            nullable: true
+            example:
+            - OverAssignment
+            oneOf:
+            - $ref: '#/components/schemas/InvalidAssignmentReasons'
+          virtualMachines:
+            type: array
+            description: The virtual machines.
+            nullable: true
+            example:
+            - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+            items:
+              type: string
+              format: guid
+    ListOfUserAssignmentRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserAssignmentRequest'
+    FilteredResponseOfDatacenterAssignment:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/DatacenterAssignment'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          format: int32
+          nullable: true
+          example: 5
+        total_items:
+          type: integer
+          description: The total number of items.
+          format: int32
+          nullable: true
+          example: 100
+    HateoasCollectionOfDatacenterAssignment:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfDatacenterAssignment'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

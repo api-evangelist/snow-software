@@ -1,0 +1,208 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Computer costs API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Computer costs
+paths:
+  /api/sam/estate/v1/computers/{id}/costs:
+    get:
+      tags:
+      - Computer costs
+      summary: Get Computer's Costs
+      description: Returns the details of a computer's costs.
+      operationId: getComputerCosts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputerCosts'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+components:
+  schemas:
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/computers/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
+    ComputerCosts:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response representing costs associated with a computer.
+        additionalProperties: false
+        required:
+        - computerId
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 4f2403da-3ab5-48f8-9114-73304cfeb017
+          vendor:
+            type: string
+            description: The vendor of the computer.
+            nullable: true
+            example: Dell Inc.
+          purchaseDate:
+            type: string
+            description: The date on which the computer was purchased.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          purchasePrice:
+            type: number
+            description: The price for which the computer was purchased.
+            format: decimal
+            nullable: true
+            example: 2521.32
+          purchaseValueBase:
+            type: number
+            description: The value base of the purchase of the computer.
+            format: decimal
+            nullable: true
+            example: 2500.32
+          purchaseCurrency:
+            type: string
+            description: The currency in which the computer was purchased.
+            nullable: true
+            example: EUR
+          invoiceReference:
+            type: string
+            description: The invoice reference for the purchase of the computer.
+            nullable: true
+            example: 2024/03/63729P
+          totalCostOfInstalledApplications:
+            type: number
+            description: The total cost of all applications installed on the computer.
+            format: decimal
+            nullable: true
+            example: 1452.28
+          totalCost:
+            type: number
+            description: The total cost of the computer and installed applications.
+            format: decimal
+            nullable: true
+            example: 3973.6
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type: string
+          description: Additional error message.
+          nullable: true
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+  responses:
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

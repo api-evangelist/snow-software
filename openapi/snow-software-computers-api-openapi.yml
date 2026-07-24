@@ -1,0 +1,1038 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Applications Computers API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Computers
+paths:
+  /api/sam/estate/v1/computers/bulk-update:
+    patch:
+      tags:
+      - Computers
+      summary: Bulk Update Status of Computers
+      description: Allows updating the status of multiple computers in bulk.
+      operationId: BulkUpdateComputerStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateComputerStatusRequest'
+      responses:
+        '200':
+          description: OK - Bulk status update completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdateComputerStatusResponse'
+        '400':
+          description: Bad Request - Invalid request body, scope, or parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/sam/estate/v1/computers/{id}:
+    get:
+      tags:
+      - Computers
+      summary: Get Computer Details
+      description: Returns the details of the given computer.
+      operationId: getComputer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputerDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+    delete:
+      tags:
+      - Computers
+      summary: Delete Computer
+      description: Removes the given computer.
+      operationId: deleteComputer
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the computer.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.d
+    put:
+      tags:
+      - Computers
+      summary: Update Computer Attributes
+      description: Modifies a computer by adding or updating the specified attributes.
+      operationId: updateComputer
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the computer.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComputerWrite'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          $ref: '#/components/responses/400'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          $ref: '#/components/responses/404'
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.u
+  /api/sam/estate/v1/computers:
+    get:
+      tags:
+      - Computers
+      summary: Get Computers
+      description: Returns a collection of computers.
+      operationId: getComputers
+      parameters:
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1.0
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 25
+          minimum: 1.0
+      - name: filter
+        in: query
+        description: 'The fields which you can use to filter the results. Format of the query string parameter:
+
+          ```
+
+          ?filter=<filter name> <operator> <value>
+
+          ```
+
+          Filter name | Description | Data type | Example
+
+          :--- | --- | --- | ---
+
+
+          For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+
+          '
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteredResponseWithLinksOfComputer'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+  /api/sam/estate/v1/computers/{id}/archive:
+    patch:
+      tags:
+      - Computers
+      summary: Archive Computer
+      description: Archives the given computer.
+      operationId: archiveComputer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Your request succeeded.
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.u
+  /api/sam/estate/v1/computers/patch-auto-editing/{id}:
+    patch:
+      tags:
+      - Computers
+      summary: Update Disable Auto Editing Settings for a Computer
+      description: Modifies Disable auto editing settings for the given computer.
+      operationId: updateComputer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchRequest'
+            example:
+            - op: replace
+              path: /isAutoEditingDisabled
+              value: 'false'
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputerDetails'
+        '400':
+          $ref: '#/components/responses/400'
+  /api/sam/estate/v1/computers/patch-organization-assigment/{id}:
+    patch:
+      tags:
+      - Computers
+      summary: Update Organization for a Computer
+      description: Modifies Organization for the given computer.
+      operationId: updateComputer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchRequest'
+            example:
+            - op: replace
+              path: /organizationId
+              value: 8a51eea9-68ce-4a32-906d-112ef9533f71
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputerDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.u
+components:
+  schemas:
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/computers/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
+    ComputerWrite:
+      type: object
+      properties:
+        purchaseDate:
+          type: string
+          format: date-time
+          description: The date on which the computer was purchased.
+          nullable: true
+          example: '2024-03-24T12:52:20Z'
+        purchaseValue:
+          type: number
+          format: decimal
+          description: The amount for which the computer was purchased.
+          nullable: true
+          example: 2461.32
+        purchaseCurrency:
+          type: string
+          description: The currency in which the computer was purchased.
+          nullable: true
+          example: EUR
+        vendor:
+          type: string
+          description: The vendor of the computer.
+          nullable: true
+          example: Dell
+        invoiceReference:
+          type: string
+          description: The invoice reference for the purchase of the computer.
+          nullable: true
+          example: 2024/03/63729P
+        statusCode:
+          type: string
+          description: The status of the computer.
+          nullable: true
+          example: Active
+        organizationId:
+          type: string
+          format: guid
+          description: The unique ID of the organization to which the computer belongs.
+          nullable: true
+          example: 293cf227-bf7f-4919-b664-791f3f49e1ef
+        isQuarantineManagementDisabled:
+          type: boolean
+          description: '```true``` if the computer has quarantine management disabled; otherwise, ```false```.'
+          nullable: true
+          example: true
+        isAutoEditingDisabled:
+          type: boolean
+          description: '```true``` if the auto editing is disabled for the computer; otherwise, ```false```.'
+          nullable: true
+          example: false
+        socketCount:
+          type: integer
+          format: int32
+          description: The number of sockets in the computer.
+          nullable: true
+          example: 2
+        hostComputerId:
+          type: string
+          format: guid
+          description: The unique ID of the host computer if present.
+          nullable: true
+          example: 8FD97CF1-FB71-469B-ACEA-39314EC26213
+        siblingComputerId:
+          type: string
+          format: guid
+          description: The unique ID of the sibling computer if present.
+          nullable: true
+          example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
+        isVirtual:
+          type: boolean
+          description: '```true``` if the computer is virtual; otherwise, ```false```.'
+          nullable: true
+          example: false
+        isSocketCountManualOverrideEnabled:
+          type: boolean
+          description: '```true``` if the socket count manual override of the computer is enabled; otherwise, ```false```.'
+          nullable: true
+          example: true
+        chipModulesPerProcessor:
+          type: integer
+          format: int32
+          description: The number of chip modules per processor.
+          nullable: true
+          example: 2
+        notes:
+          type: string
+          description: The notes associated with the purchase of the computer.
+          nullable: true
+          example: Purchased in a set with printer
+        securityCode:
+          type: string
+          description: The security code for the computer.
+          nullable: true
+          example: A563Z
+        processorValueUnit:
+          type: integer
+          format: int32
+          description: The processor value unit of the computer.
+          nullable: true
+          example: 32
+        biosSerialNumber:
+          type: string
+          description: The BIOS serial number of the computer.
+          nullable: true
+          example: 43-01-10-TX
+    FilteredResponseWithLinksOfComputer:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/Computer'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    PatchRequest:
+      type: array
+      items:
+        oneOf:
+        - $ref: '#/components/schemas/JSONPatchRequestAddReplace'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
+    JSONPatchRequestAddReplace:
+      type: object
+      properties:
+        path:
+          description: A JSON Pointer path.
+          type: string
+          example: /77f8f11f-e4f8-4bed-8e44-b78d66244302
+        value:
+          description: The value to add, replace, or test.
+          example: Active
+        op:
+          description: The operation to perform.
+          x-enumDescriptions:
+            add: Adds a value to an object or inserts it into an array.
+            replace: Replaces a value.
+            test: Tests that the specified value is set in the document.
+          type: string
+          enum:
+          - add
+          - replace
+          - test
+          example: replace
+      required:
+      - value
+      - op
+      - path
+    ComputerDetails:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response representing details of a computer.
+        additionalProperties: false
+        required:
+        - id
+        - hostName
+        - lastScanDate
+        - infoTransferDate
+        - architecture
+        properties:
+          id:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            minLength: 1
+            example: 5043cc04-3ef2-4882-a3be-8d08b4f402c7
+          scanIdentifier:
+            type: string
+            description: The identifier used by the scan.
+            nullable: true
+            example: MAC-C02GD9DUML7H
+          hostName:
+            type: string
+            description: The host name of the computer.
+            example: AM21-S42MONITOR
+          domain:
+            type: string
+            description: The domain of the computer.
+            nullable: true
+            example: APAC
+          lastScanDate:
+            type: string
+            description: The last date that the computer was scanned.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          biosSerialNumber:
+            type: string
+            description: The BIOS serial number of the computer.
+            nullable: true
+            example: 43-01-10-TX
+          biosVersion:
+            type: string
+            description: The BIOS version of the computer.
+            nullable: true
+            example: 1.26.0
+          biosDate:
+            type: string
+            description: The BIOS date of the computer.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          manufacturer:
+            type: string
+            description: The manufacturer of the computer.
+            nullable: true
+            example: Lenovo
+          manufacturerWebsite:
+            type: string
+            description: Website of the computer's manufacturer.
+            nullable: true
+            example: https://www.lenovo.com
+          model:
+            type: string
+            description: The model of the computer.
+            nullable: true
+            example: T480s
+          isPortable:
+            type: boolean
+            description: '```true``` if the computer is portable; otherwise, ```false```.'
+            nullable: true
+            example: true
+          infoTransferDate:
+            type: string
+            description: The date and time of information transfer for the computer.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          clientInstallDate:
+            type: string
+            description: The date and time that the client was installed on the computer.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          clientVersion:
+            type: string
+            description: The version of the client on the computer.
+            nullable: true
+            example: 6.14.3
+          clientSiteName:
+            type: string
+            description: The site name of the client on the computer.
+            nullable: true
+            example: snow
+          clientConfigurationName:
+            type: string
+            description: The configuration name of the client on the computer.
+            nullable: true
+            example: SnowAtlas
+          scannerVersion:
+            type: string
+            description: The version of the scanner for the computer.
+            nullable: true
+            example: 7.0.0
+          quarantineDate:
+            type: string
+            description: The quarantine date of the computer, if computer was quarantined.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          isQuarantineManagementDisabled:
+            type: boolean
+            description: '```true``` if the computer has quarantine management disabled; otherwise, ```false```.'
+            nullable: true
+            example: true
+          operatingSystem:
+            type: string
+            description: The operating system of the computer.
+            nullable: true
+            example: Microsoft Windows 11 Pro
+          operatingSystemId:
+            type: string
+            description: The unique ID of the computer's operating system.
+            format: guid
+            nullable: true
+            example: c27c14a7-dcec-4f8e-b08e-cdb7263b5378
+          operatingSystemServicePack:
+            type: string
+            description: The service pack of the computer's operating system.
+            nullable: true
+            example: SP1
+          operatingSystemSerialNumber:
+            type: string
+            description: The serial number of the computer's operating system.
+            nullable: true
+            example: V6E3X-S6J5H-L5F5P-M4M2Y
+          ipAddress:
+            type: string
+            description: The IP address of the computer.
+            nullable: true
+            example: 10.20.20.77
+          isVirtual:
+            type: boolean
+            description: '```true``` if the computer is virtual; otherwise, ```false```.'
+            nullable: true
+            example: true
+          hostComputerId:
+            type: string
+            description: The unique ID of the host computer if present.
+            format: guid
+            nullable: true
+            example: 037e6448-6ad3-4279-800d-010677485bbb
+          siblingComputerId:
+            type: string
+            description: The unique ID of the sibling computer if present.
+            format: guid
+            nullable: true
+            example: 687e2c50-6900-463a-b470-8c12e3677be8
+          isUpdated:
+            type: boolean
+            description: '```true``` if the computer is updated; otherwise, ```false```.'
+            nullable: true
+            example: true
+          is64bit:
+            type: boolean
+            description: '```true``` if the computer is 64 bit; otherwise, ```false```.'
+            example: true
+          isServer:
+            type: boolean
+            description: '```true``` if the computer is a server; otherwise, ```false```.'
+            nullable: true
+            example: true
+          hypervisorName:
+            type: string
+            description: The hypervisor name of the computer.
+            nullable: true
+            example: VMware Virtual Platform
+          isVdi:
+            type: boolean
+            description: '```true``` if the computer uses virtual desktop infrastructure; otherwise, ```false```.'
+            nullable: true
+            example: true
+          processorValueUnit:
+            type: integer
+            description: The processor value unit of the computer.
+            format: int32
+            nullable: true
+            example: 32
+          reportingDate:
+            type: string
+            description: The date and time that the computer last reported data.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          architecture:
+            type: string
+            description: The architecture of the computer.
+            example: 64-bit
+          organizationId:
+            type: string
+            description: The unique ID of the organization to which the computer belongs.
+            format: guid
+            nullable: true
+            example: 293cf227-bf7f-4919-b664-791f3f49e1ef
+          status:
+            type: string
+            description: The status of the computer.
+            nullable: true
+            example: Active
+          isAutoEditingDisabled:
+            type: boolean
+            description: '```true``` if the auto editing is disabled for the computer; otherwise, ```false```.'
+            nullable: true
+            example: true
+          purchaseDate:
+            type: string
+            description: The date and time that the computer was purchased.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          purchaseValue:
+            type: number
+            description: The amount for which the computer was purchased.
+            format: decimal
+            nullable: true
+            example: 2461.32
+          purchaseCurrency:
+            type: string
+            description: The currency in which the computer was purchased.
+            nullable: true
+            example: EUR
+          purchaseValueBase:
+            type: number
+            description: The value base of the purchase of the computer.
+            format: decimal
+            nullable: true
+            example: 2500.32
+          invoiceReference:
+            type: string
+            description: The invoice reference for the purchase of the computer.
+            nullable: true
+            example: 2024/03/63729P
+          notes:
+            type: string
+            description: The notes associated with the purchase of the computer.
+            nullable: true
+            example: Purchased in a set with printer
+          securityCode:
+            type: string
+            description: The security code for the computer.
+            nullable: true
+            example: A563Z
+          updatedDate:
+            type: string
+            description: The date and time that the computer was updated.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          isIncludedInWindowsServerRequirement:
+            type: boolean
+            description: '```true``` if the computer is included in the Windows Server requirement; otherwise, ```false```.'
+            nullable: true
+            example: true
+          mostRecentUser:
+            type: string
+            description: The unique ID of the most recent user of the computer.
+            format: guid
+            nullable: true
+            example: 77f8f11f-e4f8-4bed-8e44-b78d66244302
+          mostFrequentUser:
+            type: string
+            description: The unique ID of the most frequent user of the computer.
+            format: guid
+            nullable: true
+            example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
+          vendor:
+            type: string
+            description: The vendor of the computer.
+            nullable: true
+            example: Dell Inc.
+          processorCount:
+            type: integer
+            description: The number of processors in the computer.
+            format: int32
+            nullable: true
+            example: 2
+          coreCount:
+            type: integer
+            description: The number of cores in the computer.
+            format: int32
+            nullable: true
+            example: 8
+    BulkUpdateComputerStatusRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          enum:
+          - Only
+          description: Scope for the bulk status update. Must be 'Only'.
+        ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of computer IDs to update.
+        body:
+          $ref: '#/components/schemas/BulkUpdateComputerStatusBody'
+      required:
+      - scope
+      - ids
+      - body
+    PaginationResponse:
+      type: object
+      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          format: int32
+          nullable: true
+          example: 10
+        total_items:
+          type: integer
+          description: The total number of items.
+          format: int32
+          nullable: true
+          example: 240
+    BulkUpdateComputerStatusBody:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Quarantined
+          description: Target status value for the bulk update.
+      required:
+      - Status
+    ComputerStatusUpdateError:
+      type: object
+      properties:
+        Message:
+          type: string
+    Computer:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response representing a computer.
+        additionalProperties: false
+        required:
+        - id
+        - hostName
+        - lastScanDate
+        - status
+        properties:
+          id:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            minLength: 1
+            example: 5043cc04-3ef2-4882-a3be-8d08b4f402c7
+          hostName:
+            type: string
+            description: The host name of the computer.
+            minLength: 1
+            example: AM21-S42MONITOR
+          hostComputerId:
+            type: string
+            description: The unique ID of the host computer.
+            format: guid
+            nullable: true
+            example: 035613f6-26a5-4929-94f0-ed10a991438a
+          mostFrequentUser:
+            type: string
+            description: The unique ID of the most frequent user of the computer.
+            format: guid
+            nullable: true
+            example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
+          mostRecentUser:
+            type: string
+            description: The unique ID of the most recent user of the computer.
+            format: guid
+            nullable: true
+            example: 77f8f11f-e4f8-4bed-8e44-b78d66244302
+          manufacturer:
+            type: string
+            description: The manufacturer of the computer.
+            nullable: true
+            example: Lenovo
+          isPortable:
+            type: boolean
+            description: '```true``` if the computer is portable; otherwise, ```false```.'
+            nullable: true
+            example: true
+          isVirtual:
+            type: boolean
+            description: '```true``` if the computer is virtual; otherwise, ```false```.'
+            nullable: true
+            example: true
+          isServer:
+            type: boolean
+            description: '```true``` if the computer is a server; otherwise, ```false```.'
+            nullable: true
+            example: true
+          model:
+            type: string
+            description: The model of the computer.
+            nullable: true
+            example: T480s
+          operatingSystem:
+            type: string
+            description: The operating system of the computer.
+            nullable: true
+            example: Microsoft Windows 11 Pro
+          vendor:
+            type: string
+            description: The vendor of the computer.
+            nullable: true
+            example: Dell Inc.
+          domain:
+            type: string
+            description: The domain of the computer.
+            nullable: true
+            example: APAC
+          ipAddress:
+            type: string
+            description: The IP address of the computer.
+            nullable: true
+            example: 10.20.20.77
+          isVDI:
+            type: boolean
+            description: '```true``` if the computer uses virtual desktop infrastructure; otherwise, ```false```.'
+            nullable: true
+            example: true
+          lastScanDate:
+            type: string
+            description: The date and time that the computer was last scanned.
+            format: date-time
+            minLength: 1
+            example: '2024-03-24T12:52:20Z'
+          status:
+            type: string
+            description: The status of the computer.
+            minLength: 1
+            example: Active
+          organizationId:
+            type: string
+            description: The unique ID of the organization to which the computer belongs.
+            format: guid
+            nullable: true
+            example: 293cf227-bf7f-4919-b664-791f3f49e1ef
+          processorCount:
+            type: integer
+            description: The number of processors in the computer.
+            format: int32
+            nullable: true
+            example: 2
+          coreCount:
+            type: integer
+            description: The number of cores in the computer.
+            format: int32
+            nullable: true
+            example: 8
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type: string
+          description: Additional error message.
+          nullable: true
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    BulkUpdateComputerStatusResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComputerStatusUpdateError'
+        message:
+          type: string
+        processedCount:
+          type: integer
+        skippedCount:
+          type: integer
+  responses:
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+    '204':
+      description: 'No Content: Your request succeeded, but the response message was empty.'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

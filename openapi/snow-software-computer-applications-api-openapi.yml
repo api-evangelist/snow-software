@@ -1,0 +1,859 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Computer applications API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Computer applications
+paths:
+  /api/sam/estate/v1/computers/{id}/applications:
+    get:
+      tags:
+      - Computer applications
+      summary: Get Computer's Applications
+      description: Returns a collection of applications for the given computer.
+      operationId: getComputerApplications
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1.0
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1.0
+      - name: filter
+        in: query
+        description: 'The fields which you can use to filter the results. Format of the query string parameter:
+
+          ```
+
+          ?filter=<filter name> <operator> <value>
+
+          ```
+
+          Filter name | Description | Data type | Example
+
+          :--- | --- | --- | ---
+
+
+          For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+
+          '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteredResponseWithLinksOfComputerApplications'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+  /api/sam/estate/v1/computers/{id}/applications/{applicationid}:
+    get:
+      tags:
+      - Computer applications
+      summary: Get Computer Application's Details
+      description: Returns the details of the given computer application.
+      operationId: getComputerApplicationDetails
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique ID of the computer.
+        schema:
+          type: string
+      - name: applicationid
+        in: path
+        required: true
+        description: The unique ID of the application.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputerApplicationsDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+  /api/sam/estate/v1/computers-applications:
+    get:
+      tags:
+      - Computer applications
+      summary: Get Computer Applications
+      description: Returns a collection of applications.
+      operationId: getComputersApplications
+      parameters:
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1.0
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1.0
+      - name: filter
+        in: query
+        description: 'The fields which you can use to filter the results. Format of the query string parameter:
+
+          ```
+
+          ?filter=<filter name> <operator> <value>
+
+          ```
+
+          Filter name | Description | Data type | Example
+
+          :--- | --- | --- | ---
+
+
+          For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+
+          '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteredResponseWithLinksOfComputerApplications'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+  /api/sam/estate/v1/computers-application-usage:
+    get:
+      tags:
+      - Computer applications
+      summary: Get Application Usage Data
+      description: Returns a collection of application usage data.
+      operationId: getApplicationUsages
+      parameters:
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1.0
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1.0
+      - name: filter
+        in: query
+        description: 'The fields which you can use to filter the results. Format of the query string parameter:
+
+          ```
+
+          ?filter=<filter name> <operator> <value>
+
+          ```
+
+          Filter name | Description | Data type | Example
+
+          :--- | --- | --- | ---
+
+
+          For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+
+          '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteredResponseWithLinksOfComputerApplicationUsage'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+  /api/sam/estate/v1/computers-application-user-usage:
+    get:
+      tags:
+      - Computer applications
+      summary: Get Application User Usage
+      description: Returns a collection of users' application usage data.
+      operationId: getApplicationUserUsage
+      parameters:
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1.0
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1.0
+      - name: filter
+        in: query
+        description: 'The fields which you can use to filter the results. Format of the query string parameter:
+
+          ```
+
+          ?filter=<filter name> <operator> <value>
+
+          ```
+
+          Filter name | Description | Data type | Example
+
+          :--- | --- | --- | ---
+
+
+          For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+
+          '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteredResponseWithLinksOfUserApplicationUsage'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+  /api/sam/estate/v1/computers-application-usage/summaries:
+    get:
+      tags:
+      - Computer applications
+      summary: Get Application Usage Summaries
+      description: Returns a collection of application usage summaries.
+      operationId: getApplicationUsageSummary
+      parameters:
+      - name: page_number
+        in: query
+        description: The page number.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1.0
+      - name: page_size
+        in: query
+        description: The maximum number of items in the response.
+        schema:
+          type: integer
+          default: 100
+          minimum: 1.0
+      - name: filter
+        in: query
+        description: 'The fields which you can use to filter the results. Format of the query string parameter:
+
+          ```
+
+          ?filter=<filter name> <operator> <value>
+
+          ```
+
+          Filter name | Description | Data type | Example
+
+          :--- | --- | --- | ---
+
+
+          For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+
+          '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteredResponseWithLinksOfComputerApplicationUsageSummary'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+      - BearerAuth:
+        - sam.computer.r
+components:
+  schemas:
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/computers/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
+    FilteredResponseWithLinksOfUserApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/UserApplicationUsage'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    FilteredResponseWithLinksOfComputerApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerApplicationUsage'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    ComputerApplicationUsageSummary:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response class for application usage summary.
+        additionalProperties: false
+        required:
+        - applicationId
+        properties:
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 1ce2bdde-b68f-429d-aff5-bad93f544689
+          computers:
+            type: integer
+            description: The number of computers on which the application was used.
+            format: int32
+            example: 10
+          users:
+            type: integer
+            description: The number of users who used the application.
+            format: int32
+            example: 10
+          installations:
+            type: integer
+            description: The number of installations of the application.
+            format: int32
+            example: 10
+    UserApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Represents usage of an application by a specific user.
+        additionalProperties: false
+        required:
+        - applicationId
+        - userId
+        properties:
+          userId:
+            type: string
+            description: The unique ID of the user.
+            format: guid
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          bundleApplicationId:
+            type: string
+            description: The unique ID of the application bundle, or product suite, for a given application.
+            format: guid
+            nullable: true
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          lastUsedDate:
+            type: string
+            description: The date that the application was last used.
+            nullable: true
+            format: date
+            example: '2024-03-22'
+    ComputerApplicationsDetails:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response class for computer application details.
+        additionalProperties: false
+        required:
+        - computerId
+        - applicationId
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: c1d617ff-2104-411c-9c20-682017a9fefd
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: c1d617ff-2104-411c-9c20-682017a9fefd
+          bundleApplicationId:
+            type: string
+            description: The unique ID of the application bundle, or product suite, for a given application.
+            format: guid
+            nullable: true
+            example: c1d617ff-2104-411c-9c20-682017a9fefd
+          firstDiscovered:
+            type: string
+            description: The date when the application was first discovered on the computer.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          firstUsed:
+            type: string
+            description: The date when the application was first used on the computer.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          lastUsed:
+            type: string
+            description: The date when the application was last used on the computer.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          usedCount:
+            type: integer
+            description: The number of times the application was used on the computer.
+            format: int32
+            example: 10
+          usedUser:
+            type: integer
+            description: The number of users who used the application on the computer.
+            format: int32
+            example: 10
+          usedMinutes:
+            type: integer
+            description: The number of minutes the application was used on the computer.
+            format: int64
+            example: 10
+          usedDays:
+            type: integer
+            description: The number of days the application was used on the computer.
+            format: int32
+            nullable: true
+            example: 10
+          isInstalled:
+            type: boolean
+            description: '```true``` if the application is installed on the computer; otherwise, ```false```.'
+            nullable: true
+            example: true
+          isOEM:
+            type: boolean
+            description: '```true``` if the application is OEM; otherwise, ```false```.'
+            nullable: true
+            example: true
+          isMSDN:
+            type: boolean
+            description: '```true``` if the application is MSDN; otherwise, ```false```.'
+            nullable: true
+            example: true
+          isVirtual:
+            type: boolean
+            description: '```true``` if the application is virtual; otherwise, ```false```.'
+            nullable: true
+            example: true
+          isOverridden:
+            type: boolean
+            description: '```true``` if the application is overridden; otherwise, ```false```.'
+            nullable: true
+            example: true
+          packageGUID:
+            type: string
+            description: The unique ID of the application package.
+            format: guid
+            nullable: true
+            example: 640b16bb-447f-430f-87ee-49bfe940e308
+          isRecognized:
+            type: boolean
+            description: '```true``` if the application is recognized; otherwise, ```false```.'
+            nullable: true
+            example: true
+          isRegistry:
+            type: boolean
+            description: '```true``` if the application is in the registry; otherwise, ```false```.'
+            nullable: true
+            example: true
+          averageUsedTime:
+            type: string
+            description: The average time the application is used in hours.
+            nullable: true
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          unbundled:
+            type: boolean
+            description: '```true``` if the application is licenced individualy; otherwise, ```false```.'
+            example: true
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
+    ComputerApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response for computer application usage.
+        additionalProperties: false
+        required:
+        - computerId
+        - userId
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
+          userId:
+            type: string
+            description: The unique ID of the user.
+            format: guid
+            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
+          bundleApplicationId:
+            type: string
+            description: The unique ID of the application bundle, or product suite, for a given application.
+            format: guid
+            nullable: true
+            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
+          firstUsed:
+            type: string
+            description: The date and time that the application was first used on the computer.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          lastUsedDate:
+            type: string
+            description: The date and time that the application was last used on the computer.
+            nullable: true
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          usedCount:
+            type: integer
+            description: The number of times the application was used on the computer.
+            format: int32
+            example: 10
+          usedMinutes:
+            type: integer
+            description: The number of minutes the application was used on the computer.
+            format: int64
+            example: 10
+          usedDays:
+            type: integer
+            description: The number of days the application was used on the computer.
+            format: int32
+            nullable: true
+            example: 10
+          isInstalled:
+            type: boolean
+            description: '```true``` if the application is installed on the computer; otherwise, ```false```.'
+            nullable: true
+            example: true
+    ComputerApplications:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response class for computer applications.
+        additionalProperties: false
+        required:
+        - computerId
+        - applicationId
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          bundleApplicationId:
+            type: string
+            description: The unique ID of the application bundle, or product suite, for a given application.
+            format: guid
+            nullable: true
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          firstDiscovered:
+            type: string
+            description: The date when the application was first discovered on the computer.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          lastUsed:
+            type: string
+            description: The date when the application was last used on the computer.
+            format: date-time
+            nullable: true
+            example: '2024-03-24T12:52:20Z'
+          usedCount:
+            type: integer
+            description: The number of times the application was used on the computer.
+            format: int32
+            example: 10
+          averageUsedTime:
+            type: string
+            description: The average time the application was used in hours.
+            nullable: true
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          isVirtual:
+            type: boolean
+            description: '```true``` if the application is virtual; otherwise, ```false```.'
+            nullable: true
+            example: true
+          isInstalled:
+            type: boolean
+            description: '```true``` if the application is installed on the computer; otherwise, ```false```.'
+            nullable: true
+            example: true
+          bundleUsagePercentage:
+            type: integer
+            description: The proportion of the application bundle that is used in percentage.
+            format: int32
+            nullable: true
+            example: 20
+          unbundled:
+            type: boolean
+            description: '```true``` if the application is unbundled; otherwise, ```false```.'
+            example: true
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type: string
+          description: Additional error message.
+          nullable: true
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    PaginationResponse:
+      type: object
+      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          format: int32
+          nullable: true
+          example: 10
+        total_items:
+          type: integer
+          description: The total number of items.
+          format: int32
+          nullable: true
+          example: 240
+    FilteredResponseWithLinksOfComputerApplications:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerApplications'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    FilteredResponseWithLinksOfComputerApplicationUsageSummary:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerApplicationUsageSummary'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+  responses:
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

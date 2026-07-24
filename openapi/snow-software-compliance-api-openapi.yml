@@ -1,0 +1,657 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Compliance API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Compliance
+paths:
+  /api/sam/v1/compliance/summary/{applicationId}/allocation:
+    get:
+      tags:
+      - Compliance
+      summary: Get Compliance Allocation Summary
+      description: Returns a collection of compliance allocations for an application.
+      operationId: getAllocationSummaryCollection
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        description: The unique ID of the application.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfAllocationSummaryCollectionItem'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/compliance/summary/{applicationId}:
+    get:
+      tags:
+      - Compliance
+      summary: Get Compliance Summary
+      description: Returns a collection of application compliance summary.
+      operationId: getComplianceSummaryCollection
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        description: The unique ID of the application.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfComplianceSummaryCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+  /api/sam/v1/compliance/summary/{applicationId}/usage:
+    get:
+      tags:
+      - Compliance
+      summary: Get Compliance Usage Summary
+      description: Returns a collection of application compliance usage summary.
+      operationId: getComplianceSummaryUsageCollection
+      parameters:
+      - name: applicationId
+        in: path
+        required: true
+        description: The unique ID of the application.
+        schema:
+          type: string
+        example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HateoasCollectionOfComplianceSummaryUsageCollection'
+        '400':
+          description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 400
+                  message: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+        '404':
+          description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 404
+                  message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+        '500':
+          description: 'Internal Server Error: Your request failed due to an internal error.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: 500
+                  message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      security:
+      - BearerAuth:
+        - sam.license.r
+components:
+  schemas:
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          nullable: true
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          nullable: true
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          nullable: true
+          example: GET
+    ComplianceSummaryCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          availableLicenses:
+            type: integer
+            description: The available licenses quantity.
+            format: int32
+            example: 1
+          compliance:
+            type: integer
+            description: The compliance value.
+            format: int32
+            example: 1
+          licensesPurchased:
+            type: integer
+            description: The number of licenses that have been purchased.
+            format: int32
+            example: 1
+          incompleteLicenses:
+            type: integer
+            description: The number of incomplete licenses.
+            format: int32
+            example: 1
+          expiredSubscriptionLicenses:
+            type: integer
+            description: The number of expired subscription licenses.
+            format: int32
+            example: 1
+          invalidAssignments:
+            type: integer
+            description: The number of invalid assignments.
+            format: int32
+            example: 1
+          unassigned:
+            type: integer
+            description: The number of unassigned licenses.
+            format: int32
+            example: 1
+          assignedNamedUsers:
+            type: integer
+            description: The number of licenses assigned to named users.
+            format: int32
+            example: 1
+          siteLicenses:
+            type: integer
+            description: The number of site licenses.
+            format: int32
+            example: 1
+          downgradesGiven:
+            type: integer
+            description: The number of license downgrades given.
+            format: int32
+            example: 1
+          downgradesReceived:
+            type: integer
+            description: The number of license downgrades received.
+            format: int32
+            example: 1
+          upgradesGiven:
+            type: integer
+            description: The number of license upgrades given.
+            format: int32
+            example: 1
+          upgradesReceived:
+            type: integer
+            description: The number of license upgrades received.
+            format: int32
+            example: 1
+          crossPlatformGiven:
+            type: integer
+            description: The number of cross-platform licenses given.
+            format: int32
+            example: 1
+          crossPlatformReceived:
+            type: integer
+            description: The number of cross-platform licenses received.
+            format: int32
+            example: 1
+          crossEditionGiven:
+            type: integer
+            description: The number of cross-edition licenses given.
+            format: int32
+            example: 1
+          crossEditionReceived:
+            type: integer
+            description: The number of cross-edition licenses received.
+            format: int32
+            example: 1
+          initialRequirement:
+            type: integer
+            description: The initial requirement.
+            format: int32
+            example: 1
+          includedInBundle:
+            type: integer
+            description: The number of licenses included in a bundle.
+            format: int32
+            example: 1
+          outsideMetricPeriod:
+            type: integer
+            description: The number of licenses outside the metric period.
+            format: int32
+            example: 1
+          secondaryUseRightsDesktopLaptop:
+            type: integer
+            description: The number of licenses for secondary use on desktop or laptop computers.
+            format: int32
+            example: 1
+          secondaryUseRightsDevice:
+            type: integer
+            description: The number of licenses for secondary use on devices.
+            format: int32
+            example: 1
+          extendedCoverageForDcc:
+            type: integer
+            description: The number of licenses for extended coverage for datacenter components.
+            format: int32
+            example: 1
+          extendedCoverageForHosts:
+            type: integer
+            description: The number of licenses for extended coverage for hosts.
+            format: int32
+            example: 1
+          multipleVersionEdition:
+            type: integer
+            description: The number of licenses for multiple version/edition rights.
+            format: int32
+            example: 1
+          virtualDesktopInfrastructure:
+            type: integer
+            description: The number of licenses for virtual desktop infrastructure.
+            format: int32
+            example: 1
+          minimumRequirement:
+            type: integer
+            description: The minimum license requirement.
+            format: int32
+            example: 1
+          coreFactor:
+            type: integer
+            description: The core factor used for licensing.
+            format: int32
+            example: 1
+          physicalHost:
+            type: integer
+            description: The number of licenses required for physical hosts.
+            format: int32
+            example: 1
+          licenseRequirement:
+            type: integer
+            description: The license requirement.
+            format: int32
+            example: 1
+          computerAppExclusions:
+            type: integer
+            description: The number of licenses excluded for a specific computer application.
+            format: int32
+            example: 1
+          windowsServer:
+            type: integer
+            description: The number of licenses for Windows Server.
+            format: int32
+            example: 1
+          sqlServer:
+            type: integer
+            description: The number of licenses for SQL Server.
+            format: int32
+            example: 1
+          otherMetricCoverage:
+            type: integer
+            description: The coverage value for the other metric.
+            format: int32
+            example: 1
+          siteCoverage:
+            type: integer
+            description: The number of licenses for site coverage.
+            format: int32
+            example: 1
+          vmCoverage:
+            type: integer
+            description: The number of licenses for virtual machines.
+            format: int32
+            example: 1
+          licenseStacking:
+            type: integer
+            description: The number of licenses for license stacking.
+            format: int32
+            example: 1
+          namedUserCoverage:
+            type: integer
+            description: The number of licenses for named user coverage.
+            format: int32
+            example: 1
+          licensingOtherMetrics:
+            type: integer
+            description: The number of licenses for other metrics.
+            format: int32
+            example: 1
+          virtualDesktopAccess:
+            type: integer
+            description: The number of licenses for virtual desktop access.
+            format: int32
+            example: 1
+          totalCoverage:
+            type: integer
+            description: The total coverage of licenses.
+            format: int32
+            example: 1
+    AllocationSummaryCollectionItem:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          requirement:
+            type: integer
+            description: The requirement quantity.
+            format: int32
+            example: 1
+          coverage:
+            type: integer
+            description: The coverage of the assigned licenses.
+            format: int32
+            example: 1
+          compliance:
+            type: integer
+            description: The compliance value.
+            format: int32
+            example: 1
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    FilteredResponseOfComplianceSummaryUsageCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ComplianceSummaryUsageCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    FilteredResponseOfAllocationSummaryCollectionItem:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/AllocationSummaryCollectionItem'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    HateoasCollectionOfComplianceSummaryCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComplianceSummaryCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    HateoasCollectionOfAllocationSummaryCollectionItem:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfAllocationSummaryCollectionItem'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ComplianceSummaryUsageCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          licenseMetricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          otherMetricCoverage:
+            type: integer
+            description: The coverage value for the other metric.
+            format: int32
+            example: 1
+          mainCoverage:
+            type: integer
+            description: The coverage value.
+            format: int32
+            example: 1
+          isPartial:
+            type: boolean
+            description: '```true``` if is partial coverage; otherwise, ```false```.'
+            example: true
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          format: int32
+          nullable: true
+          example: 5
+        total_items:
+          type: integer
+          description: The total number of items.
+          format: int32
+          nullable: true
+          example: 100
+    FilteredResponseOfComplianceSummaryCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ComplianceSummaryCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    HateoasCollectionOfComplianceSummaryUsageCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComplianceSummaryUsageCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

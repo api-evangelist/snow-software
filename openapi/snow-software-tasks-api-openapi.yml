@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: 'SAM: Computers Applications Tasks API'
+  description: API for interacting with computers.
+  contact:
+    name: Flexera
+    url: https://www.flexera.com
+  version: 1.0.0
+servers:
+- url: https://{region}.snowsoftware.io
+  variables:
+    region:
+      enum:
+      - westeurope
+      - australiasoutheast
+      - eastus2
+      - uksouth
+      default: westeurope
+tags:
+- name: Tasks
+paths:
+  /api/saas/consolidated-view/v1/tasks/{id}:
+    get:
+      parameters:
+      - $ref: '#/components/parameters/TaskIdPath'
+      summary: Get Task
+      description: Returns the details of the given task.
+      operationId: getTask
+      tags:
+      - Tasks
+      responses:
+        '200':
+          description: 'OK: Your request succeeded.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          $ref: '#/components/responses/404Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+      security:
+      - bearerAuth:
+        - saas.consolidation.view.r
+components:
+  schemas:
+    InternalError:
+      type: object
+      description: Internal error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 500
+        message:
+          type: string
+          description: The error message.
+          example: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      required:
+      - code
+      - message
+    Task:
+      type: object
+      required:
+      - id
+      - name
+      - status
+      - _links
+      properties:
+        id:
+          description: The unique ID of the task.
+          type: string
+          example: 483c67cf-e247-4a82-bef7-b86a29560788
+        name:
+          description: The system-assigned task name.
+          type: string
+          example: Bulk update applications
+        status:
+          description: The status of the task.
+          x-enumDescriptions:
+            Running: The task is currently running.
+            Complete: The task has completed.
+            Failed: The task ended in a failed state.
+          type: string
+          example: Complete
+        description:
+          description: The detailed description of task status.
+          type: string
+          example: The export completed successfully.
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+          example:
+          - href: /api/saas/consolidated-view/v1/applications/bulk-update/483c67cf-e247-4a82-bef7-b86a29560788
+            rel: bulk-update-users
+            method: GET
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/saas/consolidated-view/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
+    NotFoundError:
+      type: object
+      description: Not found error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 404
+        message:
+          type: string
+          description: The error message.
+          example: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+      required:
+      - code
+      - message
+    ErrorResponse:
+      description: Internal Server Error - Your request failed due to an internal error.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/InternalError'
+      required:
+      - error
+    NotFoundResponse:
+      description: The requested resource could not be found.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NotFoundError'
+      required:
+      - error
+  responses:
+    404Response:
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
+    500Response:
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    TaskIdPath:
+      name: id
+      description: The unique ID of the task.
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 5b35aa33-e7a8-47a3-b1b6-19099ebb6bfd
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
