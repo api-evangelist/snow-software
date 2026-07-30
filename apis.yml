@@ -7,7 +7,20 @@ description: >-
   Snow Atlas REST APIs enable programmatic access to licenses, computers, SaaS applications, subscriptions, user
   accounts, agreements, and audit logs.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/snow-software.png
 tags:
   - Cloud License Management
   - FinOps
@@ -19,73 +32,420 @@ created: '2026-03-27'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: snow-software:snow-atlas-licenses-api
-    name: Snow Atlas SAM Licenses API
-    description: >-
-      The Snow Atlas SAM Licenses API provides programmatic access to software license data including license upgrades,
-      application license transfers, computer license tracking, license policies, maintenance periods, purchase orders,
-      and license metrics. Supports filtering and pagination.
-    humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
-    tags:
-      - IT Asset Management
-      - License Management
-      - Software Asset Management
-    properties:
-      - type: Documentation
-        url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-licenses-openapi.yml
-  - aid: snow-software:snow-atlas-saas-applications-api
-    name: Snow Atlas SaaS Applications API
-    description: >-
-      The Snow Atlas SaaS Applications API provides visibility into SaaS applications in use across the organization.
-      Enables listing, updating, and managing SaaS apps, application KPIs, users, and consumption data for SaaS spend
-      optimization.
-    humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
-    tags:
-      - SaaS Management
-      - Software Asset Management
-      - Spend Optimization
-    properties:
-      - type: Documentation
-        url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-saas-applications-openapi.yml
-  - aid: snow-software:snow-atlas-saas-subscriptions-api
-    name: Snow Atlas SaaS Subscriptions API
-    description: >-
-      The Snow Atlas SaaS Subscriptions API manages SaaS subscription data including subscription details, costs,
-      renewal dates, and vendor information for enterprise SaaS portfolio management.
-    humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
-    tags:
-      - Contract Management
-      - SaaS Management
-      - Subscription Management
-    properties:
-      - type: Documentation
-        url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-saas-subscriptions-openapi.yml
-  - aid: snow-software:snow-atlas-computers-api
-    name: Snow Atlas SAM Computers API
-    description: >-
-      The Snow Atlas SAM Computers API provides access to computer inventory data including hardware assets, application
-      metering per computer, installed software, update history, custom values, and bulk status management for IT asset
-      lifecycle management.
-    humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
-    tags:
-      - Hardware Asset Management
-      - IT Asset Management
-      - Inventory
-    properties:
-      - type: Documentation
-        url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-computers-openapi.json
+- aid: snow-software:snow-software-applications-api
+  name: Snow Software Applications API
+  description: The Applications API from Snow Software — 10 operation(s) for applications.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-applications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-assignments-api
+  name: Snow Software Assignments API
+  description: The Assignments API from Snow Software — 12 operation(s) for assignments.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Assignments
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-assignments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-compliance-api
+  name: Snow Software Compliance API
+  description: The Compliance API from Snow Software — 3 operation(s) for compliance.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Compliance
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-compliance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-application-metering-api
+  name: Snow Software Computer application metering API
+  description: >-
+    The Computer application metering API from Snow Software — 2 operation(s) for computer application
+    metering.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer application metering
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-application-metering-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-applications-api
+  name: Snow Software Computer applications API
+  description: >-
+    The Computer applications API from Snow Software — 6 operation(s) for computer applications.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer applications
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-applications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-contracts-api
+  name: Snow Software Computer contracts API
+  description: The Computer contracts API from Snow Software — 1 operation(s) for computer contracts.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-costs-api
+  name: Snow Software Computer costs API
+  description: The Computer costs API from Snow Software — 1 operation(s) for computer costs.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer costs
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-costs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-display-adapter-api
+  name: Snow Software Computer display adapter API
+  description: >-
+    The Computer display adapter API from Snow Software — 1 operation(s) for computer display adapter.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer display adapter
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-display-adapter-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-drives-api
+  name: Snow Software Computer drives API
+  description: The Computer drives API from Snow Software — 2 operation(s) for computer drives.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer drives
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-drives-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-environment-variables-api
+  name: Snow Software Computer environment variables API
+  description: >-
+    The Computer environment variables API from Snow Software — 2 operation(s) for computer environment
+    variables.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer environment variables
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-environment-variables-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-hardware-api
+  name: Snow Software Computer hardware API
+  description: The Computer hardware API from Snow Software — 1 operation(s) for computer hardware.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer hardware
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-hardware-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-logical-disks-api
+  name: Snow Software Computer logical disks API
+  description: >-
+    The Computer logical disks API from Snow Software — 1 operation(s) for computer logical disks.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer logical disks
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-logical-disks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-logon-history-api
+  name: Snow Software Computer logon history API
+  description: >-
+    The Computer logon history API from Snow Software — 3 operation(s) for computer logon history.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer logon history
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-logon-history-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-monitors-api
+  name: Snow Software Computer monitors API
+  description: The Computer monitors API from Snow Software — 1 operation(s) for computer monitors.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer monitors
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-monitors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-network-adapters-api
+  name: Snow Software Computer network adapters API
+  description: >-
+    The Computer network adapters API from Snow Software — 2 operation(s) for computer network adapters.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer network adapters
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-network-adapters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-processors-api
+  name: Snow Software Computer processors API
+  description: The Computer processors API from Snow Software — 2 operation(s) for computer processors.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer processors
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-processors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-registries-api
+  name: Snow Software Computer registries API
+  description: The Computer registries API from Snow Software — 1 operation(s) for computer registries.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer registries
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-registries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-remote-clients-api
+  name: Snow Software Computer remote clients API
+  description: >-
+    The Computer remote clients API from Snow Software — 1 operation(s) for computer remote clients.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer remote clients
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-remote-clients-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computer-virtual-machines-api
+  name: Snow Software Computer virtual machines API
+  description: >-
+    The Computer virtual machines API from Snow Software — 1 operation(s) for computer virtual machines.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computer virtual machines
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computer-virtual-machines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-computers-api
+  name: Snow Software Computers API
+  description: The Computers API from Snow Software — 6 operation(s) for computers.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Computers
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-computers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-costs-api
+  name: Snow Software Costs API
+  description: The Costs API from Snow Software — 3 operation(s) for costs.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Costs
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-costs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-coverage-api
+  name: Snow Software Coverage API
+  description: The Coverage API from Snow Software — 3 operation(s) for coverage.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Coverage
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-coverage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-entitlements-api
+  name: Snow Software Entitlements API
+  description: The Entitlements API from Snow Software — 4 operation(s) for entitlements.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Entitlements
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-entitlements-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-licenses-api
+  name: Snow Software Licenses API
+  description: The Licenses API from Snow Software — 3 operation(s) for licenses.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Licenses
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-licenses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-periods-api
+  name: Snow Software Periods API
+  description: The Periods API from Snow Software — 3 operation(s) for periods.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Periods
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-periods-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-policies-api
+  name: Snow Software Policies API
+  description: The Policies API from Snow Software — 4 operation(s) for policies.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-subscriptions-api
+  name: Snow Software Subscriptions API
+  description: The Subscriptions API from Snow Software — 4 operation(s) for subscriptions.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-tasks-api
+  name: Snow Software Tasks API
+  description: The Tasks API from Snow Software — 1 operation(s) for tasks.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-tracking-api
+  name: Snow Software Tracking API
+  description: The Tracking API from Snow Software — 6 operation(s) for tracking.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Tracking
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-tracking-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-transfers-api
+  name: Snow Software Transfers API
+  description: The Transfers API from Snow Software — 7 operation(s) for transfers.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-transfers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
+- aid: snow-software:snow-software-upgrades-api
+  name: Snow Software Upgrades API
+  description: The Upgrades API from Snow Software — 2 operation(s) for upgrades.
+  humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  tags:
+  - Upgrades
+  properties:
+  - type: OpenAPI
+    url: openapi/snow-software-upgrades-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
+  - type: Documentation
+    url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
 common:
   - type: AgenticAccess
     url: agentic-access/snow-software-agentic-access.yml
