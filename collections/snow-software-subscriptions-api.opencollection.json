@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAM: Computers Applications Subscriptions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Subscription Insight Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/saas/consolidated-view/v1/subscriptions/:subscriptionId/insights/:insightRuleId/users",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "a7a75b83-2690-4cc9-b652-a0fbe93dba4a",
+                "type": "path",
+                "description": "The unique ID of the subscription."
+              },
+              {
+                "name": "insightRuleId",
+                "value": "577ee610-95f2-4883-abaa-d702e73c3a10",
+                "type": "path",
+                "description": "The unique ID of the insight."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results)."
+              }
+            ]
+          },
+          "docs": "Returns a collection of users for a subscription insight."
+        },
+        {
+          "info": {
+            "name": "Delete Subscription Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/saas/consolidated-view/v1/subscriptions/:subscriptionId/users/:userIds",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "a7a75b83-2690-4cc9-b652-a0fbe93dba4a",
+                "type": "path",
+                "description": "The unique ID of the subscription."
+              },
+              {
+                "name": "userIds",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the of the subscriptions."
+              }
+            ]
+          },
+          "docs": "Removes the given one or more assigned users from a subscription."
+        },
+        {
+          "info": {
+            "name": "Get Subscription Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/saas/consolidated-view/v1/subscriptions/:subscriptionId/users",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "a7a75b83-2690-4cc9-b652-a0fbe93dba4a",
+                "type": "path",
+                "description": "The unique ID of the subscription."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ]
+          },
+          "docs": "Returns a collection of users assigned to a subscription."
+        },
+        {
+          "info": {
+            "name": "Get Subscription User Consumptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/saas/consolidated-view/v1/subscriptions/:subscriptionId/users/consumption",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "a7a75b83-2690-4cc9-b652-a0fbe93dba4a",
+                "type": "path",
+                "description": "The unique ID of the subscription."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results)."
+              }
+            ]
+          },
+          "docs": "Returns a collection of subscription users and their consumption details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

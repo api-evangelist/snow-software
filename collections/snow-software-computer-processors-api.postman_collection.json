@@ -1,0 +1,757 @@
+{
+  "item": [
+    {
+      "id": "9d75f09f-1a73-4f6d-8686-71e79e3e9f67",
+      "name": "Computer processors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3088e1cf-bf21-4ea8-8c44-1df284299fe7",
+          "name": "Get Computer's Processors",
+          "request": {
+            "name": "Get Computer's Processors",
+            "description": {
+              "content": "Returns a collection of processors for the given computer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sam",
+                "estate",
+                "v1",
+                "computers",
+                ":id",
+                "hardware",
+                "cpu"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of items in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "The fields which you can use to filter the results. Format of the query string parameter:\n```\n?filter=<filter name> <operator> <value>\n```\nFilter name | Description | Data type | Example\n:--- | --- | --- | ---\n\nFor more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique ID of the computer."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c624ac7e-4122-493b-b476-c2c5fb193778",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "estate",
+                    "v1",
+                    "computers",
+                    ":id",
+                    "hardware",
+                    "cpu"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the computer."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_links\": [\n    {\n      \"href\": \"api/computers/v1/...\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    },\n    {\n      \"href\": \"api/computers/v1/...\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"items\": [\n    {\n      \"_links\": [\n        {\n          \"href\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rel\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"href\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rel\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"computerId\": \"94cdfe57-81e2-4af6-99f4-44d15b3b6fb6\",\n      \"processorCount\": 2,\n      \"coreCount\": 8,\n      \"processorType\": \"11th Gen Intel Core i7-1185G7 @ 3.00GHz (3.00 GHz)\",\n      \"processorSpeed\": 2995,\n      \"processorManufacturer\": \"Intel\"\n    },\n    {\n      \"_links\": [\n        {\n          \"href\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rel\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"href\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rel\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"computerId\": \"94cdfe57-81e2-4af6-99f4-44d15b3b6fb6\",\n      \"processorCount\": 2,\n      \"coreCount\": 8,\n      \"processorType\": \"11th Gen Intel Core i7-1185G7 @ 3.00GHz (3.00 GHz)\",\n      \"processorSpeed\": 2995,\n      \"processorManufacturer\": \"Intel\"\n    }\n  ],\n  \"pagination\": {\n    \"page_size\": 25,\n    \"page_number\": 1,\n    \"total_pages\": 10,\n    \"total_items\": 240\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "423c3ad7-8c10-4e24-a535-f0af61fcbffe",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "estate",
+                    "v1",
+                    "computers",
+                    ":id",
+                    "hardware",
+                    "cpu"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the computer."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0830c8ea-c3ee-4b7e-aeec-869a7eec4027",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "estate",
+                    "v1",
+                    "computers",
+                    ":id",
+                    "hardware",
+                    "cpu"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the computer."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "143bebf2-5a5d-4e68-9cb2-8b9ac04fde61",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "estate",
+                    "v1",
+                    "computers",
+                    ":id",
+                    "hardware",
+                    "cpu"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the computer."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "555f1dc1-09c7-4170-b8fb-54186a2dcb9d",
+          "name": "Get Processor Socket Details",
+          "request": {
+            "name": "Get Processor Socket Details",
+            "description": {
+              "content": "Returns the details of the processor sockets for the given computer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sam",
+                "estate",
+                "v1",
+                "computers",
+                ":id",
+                "hardware",
+                "cpu",
+                "socketmap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique ID of the computer."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0047455c-284b-40ca-9e07-856dd70fbef2",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "estate",
+                    "v1",
+                    "computers",
+                    ":id",
+                    "hardware",
+                    "cpu",
+                    "socketmap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the computer."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_links\": [\n    {\n      \"href\": \"api/computers/v1/...\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    },\n    {\n      \"href\": \"api/computers/v1/...\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"computerId\": \"cf5be788-06be-4496-91b0-bfaa8c239e96\",\n  \"manufacturer\": \"Intel\",\n  \"model\": \"LGA 1151\",\n  \"socketCount\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1ca039e-a82a-42d7-8923-b4b5e27001e8",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "estate",
+                    "v1",
+                    "computers",
+                    ":id",
+                    "hardware",
+                    "cpu",
+                    "socketmap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the computer."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6122622b-4f51-4e9f-86ef-b7fca2f5ff2d",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "estate",
+                    "v1",
+                    "computers",
+                    ":id",
+                    "hardware",
+                    "cpu",
+                    "socketmap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the computer."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fe8270e-54a2-4867-8c6e-49a18cfba609",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "estate",
+                    "v1",
+                    "computers",
+                    ":id",
+                    "hardware",
+                    "cpu",
+                    "socketmap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the computer."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "westeurope",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://{{region}}.snowsoftware.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "75405c19-a110-4999-adab-eca846bc9360",
+    "name": "SAM: Computers Applications Computer processors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with computers.\n\nContact Support:\n Name: Flexera",
+      "type": "text/plain"
+    }
+  }
+}

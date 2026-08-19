@@ -1,0 +1,1456 @@
+{
+  "item": [
+    {
+      "id": "09d90d3f-ba78-48c7-9776-80abc2dd491d",
+      "name": "Subscriptions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e7990ef-2a65-4329-9cfd-c76c034dc292",
+          "name": "Get Subscription Insight Users",
+          "request": {
+            "name": "Get Subscription Insight Users",
+            "description": {
+              "content": "Returns a collection of users for a subscription insight.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "subscriptions",
+                ":subscriptionId",
+                "insights",
+                ":insightRuleId",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of items in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) The unique ID of the subscription."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "insightRuleId",
+                  "description": "(Required) The unique ID of the insight."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ce9eaa60-9bf0-49c5-beae-e7b20255880e",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "insights",
+                    ":insightRuleId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "insightRuleId",
+                      "description": "(Required) The unique ID of the insight."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"country\": \"Japan\",\n      \"createdDate\": \"2024-05-25T00:00:00Z\",\n      \"department\": \"Engineering\",\n      \"details\": [\n        {\n          \"subscriptionId\": \"1519f3e3-7e5a-466b-8a86-63ed2776f819\",\n          \"subscriptionName\": \"Microsoft 365 E5\",\n          \"lastActive\": \"2010-06-01T15:40:44.303Z\",\n          \"applicationId\": \"3519f3f3-7e5a-e66b-8a86-63ed2776f618\",\n          \"applicationName\": \"Microsoft Power BI\"\n        },\n        {\n          \"subscriptionId\": \"1519f3e3-7e5a-466b-8a86-63ed2776f819\",\n          \"subscriptionName\": \"Microsoft 365 E5\",\n          \"lastActive\": \"2012-12-11T12:12:10.619Z\",\n          \"applicationId\": \"3519f3f3-7e5a-e66b-8a86-63ed2776f618\",\n          \"applicationName\": \"Microsoft Power BI\"\n        }\n      ],\n      \"discoveryTypes\": [\n        1,\n        2\n      ],\n      \"displayName\": \"John Doe\",\n      \"email\": \"john.doe@organization.com\",\n      \"id\": \"2f86b198-04f3-4770-ad08-b32518206da0\",\n      \"isInReview\": true,\n      \"isOnline\": true,\n      \"isQualified\": true,\n      \"lastActive\": \"2024-06-28T00:00:00Z\",\n      \"licenseCount\": 5,\n      \"potentialSavings\": 500,\n      \"status\": \"Active\",\n      \"userCostPerMonth\": 1000,\n      \"username\": \"john.doe_1@org.com\",\n      \"isEnabled\": true,\n      \"employmentStatus\": \"Employed\"\n    },\n    {\n      \"country\": \"Japan\",\n      \"createdDate\": \"2024-05-25T00:00:00Z\",\n      \"department\": \"Engineering\",\n      \"details\": [\n        {\n          \"subscriptionId\": \"1519f3e3-7e5a-466b-8a86-63ed2776f819\",\n          \"subscriptionName\": \"Microsoft 365 E5\",\n          \"lastActive\": \"2003-04-23T16:10:35.329Z\",\n          \"applicationId\": \"3519f3f3-7e5a-e66b-8a86-63ed2776f618\",\n          \"applicationName\": \"Microsoft Power BI\"\n        },\n        {\n          \"subscriptionId\": \"1519f3e3-7e5a-466b-8a86-63ed2776f819\",\n          \"subscriptionName\": \"Microsoft 365 E5\",\n          \"lastActive\": \"2011-10-26T18:14:35.337Z\",\n          \"applicationId\": \"3519f3f3-7e5a-e66b-8a86-63ed2776f618\",\n          \"applicationName\": \"Microsoft Power BI\"\n        }\n      ],\n      \"discoveryTypes\": [\n        1,\n        2\n      ],\n      \"displayName\": \"John Doe\",\n      \"email\": \"john.doe@organization.com\",\n      \"id\": \"2f86b198-04f3-4770-ad08-b32518206da0\",\n      \"isInReview\": true,\n      \"isOnline\": true,\n      \"isQualified\": true,\n      \"lastActive\": \"2024-06-28T00:00:00Z\",\n      \"licenseCount\": 5,\n      \"potentialSavings\": 500,\n      \"status\": \"Active\",\n      \"userCostPerMonth\": 1000,\n      \"username\": \"john.doe_1@org.com\",\n      \"isEnabled\": true,\n      \"employmentStatus\": \"Employed\"\n    }\n  ],\n  \"pagination\": {\n    \"page_size\": 100,\n    \"page_number\": 1,\n    \"total_pages\": 1,\n    \"total_items\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a560ed9d-353f-4e6e-863f-0000f2a52652",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "insights",
+                    ":insightRuleId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "insightRuleId",
+                      "description": "(Required) The unique ID of the insight."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9482aac2-5ac8-4e21-83c5-1a26810aaf26",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "insights",
+                    ":insightRuleId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "insightRuleId",
+                      "description": "(Required) The unique ID of the insight."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b66b2d0f-bbd2-4be1-9932-0d4f8a745197",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "insights",
+                    ":insightRuleId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "insightRuleId",
+                      "description": "(Required) The unique ID of the insight."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "017db047-f81d-4d6c-95a4-079bfa1c7380",
+          "name": "Delete Subscription Users",
+          "request": {
+            "name": "Delete Subscription Users",
+            "description": {
+              "content": "Removes the given one or more assigned users from a subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "subscriptions",
+                ":subscriptionId",
+                "users",
+                ":userIds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) The unique ID of the subscription."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>,<string>",
+                  "key": "userIds",
+                  "description": "(Required) The unique ID of the of the subscriptions."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "82cc6630-902a-4a94-8561-c1f84556e6b1",
+              "name": "No Content: Your request succeeded, but the response message was empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users",
+                    ":userIds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>,<string>",
+                      "key": "userIds",
+                      "description": "(Required) The unique ID of the of the subscriptions."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e397941a-84d0-4355-841f-2ce62dc15469",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users",
+                    ":userIds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>,<string>",
+                      "key": "userIds",
+                      "description": "(Required) The unique ID of the of the subscriptions."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44a45cde-b3aa-4bbf-bd7e-ce741bea89ed",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users",
+                    ":userIds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>,<string>",
+                      "key": "userIds",
+                      "description": "(Required) The unique ID of the of the subscriptions."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "811ab6ea-3320-4e17-a1e3-f1233c7d9013",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users",
+                    ":userIds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>,<string>",
+                      "key": "userIds",
+                      "description": "(Required) The unique ID of the of the subscriptions."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4ef91a3-9f94-42e0-98de-bf65271f416f",
+          "name": "Get Subscription Users",
+          "request": {
+            "name": "Get Subscription Users",
+            "description": {
+              "content": "Returns a collection of users assigned to a subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "subscriptions",
+                ":subscriptionId",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of items in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) The unique ID of the subscription."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "a9c40179-ac79-4b9c-a175-93a15a264cf4",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"page_size\": 100,\n    \"page_number\": 1,\n    \"total_pages\": 1,\n    \"total_items\": 1\n  },\n  \"items\": [\n    {\n      \"id\": \"2f86b198-04f3-4770-ad08-b32518206da0\",\n      \"country\": \"Japan\",\n      \"discoveryTypes\": [\n        1,\n        2\n      ],\n      \"isInReview\": true,\n      \"isQualified\": true,\n      \"status\": \"Active\",\n      \"email\": \"john.doe@organization.com\",\n      \"department\": \"Engineering\",\n      \"createdDate\": \"2024-05-25T00:00:00Z\",\n      \"lastActive\": \"2024-06-28T00:00:00Z\",\n      \"userCostPerMonth\": 1000,\n      \"potentialSavings\": 500,\n      \"displayName\": \"John Doe\",\n      \"username\": \"john.doe_1@org.com\",\n      \"licenseCount\": 5,\n      \"isOnline\": true,\n      \"isEnabled\": true,\n      \"employmentStatus\": \"Employed\"\n    },\n    {\n      \"id\": \"2f86b198-04f3-4770-ad08-b32518206da0\",\n      \"country\": \"Japan\",\n      \"discoveryTypes\": [\n        1,\n        2\n      ],\n      \"isInReview\": true,\n      \"isQualified\": true,\n      \"status\": \"Active\",\n      \"email\": \"john.doe@organization.com\",\n      \"department\": \"Engineering\",\n      \"createdDate\": \"2024-05-25T00:00:00Z\",\n      \"lastActive\": \"2024-06-28T00:00:00Z\",\n      \"userCostPerMonth\": 1000,\n      \"potentialSavings\": 500,\n      \"displayName\": \"John Doe\",\n      \"username\": \"john.doe_1@org.com\",\n      \"licenseCount\": 5,\n      \"isOnline\": true,\n      \"isEnabled\": true,\n      \"employmentStatus\": \"Employed\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83994e3f-653e-40da-8c5c-557cd12dce06",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9f5bb82-999c-44d1-acbb-363fa4b3c6a3",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0cab9c6-7064-47c4-8205-2bdc20f1f41d",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7b2575e-f79c-4bac-9a70-1056e9ffb9e2",
+          "name": "Get Subscription User Consumptions",
+          "request": {
+            "name": "Get Subscription User Consumptions",
+            "description": {
+              "content": "Returns a collection of subscription users and their consumption details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "saas",
+                "consolidated-view",
+                "v1",
+                "subscriptions",
+                ":subscriptionId",
+                "users",
+                "consumption"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of items in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) The unique ID of the subscription."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "acb7427e-8b15-4c75-bbce-2a6defd87bbe",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"page_size\": 100,\n    \"page_number\": 1,\n    \"total_pages\": 1,\n    \"total_items\": 1\n  },\n  \"items\": [\n    {\n      \"activityThreshold\": 10,\n      \"country\": \"India\",\n      \"createdDate\": \"2024-10-01\",\n      \"id\": \"ac2c7870-6457-4a99-bafb-467eaf5de8e4\",\n      \"department\": \"Sales\",\n      \"discoveryTypes\": [\n        1,\n        1\n      ],\n      \"displayName\": \"John Doe.\",\n      \"email\": \"john.doe@organization.com\",\n      \"isEnabled\": true,\n      \"isInReview\": true,\n      \"isMonitored\": true,\n      \"isOnline\": true,\n      \"isQualified\": true,\n      \"lastActive\": \"2030-01-02T15:04:05\",\n      \"lastActiveValueInInt\": 1,\n      \"lastActiveValueType\": 5,\n      \"licenseCount\": 10,\n      \"manuallyAssigned\": true,\n      \"potentialSavings\": 500,\n      \"status\": \"Active\",\n      \"userCostPerMonth\": 1000,\n      \"username\": \"john.doe@organization.com\",\n      \"envelopeusage\": 2,\n      \"roles\": [\n        \"GCS Support Engineer\"\n      ]\n    },\n    {\n      \"activityThreshold\": 10,\n      \"country\": \"India\",\n      \"createdDate\": \"2024-10-01\",\n      \"id\": \"ac2c7870-6457-4a99-bafb-467eaf5de8e4\",\n      \"department\": \"Sales\",\n      \"discoveryTypes\": [\n        1,\n        1\n      ],\n      \"displayName\": \"John Doe.\",\n      \"email\": \"john.doe@organization.com\",\n      \"isEnabled\": true,\n      \"isInReview\": true,\n      \"isMonitored\": true,\n      \"isOnline\": true,\n      \"isQualified\": true,\n      \"lastActive\": \"2030-01-02T15:04:05\",\n      \"lastActiveValueInInt\": 1,\n      \"lastActiveValueType\": 5,\n      \"licenseCount\": 10,\n      \"manuallyAssigned\": true,\n      \"potentialSavings\": 500,\n      \"status\": \"Active\",\n      \"userCostPerMonth\": 1000,\n      \"username\": \"john.doe@organization.com\",\n      \"envelopeusage\": 2,\n      \"roles\": [\n        \"GCS Support Engineer\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26aa97e3-c329-4a08-bfde-f51bafed185e",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Filter field name needs to be formatted as a string.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b8feb01-2066-4719-8e5e-8ae4413e342d",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12a0e96e-ea25-436a-a2ad-c4bc43373fb9",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "saas",
+                    "consolidated-view",
+                    "v1",
+                    "subscriptions",
+                    ":subscriptionId",
+                    "users",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "?filter=field1 -eq 'abc'"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "?sort=field1:asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) The unique ID of the subscription."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "westeurope",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://{{region}}.snowsoftware.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "840650ea-1e5f-4f87-b6c3-f421202501dd",
+    "name": "SAM: Computers Applications Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with computers.\n\nContact Support:\n Name: Flexera",
+      "type": "text/plain"
+    }
+  }
+}

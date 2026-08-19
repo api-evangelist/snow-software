@@ -1,0 +1,233 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAM: Computers Applications Periods API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Periods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Maintenance and Support Periods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/maintenance-periods",
+            "params": [
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of maintenance and support periods."
+        },
+        {
+          "info": {
+            "name": "Get License's Maintenance and Support Periods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/maintenance-periods",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of maintenance and support periods."
+        },
+        {
+          "info": {
+            "name": "Add Maintenance and Support Period",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/maintenance-periods",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a maintenance and support period."
+        },
+        {
+          "info": {
+            "name": "Replace Maintenance and Support Periods",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/maintenance-periods",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license’s maintenance and support periods."
+        },
+        {
+          "info": {
+            "name": "Delete Maintenance and Support Periods",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/maintenance-periods",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license’s maintenance and support periods."
+        },
+        {
+          "info": {
+            "name": "Replace Maintenance and Support Period",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/maintenance-periods/:periodId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "periodId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the maintenance and support period."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given maintenance and support period."
+        },
+        {
+          "info": {
+            "name": "Delete Maintenance and Support Period",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/maintenance-periods/:periodId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "periodId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the maintenance and support period."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given maintenance and support period."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

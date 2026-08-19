@@ -1,0 +1,214 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAM: Applications Computers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Computers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Update Status of Computers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{region}.snowsoftware.io/api/sam/estate/v1/computers/bulk-update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows updating the status of multiple computers in bulk."
+        },
+        {
+          "info": {
+            "name": "Get Computer Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/estate/v1/computers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the computer."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the details of the given computer."
+        },
+        {
+          "info": {
+            "name": "Update Computer Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/estate/v1/computers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the computer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Modifies a computer by adding or updating the specified attributes."
+        },
+        {
+          "info": {
+            "name": "Delete Computer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/estate/v1/computers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the computer."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given computer."
+        },
+        {
+          "info": {
+            "name": "Get Computers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/estate/v1/computers",
+            "params": [
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The fields which you can use to filter the results. Format of the query string parameter:\n```\n?filter=<filter name> <operator> <value>\n```\nFilter name | Description | Data type | Example\n:--- | --- | --- | ---\n\nFor more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of computers."
+        },
+        {
+          "info": {
+            "name": "Archive Computer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{region}.snowsoftware.io/api/sam/estate/v1/computers/:id/archive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the computer."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Archives the given computer."
+        },
+        {
+          "info": {
+            "name": "Update Disable Auto Editing Settings for a Computer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{region}.snowsoftware.io/api/sam/estate/v1/computers/patch-auto-editing/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the computer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies Disable auto editing settings for the given computer."
+        },
+        {
+          "info": {
+            "name": "Update Organization for a Computer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{region}.snowsoftware.io/api/sam/estate/v1/computers/patch-organization-assigment/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the computer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Modifies Organization for the given computer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

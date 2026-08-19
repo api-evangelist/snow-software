@@ -1,0 +1,1009 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAM: Computers Applications Assignments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assignments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Assignment Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/assignment-types",
+            "params": [
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of assignment types."
+        },
+        {
+          "info": {
+            "name": "Get License Assignments to Computers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/computers",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of a license's assignments to computers."
+        },
+        {
+          "info": {
+            "name": "Add License Assignment to Computer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/computers",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a license assignment to computer."
+        },
+        {
+          "info": {
+            "name": "Replace License Assignments to Computers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/computers",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license’s assignments to computers."
+        },
+        {
+          "info": {
+            "name": "Delete License Assignments to Computers",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/computers",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license’s assignments to computers."
+        },
+        {
+          "info": {
+            "name": "Get License Assignment to Computer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/computers/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the details of the given license assignment to computer."
+        },
+        {
+          "info": {
+            "name": "Replace License Assignment to Computer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/computers/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license assignment to computer."
+        },
+        {
+          "info": {
+            "name": "Delete License Assignment to Computer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/computers/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license assignment to computer."
+        },
+        {
+          "info": {
+            "name": "Get License Assignments to Datacenters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/datacenters",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of a license's assignments to datacenters."
+        },
+        {
+          "info": {
+            "name": "Add License Assignment to Datacenter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/datacenters",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a license assignment to datacenter."
+        },
+        {
+          "info": {
+            "name": "Replace License Assignments to Datacenters",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/datacenters",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license’s assignments to datacenters."
+        },
+        {
+          "info": {
+            "name": "Delete License Assignments to Datacenters",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/datacenters",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license’s assignments to datacenters."
+        },
+        {
+          "info": {
+            "name": "Get License Assignment to Datacenter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/datacenters/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              },
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the details of the given license assignment to datacenter."
+        },
+        {
+          "info": {
+            "name": "Replace License Assignment to Datacenter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/datacenters/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license assignment to datacenter."
+        },
+        {
+          "info": {
+            "name": "Delete License Assignment to Datacenter",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/datacenters/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license assignment to datacenter."
+        },
+        {
+          "info": {
+            "name": "Get License Assignments Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments-summary",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the details of a license's assignments."
+        },
+        {
+          "info": {
+            "name": "Get License Assignments to Organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/organizations",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of a license's assignments to organizations."
+        },
+        {
+          "info": {
+            "name": "Add License Assignment to Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/organizations",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a license assignment to organization."
+        },
+        {
+          "info": {
+            "name": "Replace License Assignments to Organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/organizations",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license’s assignments to organizations."
+        },
+        {
+          "info": {
+            "name": "Delete License Assignments to Organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/organizations",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license’s assignments to organizations."
+        },
+        {
+          "info": {
+            "name": "Get License Assignment to Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/organizations/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the details of the given license assignment to organization."
+        },
+        {
+          "info": {
+            "name": "Replace License Assignment to Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/organizations/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license assignment to organization."
+        },
+        {
+          "info": {
+            "name": "Delete License Assignment to Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/organizations/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license assignment to organization."
+        },
+        {
+          "info": {
+            "name": "Get License Assignment to Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/site",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the details of the given license’s assignment to site."
+        },
+        {
+          "info": {
+            "name": "Add License Assignment to Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/site",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a license assignment to site."
+        },
+        {
+          "info": {
+            "name": "Replace License Assignment to Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/site/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license assignment to site."
+        },
+        {
+          "info": {
+            "name": "Delete License Assignment to Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/site/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license assignment to site."
+        },
+        {
+          "info": {
+            "name": "Get License Assignments to Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of a license's assignments to users."
+        },
+        {
+          "info": {
+            "name": "Add License Assignment to User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a license assignment to user."
+        },
+        {
+          "info": {
+            "name": "Replace License Assignments to Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license’s assignments to users."
+        },
+        {
+          "info": {
+            "name": "Delete License Assignments to Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license’s assignment to users."
+        },
+        {
+          "info": {
+            "name": "Get License Assignment to User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/users/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the details of the given license assignment to user."
+        },
+        {
+          "info": {
+            "name": "Delete License Assignment to User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id/assignments/users/:assignmentId",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              },
+              {
+                "name": "assignmentId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the assignment."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license assignment to user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

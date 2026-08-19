@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAM: Computers Applications Coverage API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Coverage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Licenses Extended Coverage Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses-extended-coverage-types",
+            "params": [
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of extended coverage types."
+        },
+        {
+          "info": {
+            "name": "Get Extended Coverages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/extended-coverage",
+            "params": [
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of extended coverages."
+        },
+        {
+          "info": {
+            "name": "Get Extended Coverage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/extended-coverage/:coverageId",
+            "params": [
+              {
+                "name": "coverageId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the coverage."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the details of an extended coverage."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

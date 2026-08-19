@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAM: Computers Applications Licenses API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Licenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Licenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses",
+            "params": [
+              {
+                "name": "filter",
+                "value": "filter=status -eq \"active\"",
+                "type": "query",
+                "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of licenses."
+        },
+        {
+          "info": {
+            "name": "Add License",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a license."
+        },
+        {
+          "info": {
+            "name": "Get License",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the details of the given license."
+        },
+        {
+          "info": {
+            "name": "Replace License",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces the given license."
+        },
+        {
+          "info": {
+            "name": "Delete License",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the license."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes the given license."
+        },
+        {
+          "info": {
+            "name": "Bulk Update Licenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/licenses/bulk-update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Modifies a collection of licenses."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

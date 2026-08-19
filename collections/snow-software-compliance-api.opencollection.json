@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAM: Computers Applications Compliance API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Compliance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Compliance Allocation Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/compliance/summary/:applicationId/allocation",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the application."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of compliance allocations for an application."
+        },
+        {
+          "info": {
+            "name": "Get Compliance Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/compliance/summary/:applicationId",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the application."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of application compliance summary."
+        },
+        {
+          "info": {
+            "name": "Get Compliance Usage Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/sam/v1/compliance/summary/:applicationId/usage",
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "49cdd99f-bc16-40f9-ad40-48f12182fb30",
+                "type": "path",
+                "description": "The unique ID of the application."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a collection of application compliance usage summary."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

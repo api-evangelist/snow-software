@@ -1,0 +1,1769 @@
+{
+  "item": [
+    {
+      "id": "f618ad20-6bcb-43f7-a9af-ab1150c4ea72",
+      "name": "Licenses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f49c2818-613f-4535-adfa-8b4904f2b31a",
+          "name": "Get Licenses",
+          "request": {
+            "name": "Get Licenses",
+            "description": {
+              "content": "Returns a collection of licenses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sam",
+                "v1",
+                "licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1",
+                  "description": "The page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of items in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dd8eb8e9-f724-4d8f-baf5-ac3f312c53e0",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "filter=status -eq \"active\""
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_links\": [\n    {\n      \"href\": \"/api/custom-fields/v1/custom-fields\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    },\n    {\n      \"href\": \"/api/custom-fields/v1/custom-fields\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"items\": [\n    {\n      \"_links\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"id\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"contractId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n      \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n      \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n      \"purchaseValue\": 1000,\n      \"purchaseCurrency\": \"USD\",\n      \"quantity\": 1,\n      \"initialQuantity\": 1,\n      \"mediaStorage\": \"path/to/file\",\n      \"licenseProofLocation\": \"path/to/licenseproof\",\n      \"invoiceReference\": \"INV12345\",\n      \"vendor\": \"Microsoft\",\n      \"externalId\": \"EXT12345\",\n      \"productDescription\": \"MSDN\",\n      \"isSubscription\": true,\n      \"isCrossEdition\": true,\n      \"isCrossPlatform\": true,\n      \"isUpgrade\": true,\n      \"isDowngrade\": true,\n      \"isIncomplete\": true,\n      \"incompleteReasons\": 1,\n      \"updatedDate\": \"2024-01-01T00:00:00Z\",\n      \"createdDate\": \"2024-01-01T00:00:00Z\",\n      \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n      \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n      \"activeMaintenanceCost\": 1000,\n      \"totalMaintenanceCost\": 1000,\n      \"activeSupportCost\": 1000,\n      \"totalSupportCost\": 1000,\n      \"totalLicenseCost\": 1000,\n      \"upgradedLicenseCount\": 1000,\n      \"autoAllocateOnce\": true,\n      \"isAutoAllocated\": true,\n      \"maintenanceAccordingToAgreement\": true,\n      \"skuId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgrades\": [\n        {\n          \"licenseId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradedLicenseId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradedQuantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"licenseId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradedLicenseId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradedQuantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"status\": \"Active\",\n      \"archivedDate\": \"2024-01-01T00:00:00Z\"\n    },\n    {\n      \"_links\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"id\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"contractId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n      \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n      \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n      \"purchaseValue\": 1000,\n      \"purchaseCurrency\": \"USD\",\n      \"quantity\": 1,\n      \"initialQuantity\": 1,\n      \"mediaStorage\": \"path/to/file\",\n      \"licenseProofLocation\": \"path/to/licenseproof\",\n      \"invoiceReference\": \"INV12345\",\n      \"vendor\": \"Microsoft\",\n      \"externalId\": \"EXT12345\",\n      \"productDescription\": \"MSDN\",\n      \"isSubscription\": true,\n      \"isCrossEdition\": true,\n      \"isCrossPlatform\": true,\n      \"isUpgrade\": true,\n      \"isDowngrade\": true,\n      \"isIncomplete\": true,\n      \"incompleteReasons\": 255,\n      \"updatedDate\": \"2024-01-01T00:00:00Z\",\n      \"createdDate\": \"2024-01-01T00:00:00Z\",\n      \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n      \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n      \"activeMaintenanceCost\": 1000,\n      \"totalMaintenanceCost\": 1000,\n      \"activeSupportCost\": 1000,\n      \"totalSupportCost\": 1000,\n      \"totalLicenseCost\": 1000,\n      \"upgradedLicenseCount\": 1000,\n      \"autoAllocateOnce\": true,\n      \"isAutoAllocated\": true,\n      \"maintenanceAccordingToAgreement\": true,\n      \"skuId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgrades\": [\n        {\n          \"licenseId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradedLicenseId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradedQuantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"licenseId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradedLicenseId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradedQuantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"status\": \"Active\",\n      \"archivedDate\": \"2024-01-01T00:00:00Z\"\n    }\n  ],\n  \"pagination\": {\n    \"page_size\": 25,\n    \"page_number\": 1,\n    \"total_pages\": 5,\n    \"total_items\": 100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5a7eea7-33bc-45b3-97fd-3a3898ffa5c4",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "filter=status -eq \"active\""
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25b64cf1-e45f-4868-a4ce-027ceaa5c978",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "filter=status -eq \"active\""
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0410a9ba-d6f6-4fbe-8c56-2a566f231be3",
+          "name": "Add License",
+          "request": {
+            "name": "Add License",
+            "description": {
+              "content": "Creates a license.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sam",
+                "v1",
+                "licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agreementId\": \"<guid>\",\n  \"applicationId\": \"<guid>\",\n  \"autoAllocateOnce\": \"<boolean>\",\n  \"assignmentTypeId\": \"<guid>\",\n  \"externalId\": \"<string>\",\n  \"invoiceReference\": \"<string>\",\n  \"isAutoAllocated\": \"<boolean>\",\n  \"isCrossEdition\": \"<boolean>\",\n  \"isCrossPlatform\": \"<boolean>\",\n  \"isDowngrade\": \"<boolean>\",\n  \"isSubscription\": \"<boolean>\",\n  \"isUpgrade\": \"<boolean>\",\n  \"quantity\": \"<integer>\",\n  \"licenseKeys\": \"<string>\",\n  \"licenseProofLocation\": \"<string>\",\n  \"maintenanceAccordingToAgreement\": \"<boolean>\",\n  \"mediaStorage\": \"<string>\",\n  \"metricId\": \"<guid>\",\n  \"notes\": \"<string>\",\n  \"organizationId\": \"<guid>\",\n  \"productDescription\": \"<string>\",\n  \"purchaseDate\": \"<dateTime>\",\n  \"purchaseValue\": \"<decimal>\",\n  \"purchaseCurrency\": \"<string>\",\n  \"sku\": \"<string>\",\n  \"subscriptionValidFrom\": \"<dateTime>\",\n  \"subscriptionValidTo\": \"<dateTime>\",\n  \"vendor\": \"<string>\",\n  \"upgrades\": [\n    {\n      \"upgradedLicenseId\": \"<guid>\",\n      \"upgradedQuantity\": \"<integer>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"upgradedLicenseId\": \"<guid>\",\n      \"upgradedQuantity\": \"<integer>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"maintenancePeriods\": [\n    {\n      \"agreementPeriodId\": \"<guid>\",\n      \"validFrom\": \"<dateTime>\",\n      \"validTo\": \"<dateTime>\",\n      \"hasUpgradeRights\": \"<boolean>\",\n      \"invoiceReference\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"maintenanceCost\": \"<decimal>\",\n      \"supportCost\": \"<decimal>\"\n    },\n    {\n      \"agreementPeriodId\": \"<guid>\",\n      \"validFrom\": \"<dateTime>\",\n      \"validTo\": \"<dateTime>\",\n      \"hasUpgradeRights\": \"<boolean>\",\n      \"invoiceReference\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"maintenanceCost\": \"<decimal>\",\n      \"supportCost\": \"<decimal>\"\n    }\n  ],\n  \"computerAssignments\": [\n    {\n      \"computerId\": \"<guid>\",\n      \"quantity\": \"<integer>\",\n      \"virtualMachines\": [\n        \"<guid>\",\n        \"<guid>\"\n      ]\n    },\n    {\n      \"computerId\": \"<guid>\",\n      \"quantity\": \"<integer>\",\n      \"virtualMachines\": [\n        \"<guid>\",\n        \"<guid>\"\n      ]\n    }\n  ],\n  \"datacenterAssignments\": [\n    {\n      \"datacenterId\": \"<guid>\",\n      \"quantity\": \"<integer>\",\n      \"virtualMachines\": [\n        \"<guid>\",\n        \"<guid>\"\n      ]\n    },\n    {\n      \"datacenterId\": \"<guid>\",\n      \"quantity\": \"<integer>\",\n      \"virtualMachines\": [\n        \"<guid>\",\n        \"<guid>\"\n      ]\n    }\n  ],\n  \"organizationAssignments\": [\n    {\n      \"organizationId\": \"<guid>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"organizationId\": \"<guid>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"userAssignments\": [\n    {\n      \"userId\": \"<guid>\"\n    },\n    {\n      \"userId\": \"<guid>\"\n    }\n  ],\n  \"siteAssignment\": {\n    \"organizationId\": \"<guid>\"\n  },\n  \"hasVmUseRights\": \"<boolean>\",\n  \"numberOfSupportedVirtualMachines\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "acae3f83-56b6-4976-ab63-23b405eb93c7",
+              "name": "Created: Your request created something new. Usually, this is a call that used the POST method and will allow a GET method to retrieve it later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"autoAllocateOnce\": true,\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"externalId\": \"EXT12345\",\n  \"invoiceReference\": \"INV12345\",\n  \"isAutoAllocated\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isDowngrade\": true,\n  \"isSubscription\": true,\n  \"isUpgrade\": true,\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"maintenanceAccordingToAgreement\": true,\n  \"mediaStorage\": \"path/to/file\",\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"notes\": \"Notes\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"productDescription\": \"MSDN\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"vendor\": \"Microsoft\",\n  \"upgrades\": [\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    },\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    }\n  ],\n  \"maintenancePeriods\": [\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    },\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    }\n  ],\n  \"computerAssignments\": [\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"datacenterAssignments\": [\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"organizationAssignments\": [\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    },\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    }\n  ],\n  \"userAssignments\": [\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    },\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    }\n  ],\n  \"siteAssignment\": {\n    \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n  },\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_links\": [\n    {\n      \"href\": \"/api/custom-fields/v1/custom-fields\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    },\n    {\n      \"href\": \"/api/custom-fields/v1/custom-fields\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"id\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"autoAllocateOnce\": true,\n  \"isAutoAllocated\": true,\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"mediaStorage\": \"path/to/file\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"invoiceReference\": \"INV12345\",\n  \"vendor\": \"Microsoft\",\n  \"notes\": \"Notes\",\n  \"externalId\": \"EXT12345\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"productDescription\": \"MSDN\",\n  \"isSubscription\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isUpgrade\": true,\n  \"isDowngrade\": true,\n  \"isIncomplete\": true,\n  \"incompleteReasons\": 16,\n  \"contractId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"updatedDate\": \"2024-01-01T00:00:00Z\",\n  \"createdDate\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"upgradedLicenseCount\": 1,\n  \"maintenanceAccordingToAgreement\": true,\n  \"skuId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 100,\n  \"status\": \"Active\",\n  \"archivedDate\": \"2024-01-01T00:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcc944c0-76c3-4262-a9b1-42dd799a4835",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"autoAllocateOnce\": true,\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"externalId\": \"EXT12345\",\n  \"invoiceReference\": \"INV12345\",\n  \"isAutoAllocated\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isDowngrade\": true,\n  \"isSubscription\": true,\n  \"isUpgrade\": true,\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"maintenanceAccordingToAgreement\": true,\n  \"mediaStorage\": \"path/to/file\",\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"notes\": \"Notes\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"productDescription\": \"MSDN\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"vendor\": \"Microsoft\",\n  \"upgrades\": [\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    },\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    }\n  ],\n  \"maintenancePeriods\": [\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    },\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    }\n  ],\n  \"computerAssignments\": [\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"datacenterAssignments\": [\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"organizationAssignments\": [\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    },\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    }\n  ],\n  \"userAssignments\": [\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    },\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    }\n  ],\n  \"siteAssignment\": {\n    \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n  },\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de1f5791-c470-4c98-9c05-dc8b7ea4b799",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"autoAllocateOnce\": true,\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"externalId\": \"EXT12345\",\n  \"invoiceReference\": \"INV12345\",\n  \"isAutoAllocated\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isDowngrade\": true,\n  \"isSubscription\": true,\n  \"isUpgrade\": true,\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"maintenanceAccordingToAgreement\": true,\n  \"mediaStorage\": \"path/to/file\",\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"notes\": \"Notes\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"productDescription\": \"MSDN\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"vendor\": \"Microsoft\",\n  \"upgrades\": [\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    },\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    }\n  ],\n  \"maintenancePeriods\": [\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    },\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    }\n  ],\n  \"computerAssignments\": [\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"datacenterAssignments\": [\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"organizationAssignments\": [\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    },\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    }\n  ],\n  \"userAssignments\": [\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    },\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    }\n  ],\n  \"siteAssignment\": {\n    \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n  },\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a3ee0e6-8f50-414e-81f8-63ff10fdb7ed",
+          "name": "Get License",
+          "request": {
+            "name": "Get License",
+            "description": {
+              "content": "Returns the details of the given license.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sam",
+                "v1",
+                "licenses",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique ID of the license."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "046d3973-3051-4003-bc7b-011a0050733d",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_links\": [\n    {\n      \"href\": \"/api/custom-fields/v1/custom-fields\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    },\n    {\n      \"href\": \"/api/custom-fields/v1/custom-fields\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"id\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"autoAllocateOnce\": true,\n  \"isAutoAllocated\": true,\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"mediaStorage\": \"path/to/file\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"invoiceReference\": \"INV12345\",\n  \"vendor\": \"Microsoft\",\n  \"notes\": \"Notes\",\n  \"externalId\": \"EXT12345\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"productDescription\": \"MSDN\",\n  \"isSubscription\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isUpgrade\": true,\n  \"isDowngrade\": true,\n  \"isIncomplete\": true,\n  \"incompleteReasons\": 16,\n  \"contractId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"updatedDate\": \"2024-01-01T00:00:00Z\",\n  \"createdDate\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"upgradedLicenseCount\": 1,\n  \"maintenanceAccordingToAgreement\": true,\n  \"skuId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 100,\n  \"status\": \"Active\",\n  \"archivedDate\": \"2024-01-01T00:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58ee21e2-83a1-4ef6-b57c-88a09eeb2aaf",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5a97eca-a093-40fc-81e8-b8002e50f6ba",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcc84ba0-dbf2-43a8-ba31-0f7ec4330f56",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff78e01b-51fd-4b01-aba1-b3e9455ea3bf",
+          "name": "Replace License",
+          "request": {
+            "name": "Replace License",
+            "description": {
+              "content": "Replaces the given license.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sam",
+                "v1",
+                "licenses",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique ID of the license."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agreementId\": \"<guid>\",\n  \"applicationId\": \"<guid>\",\n  \"autoAllocateOnce\": \"<boolean>\",\n  \"assignmentTypeId\": \"<guid>\",\n  \"externalId\": \"<string>\",\n  \"invoiceReference\": \"<string>\",\n  \"isAutoAllocated\": \"<boolean>\",\n  \"isCrossEdition\": \"<boolean>\",\n  \"isCrossPlatform\": \"<boolean>\",\n  \"isDowngrade\": \"<boolean>\",\n  \"isSubscription\": \"<boolean>\",\n  \"isUpgrade\": \"<boolean>\",\n  \"quantity\": \"<integer>\",\n  \"licenseKeys\": \"<string>\",\n  \"licenseProofLocation\": \"<string>\",\n  \"maintenanceAccordingToAgreement\": \"<boolean>\",\n  \"mediaStorage\": \"<string>\",\n  \"metricId\": \"<guid>\",\n  \"notes\": \"<string>\",\n  \"organizationId\": \"<guid>\",\n  \"productDescription\": \"<string>\",\n  \"purchaseDate\": \"<dateTime>\",\n  \"purchaseValue\": \"<decimal>\",\n  \"purchaseCurrency\": \"<string>\",\n  \"sku\": \"<string>\",\n  \"subscriptionValidFrom\": \"<dateTime>\",\n  \"subscriptionValidTo\": \"<dateTime>\",\n  \"vendor\": \"<string>\",\n  \"upgrades\": [\n    {\n      \"upgradedLicenseId\": \"<guid>\",\n      \"upgradedQuantity\": \"<integer>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"upgradedLicenseId\": \"<guid>\",\n      \"upgradedQuantity\": \"<integer>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"maintenancePeriods\": [\n    {\n      \"agreementPeriodId\": \"<guid>\",\n      \"validFrom\": \"<dateTime>\",\n      \"validTo\": \"<dateTime>\",\n      \"hasUpgradeRights\": \"<boolean>\",\n      \"invoiceReference\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"maintenanceCost\": \"<decimal>\",\n      \"supportCost\": \"<decimal>\"\n    },\n    {\n      \"agreementPeriodId\": \"<guid>\",\n      \"validFrom\": \"<dateTime>\",\n      \"validTo\": \"<dateTime>\",\n      \"hasUpgradeRights\": \"<boolean>\",\n      \"invoiceReference\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"maintenanceCost\": \"<decimal>\",\n      \"supportCost\": \"<decimal>\"\n    }\n  ],\n  \"computerAssignments\": [\n    {\n      \"computerId\": \"<guid>\",\n      \"quantity\": \"<integer>\",\n      \"virtualMachines\": [\n        \"<guid>\",\n        \"<guid>\"\n      ]\n    },\n    {\n      \"computerId\": \"<guid>\",\n      \"quantity\": \"<integer>\",\n      \"virtualMachines\": [\n        \"<guid>\",\n        \"<guid>\"\n      ]\n    }\n  ],\n  \"datacenterAssignments\": [\n    {\n      \"datacenterId\": \"<guid>\",\n      \"quantity\": \"<integer>\",\n      \"virtualMachines\": [\n        \"<guid>\",\n        \"<guid>\"\n      ]\n    },\n    {\n      \"datacenterId\": \"<guid>\",\n      \"quantity\": \"<integer>\",\n      \"virtualMachines\": [\n        \"<guid>\",\n        \"<guid>\"\n      ]\n    }\n  ],\n  \"organizationAssignments\": [\n    {\n      \"organizationId\": \"<guid>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"organizationId\": \"<guid>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"userAssignments\": [\n    {\n      \"userId\": \"<guid>\"\n    },\n    {\n      \"userId\": \"<guid>\"\n    }\n  ],\n  \"siteAssignment\": {\n    \"organizationId\": \"<guid>\"\n  },\n  \"hasVmUseRights\": \"<boolean>\",\n  \"numberOfSupportedVirtualMachines\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45a31925-38df-49b6-8bf1-2b8d6fa8981d",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"autoAllocateOnce\": true,\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"externalId\": \"EXT12345\",\n  \"invoiceReference\": \"INV12345\",\n  \"isAutoAllocated\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isDowngrade\": true,\n  \"isSubscription\": true,\n  \"isUpgrade\": true,\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"maintenanceAccordingToAgreement\": true,\n  \"mediaStorage\": \"path/to/file\",\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"notes\": \"Notes\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"productDescription\": \"MSDN\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"vendor\": \"Microsoft\",\n  \"upgrades\": [\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    },\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    }\n  ],\n  \"maintenancePeriods\": [\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    },\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    }\n  ],\n  \"computerAssignments\": [\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"datacenterAssignments\": [\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"organizationAssignments\": [\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    },\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    }\n  ],\n  \"userAssignments\": [\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    },\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    }\n  ],\n  \"siteAssignment\": {\n    \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n  },\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_links\": [\n    {\n      \"href\": \"/api/custom-fields/v1/custom-fields\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    },\n    {\n      \"href\": \"/api/custom-fields/v1/custom-fields\",\n      \"rel\": \"self\",\n      \"method\": \"GET\"\n    }\n  ],\n  \"id\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"autoAllocateOnce\": true,\n  \"isAutoAllocated\": true,\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"mediaStorage\": \"path/to/file\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"invoiceReference\": \"INV12345\",\n  \"vendor\": \"Microsoft\",\n  \"notes\": \"Notes\",\n  \"externalId\": \"EXT12345\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"productDescription\": \"MSDN\",\n  \"isSubscription\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isUpgrade\": true,\n  \"isDowngrade\": true,\n  \"isIncomplete\": true,\n  \"incompleteReasons\": 16,\n  \"contractId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"updatedDate\": \"2024-01-01T00:00:00Z\",\n  \"createdDate\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"upgradedLicenseCount\": 1,\n  \"maintenanceAccordingToAgreement\": true,\n  \"skuId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 100,\n  \"status\": \"Active\",\n  \"archivedDate\": \"2024-01-01T00:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bc60d48-b78e-4368-a969-90e6d46e62d1",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"autoAllocateOnce\": true,\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"externalId\": \"EXT12345\",\n  \"invoiceReference\": \"INV12345\",\n  \"isAutoAllocated\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isDowngrade\": true,\n  \"isSubscription\": true,\n  \"isUpgrade\": true,\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"maintenanceAccordingToAgreement\": true,\n  \"mediaStorage\": \"path/to/file\",\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"notes\": \"Notes\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"productDescription\": \"MSDN\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"vendor\": \"Microsoft\",\n  \"upgrades\": [\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    },\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    }\n  ],\n  \"maintenancePeriods\": [\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    },\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    }\n  ],\n  \"computerAssignments\": [\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"datacenterAssignments\": [\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"organizationAssignments\": [\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    },\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    }\n  ],\n  \"userAssignments\": [\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    },\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    }\n  ],\n  \"siteAssignment\": {\n    \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n  },\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c54f673-62c8-4714-970d-7cec56b34665",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"autoAllocateOnce\": true,\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"externalId\": \"EXT12345\",\n  \"invoiceReference\": \"INV12345\",\n  \"isAutoAllocated\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isDowngrade\": true,\n  \"isSubscription\": true,\n  \"isUpgrade\": true,\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"maintenanceAccordingToAgreement\": true,\n  \"mediaStorage\": \"path/to/file\",\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"notes\": \"Notes\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"productDescription\": \"MSDN\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"vendor\": \"Microsoft\",\n  \"upgrades\": [\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    },\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    }\n  ],\n  \"maintenancePeriods\": [\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    },\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    }\n  ],\n  \"computerAssignments\": [\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"datacenterAssignments\": [\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"organizationAssignments\": [\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    },\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    }\n  ],\n  \"userAssignments\": [\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    },\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    }\n  ],\n  \"siteAssignment\": {\n    \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n  },\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27f176dc-da4b-4d4d-b6bb-8d2dda6473c4",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"applicationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"autoAllocateOnce\": true,\n  \"assignmentTypeId\": \"8e5d8f69-c818-4575-9a91-aebae9a9eacc\",\n  \"externalId\": \"EXT12345\",\n  \"invoiceReference\": \"INV12345\",\n  \"isAutoAllocated\": true,\n  \"isCrossEdition\": true,\n  \"isCrossPlatform\": true,\n  \"isDowngrade\": true,\n  \"isSubscription\": true,\n  \"isUpgrade\": true,\n  \"quantity\": 1,\n  \"licenseKeys\": \"69658998-12-12031517-23\",\n  \"licenseProofLocation\": \"path/to/licenseproof\",\n  \"maintenanceAccordingToAgreement\": true,\n  \"mediaStorage\": \"path/to/file\",\n  \"metricId\": \"5891a1d8-7fb0-45bd-b1f6-01c943f9c572\",\n  \"notes\": \"Notes\",\n  \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n  \"productDescription\": \"MSDN\",\n  \"purchaseDate\": \"2024-01-01T00:00:00Z\",\n  \"purchaseValue\": 1000,\n  \"purchaseCurrency\": \"USD\",\n  \"sku\": \"ABC-12345-S-BL\",\n  \"subscriptionValidFrom\": \"2024-01-01T00:00:00Z\",\n  \"subscriptionValidTo\": \"2025-01-01T00:00:00Z\",\n  \"vendor\": \"Microsoft\",\n  \"upgrades\": [\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    },\n    {\n      \"upgradedLicenseId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"upgradedQuantity\": 1,\n      \"quantity\": 1\n    }\n  ],\n  \"maintenancePeriods\": [\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    },\n    {\n      \"agreementPeriodId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"validFrom\": \"2024-01-01T00:00:00Z\",\n      \"validTo\": \"2025-01-01T00:00:00Z\",\n      \"hasUpgradeRights\": true,\n      \"invoiceReference\": \"INV12345\",\n      \"notes\": \"Notes\",\n      \"maintenanceCost\": 1000,\n      \"supportCost\": 1000\n    }\n  ],\n  \"computerAssignments\": [\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"computerId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"datacenterAssignments\": [\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    },\n    {\n      \"datacenterId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1,\n      \"virtualMachines\": [\n        \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n      ]\n    }\n  ],\n  \"organizationAssignments\": [\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    },\n    {\n      \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\",\n      \"quantity\": 1\n    }\n  ],\n  \"userAssignments\": [\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    },\n    {\n      \"userId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n    }\n  ],\n  \"siteAssignment\": {\n    \"organizationId\": \"49cdd99f-bc16-40f9-ad40-48f12182fb30\"\n  },\n  \"hasVmUseRights\": true,\n  \"numberOfSupportedVirtualMachines\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6d2a015-ed9f-407b-8113-cc22f5833ebb",
+          "name": "Delete License",
+          "request": {
+            "name": "Delete License",
+            "description": {
+              "content": "Removes the given license.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sam",
+                "v1",
+                "licenses",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique ID of the license."
+                },
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "07e87479-0172-430a-ae0c-070fa8cdfbfb",
+              "name": "No Content: Your request succeeded, but the response message was empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba3c6edc-346a-42a5-8383-299bee76b22e",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d9bc897-8c65-4389-a536-3dc001cfb0a9",
+              "name": "Not Found: The operation you requested failed because a resource associated with your request could not be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "742e2a27-251c-4509-aeb5-863d487b8021",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique ID of the license."
+                    },
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4a030b4-809f-44a9-a24e-74d829b06c94",
+          "name": "Bulk Update Licenses",
+          "request": {
+            "name": "Bulk Update Licenses",
+            "description": {
+              "content": "Modifies a collection of licenses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sam",
+                "v1",
+                "licenses",
+                "bulk-update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scope\": \"<string>\",\n  \"body\": {\n    \"status\": \"<string>\"\n  },\n  \"filter\": \"<string>\",\n  \"ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba191c9a-1598-45af-90c6-e44ef021b65a",
+              "name": "OK: Your request succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    "bulk-update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scope\": \"Only\",\n  \"body\": {\n    \"status\": \"Archived\"\n  },\n  \"filter\": \"id -eq '49cdd99f-bc16-40f9-ad40-48f12182fb30'\",\n  \"ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successCount\": 10,\n  \"failedCount\": 10,\n  \"failed\": [\n    \"e192ea5e-363c-47e4-82e3-d2587afada8c\"\n  ],\n  \"failureReason\": \"These licenses are used as base licenses.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f9637e4-1bf3-44bf-b263-9831d5bddeda",
+              "name": "Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    "bulk-update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scope\": \"Only\",\n  \"body\": {\n    \"status\": \"Archived\"\n  },\n  \"filter\": \"id -eq '49cdd99f-bc16-40f9-ad40-48f12182fb30'\",\n  \"ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0dad74d-7299-4218-89f8-14d7d232c8f5",
+              "name": "Internal Server Error: Your request failed due to an internal error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sam",
+                    "v1",
+                    "licenses",
+                    "bulk-update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scope\": \"Only\",\n  \"body\": {\n    \"status\": \"Archived\"\n  },\n  \"filter\": \"id -eq '49cdd99f-bc16-40f9-ad40-48f12182fb30'\",\n  \"ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"The service encountered an unexpected condition that prevented it from fulfilling the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of westeurope,australiasoutheast,eastus2,uksouth)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "westeurope",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://{{region}}.snowsoftware.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "de9d4651-c585-4384-b494-c4519c80f249",
+    "name": "SAM: Computers Applications Licenses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with computers.\n\nContact Support:\n Name: Flexera",
+      "type": "text/plain"
+    }
+  }
+}

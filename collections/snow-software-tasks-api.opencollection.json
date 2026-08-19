@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAM: Computers Applications Tasks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{region}.snowsoftware.io/api/saas/consolidated-view/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "5b35aa33-e7a8-47a3-b1b6-19099ebb6bfd",
+                "type": "path",
+                "description": "The unique ID of the task."
+              }
+            ]
+          },
+          "docs": "Returns the details of the given task."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
