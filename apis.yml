@@ -187,7 +187,7 @@ apis:
   description: The Computer hardware API from Snow Software — 1 operation(s) for computer hardware.
   humanURL: https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis
   tags:
-  - Computer hardware
+  - Computer Hardware
   tags_raw:
   - Computer hardware
   properties:
