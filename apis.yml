@@ -30,6 +30,7 @@ accessModel:
   source:
   - plans
   - authentication
+  - {url: 'https://www.snowsoftware.com', status: 301, note: 'declared website redirects to https://www.flexera.com/ — a different registrable domain (snowsoftware.com -> flexera.com), possible rename or acquisition (probed 2026-09-03, roadmap#169)'}
   generated: '2026-07-22'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/snow-software.png
@@ -467,6 +468,9 @@ apis:
   - type: Documentation
     url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
 common:
+  - type: CapabilityMap
+    url: capabilities/snow-software-capability-edges.yml
+    name: Snow Software Business Capability Map
   - type: AgenticAccess
     url: agentic-access/snow-software-agentic-access.yml
   - type: DomainSecurity
