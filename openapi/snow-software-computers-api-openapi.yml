@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Applications Computers API'
+  title: 'SAM: Computers API'
   description: API for interacting with computers.
   contact:
     name: Flexera
@@ -289,6 +289,175 @@ paths:
         - sam.computer.u
 components:
   schemas:
+    ComputerWrite:
+      type: object
+      properties:
+        purchaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date on which the computer was purchased.
+          example: '2024-03-24T12:52:20Z'
+        purchaseValue:
+          type:
+          - number
+          - 'null'
+          format: decimal
+          description: The amount for which the computer was purchased.
+          example: 2461.32
+        purchaseCurrency:
+          type:
+          - string
+          - 'null'
+          description: The currency in which the computer was purchased.
+          example: EUR
+        vendor:
+          type:
+          - string
+          - 'null'
+          description: The vendor of the computer.
+          example: Dell
+        invoiceReference:
+          type:
+          - string
+          - 'null'
+          description: The invoice reference for the purchase of the computer.
+          example: 2024/03/63729P
+        statusCode:
+          type:
+          - string
+          - 'null'
+          description: The status of the computer.
+          example: Active
+        organizationId:
+          type:
+          - string
+          - 'null'
+          format: guid
+          description: The unique ID of the organization to which the computer belongs.
+          example: 293cf227-bf7f-4919-b664-791f3f49e1ef
+        isQuarantineManagementDisabled:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if the computer has quarantine management disabled; otherwise, ```false```.'
+          example: true
+        isAutoEditingDisabled:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if the auto editing is disabled for the computer; otherwise, ```false```.'
+          example: false
+        socketCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: The number of sockets in the computer.
+          example: 2
+        hostComputerId:
+          type:
+          - string
+          - 'null'
+          format: guid
+          description: The unique ID of the host computer if present.
+          example: 8FD97CF1-FB71-469B-ACEA-39314EC26213
+        siblingComputerId:
+          type:
+          - string
+          - 'null'
+          format: guid
+          description: The unique ID of the sibling computer if present.
+          example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
+        isVirtual:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if the computer is virtual; otherwise, ```false```.'
+          example: false
+        isSocketCountManualOverrideEnabled:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if the socket count manual override of the computer is enabled; otherwise, ```false```.'
+          example: true
+        chipModulesPerProcessor:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: The number of chip modules per processor.
+          example: 2
+        notes:
+          type:
+          - string
+          - 'null'
+          description: The notes associated with the purchase of the computer.
+          example: Purchased in a set with printer
+        securityCode:
+          type:
+          - string
+          - 'null'
+          description: The security code for the computer.
+          example: A563Z
+        processorValueUnit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: The processor value unit of the computer.
+          example: 32
+        biosSerialNumber:
+          type:
+          - string
+          - 'null'
+          description: The BIOS serial number of the computer.
+          example: 43-01-10-TX
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    PaginationResponse:
+      type: object
+      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 10
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 240
     Link:
       type: object
       required:
@@ -308,112 +477,17 @@ components:
           type: string
           description: The method to access related resources.
           example: GET
-    ComputerWrite:
+    ErrorResponse:
       type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
       properties:
-        purchaseDate:
-          type: string
-          format: date-time
-          description: The date on which the computer was purchased.
-          nullable: true
-          example: '2024-03-24T12:52:20Z'
-        purchaseValue:
-          type: number
-          format: decimal
-          description: The amount for which the computer was purchased.
-          nullable: true
-          example: 2461.32
-        purchaseCurrency:
-          type: string
-          description: The currency in which the computer was purchased.
-          nullable: true
-          example: EUR
-        vendor:
-          type: string
-          description: The vendor of the computer.
-          nullable: true
-          example: Dell
-        invoiceReference:
-          type: string
-          description: The invoice reference for the purchase of the computer.
-          nullable: true
-          example: 2024/03/63729P
-        statusCode:
-          type: string
-          description: The status of the computer.
-          nullable: true
-          example: Active
-        organizationId:
-          type: string
-          format: guid
-          description: The unique ID of the organization to which the computer belongs.
-          nullable: true
-          example: 293cf227-bf7f-4919-b664-791f3f49e1ef
-        isQuarantineManagementDisabled:
-          type: boolean
-          description: '```true``` if the computer has quarantine management disabled; otherwise, ```false```.'
-          nullable: true
-          example: true
-        isAutoEditingDisabled:
-          type: boolean
-          description: '```true``` if the auto editing is disabled for the computer; otherwise, ```false```.'
-          nullable: true
-          example: false
-        socketCount:
-          type: integer
-          format: int32
-          description: The number of sockets in the computer.
-          nullable: true
-          example: 2
-        hostComputerId:
-          type: string
-          format: guid
-          description: The unique ID of the host computer if present.
-          nullable: true
-          example: 8FD97CF1-FB71-469B-ACEA-39314EC26213
-        siblingComputerId:
-          type: string
-          format: guid
-          description: The unique ID of the sibling computer if present.
-          nullable: true
-          example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
-        isVirtual:
-          type: boolean
-          description: '```true``` if the computer is virtual; otherwise, ```false```.'
-          nullable: true
-          example: false
-        isSocketCountManualOverrideEnabled:
-          type: boolean
-          description: '```true``` if the socket count manual override of the computer is enabled; otherwise, ```false```.'
-          nullable: true
-          example: true
-        chipModulesPerProcessor:
-          type: integer
-          format: int32
-          description: The number of chip modules per processor.
-          nullable: true
-          example: 2
-        notes:
-          type: string
-          description: The notes associated with the purchase of the computer.
-          nullable: true
-          example: Purchased in a set with printer
-        securityCode:
-          type: string
-          description: The security code for the computer.
-          nullable: true
-          example: A563Z
-        processorValueUnit:
-          type: integer
-          format: int32
-          description: The processor value unit of the computer.
-          nullable: true
-          example: 32
-        biosSerialNumber:
-          type: string
-          description: The BIOS serial number of the computer.
-          nullable: true
-          example: 43-01-10-TX
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
     FilteredResponseWithLinksOfComputer:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -433,22 +507,551 @@ components:
             description: The pagination details.
             oneOf:
             - $ref: '#/components/schemas/PaginationResponse'
-    PatchRequest:
-      type: array
-      items:
-        oneOf:
-        - $ref: '#/components/schemas/JSONPatchRequestAddReplace'
-    ErrorResponse:
+    ErrorContent:
       type: object
-      description: Response representing error.
+      description: Details of error.
       additionalProperties: false
       required:
-      - error
+      - code
+      - message
       properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type:
+          - string
+          - 'null'
+          description: Additional error message.
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    BulkUpdateComputerStatusResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComputerStatusUpdateError'
+        message:
+          type: string
+        processedCount:
+          type: integer
+        skippedCount:
+          type: integer
+    Computer:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response representing a computer.
+        additionalProperties: false
+        required:
+        - id
+        - hostName
+        - lastScanDate
+        - status
+        properties:
+          id:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            minLength: 1
+            example: 5043cc04-3ef2-4882-a3be-8d08b4f402c7
+          hostName:
+            type: string
+            description: The host name of the computer.
+            minLength: 1
+            example: AM21-S42MONITOR
+          hostComputerId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the host computer.
+            format: guid
+            example: 035613f6-26a5-4929-94f0-ed10a991438a
+          mostFrequentUser:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the most frequent user of the computer.
+            format: guid
+            example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
+          mostRecentUser:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the most recent user of the computer.
+            format: guid
+            example: 77f8f11f-e4f8-4bed-8e44-b78d66244302
+          manufacturer:
+            type:
+            - string
+            - 'null'
+            description: The manufacturer of the computer.
+            example: Lenovo
+          isPortable:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer is portable; otherwise, ```false```.'
+            example: true
+          isVirtual:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer is virtual; otherwise, ```false```.'
+            example: true
+          isServer:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer is a server; otherwise, ```false```.'
+            example: true
+          model:
+            type:
+            - string
+            - 'null'
+            description: The model of the computer.
+            example: T480s
+          operatingSystem:
+            type:
+            - string
+            - 'null'
+            description: The operating system of the computer.
+            example: Microsoft Windows 11 Pro
+          vendor:
+            type:
+            - string
+            - 'null'
+            description: The vendor of the computer.
+            example: Dell Inc.
+          domain:
+            type:
+            - string
+            - 'null'
+            description: The domain of the computer.
+            example: APAC
+          ipAddress:
+            type:
+            - string
+            - 'null'
+            description: The IP address of the computer.
+            example: 10.20.20.77
+          isVDI:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer uses virtual desktop infrastructure; otherwise, ```false```.'
+            example: true
+          lastScanDate:
+            type: string
+            description: The date and time that the computer was last scanned.
+            format: date-time
+            minLength: 1
+            example: '2024-03-24T12:52:20Z'
+          status:
+            type: string
+            description: The status of the computer.
+            minLength: 1
+            example: Active
+          organizationId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the organization to which the computer belongs.
+            format: guid
+            example: 293cf227-bf7f-4919-b664-791f3f49e1ef
+          processorCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of processors in the computer.
+            format: int32
+            example: 2
+          coreCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of cores in the computer.
+            format: int32
+            example: 8
+    BulkUpdateComputerStatusBody:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Quarantined
+          description: Target status value for the bulk update.
+      required:
+      - Status
+    BulkUpdateComputerStatusRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          enum:
+          - Only
+          description: Scope for the bulk status update. Must be 'Only'.
+        ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of computer IDs to update.
+        body:
+          $ref: '#/components/schemas/BulkUpdateComputerStatusBody'
+      required:
+      - scope
+      - ids
+      - body
+    ComputerStatusUpdateError:
+      type: object
+      properties:
+        Message:
+          type: string
+    ComputerDetails:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response representing details of a computer.
+        additionalProperties: false
+        required:
+        - id
+        - hostName
+        - lastScanDate
+        - infoTransferDate
+        - architecture
+        properties:
+          id:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            minLength: 1
+            example: 5043cc04-3ef2-4882-a3be-8d08b4f402c7
+          scanIdentifier:
+            type:
+            - string
+            - 'null'
+            description: The identifier used by the scan.
+            example: MAC-C02GD9DUML7H
+          hostName:
+            type: string
+            description: The host name of the computer.
+            example: AM21-S42MONITOR
+          domain:
+            type:
+            - string
+            - 'null'
+            description: The domain of the computer.
+            example: APAC
+          lastScanDate:
+            type: string
+            description: The last date that the computer was scanned.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          biosSerialNumber:
+            type:
+            - string
+            - 'null'
+            description: The BIOS serial number of the computer.
+            example: 43-01-10-TX
+          biosVersion:
+            type:
+            - string
+            - 'null'
+            description: The BIOS version of the computer.
+            example: 1.26.0
+          biosDate:
+            type:
+            - string
+            - 'null'
+            description: The BIOS date of the computer.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          manufacturer:
+            type:
+            - string
+            - 'null'
+            description: The manufacturer of the computer.
+            example: Lenovo
+          manufacturerWebsite:
+            type:
+            - string
+            - 'null'
+            description: Website of the computer's manufacturer.
+            example: https://www.lenovo.com
+          model:
+            type:
+            - string
+            - 'null'
+            description: The model of the computer.
+            example: T480s
+          isPortable:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer is portable; otherwise, ```false```.'
+            example: true
+          infoTransferDate:
+            type: string
+            description: The date and time of information transfer for the computer.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          clientInstallDate:
+            type:
+            - string
+            - 'null'
+            description: The date and time that the client was installed on the computer.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          clientVersion:
+            type:
+            - string
+            - 'null'
+            description: The version of the client on the computer.
+            example: 6.14.3
+          clientSiteName:
+            type:
+            - string
+            - 'null'
+            description: The site name of the client on the computer.
+            example: snow
+          clientConfigurationName:
+            type:
+            - string
+            - 'null'
+            description: The configuration name of the client on the computer.
+            example: SnowAtlas
+          scannerVersion:
+            type:
+            - string
+            - 'null'
+            description: The version of the scanner for the computer.
+            example: 7.0.0
+          quarantineDate:
+            type:
+            - string
+            - 'null'
+            description: The quarantine date of the computer, if computer was quarantined.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          isQuarantineManagementDisabled:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer has quarantine management disabled; otherwise, ```false```.'
+            example: true
+          operatingSystem:
+            type:
+            - string
+            - 'null'
+            description: The operating system of the computer.
+            example: Microsoft Windows 11 Pro
+          operatingSystemId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the computer's operating system.
+            format: guid
+            example: c27c14a7-dcec-4f8e-b08e-cdb7263b5378
+          operatingSystemServicePack:
+            type:
+            - string
+            - 'null'
+            description: The service pack of the computer's operating system.
+            example: SP1
+          operatingSystemSerialNumber:
+            type:
+            - string
+            - 'null'
+            description: The serial number of the computer's operating system.
+            example: V6E3X-S6J5H-L5F5P-M4M2Y
+          ipAddress:
+            type:
+            - string
+            - 'null'
+            description: The IP address of the computer.
+            example: 10.20.20.77
+          isVirtual:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer is virtual; otherwise, ```false```.'
+            example: true
+          hostComputerId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the host computer if present.
+            format: guid
+            example: 037e6448-6ad3-4279-800d-010677485bbb
+          siblingComputerId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the sibling computer if present.
+            format: guid
+            example: 687e2c50-6900-463a-b470-8c12e3677be8
+          isUpdated:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer is updated; otherwise, ```false```.'
+            example: true
+          is64bit:
+            type: boolean
+            description: '```true``` if the computer is 64 bit; otherwise, ```false```.'
+            example: true
+          isServer:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer is a server; otherwise, ```false```.'
+            example: true
+          hypervisorName:
+            type:
+            - string
+            - 'null'
+            description: The hypervisor name of the computer.
+            example: VMware Virtual Platform
+          isVdi:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer uses virtual desktop infrastructure; otherwise, ```false```.'
+            example: true
+          processorValueUnit:
+            type:
+            - integer
+            - 'null'
+            description: The processor value unit of the computer.
+            format: int32
+            example: 32
+          reportingDate:
+            type:
+            - string
+            - 'null'
+            description: The date and time that the computer last reported data.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          architecture:
+            type: string
+            description: The architecture of the computer.
+            example: 64-bit
+          organizationId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the organization to which the computer belongs.
+            format: guid
+            example: 293cf227-bf7f-4919-b664-791f3f49e1ef
+          status:
+            type:
+            - string
+            - 'null'
+            description: The status of the computer.
+            example: Active
+          isAutoEditingDisabled:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the auto editing is disabled for the computer; otherwise, ```false```.'
+            example: true
+          purchaseDate:
+            type:
+            - string
+            - 'null'
+            description: The date and time that the computer was purchased.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          purchaseValue:
+            type:
+            - number
+            - 'null'
+            description: The amount for which the computer was purchased.
+            format: decimal
+            example: 2461.32
+          purchaseCurrency:
+            type:
+            - string
+            - 'null'
+            description: The currency in which the computer was purchased.
+            example: EUR
+          purchaseValueBase:
+            type:
+            - number
+            - 'null'
+            description: The value base of the purchase of the computer.
+            format: decimal
+            example: 2500.32
+          invoiceReference:
+            type:
+            - string
+            - 'null'
+            description: The invoice reference for the purchase of the computer.
+            example: 2024/03/63729P
+          notes:
+            type:
+            - string
+            - 'null'
+            description: The notes associated with the purchase of the computer.
+            example: Purchased in a set with printer
+          securityCode:
+            type:
+            - string
+            - 'null'
+            description: The security code for the computer.
+            example: A563Z
+          updatedDate:
+            type:
+            - string
+            - 'null'
+            description: The date and time that the computer was updated.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          isIncludedInWindowsServerRequirement:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the computer is included in the Windows Server requirement; otherwise, ```false```.'
+            example: true
+          mostRecentUser:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the most recent user of the computer.
+            format: guid
+            example: 77f8f11f-e4f8-4bed-8e44-b78d66244302
+          mostFrequentUser:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the most frequent user of the computer.
+            format: guid
+            example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
+          vendor:
+            type:
+            - string
+            - 'null'
+            description: The vendor of the computer.
+            example: Dell Inc.
+          processorCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of processors in the computer.
+            format: int32
+            example: 2
+          coreCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of cores in the computer.
+            format: int32
+            example: 8
     JSONPatchRequestAddReplace:
       type: object
       properties:
@@ -475,540 +1078,12 @@ components:
       - value
       - op
       - path
-    ComputerDetails:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Response representing details of a computer.
-        additionalProperties: false
-        required:
-        - id
-        - hostName
-        - lastScanDate
-        - infoTransferDate
-        - architecture
-        properties:
-          id:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            minLength: 1
-            example: 5043cc04-3ef2-4882-a3be-8d08b4f402c7
-          scanIdentifier:
-            type: string
-            description: The identifier used by the scan.
-            nullable: true
-            example: MAC-C02GD9DUML7H
-          hostName:
-            type: string
-            description: The host name of the computer.
-            example: AM21-S42MONITOR
-          domain:
-            type: string
-            description: The domain of the computer.
-            nullable: true
-            example: APAC
-          lastScanDate:
-            type: string
-            description: The last date that the computer was scanned.
-            format: date-time
-            example: '2024-03-24T12:52:20Z'
-          biosSerialNumber:
-            type: string
-            description: The BIOS serial number of the computer.
-            nullable: true
-            example: 43-01-10-TX
-          biosVersion:
-            type: string
-            description: The BIOS version of the computer.
-            nullable: true
-            example: 1.26.0
-          biosDate:
-            type: string
-            description: The BIOS date of the computer.
-            format: date-time
-            nullable: true
-            example: '2024-03-24T12:52:20Z'
-          manufacturer:
-            type: string
-            description: The manufacturer of the computer.
-            nullable: true
-            example: Lenovo
-          manufacturerWebsite:
-            type: string
-            description: Website of the computer's manufacturer.
-            nullable: true
-            example: https://www.lenovo.com
-          model:
-            type: string
-            description: The model of the computer.
-            nullable: true
-            example: T480s
-          isPortable:
-            type: boolean
-            description: '```true``` if the computer is portable; otherwise, ```false```.'
-            nullable: true
-            example: true
-          infoTransferDate:
-            type: string
-            description: The date and time of information transfer for the computer.
-            format: date-time
-            example: '2024-03-24T12:52:20Z'
-          clientInstallDate:
-            type: string
-            description: The date and time that the client was installed on the computer.
-            format: date-time
-            nullable: true
-            example: '2024-03-24T12:52:20Z'
-          clientVersion:
-            type: string
-            description: The version of the client on the computer.
-            nullable: true
-            example: 6.14.3
-          clientSiteName:
-            type: string
-            description: The site name of the client on the computer.
-            nullable: true
-            example: snow
-          clientConfigurationName:
-            type: string
-            description: The configuration name of the client on the computer.
-            nullable: true
-            example: SnowAtlas
-          scannerVersion:
-            type: string
-            description: The version of the scanner for the computer.
-            nullable: true
-            example: 7.0.0
-          quarantineDate:
-            type: string
-            description: The quarantine date of the computer, if computer was quarantined.
-            format: date-time
-            nullable: true
-            example: '2024-03-24T12:52:20Z'
-          isQuarantineManagementDisabled:
-            type: boolean
-            description: '```true``` if the computer has quarantine management disabled; otherwise, ```false```.'
-            nullable: true
-            example: true
-          operatingSystem:
-            type: string
-            description: The operating system of the computer.
-            nullable: true
-            example: Microsoft Windows 11 Pro
-          operatingSystemId:
-            type: string
-            description: The unique ID of the computer's operating system.
-            format: guid
-            nullable: true
-            example: c27c14a7-dcec-4f8e-b08e-cdb7263b5378
-          operatingSystemServicePack:
-            type: string
-            description: The service pack of the computer's operating system.
-            nullable: true
-            example: SP1
-          operatingSystemSerialNumber:
-            type: string
-            description: The serial number of the computer's operating system.
-            nullable: true
-            example: V6E3X-S6J5H-L5F5P-M4M2Y
-          ipAddress:
-            type: string
-            description: The IP address of the computer.
-            nullable: true
-            example: 10.20.20.77
-          isVirtual:
-            type: boolean
-            description: '```true``` if the computer is virtual; otherwise, ```false```.'
-            nullable: true
-            example: true
-          hostComputerId:
-            type: string
-            description: The unique ID of the host computer if present.
-            format: guid
-            nullable: true
-            example: 037e6448-6ad3-4279-800d-010677485bbb
-          siblingComputerId:
-            type: string
-            description: The unique ID of the sibling computer if present.
-            format: guid
-            nullable: true
-            example: 687e2c50-6900-463a-b470-8c12e3677be8
-          isUpdated:
-            type: boolean
-            description: '```true``` if the computer is updated; otherwise, ```false```.'
-            nullable: true
-            example: true
-          is64bit:
-            type: boolean
-            description: '```true``` if the computer is 64 bit; otherwise, ```false```.'
-            example: true
-          isServer:
-            type: boolean
-            description: '```true``` if the computer is a server; otherwise, ```false```.'
-            nullable: true
-            example: true
-          hypervisorName:
-            type: string
-            description: The hypervisor name of the computer.
-            nullable: true
-            example: VMware Virtual Platform
-          isVdi:
-            type: boolean
-            description: '```true``` if the computer uses virtual desktop infrastructure; otherwise, ```false```.'
-            nullable: true
-            example: true
-          processorValueUnit:
-            type: integer
-            description: The processor value unit of the computer.
-            format: int32
-            nullable: true
-            example: 32
-          reportingDate:
-            type: string
-            description: The date and time that the computer last reported data.
-            format: date-time
-            nullable: true
-            example: '2024-03-24T12:52:20Z'
-          architecture:
-            type: string
-            description: The architecture of the computer.
-            example: 64-bit
-          organizationId:
-            type: string
-            description: The unique ID of the organization to which the computer belongs.
-            format: guid
-            nullable: true
-            example: 293cf227-bf7f-4919-b664-791f3f49e1ef
-          status:
-            type: string
-            description: The status of the computer.
-            nullable: true
-            example: Active
-          isAutoEditingDisabled:
-            type: boolean
-            description: '```true``` if the auto editing is disabled for the computer; otherwise, ```false```.'
-            nullable: true
-            example: true
-          purchaseDate:
-            type: string
-            description: The date and time that the computer was purchased.
-            format: date-time
-            nullable: true
-            example: '2024-03-24T12:52:20Z'
-          purchaseValue:
-            type: number
-            description: The amount for which the computer was purchased.
-            format: decimal
-            nullable: true
-            example: 2461.32
-          purchaseCurrency:
-            type: string
-            description: The currency in which the computer was purchased.
-            nullable: true
-            example: EUR
-          purchaseValueBase:
-            type: number
-            description: The value base of the purchase of the computer.
-            format: decimal
-            nullable: true
-            example: 2500.32
-          invoiceReference:
-            type: string
-            description: The invoice reference for the purchase of the computer.
-            nullable: true
-            example: 2024/03/63729P
-          notes:
-            type: string
-            description: The notes associated with the purchase of the computer.
-            nullable: true
-            example: Purchased in a set with printer
-          securityCode:
-            type: string
-            description: The security code for the computer.
-            nullable: true
-            example: A563Z
-          updatedDate:
-            type: string
-            description: The date and time that the computer was updated.
-            format: date-time
-            nullable: true
-            example: '2024-03-24T12:52:20Z'
-          isIncludedInWindowsServerRequirement:
-            type: boolean
-            description: '```true``` if the computer is included in the Windows Server requirement; otherwise, ```false```.'
-            nullable: true
-            example: true
-          mostRecentUser:
-            type: string
-            description: The unique ID of the most recent user of the computer.
-            format: guid
-            nullable: true
-            example: 77f8f11f-e4f8-4bed-8e44-b78d66244302
-          mostFrequentUser:
-            type: string
-            description: The unique ID of the most frequent user of the computer.
-            format: guid
-            nullable: true
-            example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
-          vendor:
-            type: string
-            description: The vendor of the computer.
-            nullable: true
-            example: Dell Inc.
-          processorCount:
-            type: integer
-            description: The number of processors in the computer.
-            format: int32
-            nullable: true
-            example: 2
-          coreCount:
-            type: integer
-            description: The number of cores in the computer.
-            format: int32
-            nullable: true
-            example: 8
-    BulkUpdateComputerStatusRequest:
-      type: object
-      properties:
-        scope:
-          type: string
-          enum:
-          - Only
-          description: Scope for the bulk status update. Must be 'Only'.
-        ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: List of computer IDs to update.
-        body:
-          $ref: '#/components/schemas/BulkUpdateComputerStatusBody'
-      required:
-      - scope
-      - ids
-      - body
-    PaginationResponse:
-      type: object
-      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type: integer
-          description: The total number of pages.
-          format: int32
-          nullable: true
-          example: 10
-        total_items:
-          type: integer
-          description: The total number of items.
-          format: int32
-          nullable: true
-          example: 240
-    BulkUpdateComputerStatusBody:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - Active
-          - Inactive
-          - Quarantined
-          description: Target status value for the bulk update.
-      required:
-      - Status
-    ComputerStatusUpdateError:
-      type: object
-      properties:
-        Message:
-          type: string
-    Computer:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Response representing a computer.
-        additionalProperties: false
-        required:
-        - id
-        - hostName
-        - lastScanDate
-        - status
-        properties:
-          id:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            minLength: 1
-            example: 5043cc04-3ef2-4882-a3be-8d08b4f402c7
-          hostName:
-            type: string
-            description: The host name of the computer.
-            minLength: 1
-            example: AM21-S42MONITOR
-          hostComputerId:
-            type: string
-            description: The unique ID of the host computer.
-            format: guid
-            nullable: true
-            example: 035613f6-26a5-4929-94f0-ed10a991438a
-          mostFrequentUser:
-            type: string
-            description: The unique ID of the most frequent user of the computer.
-            format: guid
-            nullable: true
-            example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
-          mostRecentUser:
-            type: string
-            description: The unique ID of the most recent user of the computer.
-            format: guid
-            nullable: true
-            example: 77f8f11f-e4f8-4bed-8e44-b78d66244302
-          manufacturer:
-            type: string
-            description: The manufacturer of the computer.
-            nullable: true
-            example: Lenovo
-          isPortable:
-            type: boolean
-            description: '```true``` if the computer is portable; otherwise, ```false```.'
-            nullable: true
-            example: true
-          isVirtual:
-            type: boolean
-            description: '```true``` if the computer is virtual; otherwise, ```false```.'
-            nullable: true
-            example: true
-          isServer:
-            type: boolean
-            description: '```true``` if the computer is a server; otherwise, ```false```.'
-            nullable: true
-            example: true
-          model:
-            type: string
-            description: The model of the computer.
-            nullable: true
-            example: T480s
-          operatingSystem:
-            type: string
-            description: The operating system of the computer.
-            nullable: true
-            example: Microsoft Windows 11 Pro
-          vendor:
-            type: string
-            description: The vendor of the computer.
-            nullable: true
-            example: Dell Inc.
-          domain:
-            type: string
-            description: The domain of the computer.
-            nullable: true
-            example: APAC
-          ipAddress:
-            type: string
-            description: The IP address of the computer.
-            nullable: true
-            example: 10.20.20.77
-          isVDI:
-            type: boolean
-            description: '```true``` if the computer uses virtual desktop infrastructure; otherwise, ```false```.'
-            nullable: true
-            example: true
-          lastScanDate:
-            type: string
-            description: The date and time that the computer was last scanned.
-            format: date-time
-            minLength: 1
-            example: '2024-03-24T12:52:20Z'
-          status:
-            type: string
-            description: The status of the computer.
-            minLength: 1
-            example: Active
-          organizationId:
-            type: string
-            description: The unique ID of the organization to which the computer belongs.
-            format: guid
-            nullable: true
-            example: 293cf227-bf7f-4919-b664-791f3f49e1ef
-          processorCount:
-            type: integer
-            description: The number of processors in the computer.
-            format: int32
-            nullable: true
-            example: 2
-          coreCount:
-            type: integer
-            description: The number of cores in the computer.
-            format: int32
-            nullable: true
-            example: 8
-    ErrorContent:
-      type: object
-      description: Details of error.
-      additionalProperties: false
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: Http error code.
-          format: int32
-          example: 400
-        message:
-          type: string
-          description: Additional error message.
-          nullable: true
-          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
-    BaseResponse:
-      type: object
-      description: Base response class.
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    BulkUpdateComputerStatusResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ComputerStatusUpdateError'
-        message:
-          type: string
-        processedCount:
-          type: integer
-        skippedCount:
-          type: integer
+    PatchRequest:
+      type: array
+      items:
+        oneOf:
+        - $ref: '#/components/schemas/JSONPatchRequestAddReplace'
   responses:
-    '500':
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
     '400':
       description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
       content:
@@ -1031,6 +1106,16 @@ components:
               message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
     '204':
       description: 'No Content: Your request succeeded, but the response message was empty.'
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
   securitySchemes:
     BearerAuth:
       type: http

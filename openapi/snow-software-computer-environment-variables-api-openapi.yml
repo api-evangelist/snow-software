@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Computer environment variables API'
+  title: 'SAM: Computers Computer environment variables API'
   description: API for interacting with computers.
   contact:
     name: Flexera
@@ -140,7 +140,57 @@ paths:
       - BearerAuth:
         - sam.computer.r
 components:
+  responses:
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
   schemas:
+    FilteredResponseWithLinksOfComputerEnvironmentVariables:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerEnvironmentVariables'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
     ComputerEnvironmentVariables:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -156,14 +206,16 @@ components:
             format: guid
             example: ae739332-5f44-4c70-aec5-251c841366f1
           environmentVariableName:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The name of the environment variables.
-            nullable: true
             example: CommonProgramW6432
           environmentVariableValue:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The value of the environment variables.
-            nullable: true
             example: C:\Program Files\Common Files
     Link:
       type: object
@@ -184,36 +236,6 @@ components:
           type: string
           description: The method to access related resources.
           example: GET
-    FilteredResponseWithLinksOfComputerEnvironmentVariables:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Generic response class supporting filtering and including links.
-        additionalProperties: false
-        required:
-        - items
-        - pagination
-        properties:
-          items:
-            type: array
-            description: A collection of items returned in the response.
-            items:
-              $ref: '#/components/schemas/ComputerEnvironmentVariables'
-          pagination:
-            description: The pagination details.
-            oneOf:
-            - $ref: '#/components/schemas/PaginationResponse'
-    ErrorResponse:
-      type: object
-      description: Response representing error.
-      additionalProperties: false
-      required:
-      - error
-      properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
     ErrorContent:
       type: object
       description: Details of error.
@@ -228,10 +250,22 @@ components:
           format: int32
           example: 400
         message:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Additional error message.
-          nullable: true
           example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
     BaseResponse:
       type: object
       description: Base response class.
@@ -263,48 +297,19 @@ components:
           format: int32
           example: 1
         total_pages:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of pages.
           format: int32
-          nullable: true
           example: 10
         total_items:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of items.
           format: int32
-          nullable: true
           example: 240
-  responses:
-    '500':
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
-    '400':
-      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              message: Filter field name needs to be formatted as a string.
-    '404':
-      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
   securitySchemes:
     BearerAuth:
       type: http

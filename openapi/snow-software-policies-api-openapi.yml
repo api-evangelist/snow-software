@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Policies API'
-  description: API for interacting with computers.
+  title: 'SAM: Licenses Policies API'
   contact:
     name: Flexera
     url: https://www.flexera.com
-  version: 1.0.0
+  version: 1.7.0
 servers:
 - url: https://{region}.snowsoftware.io
+  description: You can find your **Data region** in the **Snow Atlas settings** menu, in **License details**. Your **Data region** is on the **General information** tab. For further information, see [General information](https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789 "https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789").
   variables:
     region:
       enum:
@@ -271,39 +271,139 @@ paths:
         - sam.license.r
 components:
   schemas:
+    LicensePolicyField:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the policy field.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          name:
+            type:
+            - string
+            - 'null'
+            description: The policy field name.
+            example: InvoiceReference
+          description:
+            type:
+            - string
+            - 'null'
+            description: The policy field description.
+            example: InvoiceReference
+          isRequired:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if is required; otherwise, ```false```.'
+            example: true
+          isComboBox:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if is combo box; otherwise, ```false```.'
+            example: true
+          isEditingAllowed:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if editing is allowed; otherwise, ```false```.'
+            example: true
+          listItems:
+            type:
+            - array
+            - 'null'
+            description: The list of item values.
+            example:
+            - Item
+            items:
+              type: string
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    FilteredResponseOfLicensePolicyFieldCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicensePolicyFieldCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
     Link:
       type: object
       description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
       additionalProperties: false
       properties:
         href:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The associated relative URL.
-          nullable: true
           example: /api/custom-fields/v1/custom-fields
         rel:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Specifies the relationship between the current document and the linked document/resource.
-          nullable: true
           example: self
         method:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The method to access related resources.
-          nullable: true
           example: GET
-    HateoasCollectionOfPolicy:
+    FilteredResponseOfPolicy:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/Policy'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Policy:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfPolicy'
+      - $ref: '#/components/schemas/HateoasResource'
       - type: object
+        description: The license policy.
         additionalProperties: false
-        required:
-        - _links
         properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
+          id:
+            type: string
+            description: The unique ID of the license policy.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
     Pagination:
       type: object
       description: The pagination details.
@@ -323,34 +423,26 @@ components:
           format: int32
           example: 1
         total_pages:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of pages.
           format: int32
-          nullable: true
           example: 5
         total_items:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of items.
           format: int32
-          nullable: true
           example: 100
-    FilteredResponseOfPolicy:
+    ErrorResponse:
       type: object
-      description: Filtered response.
-      additionalProperties: false
       required:
-      - items
-      - pagination
+      - error
       properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/Policy'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
+        error:
+          $ref: '#/components/schemas/Error'
     HateoasResource:
       type: object
       additionalProperties: false
@@ -362,13 +454,19 @@ components:
           description: A collection of links to related resources.
           items:
             $ref: '#/components/schemas/Link'
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
+    HateoasCollectionOfPolicy:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfPolicy'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
     LicensePolicyFieldCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -381,14 +479,16 @@ components:
             format: guid
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           name:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The policy field name.
-            nullable: true
             example: InvoiceReference
           description:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The policy field description.
-            nullable: true
             example: InvoiceReference
           isRequired:
             type: boolean
@@ -403,9 +503,10 @@ components:
             description: '```true``` if is editing allowed; otherwise, ```false```.'
             example: true
           listItems:
-            type: array
+            type:
+            - array
+            - 'null'
             description: The list of item values.
-            nullable: true
             example:
             - Item
             items:
@@ -423,93 +524,6 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
-    FilteredResponseOfLicensePolicyFieldCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/LicensePolicyFieldCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    LicensePolicyField:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the policy field.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          name:
-            type: string
-            description: The policy field name.
-            nullable: true
-            example: InvoiceReference
-          description:
-            type: string
-            description: The policy field description.
-            nullable: true
-            example: InvoiceReference
-          isRequired:
-            type: boolean
-            description: '```true``` if is required; otherwise, ```false```.'
-            nullable: true
-            example: true
-          isComboBox:
-            type: boolean
-            description: '```true``` if is combo box; otherwise, ```false```.'
-            nullable: true
-            example: true
-          isEditingAllowed:
-            type: boolean
-            description: '```true``` if editing is allowed; otherwise, ```false```.'
-            nullable: true
-            example: true
-          listItems:
-            type: array
-            description: The list of item values.
-            nullable: true
-            example:
-            - Item
-            items:
-              type: string
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    Policy:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        description: The license policy.
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the license policy.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
   securitySchemes:
     BearerAuth:
       type: http

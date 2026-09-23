@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Entitlements API'
-  description: API for interacting with computers.
+  title: 'SAM: Licenses Entitlements API'
   contact:
     name: Flexera
     url: https://www.flexera.com
-  version: 1.0.0
+  version: 1.7.0
 servers:
 - url: https://{region}.snowsoftware.io
+  description: You can find your **Data region** in the **Snow Atlas settings** menu, in **License details**. Your **Data region** is on the **General information** tab. For further information, see [General information](https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789 "https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789").
   variables:
     region:
       enum:
@@ -247,6 +247,219 @@ paths:
         - sam.license.r
 components:
   schemas:
+    HateoasCollectionOfLicenseEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseEntitlement'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    EntitlementState:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the entitlement state.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          name:
+            type:
+            - string
+            - 'null'
+            description: The name of the entitlement state.
+            example: Partially covered
+          description:
+            type:
+            - string
+            - 'null'
+            description: The description of the entitlement state.
+            example: The virtual machine is licensed by the host it is running on.
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
+    ComputerApplicationEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          entitlementStateId:
+            type: string
+            description: The unique ID of the entitlement state.
+            format: guid
+            example: 6fb32edf-1d45-44e3-a55d-6df6068c0c08
+    AssignmentType:
+      type: string
+      description: The assignment type.
+      x-enumNames:
+      - Organization
+      - Computer
+      - User
+      - Site
+      enum:
+      - Organization
+      - Computer
+      - User
+      - Site
+    FilteredResponseOfUserApplicationEntitlement:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/UserApplicationEntitlement'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 5
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 100
+    HateoasCollectionOfUserApplicationEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfUserApplicationEntitlement'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    UserApplicationEntitlement:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          userId:
+            type: string
+            description: The unique ID of the user.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          entitlementStateId:
+            type: string
+            description: The unique ID of the entitlement state.
+            format: guid
+            example: 6fb32edf-1d45-44e3-a55d-6df6068c0c08
+    HateoasCollectionOfEntitlementState:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfEntitlementState'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
     FilteredResponseOfComputerApplicationEntitlement:
       type: object
       description: Filtered response.
@@ -264,29 +477,44 @@ components:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    Link:
+    HateoasResource:
       type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
       additionalProperties: false
+      required:
+      - _links
       properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          nullable: true
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          nullable: true
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          nullable: true
-          example: GET
-    HateoasCollectionOfUserApplicationEntitlement:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    FilteredResponseOfEntitlementState:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/EntitlementState'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    HateoasCollectionOfComputerApplicationEntitlement:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfUserApplicationEntitlement'
+      - $ref: '#/components/schemas/FilteredResponseOfComputerApplicationEntitlement'
       - type: object
         additionalProperties: false
         required:
@@ -314,55 +542,6 @@ components:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    FilteredResponseOfEntitlementState:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/EntitlementState'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    EntitlementState:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the entitlement state.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          name:
-            type: string
-            description: The name of the entitlement state.
-            nullable: true
-            example: Partially covered
-          description:
-            type: string
-            description: The description of the entitlement state.
-            nullable: true
-            example: The virtual machine is licensed by the host it is running on.
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
     LicenseEntitlement:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -395,178 +574,6 @@ components:
             description: The quantity.
             format: int32
             example: 1
-    ComputerApplicationEntitlement:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          computerId:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          applicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          metricId:
-            type: string
-            description: The unique ID of the metric.
-            format: guid
-            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
-          entitlementStateId:
-            type: string
-            description: The unique ID of the entitlement state.
-            format: guid
-            example: 6fb32edf-1d45-44e3-a55d-6df6068c0c08
-    HateoasCollectionOfComputerApplicationEntitlement:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfComputerApplicationEntitlement'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    HateoasCollectionOfLicenseEntitlement:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseEntitlement'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    FilteredResponseOfUserApplicationEntitlement:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/UserApplicationEntitlement'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    HateoasCollectionOfEntitlementState:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfEntitlementState'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    Pagination:
-      type: object
-      description: The pagination details.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type: integer
-          description: The total number of pages.
-          format: int32
-          nullable: true
-          example: 5
-        total_items:
-          type: integer
-          description: The total number of items.
-          format: int32
-          nullable: true
-          example: 100
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    AssignmentType:
-      type: string
-      description: The assignment type.
-      x-enumNames:
-      - Organization
-      - Computer
-      - User
-      - Site
-      enum:
-      - Organization
-      - Computer
-      - User
-      - Site
-    UserApplicationEntitlement:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          userId:
-            type: string
-            description: The unique ID of the user.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          applicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          metricId:
-            type: string
-            description: The unique ID of the metric.
-            format: guid
-            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
-          entitlementStateId:
-            type: string
-            description: The unique ID of the entitlement state.
-            format: guid
-            example: 6fb32edf-1d45-44e3-a55d-6df6068c0c08
   securitySchemes:
     BearerAuth:
       type: http

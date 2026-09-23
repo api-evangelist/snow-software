@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Costs API'
-  description: API for interacting with computers.
+  title: 'SAM: Licenses Costs API'
   contact:
     name: Flexera
     url: https://www.flexera.com
-  version: 1.0.0
+  version: 1.7.0
 servers:
 - url: https://{region}.snowsoftware.io
+  description: You can find your **Data region** in the **Snow Atlas settings** menu, in **License details**. Your **Data region** is on the **General information** tab. For further information, see [General information](https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789 "https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789").
   variables:
     region:
       enum:
@@ -213,50 +213,20 @@ paths:
         - sam.license.r
 components:
   schemas:
-    Link:
+    Error:
+      description: The error details.
       type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          nullable: true
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          nullable: true
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          nullable: true
-          example: GET
-    HateoasCollectionOfLicenseCost:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseCost'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    HateoasResource:
-      type: object
-      additionalProperties: false
       required:
-      - _links
+      - code
+      - message
       properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
     LicenseCost:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -310,34 +280,34 @@ components:
             format: decimal
             example: 1000
           currency:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The currency.
-            nullable: true
             example: USD
-    ErrorResponse:
+    Link:
       type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    FilteredResponseOfLicenseCost:
-      type: object
-      description: Filtered response.
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
       additionalProperties: false
-      required:
-      - items
-      - pagination
       properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/LicenseCost'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
     LicenseCostSummary:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -391,10 +361,24 @@ components:
             format: decimal
             example: 100
           currency:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The currency.
-            nullable: true
             example: USD
+    HateoasCollectionOfLicenseCost:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseCost'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
     Pagination:
       type: object
       description: The pagination details.
@@ -414,31 +398,54 @@ components:
           format: int32
           example: 1
         total_pages:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of pages.
           format: int32
-          nullable: true
           example: 5
         total_items:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of items.
           format: int32
-          nullable: true
           example: 100
-    Error:
-      description: The error details.
+    ErrorResponse:
       type: object
       required:
-      - code
-      - message
+      - error
       properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
+        error:
+          $ref: '#/components/schemas/Error'
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    FilteredResponseOfLicenseCost:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseCost'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
   securitySchemes:
     BearerAuth:
       type: http

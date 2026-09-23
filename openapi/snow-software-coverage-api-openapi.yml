@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Coverage API'
-  description: API for interacting with computers.
+  title: 'SAM: Licenses Coverage API'
   contact:
     name: Flexera
     url: https://www.flexera.com
-  version: 1.0.0
+  version: 1.7.0
 servers:
 - url: https://{region}.snowsoftware.io
+  description: You can find your **Data region** in the **Snow Atlas settings** menu, in **License details**. Your **Data region** is on the **General information** tab. For further information, see [General information](https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789 "https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789").
   variables:
     region:
       enum:
@@ -192,43 +192,18 @@ paths:
         - sam.license.r
 components:
   schemas:
-    FilteredResponseOfLicenseExtendedCoverage:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/LicenseExtendedCoverage'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          nullable: true
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          nullable: true
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          nullable: true
-          example: GET
+    ExtendedCoverageType:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          name:
+            type:
+            - string
+            - 'null'
+            description: The type of the extended coverage.
+            example: Passive
     LicenseExtendedCoverage:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -260,10 +235,11 @@ components:
             format: guid
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           coveredApplicationId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the application.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           reason:
             description: The incomplete license reason.
@@ -271,45 +247,11 @@ components:
             oneOf:
             - $ref: '#/components/schemas/ExtendedCoverageReason'
           reasonDescription:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The reason description.
-            nullable: true
             example: The recovery reason description
-    HateoasCollectionOfLicenseExtendedCoverage:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseExtendedCoverage'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    ExtendedCoverageType:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          name:
-            type: string
-            description: The type of the extended coverage.
-            nullable: true
-            example: Passive
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
     HateoasCollectionOfExtendedCoverageType:
       allOf:
       - $ref: '#/components/schemas/FilteredResponseOfExtendedCoverageType'
@@ -323,13 +265,60 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
-    ErrorResponse:
+    Error:
+      description: The error details.
       type: object
       required:
-      - error
+      - code
+      - message
       properties:
-        error:
-          $ref: '#/components/schemas/Error'
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
+    FilteredResponseOfLicenseExtendedCoverage:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseExtendedCoverage'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
     FilteredResponseOfExtendedCoverageType:
       type: object
       description: Filtered response.
@@ -366,31 +355,50 @@ components:
           format: int32
           example: 1
         total_pages:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of pages.
           format: int32
-          nullable: true
           example: 5
         total_items:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of items.
           format: int32
-          nullable: true
           example: 100
-    Error:
-      description: The error details.
+    ErrorResponse:
       type: object
       required:
-      - code
-      - message
+      - error
       properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
+        error:
+          $ref: '#/components/schemas/Error'
+    HateoasCollectionOfLicenseExtendedCoverage:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseExtendedCoverage'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
     ExtendedCoverageReason:
       type: string
       description: The extended coverage reason.

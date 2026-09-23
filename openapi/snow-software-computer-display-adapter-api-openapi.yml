@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Computer display adapter API'
+  title: 'SAM: Computers Computer display adapter API'
   description: API for interacting with computers.
   contact:
     name: Flexera
@@ -84,40 +84,38 @@ paths:
       - BearerAuth:
         - sam.computer.r
 components:
+  responses:
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
   schemas:
-    ComputerDisplayAdapter:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Response representing display adapter of a computer.
-        additionalProperties: false
-        required:
-        - computerId
-        properties:
-          computerId:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            example: 66a6b2b7-2ff1-403f-add3-60ed14a0233a
-          name:
-            type: string
-            description: The name of the display adapter.
-            nullable: true
-            example: NVIDIA T1200 Laptop GPU
-          currentResolution:
-            type: string
-            description: The current resolution of the computer's display adapter.
-            nullable: true
-            example: 1920 x 1200
-          maxResolution:
-            type: string
-            description: The maximum resolution of the computer's display adapter.
-            nullable: true
-            example: 2560x1440
-          isUpdated:
-            type: boolean
-            description: '```true``` if the display adapter is updated; otherwise, ```false```.'
-            example: true
     Link:
       type: object
       required:
@@ -137,17 +135,42 @@ components:
           type: string
           description: The method to access related resources.
           example: GET
-    ErrorResponse:
-      type: object
-      description: Response representing error.
-      additionalProperties: false
-      required:
-      - error
-      properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
+    ComputerDisplayAdapter:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response representing display adapter of a computer.
+        additionalProperties: false
+        required:
+        - computerId
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 66a6b2b7-2ff1-403f-add3-60ed14a0233a
+          name:
+            type:
+            - string
+            - 'null'
+            description: The name of the display adapter.
+            example: NVIDIA T1200 Laptop GPU
+          currentResolution:
+            type:
+            - string
+            - 'null'
+            description: The current resolution of the computer's display adapter.
+            example: 1920 x 1200
+          maxResolution:
+            type:
+            - string
+            - 'null'
+            description: The maximum resolution of the computer's display adapter.
+            example: 2560x1440
+          isUpdated:
+            type: boolean
+            description: '```true``` if the display adapter is updated; otherwise, ```false```.'
+            example: true
     ErrorContent:
       type: object
       description: Details of error.
@@ -162,10 +185,22 @@ components:
           format: int32
           example: 400
         message:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Additional error message.
-          nullable: true
           example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
     BaseResponse:
       type: object
       description: Base response class.
@@ -178,37 +213,6 @@ components:
           description: A collection of links to related resources.
           items:
             $ref: '#/components/schemas/Link'
-  responses:
-    '500':
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
-    '400':
-      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              message: Filter field name needs to be formatted as a string.
-    '404':
-      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
   securitySchemes:
     BearerAuth:
       type: http

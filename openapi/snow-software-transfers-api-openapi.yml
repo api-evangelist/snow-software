@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Transfers API'
-  description: API for interacting with computers.
+  title: 'SAM: Licenses Transfers API'
   contact:
     name: Flexera
     url: https://www.flexera.com
-  version: 1.0.0
+  version: 1.7.0
 servers:
 - url: https://{region}.snowsoftware.io
+  description: You can find your **Data region** in the **Snow Atlas settings** menu, in **License details**. Your **Data region** is on the **General information** tab. For further information, see [General information](https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789 "https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789").
   variables:
     region:
       enum:
@@ -567,94 +567,40 @@ paths:
         - sam.license.r
 components:
   schemas:
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          nullable: true
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          nullable: true
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          nullable: true
-          example: GET
-    FilteredResponseOfCustomValueTransferDetailsCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/CustomValueTransferDetailsCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    FilteredResponseOfComputerTransferDetailsCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/ComputerTransferDetailsCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    FilteredResponseOfLicenseTransferCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/LicenseTransferCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    HateoasCollectionOfComputerTransferCollection:
+    ComputerTransferCollection:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfComputerTransferCollection'
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          fromApplicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          toApplicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+    HateoasCollectionOfComputerTransferDetailsCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComputerTransferDetailsCollection'
       - type: object
         additionalProperties: false
         required:
@@ -665,6 +611,38 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
+    UserTransferCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        description: A collection of application license transfers for user.
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          userId:
+            type: string
+            description: The unique ID of the user.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          fromApplicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          toApplicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
     FilteredResponseOfComputerTransferCollection:
       type: object
       description: Filtered response.
@@ -682,33 +660,9 @@ components:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    FilteredResponseOfUserTransferDetailsCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/UserTransferDetailsCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    HateoasCollectionOfCustomValueTransferCollection:
+    HateoasCollectionOfLicenseTransferCollection:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfCustomValueTransferCollection'
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseTransferCollection'
       - type: object
         additionalProperties: false
         required:
@@ -732,6 +686,80 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
+    HateoasCollectionOfCustomValueTransferCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfCustomValueTransferCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    CustomValueTransferCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          customCompareValueId:
+            type: string
+            description: The unique ID of the custom compare value.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          fromApplicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          toApplicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
     HateoasResource:
       type: object
       additionalProperties: false
@@ -743,19 +771,85 @@ components:
           description: A collection of links to related resources.
           items:
             $ref: '#/components/schemas/Link'
-    HateoasCollectionOfLicenseTransferCollection:
+    ComputerTransferDetailsCollection:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseTransferCollection'
+      - $ref: '#/components/schemas/HateoasResource'
       - type: object
         additionalProperties: false
-        required:
-        - _links
         properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
+          id:
+            type: string
+            description: The unique ID of the computer transfer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          fromApplicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          toApplicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          isUpgrade:
+            type: boolean
+            description: '```true``` if is upgrade; otherwise, ```false```.'
+            example: true
+          isDowngrade:
+            type: boolean
+            description: '```true``` if is downgrade; otherwise, ```false```.'
+            example: true
+          isCrossEdition:
+            type: boolean
+            description: '```true``` if is cross-edition; otherwise, ```false```.'
+            example: true
+          isCrossPlatform:
+            type: boolean
+            description: '```true``` if is cross-platform; otherwise, ```false```.'
+            example: true
+          quantity:
+            type: integer
+            description: The transferred quantity.
+            format: int32
+            example: 1
+    FilteredResponseOfComputerTransferDetailsCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ComputerTransferDetailsCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
     CustomValueTransferDetailsCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -824,84 +918,6 @@ components:
             - Standard
             oneOf:
             - $ref: '#/components/schemas/UseRightType'
-    CustomValueTransferCollection:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          customCompareValueId:
-            type: string
-            description: The unique ID of the custom compare value.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          organizationId:
-            type: string
-            description: The unique ID of the organization.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          fromApplicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          toApplicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    FilteredResponseOfCustomValueTransferCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/CustomValueTransferCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    HateoasCollectionOfUserTransferDetailsCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfUserTransferDetailsCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    FilteredResponseOfUserTransferCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/UserTransferCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
     UserTransferDetailsCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -964,51 +980,23 @@ components:
             description: The transferred quantity.
             format: int32
             example: 1
-    UserTransferCollection:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        description: A collection of application license transfers for user.
-        additionalProperties: false
-        properties:
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          organizationId:
-            type: string
-            description: The unique ID of the organization.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          userId:
-            type: string
-            description: The unique ID of the user.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          fromApplicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          toApplicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    HateoasCollectionOfComputerTransferDetailsCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfComputerTransferDetailsCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
+    FilteredResponseOfCustomValueTransferCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/CustomValueTransferCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
     HateoasCollectionOfUserTransferCollection:
       allOf:
       - $ref: '#/components/schemas/FilteredResponseOfUserTransferCollection'
@@ -1022,153 +1010,23 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
-    LicenseTransferCollection:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        description: A collection of license transfers.
-        additionalProperties: false
-        properties:
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          hasComputerTransfer:
-            type: boolean
-            description: '```true``` if has computer transfer; otherwise, ```false```.'
-            example: true
-          hasUserTransfer:
-            type: boolean
-            description: '```true``` if has user transfer; otherwise, ```false```.'
-            example: true
-          hasCustomCompareValueTransfer:
-            type: boolean
-            description: '```true``` if has custom compare value transfer; otherwise, ```false```.'
-            example: true
-    Pagination:
+    FilteredResponseOfCustomValueTransferDetailsCollection:
       type: object
-      description: The pagination details.
+      description: Filtered response.
       additionalProperties: false
       required:
-      - page_size
-      - page_number
+      - items
+      - pagination
       properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type: integer
-          description: The total number of pages.
-          format: int32
-          nullable: true
-          example: 5
-        total_items:
-          type: integer
-          description: The total number of items.
-          format: int32
-          nullable: true
-          example: 100
-    ComputerTransferDetailsCollection:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the computer transfer.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          metricId:
-            type: string
-            description: The unique ID of the metric.
-            format: guid
-            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
-          fromApplicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          toApplicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          computerId:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          organizationId:
-            type: string
-            description: The unique ID of the organization.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          isUpgrade:
-            type: boolean
-            description: '```true``` if is upgrade; otherwise, ```false```.'
-            example: true
-          isDowngrade:
-            type: boolean
-            description: '```true``` if is downgrade; otherwise, ```false```.'
-            example: true
-          isCrossEdition:
-            type: boolean
-            description: '```true``` if is cross-edition; otherwise, ```false```.'
-            example: true
-          isCrossPlatform:
-            type: boolean
-            description: '```true``` if is cross-platform; otherwise, ```false```.'
-            example: true
-          quantity:
-            type: integer
-            description: The transferred quantity.
-            format: int32
-            example: 1
-    ComputerTransferCollection:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          organizationId:
-            type: string
-            description: The unique ID of the organization.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          computerId:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          fromApplicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          toApplicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/CustomValueTransferDetailsCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
     UseRightType:
       type: integer
       description: The use rights type.
@@ -1207,6 +1065,153 @@ components:
       - 65536
       - 131072
       - 262144
+    FilteredResponseOfUserTransferDetailsCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/UserTransferDetailsCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 5
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 100
+    FilteredResponseOfLicenseTransferCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseTransferCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    LicenseTransferCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        description: A collection of license transfers.
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          hasComputerTransfer:
+            type: boolean
+            description: '```true``` if has computer transfer; otherwise, ```false```.'
+            example: true
+          hasUserTransfer:
+            type: boolean
+            description: '```true``` if has user transfer; otherwise, ```false```.'
+            example: true
+          hasCustomCompareValueTransfer:
+            type: boolean
+            description: '```true``` if has custom compare value transfer; otherwise, ```false```.'
+            example: true
+    FilteredResponseOfUserTransferCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/UserTransferCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    HateoasCollectionOfUserTransferDetailsCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfUserTransferDetailsCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    HateoasCollectionOfComputerTransferCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComputerTransferCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
   securitySchemes:
     BearerAuth:
       type: http

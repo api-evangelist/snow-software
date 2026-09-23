@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Licenses API'
-  description: API for interacting with computers.
+  title: 'SAM: Licenses API'
   contact:
     name: Flexera
     url: https://www.flexera.com
-  version: 1.0.0
+  version: 1.7.0
 servers:
 - url: https://{region}.snowsoftware.io
+  description: You can find your **Data region** in the **Snow Atlas settings** menu, in **License details**. Your **Data region** is on the **General information** tab. For further information, see [General information](https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789 "https://docs.snowsoftware.com/snow-atlas/en/UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f.html#UUID-2d4ce22b-e2a9-b7b0-44b8-0ecc55c2959f_section-idm4543865842761633102149279789").
   variables:
     region:
       enum:
@@ -328,75 +328,30 @@ paths:
         - sam.license.crud
 components:
   schemas:
-    LicenseUpgradeRequest:
+    LicenseCollectionUpgrade:
       type: object
       additionalProperties: false
       properties:
+        licenseId:
+          type: string
+          description: The unique ID of the license.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The quantity.
+          format: int32
+          example: 1
         upgradedLicenseId:
           type: string
-          description: The unique ID of the base license.
+          description: The unique ID of the upgraded license.
           format: guid
           example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
         upgradedQuantity:
           type: integer
-          description: The quantity sent from the base license.
+          description: The upgraded quantity.
           format: int32
           example: 1
-        quantity:
-          type: integer
-          description: The quantity received on the upgraded license.
-          format: int32
-          example: 1
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          nullable: true
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          nullable: true
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          nullable: true
-          example: GET
-    HateoasCollectionOfLicenseCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    FilteredResponseOfLicenseCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/LicenseCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
     LicenseCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -410,40 +365,46 @@ components:
             format: guid
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           organizationId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the organization.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           applicationId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the application.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           contractId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the agreement.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           agreementId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the agreement.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           metricId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the metric.
             format: guid
-            nullable: true
             example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
           assignmentTypeId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the assignment type.
             format: guid
-            nullable: true
             example: 8e5d8f69-c818-4575-9a91-aebae9a9eacc
           purchaseDate:
             type: string
@@ -451,57 +412,67 @@ components:
             format: date-time
             example: '2024-01-01T00:00:00Z'
           purchaseValue:
-            type: number
+            type:
+            - number
+            - 'null'
             description: The purchase value.
             format: decimal
-            nullable: true
             example: 1000
           purchaseCurrency:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The purchase currency.
-            nullable: true
             example: USD
           quantity:
-            type: integer
+            type:
+            - integer
+            - 'null'
             description: The quantity.
             format: int32
-            nullable: true
             example: 1
           initialQuantity:
-            type: integer
+            type:
+            - integer
+            - 'null'
             description: The initial quantity.
             format: int32
-            nullable: true
             example: 1
           mediaStorage:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The media storage.
-            nullable: true
             example: path/to/file
           licenseProofLocation:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The license proof location.
-            nullable: true
             example: path/to/licenseproof
           invoiceReference:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The invoice reference.
-            nullable: true
             example: INV12345
           vendor:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The vendor.
-            nullable: true
             example: Microsoft
           externalId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The external ID.
-            nullable: true
             example: EXT12345
           productDescription:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The product description.
-            nullable: true
             example: MSDN
           isSubscription:
             type: boolean
@@ -544,16 +515,18 @@ components:
             format: date-time
             example: '2024-01-01T00:00:00Z'
           subscriptionValidFrom:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The subscription valid from date.
             format: date-time
-            nullable: true
             example: '2024-01-01T00:00:00Z'
           subscriptionValidTo:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The subscription valid to date.
             format: date-time
-            nullable: true
             example: '2025-01-01T00:00:00Z'
           activeMaintenanceCost:
             type: number
@@ -581,35 +554,40 @@ components:
             format: decimal
             example: 1000
           upgradedLicenseCount:
-            type: integer
+            type:
+            - integer
+            - 'null'
             description: The upgraded license count.
             format: int32
-            nullable: true
             example: 1000
           autoAllocateOnce:
-            type: boolean
+            type:
+            - boolean
+            - 'null'
             description: '```true``` if has auto allocate once selected; otherwise, ```false```.'
-            nullable: true
             example: true
           isAutoAllocated:
-            type: boolean
+            type:
+            - boolean
+            - 'null'
             description: '```true``` if has auto allocate selected; otherwise, ```false```.'
-            nullable: true
             example: true
           maintenanceAccordingToAgreement:
             type: boolean
             description: '```true``` if is maintenance and support periods are based on the agreement; otherwise, ```false```..'
             example: true
           skuId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the sku.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           upgrades:
-            type: array
+            type:
+            - array
+            - 'null'
             description: The collection of license upgrades.
-            nullable: true
             items:
               $ref: '#/components/schemas/LicenseCollectionUpgrade'
           status:
@@ -619,10 +597,11 @@ components:
             - $ref: '#/components/schemas/Status'
             example: Active
           archivedDate:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The archived date.
             format: date-time
-            nullable: true
             example: '2024-01-01T00:00:00Z'
     Status:
       type: string
@@ -631,134 +610,54 @@ components:
         Active: The license is active and affects compliance position.
         Archived: The license is archived and does not affect compliance position.
       example: Active
-    UserAssignmentRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        userId:
-          type: string
-          description: The unique ID of the user.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    SiteAssignmentRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        organizationId:
-          type: string
-          description: The unique ID of the organization.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    MaintenancePeriodRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        agreementPeriodId:
-          type: string
-          description: The unique ID of the agreement period.
-          format: guid
-          nullable: true
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        validFrom:
-          type: string
-          description: The valid form date.
-          format: date-time
-          nullable: true
-          example: '2024-01-01T00:00:00Z'
-        validTo:
-          type: string
-          description: The valid to date.
-          format: date-time
-          nullable: true
-          example: '2025-01-01T00:00:00Z'
-        hasUpgradeRights:
-          type: boolean
-          description: '```true``` if has upgrade rights; otherwise, ```false```.'
-          example: true
-        invoiceReference:
-          type: string
-          description: The invoice reference.
-          nullable: true
-          example: INV12345
-        notes:
-          type: string
-          description: The notes.
-          nullable: true
-          example: Notes
-        maintenanceCost:
-          type: number
-          description: The maintenance cost.
-          format: decimal
-          nullable: true
-          example: 1000
-        supportCost:
-          type: number
-          description: The support cost.
-          format: decimal
-          nullable: true
-          example: 1000
     LicenseRequest:
       type: object
       additionalProperties: false
       properties:
         agreementId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The unique ID of the agreement.
           format: guid
-          nullable: true
           example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
         applicationId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The unique ID of the application.
           format: guid
-          nullable: true
           example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
         autoAllocateOnce:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: '```true``` if has auto allocate once selected; otherwise, ```false```.'
-          nullable: true
           example: true
         assignmentTypeId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The unique ID of the assignment type.
           format: guid
-          nullable: true
           example: 8e5d8f69-c818-4575-9a91-aebae9a9eacc
         externalId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The external ID.
-          nullable: true
           example: EXT12345
         invoiceReference:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The invoice reference.
-          nullable: true
           example: INV12345
         isAutoAllocated:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: '```true``` if has auto allocate selected; otherwise, ```false```.'
-          nullable: true
           example: true
         isCrossEdition:
           type: boolean
@@ -773,49 +672,56 @@ components:
           description: '```true``` if is downgrade; otherwise, ```false```.'
           example: true
         isSubscription:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: '```true``` if is subscription; otherwise, ```false```.'
-          nullable: true
           example: true
         isUpgrade:
           type: boolean
           description: '```true``` if is upgrade; otherwise, ```false```.'
           example: true
         quantity:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The quantity.
           format: int32
-          nullable: true
           example: 1
         licenseKeys:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The license keys.
-          nullable: true
           example: 69658998-12-12031517-23
         licenseProofLocation:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The license proof location.
-          nullable: true
           example: path/to/licenseproof
         maintenanceAccordingToAgreement:
           type: boolean
           description: '```true``` if has maintenance according to agreement selected; otherwise, ```false```.'
           example: true
         mediaStorage:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The media storage.
-          nullable: true
           example: path/to/file
         metricId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The unique ID of the metric.
           format: guid
-          nullable: true
           example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
         notes:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The notes.
-          nullable: true
           example: Notes
         organizationId:
           type: string
@@ -823,9 +729,10 @@ components:
           format: guid
           example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
         productDescription:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The product description.
-          nullable: true
           example: MSDN
         purchaseDate:
           type: string
@@ -833,191 +740,172 @@ components:
           format: date-time
           example: '2024-01-01T00:00:00Z'
         purchaseValue:
-          type: number
+          type:
+          - number
+          - 'null'
           description: The purchase value.
           format: decimal
-          nullable: true
           example: 1000
         purchaseCurrency:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The purchase currency.
-          nullable: true
           example: USD
         sku:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The stock keeping unit.
-          nullable: true
           example: ABC-12345-S-BL
         subscriptionValidFrom:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The subscription valid from date.
           format: date-time
-          nullable: true
           example: '2024-01-01T00:00:00Z'
         subscriptionValidTo:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The subscription valid to date.
           format: date-time
-          nullable: true
           example: '2025-01-01T00:00:00Z'
         vendor:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The vendor.
-          nullable: true
           example: Microsoft
         upgrades:
-          type: array
+          type:
+          - array
+          - 'null'
           description: The license upgrades.
-          nullable: true
           items:
             $ref: '#/components/schemas/LicenseUpgradeRequest'
         maintenancePeriods:
-          type: array
+          type:
+          - array
+          - 'null'
           description: The maintenance and support periods.
-          nullable: true
           items:
             $ref: '#/components/schemas/MaintenancePeriodRequest'
         computerAssignments:
-          type: array
+          type:
+          - array
+          - 'null'
           description: The computer assignments.
-          nullable: true
           items:
             $ref: '#/components/schemas/ComputerAssignmentRequest'
         datacenterAssignments:
-          type: array
+          type:
+          - array
+          - 'null'
           description: The datacenter assignments.
-          nullable: true
           items:
             $ref: '#/components/schemas/DatacenterAssignmentRequest'
         organizationAssignments:
-          type: array
+          type:
+          - array
+          - 'null'
           description: The organization assignments.
-          nullable: true
           items:
             $ref: '#/components/schemas/OrganizationAssignmentRequest'
         userAssignments:
-          type: array
+          type:
+          - array
+          - 'null'
           description: The user assignments.
-          nullable: true
           items:
             $ref: '#/components/schemas/UserAssignmentRequest'
         siteAssignment:
           description: The site assignment.
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/SiteAssignmentRequest'
         hasVmUseRights:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: '```true``` if has VM use rights; otherwise, ```false```.'
-          nullable: true
           example: true
         numberOfSupportedVirtualMachines:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The number of VM supported by license.
           format: int32
-          nullable: true
           example: 3
-    LicenseCollectionUpgrade:
-      type: object
-      additionalProperties: false
-      properties:
-        licenseId:
-          type: string
-          description: The unique ID of the license.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        quantity:
-          type: integer
-          description: The quantity.
-          format: int32
-          example: 1
-        upgradedLicenseId:
-          type: string
-          description: The unique ID of the upgraded license.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        upgradedQuantity:
-          type: integer
-          description: The upgraded quantity.
-          format: int32
-          example: 1
-    BulkSummaryResponse:
+    HateoasCollectionOfLicenseCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    LicenseBulkUpdateOperation:
       type: object
       required:
-      - successCount
-      - failedCount
+      - scope
+      - body
       properties:
-        successCount:
-          description: The number of items that succeeded in the operation.
-          type: integer
-          format: int64
-          example: 10
-        failedCount:
-          description: The number of items that failed in the operation.
-          type: integer
-          format: int64
-          example: 10
-        failed:
-          description: The IDs of the failed items.
+        filter:
+          description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+          type: string
+          example: id -eq '49cdd99f-bc16-40f9-ad40-48f12182fb30'
+        scope:
+          description: The scope of the update operation.
+          x-enumDescriptions:
+            Only: The operation is performed only on the licenses whose IDs are specified.
+            All: The operation is performed on all licenses.
+            AllExcept: The operation is performed on every license except those whose IDs are specified.
+          type: string
+          example: Only
+        ids:
+          description: The IDs that the operation is performed on.
           type: array
           items:
             type: string
-          example:
-          - e192ea5e-363c-47e4-82e3-d2587afada8c
-        failureReason:
-          description: The reason the bulk operation failed.
-          type: string
-          example: These licenses are used as base licenses.
-    IncompleteLicenseReason:
-      type: integer
-      description: The incomplete reason.
-      x-enumFlags: true
-      x-enumNames:
-      - None
-      - MissingApplication
-      - MissingLicenseCount
-      - MissingMetric
-      - MissingBaseLicenses
-      - InvalidSubscriptionPeriod
-      - MissingValidFromToDate
-      - MissingAgreementNumber
-      - MissingAssignmentType
-      - All
-      enum:
-      - 0
-      - 1
-      - 2
-      - 4
-      - 8
-      - 16
-      - 32
-      - 64
-      - 128
-      - 255
-    ComputerAssignmentRequest:
+            format: uuid
+        body:
+          $ref: '#/components/schemas/LicenseUpdate'
+    Link:
       type: object
-      description: A collection of computer license assignments.
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
       additionalProperties: false
       properties:
-        computerId:
-          type: string
-          description: The unique ID of the computer.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        quantity:
-          type: integer
-          description: The assigned quantity of licenses.
-          format: int32
-          example: 1
-        virtualMachines:
-          type: array
-          description: The list of virtual machines.
-          nullable: true
-          example:
-          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          items:
-            type: string
-            format: guid
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
     HateoasResource:
       type: object
       additionalProperties: false
@@ -1029,6 +917,15 @@ components:
           description: A collection of links to related resources.
           items:
             $ref: '#/components/schemas/Link'
+    UserAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        userId:
+          type: string
+          description: The unique ID of the user.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
     License:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -1046,26 +943,30 @@ components:
             format: guid
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           applicationId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the application.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           assignmentTypeId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the assignment type.
             format: guid
-            nullable: true
             example: 8e5d8f69-c818-4575-9a91-aebae9a9eacc
           autoAllocateOnce:
-            type: boolean
+            type:
+            - boolean
+            - 'null'
             description: '```true``` if has auto allocate once selected; otherwise, ```false```.'
-            nullable: true
             example: true
           isAutoAllocated:
-            type: boolean
+            type:
+            - boolean
+            - 'null'
             description: '```true``` if has auto allocate selected; otherwise, ```false```.'
-            nullable: true
             example: true
           metricId:
             type: string
@@ -1083,60 +984,71 @@ components:
             format: decimal
             example: 1000
           purchaseCurrency:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The purchase currency.
-            nullable: true
             example: USD
           quantity:
-            type: integer
+            type:
+            - integer
+            - 'null'
             description: The quantity.
             format: int32
-            nullable: true
             example: 1
           licenseKeys:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The license keys.
-            nullable: true
             example: 69658998-12-12031517-23
           mediaStorage:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The media storage.
-            nullable: true
             example: path/to/file
           licenseProofLocation:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The license proof location.
-            nullable: true
             example: path/to/licenseproof
           invoiceReference:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The invoice reference.
-            nullable: true
             example: INV12345
           vendor:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The vendor.
-            nullable: true
             example: Microsoft
           notes:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The notes.
-            nullable: true
             example: Notes
           externalId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The external ID.
-            nullable: true
             example: EXT12345
           sku:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The stock keeping unit.
-            nullable: true
             example: ABC-12345-S-BL
           productDescription:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The product description.
-            nullable: true
             example: MSDN
           isSubscription:
             type: boolean
@@ -1169,16 +1081,18 @@ components:
             oneOf:
             - $ref: '#/components/schemas/IncompleteLicenseReason'
           contractId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the agreement.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           agreementId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the agreement.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           updatedDate:
             type: string
@@ -1191,43 +1105,49 @@ components:
             format: date-time
             example: '2024-01-01T00:00:00Z'
           subscriptionValidFrom:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The subscription valid from date.
             format: date-time
-            nullable: true
             example: '2024-01-01T00:00:00Z'
           subscriptionValidTo:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The subscription valid to date.
             format: date-time
-            nullable: true
             example: '2025-01-01T00:00:00Z'
           upgradedLicenseCount:
-            type: integer
+            type:
+            - integer
+            - 'null'
             description: The upgraded license count.
             format: int32
-            nullable: true
             example: 1
           maintenanceAccordingToAgreement:
             type: boolean
             description: '```true``` if is maintenance and support periods are based on the agreement; otherwise, ```false```..'
             example: true
           skuId:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The unique ID of the sku.
             format: guid
-            nullable: true
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           hasVmUseRights:
-            type: boolean
+            type:
+            - boolean
+            - 'null'
             description: '```true``` if has VM use rights; otherwise, ```false```.'
-            nullable: true
             example: true
           numberOfSupportedVirtualMachines:
-            type: integer
+            type:
+            - integer
+            - 'null'
             description: The number of supported virtual machines.
             format: int32
-            nullable: true
             example: 100
           status:
             type: string
@@ -1236,85 +1156,120 @@ components:
             - $ref: '#/components/schemas/Status'
             example: Active
           archivedDate:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The archived date.
             format: date-time
-            nullable: true
             example: '2024-01-01T00:00:00Z'
-    LicenseBulkUpdateOperation:
+    MaintenancePeriodRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        agreementPeriodId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the agreement period.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        validFrom:
+          type:
+          - string
+          - 'null'
+          description: The valid form date.
+          format: date-time
+          example: '2024-01-01T00:00:00Z'
+        validTo:
+          type:
+          - string
+          - 'null'
+          description: The valid to date.
+          format: date-time
+          example: '2025-01-01T00:00:00Z'
+        hasUpgradeRights:
+          type: boolean
+          description: '```true``` if has upgrade rights; otherwise, ```false```.'
+          example: true
+        invoiceReference:
+          type:
+          - string
+          - 'null'
+          description: The invoice reference.
+          example: INV12345
+        notes:
+          type:
+          - string
+          - 'null'
+          description: The notes.
+          example: Notes
+        maintenanceCost:
+          type:
+          - number
+          - 'null'
+          description: The maintenance cost.
+          format: decimal
+          example: 1000
+        supportCost:
+          type:
+          - number
+          - 'null'
+          description: The support cost.
+          format: decimal
+          example: 1000
+    IncompleteLicenseReason:
+      type: integer
+      description: The incomplete reason.
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - MissingApplication
+      - MissingLicenseCount
+      - MissingMetric
+      - MissingBaseLicenses
+      - InvalidSubscriptionPeriod
+      - MissingValidFromToDate
+      - MissingAgreementNumber
+      - MissingAssignmentType
+      - All
+      enum:
+      - 0
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 32
+      - 64
+      - 128
+      - 255
+    BulkSummaryResponse:
       type: object
       required:
-      - scope
-      - body
+      - successCount
+      - failedCount
       properties:
-        filter:
-          description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
-          type: string
-          example: id -eq '49cdd99f-bc16-40f9-ad40-48f12182fb30'
-        scope:
-          description: The scope of the update operation.
-          x-enumDescriptions:
-            Only: The operation is performed only on the licenses whose IDs are specified.
-            All: The operation is performed on all licenses.
-            AllExcept: The operation is performed on every license except those whose IDs are specified.
-          type: string
-          example: Only
-        ids:
-          description: The IDs that the operation is performed on.
+        successCount:
+          description: The number of items that succeeded in the operation.
+          type: integer
+          format: int64
+          example: 10
+        failedCount:
+          description: The number of items that failed in the operation.
+          type: integer
+          format: int64
+          example: 10
+        failed:
+          description: The IDs of the failed items.
           type: array
           items:
             type: string
-            format: uuid
-        body:
-          $ref: '#/components/schemas/LicenseUpdate'
-    LicenseUpdate:
-      description: The update to be applied to all IDs.
-      type: object
-      properties:
-        status:
-          description: The scope of the update operation.
-          x-enumDescriptions:
-            Active: The license is active and affects compliance position.
-            Archived: The license is archived and does not affect compliance position.
-          type: string
-          example: Archived
-    OrganizationAssignmentRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        organizationId:
-          type: string
-          description: The unique ID of the organization.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        quantity:
-          type: integer
-          description: The assigned quantity of licenses.
-          format: int32
-          example: 1
-    DatacenterAssignmentRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        datacenterId:
-          type: string
-          description: The unique ID of the DCC.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        quantity:
-          type: integer
-          description: The assigned quantity of licenses.
-          format: int32
-          example: 1
-        virtualMachines:
-          type: array
-          description: The list of virtual machines.
-          nullable: true
           example:
-          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          items:
-            type: string
-            format: guid
+          - e192ea5e-363c-47e4-82e3-d2587afada8c
+        failureReason:
+          description: The reason the bulk operation failed.
+          type: string
+          example: These licenses are used as base licenses.
     Pagination:
       type: object
       description: The pagination details.
@@ -1334,17 +1289,152 @@ components:
           format: int32
           example: 1
         total_pages:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of pages.
           format: int32
-          nullable: true
           example: 5
         total_items:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of items.
           format: int32
-          nullable: true
           example: 100
+    SiteAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        organizationId:
+          type: string
+          description: The unique ID of the organization.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+    LicenseUpgradeRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        upgradedLicenseId:
+          type: string
+          description: The unique ID of the base license.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        upgradedQuantity:
+          type: integer
+          description: The quantity sent from the base license.
+          format: int32
+          example: 1
+        quantity:
+          type: integer
+          description: The quantity received on the upgraded license.
+          format: int32
+          example: 1
+    LicenseUpdate:
+      description: The update to be applied to all IDs.
+      type: object
+      properties:
+        status:
+          description: The scope of the update operation.
+          x-enumDescriptions:
+            Active: The license is active and affects compliance position.
+            Archived: The license is archived and does not affect compliance position.
+          type: string
+          example: Archived
+    FilteredResponseOfLicenseCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    OrganizationAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        organizationId:
+          type: string
+          description: The unique ID of the organization.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The assigned quantity of licenses.
+          format: int32
+          example: 1
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    ComputerAssignmentRequest:
+      type: object
+      description: A collection of computer license assignments.
+      additionalProperties: false
+      properties:
+        computerId:
+          type: string
+          description: The unique ID of the computer.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The assigned quantity of licenses.
+          format: int32
+          example: 1
+        virtualMachines:
+          type:
+          - array
+          - 'null'
+          description: The list of virtual machines.
+          example:
+          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          items:
+            type: string
+            format: guid
+    DatacenterAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        datacenterId:
+          type: string
+          description: The unique ID of the DCC.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The assigned quantity of licenses.
+          format: int32
+          example: 1
+        virtualMachines:
+          type:
+          - array
+          - 'null'
+          description: The list of virtual machines.
+          example:
+          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          items:
+            type: string
+            format: guid
   securitySchemes:
     BearerAuth:
       type: http

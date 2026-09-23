@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Computer virtual machines API'
+  title: 'SAM: Computers Computer virtual machines API'
   description: API for interacting with computers.
   contact:
     name: Flexera
@@ -84,144 +84,38 @@ paths:
       - BearerAuth:
         - sam.computer.r
 components:
+  responses:
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
   schemas:
-    Link:
-      type: object
-      required:
-      - href
-      - rel
-      - method
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          example: api/computers/v1/...
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          example: GET
-    ComputerVirtualMachineDetails:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Response class for computer applications.
-        additionalProperties: false
-        required:
-        - id
-        properties:
-          id:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
-          machineId:
-            type: string
-            description: The unique ID of the inventory virtual machine.
-            format: guid
-            nullable: true
-            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
-          name:
-            type: string
-            description: Name of the virtual machine.
-            nullable: true
-            example: VM nr. 11
-          operatingSystem:
-            type: string
-            description: Name of the operating system installed.
-            nullable: true
-            example: Windows 10
-          ip:
-            type: string
-            description: IP of the virtuale machine.
-            nullable: true
-            example: 192.168.1.15
-          manufacturer:
-            type: string
-            description: Manufacturer of the virtual machine.
-            nullable: true
-            example: Broadcom
-          model:
-            type: string
-            description: Model of the virtual machine.
-            nullable: true
-            example: VMware 17.5.2
-          lastScanDate:
-            type: string
-            description: The date and time that the virtual machine was last scanned.
-            format: date-time
-            example: '2024-03-24T12:52:20Z'
-          powerState:
-            type: string
-            description: Power state of the virtual machine.
-            nullable: true
-            example: Shut down
-          processorCount:
-            type: integer
-            description: The number of processors in the virtual machine.
-            format: int32
-            nullable: true
-            example: 2
-          coreCount:
-            type: integer
-            description: The number of cores in the virtual machine.
-            format: int32
-            nullable: true
-            example: 8
-          isInventoried:
-            type: boolean
-            description: '```true``` if Get Virtual Machines From Computers ; otherwise, ```false```.'
-            example: true
-    ErrorResponse:
-      type: object
-      description: Response representing error.
-      additionalProperties: false
-      required:
-      - error
-      properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
-    ErrorContent:
-      type: object
-      description: Details of error.
-      additionalProperties: false
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: Http error code.
-          format: int32
-          example: 400
-        message:
-          type: string
-          description: Additional error message.
-          nullable: true
-          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
-    BaseResponse:
-      type: object
-      description: Base response class.
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    ComputerVirtualMachine:
-      allOf:
-      - $ref: '#/components/schemas/ComputerVirtualMachineDetails'
-      - type: object
-        description: Response representing computer virtual machines for a given computer.
-        additionalProperties: false
     FilteredResponseWithLinksOfComputerVirtualMachine:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -241,6 +135,153 @@ components:
             description: The pagination details.
             oneOf:
             - $ref: '#/components/schemas/PaginationResponse'
+    ComputerVirtualMachine:
+      allOf:
+      - $ref: '#/components/schemas/ComputerVirtualMachineDetails'
+      - type: object
+        description: Response representing computer virtual machines for a given computer.
+        additionalProperties: false
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/computers/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type:
+          - string
+          - 'null'
+          description: Additional error message.
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    ComputerVirtualMachineDetails:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response class for computer applications.
+        additionalProperties: false
+        required:
+        - id
+        properties:
+          id:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          machineId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the inventory virtual machine.
+            format: guid
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          name:
+            type:
+            - string
+            - 'null'
+            description: Name of the virtual machine.
+            example: VM nr. 11
+          operatingSystem:
+            type:
+            - string
+            - 'null'
+            description: Name of the operating system installed.
+            example: Windows 10
+          ip:
+            type:
+            - string
+            - 'null'
+            description: IP of the virtuale machine.
+            example: 192.168.1.15
+          manufacturer:
+            type:
+            - string
+            - 'null'
+            description: Manufacturer of the virtual machine.
+            example: Broadcom
+          model:
+            type:
+            - string
+            - 'null'
+            description: Model of the virtual machine.
+            example: VMware 17.5.2
+          lastScanDate:
+            type: string
+            description: The date and time that the virtual machine was last scanned.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          powerState:
+            type:
+            - string
+            - 'null'
+            description: Power state of the virtual machine.
+            example: Shut down
+          processorCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of processors in the virtual machine.
+            format: int32
+            example: 2
+          coreCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of cores in the virtual machine.
+            format: int32
+            example: 8
+          isInventoried:
+            type: boolean
+            description: '```true``` if Get Virtual Machines From Computers ; otherwise, ```false```.'
+            example: true
     PaginationResponse:
       type: object
       description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
@@ -260,48 +301,19 @@ components:
           format: int32
           example: 1
         total_pages:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of pages.
           format: int32
-          nullable: true
           example: 10
         total_items:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of items.
           format: int32
-          nullable: true
           example: 240
-  responses:
-    '500':
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
-    '400':
-      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              message: Filter field name needs to be formatted as a string.
-    '404':
-      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,11 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Tasks API'
-  description: API for interacting with computers.
+  title: 'SaaS: Applications Tasks API'
+  description: API for interacting with SaaS applications.
+  version: 1.4.1
   contact:
     name: Flexera
     url: https://www.flexera.com
-  version: 1.0.0
 servers:
 - url: https://{region}.snowsoftware.io
   variables:
@@ -44,22 +44,6 @@ paths:
         - saas.consolidation.view.r
 components:
   schemas:
-    InternalError:
-      type: object
-      description: Internal error.
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code.
-          format: int32
-          example: 500
-        message:
-          type: string
-          description: The error message.
-          example: The service encountered an unexpected condition that prevented it from fulfilling the request.
-      required:
-      - code
-      - message
     Task:
       type: object
       required:
@@ -148,6 +132,31 @@ components:
           $ref: '#/components/schemas/NotFoundError'
       required:
       - error
+    InternalError:
+      type: object
+      description: Internal error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 500
+        message:
+          type: string
+          description: The error message.
+          example: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      required:
+      - code
+      - message
+  parameters:
+    TaskIdPath:
+      name: id
+      description: The unique ID of the task.
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 5b35aa33-e7a8-47a3-b1b6-19099ebb6bfd
   responses:
     404Response:
       description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
@@ -161,17 +170,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    TaskIdPath:
-      name: id
-      description: The unique ID of the task.
-      in: path
-      required: true
-      schema:
-        type: string
-      example: 5b35aa33-e7a8-47a3-b1b6-19099ebb6bfd
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT

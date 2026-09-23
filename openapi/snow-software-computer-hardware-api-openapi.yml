@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Computer hardware API'
+  title: 'SAM: Computers Computer hardware API'
   description: API for interacting with computers.
   contact:
     name: Flexera
@@ -50,7 +50,166 @@ paths:
       - BearerAuth:
         - sam.computer.r
 components:
+  responses:
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
   schemas:
+    ComputerHardwareDetails:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response representing details of hardware of a computer.
+        additionalProperties: false
+        required:
+        - computerId
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 990b4de8-f11f-4904-9e86-d8a435835574
+          processorCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of processors in the computer.
+            format: int32
+            example: 2
+          coreCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of cores in the computer.
+            format: int32
+            example: 8
+          processorType:
+            type:
+            - string
+            - 'null'
+            description: The type of processors in the computer.
+            example: 11th Gen Intel Core i7-1185G7 @ 3.00GHz (3.00 GHz)
+          processorSpeed:
+            type:
+            - integer
+            - 'null'
+            description: The speed of the processor in the computer in MHz.
+            format: int32
+            example: 2995
+          memorySlots:
+            type:
+            - integer
+            - 'null'
+            description: The total number of memory slots in the computer.
+            format: int32
+            example: 8
+          memorySlotsAvailable:
+            type:
+            - integer
+            - 'null'
+            description: The number of available memory slots in the computer.
+            format: int32
+            example: 2
+          physicalMemory:
+            type:
+            - integer
+            - 'null'
+            description: The amount of physical memory in the computer.
+            format: int32
+            example: 16384
+          systemDiskSpace:
+            type:
+            - integer
+            - 'null'
+            description: The total amount of system disk space in the computer in MB.
+            format: int64
+            example: 957534
+          systemDiskSpaceAvailable:
+            type:
+            - integer
+            - 'null'
+            description: The amount of available system disk space in the computer in MB.
+            format: int64
+            example: 552150
+          totalDiskSpace:
+            type:
+            - integer
+            - 'null'
+            description: The total amount of disk space in the computer in MB.
+            format: int64
+            example: 957534
+          totalDiskSpaceAvailable:
+            type:
+            - integer
+            - 'null'
+            description: The amount of available disk space in the computer in MB.
+            format: int64
+            example: 552150
+          totalDiskSpaceUsed:
+            type:
+            - integer
+            - 'null'
+            description: The total amount of disk space used in the computer in MB.
+            format: int64
+            example: 405384
+          socketCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of sockets in the computer.
+            format: byte
+            example: 2
+          isSocketCountManualOverrideEnabled:
+            type: boolean
+            description: '```true``` if the socket count manual override of the computer is enabled; otherwise, ```false```.'
+            example: true
+          chipModulesPerProcessor:
+            type:
+            - integer
+            - 'null'
+            description: The number of chip modules per processor.
+            format: byte
+            example: 2
+          processorManufacturer:
+            type:
+            - string
+            - 'null'
+            description: The manufacturer of the computer's processors.
+            example: Intel
+          logicalProcessorCount:
+            type:
+            - integer
+            - 'null'
+            description: The number of logical processors in the computer.
+            format: int32
+            example: 12
     Link:
       type: object
       required:
@@ -70,17 +229,6 @@ components:
           type: string
           description: The method to access related resources.
           example: GET
-    ErrorResponse:
-      type: object
-      description: Response representing error.
-      additionalProperties: false
-      required:
-      - error
-      properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
     ErrorContent:
       type: object
       description: Details of error.
@@ -95,10 +243,22 @@ components:
           format: int32
           example: 400
         message:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Additional error message.
-          nullable: true
           example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
     BaseResponse:
       type: object
       description: Base response class.
@@ -111,149 +271,6 @@ components:
           description: A collection of links to related resources.
           items:
             $ref: '#/components/schemas/Link'
-    ComputerHardwareDetails:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Response representing details of hardware of a computer.
-        additionalProperties: false
-        required:
-        - computerId
-        properties:
-          computerId:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            example: 990b4de8-f11f-4904-9e86-d8a435835574
-          processorCount:
-            type: integer
-            description: The number of processors in the computer.
-            format: int32
-            nullable: true
-            example: 2
-          coreCount:
-            type: integer
-            description: The number of cores in the computer.
-            format: int32
-            nullable: true
-            example: 8
-          processorType:
-            type: string
-            description: The type of processors in the computer.
-            nullable: true
-            example: 11th Gen Intel Core i7-1185G7 @ 3.00GHz (3.00 GHz)
-          processorSpeed:
-            type: integer
-            description: The speed of the processor in the computer in MHz.
-            format: int32
-            nullable: true
-            example: 2995
-          memorySlots:
-            type: integer
-            description: The total number of memory slots in the computer.
-            format: int32
-            nullable: true
-            example: 8
-          memorySlotsAvailable:
-            type: integer
-            description: The number of available memory slots in the computer.
-            format: int32
-            nullable: true
-            example: 2
-          physicalMemory:
-            type: integer
-            description: The amount of physical memory in the computer.
-            format: int32
-            nullable: true
-            example: 16384
-          systemDiskSpace:
-            type: integer
-            description: The total amount of system disk space in the computer in MB.
-            format: int64
-            nullable: true
-            example: 957534
-          systemDiskSpaceAvailable:
-            type: integer
-            description: The amount of available system disk space in the computer in MB.
-            format: int64
-            nullable: true
-            example: 552150
-          totalDiskSpace:
-            type: integer
-            description: The total amount of disk space in the computer in MB.
-            format: int64
-            nullable: true
-            example: 957534
-          totalDiskSpaceAvailable:
-            type: integer
-            description: The amount of available disk space in the computer in MB.
-            format: int64
-            nullable: true
-            example: 552150
-          totalDiskSpaceUsed:
-            type: integer
-            description: The total amount of disk space used in the computer in MB.
-            format: int64
-            nullable: true
-            example: 405384
-          socketCount:
-            type: integer
-            description: The number of sockets in the computer.
-            format: byte
-            nullable: true
-            example: 2
-          isSocketCountManualOverrideEnabled:
-            type: boolean
-            description: '```true``` if the socket count manual override of the computer is enabled; otherwise, ```false```.'
-            example: true
-          chipModulesPerProcessor:
-            type: integer
-            description: The number of chip modules per processor.
-            format: byte
-            nullable: true
-            example: 2
-          processorManufacturer:
-            type: string
-            description: The manufacturer of the computer's processors.
-            nullable: true
-            example: Intel
-          logicalProcessorCount:
-            type: integer
-            description: The number of logical processors in the computer.
-            format: int32
-            nullable: true
-            example: 12
-  responses:
-    '500':
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
-    '400':
-      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              message: Filter field name needs to be formatted as a string.
-    '404':
-      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: 'SAM: Computers Applications Computer costs API'
+  title: 'SAM: Computers Computer costs API'
   description: API for interacting with computers.
   contact:
     name: Flexera
@@ -50,6 +50,37 @@ paths:
       - BearerAuth:
         - sam.computer.r
 components:
+  responses:
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
   schemas:
     Link:
       type: object
@@ -70,17 +101,6 @@ components:
           type: string
           description: The method to access related resources.
           example: GET
-    ErrorResponse:
-      type: object
-      description: Response representing error.
-      additionalProperties: false
-      required:
-      - error
-      properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
     ComputerCosts:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -96,49 +116,57 @@ components:
             format: guid
             example: 4f2403da-3ab5-48f8-9114-73304cfeb017
           vendor:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The vendor of the computer.
-            nullable: true
             example: Dell Inc.
           purchaseDate:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The date on which the computer was purchased.
             format: date-time
-            nullable: true
             example: '2024-03-24T12:52:20Z'
           purchasePrice:
-            type: number
+            type:
+            - number
+            - 'null'
             description: The price for which the computer was purchased.
             format: decimal
-            nullable: true
             example: 2521.32
           purchaseValueBase:
-            type: number
+            type:
+            - number
+            - 'null'
             description: The value base of the purchase of the computer.
             format: decimal
-            nullable: true
             example: 2500.32
           purchaseCurrency:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The currency in which the computer was purchased.
-            nullable: true
             example: EUR
           invoiceReference:
-            type: string
+            type:
+            - string
+            - 'null'
             description: The invoice reference for the purchase of the computer.
-            nullable: true
             example: 2024/03/63729P
           totalCostOfInstalledApplications:
-            type: number
+            type:
+            - number
+            - 'null'
             description: The total cost of all applications installed on the computer.
             format: decimal
-            nullable: true
             example: 1452.28
           totalCost:
-            type: number
+            type:
+            - number
+            - 'null'
             description: The total cost of the computer and installed applications.
             format: decimal
-            nullable: true
             example: 3973.6
     ErrorContent:
       type: object
@@ -154,10 +182,22 @@ components:
           format: int32
           example: 400
         message:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Additional error message.
-          nullable: true
           example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
     BaseResponse:
       type: object
       description: Base response class.
@@ -170,37 +210,6 @@ components:
           description: A collection of links to related resources.
           items:
             $ref: '#/components/schemas/Link'
-  responses:
-    '500':
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
-    '400':
-      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              message: Filter field name needs to be formatted as a string.
-    '404':
-      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
   securitySchemes:
     BearerAuth:
       type: http
