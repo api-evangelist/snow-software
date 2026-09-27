@@ -43,7 +43,63 @@ paths:
       - bearerAuth:
         - saas.consolidation.view.r
 components:
+  responses:
+    404Response:
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
+    500Response:
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    NotFoundResponse:
+      description: The requested resource could not be found.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NotFoundError'
+      required:
+      - error
+    NotFoundError:
+      type: object
+      description: Not found error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 404
+        message:
+          type: string
+          description: The error message.
+          example: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+      required:
+      - code
+      - message
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/saas/consolidated-view/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
     Task:
       type: object
       required:
@@ -81,57 +137,6 @@ components:
           - href: /api/saas/consolidated-view/v1/applications/bulk-update/483c67cf-e247-4a82-bef7-b86a29560788
             rel: bulk-update-users
             method: GET
-    Link:
-      type: object
-      required:
-      - href
-      - rel
-      - method
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          example: api/saas/consolidated-view/v1/...
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          example: GET
-    NotFoundError:
-      type: object
-      description: Not found error.
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code.
-          format: int32
-          example: 404
-        message:
-          type: string
-          description: The error message.
-          example: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
-      required:
-      - code
-      - message
-    ErrorResponse:
-      description: Internal Server Error - Your request failed due to an internal error.
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/InternalError'
-      required:
-      - error
-    NotFoundResponse:
-      description: The requested resource could not be found.
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NotFoundError'
-      required:
-      - error
     InternalError:
       type: object
       description: Internal error.
@@ -148,6 +153,14 @@ components:
       required:
       - code
       - message
+    ErrorResponse:
+      description: Internal Server Error - Your request failed due to an internal error.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/InternalError'
+      required:
+      - error
   parameters:
     TaskIdPath:
       name: id
@@ -157,19 +170,6 @@ components:
       schema:
         type: string
       example: 5b35aa33-e7a8-47a3-b1b6-19099ebb6bfd
-  responses:
-    404Response:
-      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NotFoundResponse'
-    500Response:
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http

@@ -158,6 +158,56 @@ paths:
         - sam.license.r
 components:
   schemas:
+    LicenseUpgrade:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          quantity:
+            type: integer
+            description: The quantity.
+            format: int32
+            example: 1
+          upgradedLicenseId:
+            type: string
+            description: The unique ID of the upgraded license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          upgradedQuantity:
+            type: integer
+            description: The upgraded quantity.
+            format: int32
+            example: 1
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    HateoasCollectionOfLicenseUpgrade:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseUpgrade'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
     Error:
       description: The error details.
       type: object
@@ -195,45 +245,6 @@ components:
           - 'null'
           description: The method to access related resources.
           example: GET
-    HateoasCollectionOfLicenseUpgrade:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseUpgrade'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    LicenseUpgrade:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          quantity:
-            type: integer
-            description: The quantity.
-            format: int32
-            example: 1
-          upgradedLicenseId:
-            type: string
-            description: The unique ID of the upgraded license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          upgradedQuantity:
-            type: integer
-            description: The upgraded quantity.
-            format: int32
-            example: 1
     Pagination:
       type: object
       description: The pagination details.
@@ -266,13 +277,6 @@ components:
           description: The total number of items.
           format: int32
           example: 100
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
     FilteredResponseOfLicenseUpgrade:
       type: object
       description: Filtered response.
@@ -290,17 +294,13 @@ components:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    HateoasResource:
+    ErrorResponse:
       type: object
-      additionalProperties: false
       required:
-      - _links
+      - error
       properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
+        error:
+          $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

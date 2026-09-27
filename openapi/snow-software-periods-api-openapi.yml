@@ -446,19 +446,38 @@ paths:
         - sam.license.crud
 components:
   schemas:
-    HateoasCollectionOfMaintenancePeriodCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfMaintenancePeriodCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 5
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 100
     MaintenancePeriodRequest:
       type: object
       additionalProperties: false
@@ -514,6 +533,44 @@ components:
           description: The support cost.
           format: decimal
           example: 1000
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    CreatedHateoasResponse:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResponse'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the resource.
+            format: guid
+    ListOfMaintenancePeriodRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/MaintenancePeriodRequest'
+    HateoasCollectionOfMaintenancePeriodCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfMaintenancePeriodCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
     Error:
       description: The error details.
       type: object
@@ -528,57 +585,6 @@ components:
         message:
           type: string
           description: The error message.
-    FilteredResponseOfMaintenancePeriodCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/MaintenancePeriodCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-          description: The associated relative URL.
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type:
-          - string
-          - 'null'
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type:
-          - string
-          - 'null'
-          description: The method to access related resources.
-          example: GET
-    HateoasResponse:
-      type: object
-      description: Abstract class for IResource.
-      x-abstract: true
-      additionalProperties: false
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
     MaintenancePeriod:
       allOf:
       - $ref: '#/components/schemas/CreatedHateoasResponse'
@@ -635,13 +641,40 @@ components:
             - 'null'
             description: The notes.
             example: Notes
-    ErrorResponse:
+    HateoasResponse:
       type: object
-      required:
-      - error
+      description: Abstract class for IResource.
+      x-abstract: true
+      additionalProperties: false
       properties:
-        error:
-          $ref: '#/components/schemas/Error'
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
     MaintenancePeriodCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -717,63 +750,30 @@ components:
             - 'null'
             description: The purchase currency.
             example: USD
-    Pagination:
+    FilteredResponseOfMaintenancePeriodCollection:
       type: object
-      description: The pagination details.
+      description: Filtered response.
       additionalProperties: false
       required:
-      - page_size
-      - page_number
+      - items
+      - pagination
       properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 5
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 100
-    CreatedHateoasResponse:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResponse'
-      - type: object
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the resource.
-            format: guid
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
+        items:
           type: array
-          description: A collection of links to related resources.
+          description: A collection of items.
           items:
-            $ref: '#/components/schemas/Link'
-    ListOfMaintenancePeriodRequest:
-      type: array
-      items:
-        $ref: '#/components/schemas/MaintenancePeriodRequest'
+            $ref: '#/components/schemas/MaintenancePeriodCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

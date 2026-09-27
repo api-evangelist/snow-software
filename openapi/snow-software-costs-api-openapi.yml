@@ -213,6 +213,17 @@ paths:
         - sam.license.r
 components:
   schemas:
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
     Error:
       description: The error details.
       type: object
@@ -227,87 +238,23 @@ components:
         message:
           type: string
           description: The error message.
-    LicenseCost:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        description: The license cost.
-        additionalProperties: false
-        properties:
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          organizationId:
-            type: string
-            description: The unique ID of the organization.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          licenseQuantity:
-            type: integer
-            description: The quantity.
-            format: int32
-            example: 1
-          licensePurchaseCost:
-            type: number
-            description: The license purchase value.
-            format: decimal
-            example: 1000
-          currentMaintenanceCost:
-            type: number
-            description: The current maintenance cost.
-            format: decimal
-            example: 1000
-          accumulatedMaintenanceCost:
-            type: number
-            description: The accumulated maintenance cost.
-            format: decimal
-            example: 1000
-          currentSupportCost:
-            type: number
-            description: The current support cost.
-            format: decimal
-            example: 1000
-          accumulatedSupportCost:
-            type: number
-            description: The accumulated support cost.
-            format: decimal
-            example: 1000
-          totalCost:
-            type: number
-            description: The total license cost.
-            format: decimal
-            example: 1000
-          currency:
-            type:
-            - string
-            - 'null'
-            description: The currency.
-            example: USD
-    Link:
+    FilteredResponseOfLicenseCost:
       type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      description: Filtered response.
       additionalProperties: false
+      required:
+      - items
+      - pagination
       properties:
-        href:
-          type:
-          - string
-          - 'null'
-          description: The associated relative URL.
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type:
-          - string
-          - 'null'
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type:
-          - string
-          - 'null'
-          description: The method to access related resources.
-          example: GET
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseCost'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
     LicenseCostSummary:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -366,6 +313,29 @@ components:
             - 'null'
             description: The currency.
             example: USD
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
     HateoasCollectionOfLicenseCost:
       allOf:
       - $ref: '#/components/schemas/FilteredResponseOfLicenseCost'
@@ -411,6 +381,64 @@ components:
           description: The total number of items.
           format: int32
           example: 100
+    LicenseCost:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        description: The license cost.
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          licenseQuantity:
+            type: integer
+            description: The quantity.
+            format: int32
+            example: 1
+          licensePurchaseCost:
+            type: number
+            description: The license purchase value.
+            format: decimal
+            example: 1000
+          currentMaintenanceCost:
+            type: number
+            description: The current maintenance cost.
+            format: decimal
+            example: 1000
+          accumulatedMaintenanceCost:
+            type: number
+            description: The accumulated maintenance cost.
+            format: decimal
+            example: 1000
+          currentSupportCost:
+            type: number
+            description: The current support cost.
+            format: decimal
+            example: 1000
+          accumulatedSupportCost:
+            type: number
+            description: The accumulated support cost.
+            format: decimal
+            example: 1000
+          totalCost:
+            type: number
+            description: The total license cost.
+            format: decimal
+            example: 1000
+          currency:
+            type:
+            - string
+            - 'null'
+            description: The currency.
+            example: USD
     ErrorResponse:
       type: object
       required:
@@ -418,34 +446,6 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/Error'
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    FilteredResponseOfLicenseCost:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/LicenseCost'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
   securitySchemes:
     BearerAuth:
       type: http
