@@ -85,25 +85,6 @@ paths:
         - sam.computer.r
 components:
   schemas:
-    Link:
-      type: object
-      required:
-      - href
-      - rel
-      - method
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          example: api/computers/v1/...
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          example: GET
     ErrorContent:
       type: object
       description: Details of error.
@@ -154,18 +135,36 @@ components:
             description: The date and time of the last logon from the  Remote Client.
             format: date-time
             example: '2024-03-24T12:52:20Z'
-    BaseResponse:
+    Link:
       type: object
-      description: Base response class.
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/computers/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
+    ErrorResponse:
+      type: object
+      description: Response representing error.
       additionalProperties: false
       required:
-      - _links
+      - error
       properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
     FilteredResponseWithLinksOfComputerRemoteClients:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -185,6 +184,18 @@ components:
             description: The pagination details.
             oneOf:
             - $ref: '#/components/schemas/PaginationResponse'
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
     PaginationResponse:
       type: object
       description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
@@ -217,17 +228,6 @@ components:
           description: The total number of items.
           format: int32
           example: 240
-    ErrorResponse:
-      type: object
-      description: Response representing error.
-      additionalProperties: false
-      required:
-      - error
-      properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
   responses:
     '400':
       description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'

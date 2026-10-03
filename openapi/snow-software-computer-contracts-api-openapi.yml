@@ -85,95 +85,6 @@ paths:
         - sam.computer.r
 components:
   schemas:
-    Link:
-      type: object
-      required:
-      - href
-      - rel
-      - method
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          example: api/computers/v1/...
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          example: GET
-    ErrorContent:
-      type: object
-      description: Details of error.
-      additionalProperties: false
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: Http error code.
-          format: int32
-          example: 400
-        message:
-          type:
-          - string
-          - 'null'
-          description: Additional error message.
-          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
-    BaseResponse:
-      type: object
-      description: Base response class.
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    ComputerContract:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Response representing connection between computer and contract.
-        additionalProperties: false
-        required:
-        - computerId
-        - contractId
-        properties:
-          computerId:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            example: 95c1d359-8d89-4a51-a8ed-444e0ab01f71
-          contractId:
-            type: string
-            description: The unique ID of the contract.
-            format: guid
-            example: 95c1d359-8d89-4a51-a8ed-444e0ab01f71
-    FilteredResponseWithLinksOfComputerContract:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Generic response class supporting filtering and including links.
-        additionalProperties: false
-        required:
-        - items
-        - pagination
-        properties:
-          items:
-            type: array
-            description: A collection of items returned in the response.
-            items:
-              $ref: '#/components/schemas/ComputerContract'
-          pagination:
-            description: The pagination details.
-            oneOf:
-            - $ref: '#/components/schemas/PaginationResponse'
     PaginationResponse:
       type: object
       description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
@@ -206,6 +117,44 @@ components:
           description: The total number of items.
           format: int32
           example: 240
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type:
+          - string
+          - 'null'
+          description: Additional error message.
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    FilteredResponseWithLinksOfComputerContract:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerContract'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
     ErrorResponse:
       type: object
       description: Response representing error.
@@ -217,6 +166,57 @@ components:
           description: The error details.
           oneOf:
           - $ref: '#/components/schemas/ErrorContent'
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    ComputerContract:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response representing connection between computer and contract.
+        additionalProperties: false
+        required:
+        - computerId
+        - contractId
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 95c1d359-8d89-4a51-a8ed-444e0ab01f71
+          contractId:
+            type: string
+            description: The unique ID of the contract.
+            format: guid
+            example: 95c1d359-8d89-4a51-a8ed-444e0ab01f71
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/computers/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
   responses:
     '400':
       description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'

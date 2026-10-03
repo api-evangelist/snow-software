@@ -485,6 +485,23 @@ paths:
         - sam.license.r
 components:
   schemas:
+    FilteredResponseOfUserTrackingCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/UserTrackingCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
     HateoasCollectionOfUserTrackingCollection:
       allOf:
       - $ref: '#/components/schemas/FilteredResponseOfUserTrackingCollection'
@@ -498,83 +515,11 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
-    HateoasCollectionOfComputerTrackingDetailsCollection:
+    ComputerTrackingCollection:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfComputerTrackingDetailsCollection'
+      - $ref: '#/components/schemas/ComputerTrackingDetailsCollection'
       - type: object
         additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    HateoasCollectionOfUserTrackingDetailsCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfUserTrackingDetailsCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    UseRightType:
-      type: integer
-      description: The use rights type.
-      x-enumFlags: true
-      x-enumNames:
-      - None
-      - Standard
-      - UpgradeRights
-      - DowngradeRights
-      - CrossEdition
-      - VirtualDesktopAccess
-      - VmSupport
-      - NinetyDayRule
-      - ProcessorLimitations
-      - ProcessorCoreLimitations
-      - NamedComputer
-      - NamedDatacenter
-      - NamedApplicationCluster
-      - NamedUser
-      - Site
-      - CrossPlatform
-      enum:
-      - 0
-      - 1
-      - 2
-      - 4
-      - 8
-      - 16
-      - 32
-      - 256
-      - 512
-      - 1024
-      - 8192
-      - 16384
-      - 32768
-      - 65536
-      - 131072
-      - 262144
-    HateoasCollectionOfLicenseTracking:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseTracking'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
     UserTrackingDetailsCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -639,49 +584,32 @@ components:
             - UpgradeRights
             oneOf:
             - $ref: '#/components/schemas/UseRightType'
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-          description: The associated relative URL.
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type:
-          - string
-          - 'null'
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type:
-          - string
-          - 'null'
-          description: The method to access related resources.
-          example: GET
-    LicenseTracking:
+    HateoasCollectionOfApplicationComputerTrackingCollection:
       allOf:
-      - $ref: '#/components/schemas/HateoasResource'
+      - $ref: '#/components/schemas/FilteredResponseOfApplicationComputerTrackingCollection'
       - type: object
         additionalProperties: false
+        required:
+        - _links
         properties:
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          hasComputerTracking:
-            type: boolean
-            description: '```true``` if has computer tracking; otherwise, ```false```.'
-            example: true
-          hasUserTracking:
-            type: boolean
-            description: '```true``` if has user tracking; otherwise, ```false```.'
-            example: true
-    FilteredResponseOfUserTrackingDetailsCollection:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    UserTrackingCollection:
+      allOf:
+      - $ref: '#/components/schemas/UserTrackingDetailsCollection'
+      - type: object
+        additionalProperties: false
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    FilteredResponseOfApplicationComputerTrackingCollection:
       type: object
       description: Filtered response.
       additionalProperties: false
@@ -693,21 +621,142 @@ components:
           type: array
           description: A collection of items.
           items:
-            $ref: '#/components/schemas/UserTrackingDetailsCollection'
+            $ref: '#/components/schemas/ApplicationComputerTrackingCollection'
         pagination:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    UserTrackingCollection:
+    FilteredResponseOfComputerTrackingCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ComputerTrackingCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    FilteredResponseOfLicenseTracking:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseTracking'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    ApplicationComputerTrackingCollection:
       allOf:
-      - $ref: '#/components/schemas/UserTrackingDetailsCollection'
+      - $ref: '#/components/schemas/HateoasResource'
       - type: object
         additionalProperties: false
-    ComputerTrackingCollection:
+        properties:
+          id:
+            type: string
+            description: The unique ID of the computer application tracking.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          metricId:
+            type: string
+            description: The unique ID of the metric.
+            format: guid
+            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          primaryUseRights:
+            description: The primary user rights.
+            example:
+            - NamedComputer
+            oneOf:
+            - $ref: '#/components/schemas/UseRightType'
+    UseRightType:
+      type: integer
+      description: The use rights type.
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - Standard
+      - UpgradeRights
+      - DowngradeRights
+      - CrossEdition
+      - VirtualDesktopAccess
+      - VmSupport
+      - NinetyDayRule
+      - ProcessorLimitations
+      - ProcessorCoreLimitations
+      - NamedComputer
+      - NamedDatacenter
+      - NamedApplicationCluster
+      - NamedUser
+      - Site
+      - CrossPlatform
+      enum:
+      - 0
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 32
+      - 256
+      - 512
+      - 1024
+      - 8192
+      - 16384
+      - 32768
+      - 65536
+      - 131072
+      - 262144
+    HateoasCollectionOfComputerTrackingCollection:
       allOf:
-      - $ref: '#/components/schemas/ComputerTrackingDetailsCollection'
+      - $ref: '#/components/schemas/FilteredResponseOfComputerTrackingCollection'
       - type: object
         additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
     ComputerTrackingDetailsCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -777,23 +826,6 @@ components:
             - UpgradeRights
             oneOf:
             - $ref: '#/components/schemas/UseRightType'
-    FilteredResponseOfUserTrackingCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/UserTrackingCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
     FilteredResponseOfComputerTrackingDetailsCollection:
       type: object
       description: Filtered response.
@@ -811,7 +843,7 @@ components:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    FilteredResponseOfApplicationComputerTrackingCollection:
+    FilteredResponseOfUserTrackingDetailsCollection:
       type: object
       description: Filtered response.
       additionalProperties: false
@@ -823,24 +855,11 @@ components:
           type: array
           description: A collection of items.
           items:
-            $ref: '#/components/schemas/ApplicationComputerTrackingCollection'
+            $ref: '#/components/schemas/UserTrackingDetailsCollection'
         pagination:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    HateoasCollectionOfApplicationComputerTrackingCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfApplicationComputerTrackingCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
     Pagination:
       type: object
       description: The pagination details.
@@ -873,16 +892,9 @@ components:
           description: The total number of items.
           format: int32
           example: 100
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    HateoasCollectionOfComputerTrackingCollection:
+    HateoasCollectionOfLicenseTracking:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfComputerTrackingCollection'
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseTracking'
       - type: object
         additionalProperties: false
         required:
@@ -893,40 +905,51 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
-    FilteredResponseOfLicenseTracking:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/LicenseTracking'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    FilteredResponseOfComputerTrackingCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/ComputerTrackingCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
+    HateoasCollectionOfUserTrackingDetailsCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfUserTrackingDetailsCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    LicenseTracking:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          hasComputerTracking:
+            type: boolean
+            description: '```true``` if has computer tracking; otherwise, ```false```.'
+            example: true
+          hasUserTracking:
+            type: boolean
+            description: '```true``` if has user tracking; otherwise, ```false```.'
+            example: true
+    HateoasCollectionOfComputerTrackingDetailsCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComputerTrackingDetailsCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
     HateoasResource:
       type: object
       additionalProperties: false
@@ -938,52 +961,29 @@ components:
           description: A collection of links to related resources.
           items:
             $ref: '#/components/schemas/Link'
-    Error:
-      description: The error details.
+    Link:
       type: object
-      required:
-      - code
-      - message
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
       properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    ApplicationComputerTrackingCollection:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the computer application tracking.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          metricId:
-            type: string
-            description: The unique ID of the metric.
-            format: guid
-            example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
-          applicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          computerId:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          primaryUseRights:
-            description: The primary user rights.
-            example:
-            - NamedComputer
-            oneOf:
-            - $ref: '#/components/schemas/UseRightType'
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
   securitySchemes:
     BearerAuth:
       type: http

@@ -158,93 +158,6 @@ paths:
         - sam.license.r
 components:
   schemas:
-    LicenseUpgrade:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          quantity:
-            type: integer
-            description: The quantity.
-            format: int32
-            example: 1
-          upgradedLicenseId:
-            type: string
-            description: The unique ID of the upgraded license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          upgradedQuantity:
-            type: integer
-            description: The upgraded quantity.
-            format: int32
-            example: 1
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    HateoasCollectionOfLicenseUpgrade:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseUpgrade'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-          description: The associated relative URL.
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type:
-          - string
-          - 'null'
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type:
-          - string
-          - 'null'
-          description: The method to access related resources.
-          example: GET
     Pagination:
       type: object
       description: The pagination details.
@@ -277,6 +190,77 @@ components:
           description: The total number of items.
           format: int32
           example: 100
+    LicenseUpgrade:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          quantity:
+            type: integer
+            description: The quantity.
+            format: int32
+            example: 1
+          upgradedLicenseId:
+            type: string
+            description: The unique ID of the upgraded license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          upgradedQuantity:
+            type: integer
+            description: The upgraded quantity.
+            format: int32
+            example: 1
+    HateoasCollectionOfLicenseUpgrade:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseUpgrade'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
     FilteredResponseOfLicenseUpgrade:
       type: object
       description: Filtered response.
@@ -294,13 +278,29 @@ components:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    ErrorResponse:
+    Link:
       type: object
-      required:
-      - error
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
       properties:
-        error:
-          $ref: '#/components/schemas/Error'
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
   securitySchemes:
     BearerAuth:
       type: http

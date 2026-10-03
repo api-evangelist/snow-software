@@ -271,19 +271,38 @@ paths:
         - sam.license.r
 components:
   schemas:
-    HateoasCollectionOfPolicy:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfPolicy'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 5
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 100
     LicensePolicyFieldCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -328,29 +347,6 @@ components:
             - Item
             items:
               type: string
-    Policy:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        description: The license policy.
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the license policy.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
     FilteredResponseOfLicensePolicyFieldCollection:
       type: object
       description: Filtered response.
@@ -368,20 +364,26 @@ components:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    Error:
-      description: The error details.
+    HateoasCollectionOfLicensePolicyFieldCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicensePolicyFieldCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    ErrorResponse:
       type: object
       required:
-      - code
-      - message
+      - error
       properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
+        error:
+          $ref: '#/components/schemas/Error'
     LicensePolicyField:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -432,9 +434,46 @@ components:
             - Item
             items:
               type: string
-    HateoasCollectionOfLicensePolicyFieldCollection:
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    Policy:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicensePolicyFieldCollection'
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        description: The license policy.
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the license policy.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+    HateoasCollectionOfPolicy:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfPolicy'
       - type: object
         additionalProperties: false
         required:
@@ -485,45 +524,6 @@ components:
           - 'null'
           description: The method to access related resources.
           example: GET
-    Pagination:
-      type: object
-      description: The pagination details.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 5
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 100
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

@@ -328,69 +328,14 @@ paths:
         - sam.license.crud
 components:
   schemas:
-    Status:
-      type: string
-      description: The status of the license.
-      x-enumDescriptions:
-        Active: The license is active and affects compliance position.
-        Archived: The license is archived and does not affect compliance position.
-      example: Active
-    FilteredResponseOfLicenseCollection:
+    ComputerAssignmentRequest:
       type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/LicenseCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    UserAssignmentRequest:
-      type: object
+      description: A collection of computer license assignments.
       additionalProperties: false
       properties:
-        userId:
+        computerId:
           type: string
-          description: The unique ID of the user.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-          description: The associated relative URL.
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type:
-          - string
-          - 'null'
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type:
-          - string
-          - 'null'
-          description: The method to access related resources.
-          example: GET
-    OrganizationAssignmentRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        organizationId:
-          type: string
-          description: The unique ID of the organization.
+          description: The unique ID of the computer.
           format: guid
           example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
         quantity:
@@ -398,233 +343,25 @@ components:
           description: The assigned quantity of licenses.
           format: int32
           example: 1
-    LicenseRequest:
+        virtualMachines:
+          type:
+          - array
+          - 'null'
+          description: The list of virtual machines.
+          example:
+          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          items:
+            type: string
+            format: guid
+    SiteAssignmentRequest:
       type: object
       additionalProperties: false
       properties:
-        agreementId:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the agreement.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        applicationId:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the application.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        autoAllocateOnce:
-          type:
-          - boolean
-          - 'null'
-          description: '```true``` if has auto allocate once selected; otherwise, ```false```.'
-          example: true
-        assignmentTypeId:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the assignment type.
-          format: guid
-          example: 8e5d8f69-c818-4575-9a91-aebae9a9eacc
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: The external ID.
-          example: EXT12345
-        invoiceReference:
-          type:
-          - string
-          - 'null'
-          description: The invoice reference.
-          example: INV12345
-        isAutoAllocated:
-          type:
-          - boolean
-          - 'null'
-          description: '```true``` if has auto allocate selected; otherwise, ```false```.'
-          example: true
-        isCrossEdition:
-          type: boolean
-          description: '```true``` if is cross-edition; otherwise, ```false```.'
-          example: true
-        isCrossPlatform:
-          type: boolean
-          description: '```true``` if is cross-platform; otherwise, ```false```.'
-          example: true
-        isDowngrade:
-          type: boolean
-          description: '```true``` if is downgrade; otherwise, ```false```.'
-          example: true
-        isSubscription:
-          type:
-          - boolean
-          - 'null'
-          description: '```true``` if is subscription; otherwise, ```false```.'
-          example: true
-        isUpgrade:
-          type: boolean
-          description: '```true``` if is upgrade; otherwise, ```false```.'
-          example: true
-        quantity:
-          type:
-          - integer
-          - 'null'
-          description: The quantity.
-          format: int32
-          example: 1
-        licenseKeys:
-          type:
-          - string
-          - 'null'
-          description: The license keys.
-          example: 69658998-12-12031517-23
-        licenseProofLocation:
-          type:
-          - string
-          - 'null'
-          description: The license proof location.
-          example: path/to/licenseproof
-        maintenanceAccordingToAgreement:
-          type: boolean
-          description: '```true``` if has maintenance according to agreement selected; otherwise, ```false```.'
-          example: true
-        mediaStorage:
-          type:
-          - string
-          - 'null'
-          description: The media storage.
-          example: path/to/file
-        metricId:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the metric.
-          format: guid
-          example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
-        notes:
-          type:
-          - string
-          - 'null'
-          description: The notes.
-          example: Notes
         organizationId:
           type: string
           description: The unique ID of the organization.
           format: guid
           example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        productDescription:
-          type:
-          - string
-          - 'null'
-          description: The product description.
-          example: MSDN
-        purchaseDate:
-          type: string
-          description: The purchase date.
-          format: date-time
-          example: '2024-01-01T00:00:00Z'
-        purchaseValue:
-          type:
-          - number
-          - 'null'
-          description: The purchase value.
-          format: decimal
-          example: 1000
-        purchaseCurrency:
-          type:
-          - string
-          - 'null'
-          description: The purchase currency.
-          example: USD
-        sku:
-          type:
-          - string
-          - 'null'
-          description: The stock keeping unit.
-          example: ABC-12345-S-BL
-        subscriptionValidFrom:
-          type:
-          - string
-          - 'null'
-          description: The subscription valid from date.
-          format: date-time
-          example: '2024-01-01T00:00:00Z'
-        subscriptionValidTo:
-          type:
-          - string
-          - 'null'
-          description: The subscription valid to date.
-          format: date-time
-          example: '2025-01-01T00:00:00Z'
-        vendor:
-          type:
-          - string
-          - 'null'
-          description: The vendor.
-          example: Microsoft
-        upgrades:
-          type:
-          - array
-          - 'null'
-          description: The license upgrades.
-          items:
-            $ref: '#/components/schemas/LicenseUpgradeRequest'
-        maintenancePeriods:
-          type:
-          - array
-          - 'null'
-          description: The maintenance and support periods.
-          items:
-            $ref: '#/components/schemas/MaintenancePeriodRequest'
-        computerAssignments:
-          type:
-          - array
-          - 'null'
-          description: The computer assignments.
-          items:
-            $ref: '#/components/schemas/ComputerAssignmentRequest'
-        datacenterAssignments:
-          type:
-          - array
-          - 'null'
-          description: The datacenter assignments.
-          items:
-            $ref: '#/components/schemas/DatacenterAssignmentRequest'
-        organizationAssignments:
-          type:
-          - array
-          - 'null'
-          description: The organization assignments.
-          items:
-            $ref: '#/components/schemas/OrganizationAssignmentRequest'
-        userAssignments:
-          type:
-          - array
-          - 'null'
-          description: The user assignments.
-          items:
-            $ref: '#/components/schemas/UserAssignmentRequest'
-        siteAssignment:
-          description: The site assignment.
-          oneOf:
-          - $ref: '#/components/schemas/SiteAssignmentRequest'
-        hasVmUseRights:
-          type:
-          - boolean
-          - 'null'
-          description: '```true``` if has VM use rights; otherwise, ```false```.'
-          example: true
-        numberOfSupportedVirtualMachines:
-          type:
-          - integer
-          - 'null'
-          description: The number of VM supported by license.
-          format: int32
-          example: 3
     DatacenterAssignmentRequest:
       type: object
       additionalProperties: false
@@ -649,52 +386,32 @@ components:
           items:
             type: string
             format: guid
-    BulkSummaryResponse:
-      type: object
-      required:
-      - successCount
-      - failedCount
-      properties:
-        successCount:
-          description: The number of items that succeeded in the operation.
-          type: integer
-          format: int64
-          example: 10
-        failedCount:
-          description: The number of items that failed in the operation.
-          type: integer
-          format: int64
-          example: 10
-        failed:
-          description: The IDs of the failed items.
-          type: array
-          items:
-            type: string
-          example:
-          - e192ea5e-363c-47e4-82e3-d2587afada8c
-        failureReason:
-          description: The reason the bulk operation failed.
-          type: string
-          example: These licenses are used as base licenses.
-    LicenseUpgradeRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        upgradedLicenseId:
-          type: string
-          description: The unique ID of the base license.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        upgradedQuantity:
-          type: integer
-          description: The quantity sent from the base license.
-          format: int32
-          example: 1
-        quantity:
-          type: integer
-          description: The quantity received on the upgraded license.
-          format: int32
-          example: 1
+    IncompleteLicenseReason:
+      type: integer
+      description: The incomplete reason.
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - MissingApplication
+      - MissingLicenseCount
+      - MissingMetric
+      - MissingBaseLicenses
+      - InvalidSubscriptionPeriod
+      - MissingValidFromToDate
+      - MissingAgreementNumber
+      - MissingAssignmentType
+      - All
+      enum:
+      - 0
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 32
+      - 64
+      - 128
+      - 255
     LicenseCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -946,133 +663,6 @@ components:
             description: The archived date.
             format: date-time
             example: '2024-01-01T00:00:00Z'
-    SiteAssignmentRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        organizationId:
-          type: string
-          description: The unique ID of the organization.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    MaintenancePeriodRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        agreementPeriodId:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the agreement period.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        validFrom:
-          type:
-          - string
-          - 'null'
-          description: The valid form date.
-          format: date-time
-          example: '2024-01-01T00:00:00Z'
-        validTo:
-          type:
-          - string
-          - 'null'
-          description: The valid to date.
-          format: date-time
-          example: '2025-01-01T00:00:00Z'
-        hasUpgradeRights:
-          type: boolean
-          description: '```true``` if has upgrade rights; otherwise, ```false```.'
-          example: true
-        invoiceReference:
-          type:
-          - string
-          - 'null'
-          description: The invoice reference.
-          example: INV12345
-        notes:
-          type:
-          - string
-          - 'null'
-          description: The notes.
-          example: Notes
-        maintenanceCost:
-          type:
-          - number
-          - 'null'
-          description: The maintenance cost.
-          format: decimal
-          example: 1000
-        supportCost:
-          type:
-          - number
-          - 'null'
-          description: The support cost.
-          format: decimal
-          example: 1000
-    HateoasCollectionOfLicenseCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    Pagination:
-      type: object
-      description: The pagination details.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 5
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 100
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    LicenseUpdate:
-      description: The update to be applied to all IDs.
-      type: object
-      properties:
-        status:
-          description: The scope of the update operation.
-          x-enumDescriptions:
-            Active: The license is active and affects compliance position.
-            Archived: The license is archived and does not affect compliance position.
-          type: string
-          example: Archived
     LicenseCollectionUpgrade:
       type: object
       additionalProperties: false
@@ -1097,17 +687,63 @@ components:
           description: The upgraded quantity.
           format: int32
           example: 1
-    HateoasResource:
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    BulkSummaryResponse:
+      type: object
+      required:
+      - successCount
+      - failedCount
+      properties:
+        successCount:
+          description: The number of items that succeeded in the operation.
+          type: integer
+          format: int64
+          example: 10
+        failedCount:
+          description: The number of items that failed in the operation.
+          type: integer
+          format: int64
+          example: 10
+        failed:
+          description: The IDs of the failed items.
+          type: array
+          items:
+            type: string
+          example:
+          - e192ea5e-363c-47e4-82e3-d2587afada8c
+        failureReason:
+          description: The reason the bulk operation failed.
+          type: string
+          example: These licenses are used as base licenses.
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    UserAssignmentRequest:
       type: object
       additionalProperties: false
-      required:
-      - _links
       properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
+        userId:
+          type: string
+          description: The unique ID of the user.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
     License:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -1344,14 +980,45 @@ components:
             description: The archived date.
             format: date-time
             example: '2024-01-01T00:00:00Z'
-    ComputerAssignmentRequest:
+    LicenseUpgradeRequest:
       type: object
-      description: A collection of computer license assignments.
       additionalProperties: false
       properties:
-        computerId:
+        upgradedLicenseId:
           type: string
-          description: The unique ID of the computer.
+          description: The unique ID of the base license.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        upgradedQuantity:
+          type: integer
+          description: The quantity sent from the base license.
+          format: int32
+          example: 1
+        quantity:
+          type: integer
+          description: The quantity received on the upgraded license.
+          format: int32
+          example: 1
+    HateoasCollectionOfLicenseCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    OrganizationAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        organizationId:
+          type: string
+          description: The unique ID of the organization.
           format: guid
           example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
         quantity:
@@ -1359,30 +1026,66 @@ components:
           description: The assigned quantity of licenses.
           format: int32
           example: 1
-        virtualMachines:
-          type:
-          - array
-          - 'null'
-          description: The list of virtual machines.
-          example:
-          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          items:
-            type: string
-            format: guid
-    Error:
-      description: The error details.
+    FilteredResponseOfLicenseCollection:
       type: object
+      description: Filtered response.
+      additionalProperties: false
       required:
-      - code
-      - message
+      - items
+      - pagination
       properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    LicenseUpdate:
+      description: The update to be applied to all IDs.
+      type: object
+      properties:
+        status:
+          description: The scope of the update operation.
+          x-enumDescriptions:
+            Active: The license is active and affects compliance position.
+            Archived: The license is archived and does not affect compliance position.
           type: string
-          description: The error message.
+          example: Archived
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 5
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 100
     LicenseBulkUpdateOperation:
       type: object
       required:
@@ -1409,32 +1112,329 @@ components:
             format: uuid
         body:
           $ref: '#/components/schemas/LicenseUpdate'
-    IncompleteLicenseReason:
-      type: integer
-      description: The incomplete reason.
-      x-enumFlags: true
-      x-enumNames:
-      - None
-      - MissingApplication
-      - MissingLicenseCount
-      - MissingMetric
-      - MissingBaseLicenses
-      - InvalidSubscriptionPeriod
-      - MissingValidFromToDate
-      - MissingAgreementNumber
-      - MissingAssignmentType
-      - All
-      enum:
-      - 0
-      - 1
-      - 2
-      - 4
-      - 8
-      - 16
-      - 32
-      - 64
-      - 128
-      - 255
+    Status:
+      type: string
+      description: The status of the license.
+      x-enumDescriptions:
+        Active: The license is active and affects compliance position.
+        Archived: The license is archived and does not affect compliance position.
+      example: Active
+    LicenseRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        agreementId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the agreement.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        applicationId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the application.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        autoAllocateOnce:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if has auto allocate once selected; otherwise, ```false```.'
+          example: true
+        assignmentTypeId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the assignment type.
+          format: guid
+          example: 8e5d8f69-c818-4575-9a91-aebae9a9eacc
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: The external ID.
+          example: EXT12345
+        invoiceReference:
+          type:
+          - string
+          - 'null'
+          description: The invoice reference.
+          example: INV12345
+        isAutoAllocated:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if has auto allocate selected; otherwise, ```false```.'
+          example: true
+        isCrossEdition:
+          type: boolean
+          description: '```true``` if is cross-edition; otherwise, ```false```.'
+          example: true
+        isCrossPlatform:
+          type: boolean
+          description: '```true``` if is cross-platform; otherwise, ```false```.'
+          example: true
+        isDowngrade:
+          type: boolean
+          description: '```true``` if is downgrade; otherwise, ```false```.'
+          example: true
+        isSubscription:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if is subscription; otherwise, ```false```.'
+          example: true
+        isUpgrade:
+          type: boolean
+          description: '```true``` if is upgrade; otherwise, ```false```.'
+          example: true
+        quantity:
+          type:
+          - integer
+          - 'null'
+          description: The quantity.
+          format: int32
+          example: 1
+        licenseKeys:
+          type:
+          - string
+          - 'null'
+          description: The license keys.
+          example: 69658998-12-12031517-23
+        licenseProofLocation:
+          type:
+          - string
+          - 'null'
+          description: The license proof location.
+          example: path/to/licenseproof
+        maintenanceAccordingToAgreement:
+          type: boolean
+          description: '```true``` if has maintenance according to agreement selected; otherwise, ```false```.'
+          example: true
+        mediaStorage:
+          type:
+          - string
+          - 'null'
+          description: The media storage.
+          example: path/to/file
+        metricId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the metric.
+          format: guid
+          example: 5891a1d8-7fb0-45bd-b1f6-01c943f9c572
+        notes:
+          type:
+          - string
+          - 'null'
+          description: The notes.
+          example: Notes
+        organizationId:
+          type: string
+          description: The unique ID of the organization.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        productDescription:
+          type:
+          - string
+          - 'null'
+          description: The product description.
+          example: MSDN
+        purchaseDate:
+          type: string
+          description: The purchase date.
+          format: date-time
+          example: '2024-01-01T00:00:00Z'
+        purchaseValue:
+          type:
+          - number
+          - 'null'
+          description: The purchase value.
+          format: decimal
+          example: 1000
+        purchaseCurrency:
+          type:
+          - string
+          - 'null'
+          description: The purchase currency.
+          example: USD
+        sku:
+          type:
+          - string
+          - 'null'
+          description: The stock keeping unit.
+          example: ABC-12345-S-BL
+        subscriptionValidFrom:
+          type:
+          - string
+          - 'null'
+          description: The subscription valid from date.
+          format: date-time
+          example: '2024-01-01T00:00:00Z'
+        subscriptionValidTo:
+          type:
+          - string
+          - 'null'
+          description: The subscription valid to date.
+          format: date-time
+          example: '2025-01-01T00:00:00Z'
+        vendor:
+          type:
+          - string
+          - 'null'
+          description: The vendor.
+          example: Microsoft
+        upgrades:
+          type:
+          - array
+          - 'null'
+          description: The license upgrades.
+          items:
+            $ref: '#/components/schemas/LicenseUpgradeRequest'
+        maintenancePeriods:
+          type:
+          - array
+          - 'null'
+          description: The maintenance and support periods.
+          items:
+            $ref: '#/components/schemas/MaintenancePeriodRequest'
+        computerAssignments:
+          type:
+          - array
+          - 'null'
+          description: The computer assignments.
+          items:
+            $ref: '#/components/schemas/ComputerAssignmentRequest'
+        datacenterAssignments:
+          type:
+          - array
+          - 'null'
+          description: The datacenter assignments.
+          items:
+            $ref: '#/components/schemas/DatacenterAssignmentRequest'
+        organizationAssignments:
+          type:
+          - array
+          - 'null'
+          description: The organization assignments.
+          items:
+            $ref: '#/components/schemas/OrganizationAssignmentRequest'
+        userAssignments:
+          type:
+          - array
+          - 'null'
+          description: The user assignments.
+          items:
+            $ref: '#/components/schemas/UserAssignmentRequest'
+        siteAssignment:
+          description: The site assignment.
+          oneOf:
+          - $ref: '#/components/schemas/SiteAssignmentRequest'
+        hasVmUseRights:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if has VM use rights; otherwise, ```false```.'
+          example: true
+        numberOfSupportedVirtualMachines:
+          type:
+          - integer
+          - 'null'
+          description: The number of VM supported by license.
+          format: int32
+          example: 3
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    MaintenancePeriodRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        agreementPeriodId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the agreement period.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        validFrom:
+          type:
+          - string
+          - 'null'
+          description: The valid form date.
+          format: date-time
+          example: '2024-01-01T00:00:00Z'
+        validTo:
+          type:
+          - string
+          - 'null'
+          description: The valid to date.
+          format: date-time
+          example: '2025-01-01T00:00:00Z'
+        hasUpgradeRights:
+          type: boolean
+          description: '```true``` if has upgrade rights; otherwise, ```false```.'
+          example: true
+        invoiceReference:
+          type:
+          - string
+          - 'null'
+          description: The invoice reference.
+          example: INV12345
+        notes:
+          type:
+          - string
+          - 'null'
+          description: The notes.
+          example: Notes
+        maintenanceCost:
+          type:
+          - number
+          - 'null'
+          description: The maintenance cost.
+          format: decimal
+          example: 1000
+        supportCost:
+          type:
+          - number
+          - 'null'
+          description: The support cost.
+          format: decimal
+          example: 1000
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
   securitySchemes:
     BearerAuth:
       type: http

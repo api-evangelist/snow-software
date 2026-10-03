@@ -345,6 +345,126 @@ paths:
         - sam.computer.r
 components:
   schemas:
+    PaginationResponse:
+      type: object
+      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 10
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 240
+    FilteredResponseWithLinksOfUserApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/UserApplicationUsage'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    ComputerApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response for computer application usage.
+        additionalProperties: false
+        required:
+        - computerId
+        - userId
+        properties:
+          computerId:
+            type: string
+            description: The unique ID of the computer.
+            format: guid
+            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
+          userId:
+            type: string
+            description: The unique ID of the user.
+            format: guid
+            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
+          bundleApplicationId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the application bundle, or product suite, for a given application.
+            format: guid
+            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
+          firstUsed:
+            type:
+            - string
+            - 'null'
+            description: The date and time that the application was first used on the computer.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          lastUsedDate:
+            type:
+            - string
+            - 'null'
+            description: The date and time that the application was last used on the computer.
+            format: date-time
+            example: '2024-03-24T12:52:20Z'
+          usedCount:
+            type: integer
+            description: The number of times the application was used on the computer.
+            format: int32
+            example: 10
+          usedMinutes:
+            type: integer
+            description: The number of minutes the application was used on the computer.
+            format: int64
+            example: 10
+          usedDays:
+            type:
+            - integer
+            - 'null'
+            description: The number of days the application was used on the computer.
+            format: int32
+            example: 10
+          isInstalled:
+            type:
+            - boolean
+            - 'null'
+            description: '```true``` if the application is installed on the computer; otherwise, ```false```.'
+            example: true
     ComputerApplicationsDetails:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -475,6 +595,99 @@ components:
             type: boolean
             description: '```true``` if the application is licenced individualy; otherwise, ```false```.'
             example: true
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type:
+          - string
+          - 'null'
+          description: Additional error message.
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    UserApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Represents usage of an application by a specific user.
+        additionalProperties: false
+        required:
+        - applicationId
+        - userId
+        properties:
+          userId:
+            type: string
+            description: The unique ID of the user.
+            format: guid
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          bundleApplicationId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the application bundle, or product suite, for a given application.
+            format: guid
+            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
+          lastUsedDate:
+            type:
+            - string
+            - 'null'
+            description: The date that the application was last used.
+            format: date
+            example: '2024-03-22'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
+    ComputerApplicationUsageSummary:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Response class for application usage summary.
+        additionalProperties: false
+        required:
+        - applicationId
+        properties:
+          applicationId:
+            type: string
+            description: The unique ID of the application.
+            format: guid
+            example: 1ce2bdde-b68f-429d-aff5-bad93f544689
+          computers:
+            type: integer
+            description: The number of computers on which the application was used.
+            format: int32
+            example: 10
+          users:
+            type: integer
+            description: The number of users who used the application.
+            format: int32
+            example: 10
+          installations:
+            type: integer
+            description: The number of installations of the application.
+            format: int32
+            example: 10
     FilteredResponseWithLinksOfComputerApplicationUsageSummary:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -494,7 +707,7 @@ components:
             description: The pagination details.
             oneOf:
             - $ref: '#/components/schemas/PaginationResponse'
-    FilteredResponseWithLinksOfUserApplicationUsage:
+    FilteredResponseWithLinksOfComputerApplications:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
       - type: object
@@ -508,7 +721,38 @@ components:
             type: array
             description: A collection of items returned in the response.
             items:
-              $ref: '#/components/schemas/UserApplicationUsage'
+              $ref: '#/components/schemas/ComputerApplications'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    FilteredResponseWithLinksOfComputerApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerApplicationUsage'
           pagination:
             description: The pagination details.
             oneOf:
@@ -589,188 +833,6 @@ components:
             type: boolean
             description: '```true``` if the application is unbundled; otherwise, ```false```.'
             example: true
-    ComputerApplicationUsage:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Response for computer application usage.
-        additionalProperties: false
-        required:
-        - computerId
-        - userId
-        properties:
-          computerId:
-            type: string
-            description: The unique ID of the computer.
-            format: guid
-            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
-          userId:
-            type: string
-            description: The unique ID of the user.
-            format: guid
-            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
-          bundleApplicationId:
-            type:
-            - string
-            - 'null'
-            description: The unique ID of the application bundle, or product suite, for a given application.
-            format: guid
-            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
-          applicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 743ba97e-3425-4f46-99b0-9a9c791ceb3a
-          firstUsed:
-            type:
-            - string
-            - 'null'
-            description: The date and time that the application was first used on the computer.
-            format: date-time
-            example: '2024-03-24T12:52:20Z'
-          lastUsedDate:
-            type:
-            - string
-            - 'null'
-            description: The date and time that the application was last used on the computer.
-            format: date-time
-            example: '2024-03-24T12:52:20Z'
-          usedCount:
-            type: integer
-            description: The number of times the application was used on the computer.
-            format: int32
-            example: 10
-          usedMinutes:
-            type: integer
-            description: The number of minutes the application was used on the computer.
-            format: int64
-            example: 10
-          usedDays:
-            type:
-            - integer
-            - 'null'
-            description: The number of days the application was used on the computer.
-            format: int32
-            example: 10
-          isInstalled:
-            type:
-            - boolean
-            - 'null'
-            description: '```true``` if the application is installed on the computer; otherwise, ```false```.'
-            example: true
-    FilteredResponseWithLinksOfComputerApplicationUsage:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Generic response class supporting filtering and including links.
-        additionalProperties: false
-        required:
-        - items
-        - pagination
-        properties:
-          items:
-            type: array
-            description: A collection of items returned in the response.
-            items:
-              $ref: '#/components/schemas/ComputerApplicationUsage'
-          pagination:
-            description: The pagination details.
-            oneOf:
-            - $ref: '#/components/schemas/PaginationResponse'
-    UserApplicationUsage:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Represents usage of an application by a specific user.
-        additionalProperties: false
-        required:
-        - applicationId
-        - userId
-        properties:
-          userId:
-            type: string
-            description: The unique ID of the user.
-            format: guid
-            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
-          applicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
-          bundleApplicationId:
-            type:
-            - string
-            - 'null'
-            description: The unique ID of the application bundle, or product suite, for a given application.
-            format: guid
-            example: 29ce62ac-d575-4ff1-90e8-b84eaed0f5d8
-          lastUsedDate:
-            type:
-            - string
-            - 'null'
-            description: The date that the application was last used.
-            format: date
-            example: '2024-03-22'
-    ErrorContent:
-      type: object
-      description: Details of error.
-      additionalProperties: false
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: Http error code.
-          format: int32
-          example: 400
-        message:
-          type:
-          - string
-          - 'null'
-          description: Additional error message.
-          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
-    ComputerApplicationUsageSummary:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Response class for application usage summary.
-        additionalProperties: false
-        required:
-        - applicationId
-        properties:
-          applicationId:
-            type: string
-            description: The unique ID of the application.
-            format: guid
-            example: 1ce2bdde-b68f-429d-aff5-bad93f544689
-          computers:
-            type: integer
-            description: The number of computers on which the application was used.
-            format: int32
-            example: 10
-          users:
-            type: integer
-            description: The number of users who used the application.
-            format: int32
-            example: 10
-          installations:
-            type: integer
-            description: The number of installations of the application.
-            format: int32
-            example: 10
-    BaseResponse:
-      type: object
-      description: Base response class.
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
     Link:
       type: object
       required:
@@ -790,68 +852,6 @@ components:
           type: string
           description: The method to access related resources.
           example: GET
-    PaginationResponse:
-      type: object
-      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 10
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 240
-    FilteredResponseWithLinksOfComputerApplications:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Generic response class supporting filtering and including links.
-        additionalProperties: false
-        required:
-        - items
-        - pagination
-        properties:
-          items:
-            type: array
-            description: A collection of items returned in the response.
-            items:
-              $ref: '#/components/schemas/ComputerApplications'
-          pagination:
-            description: The pagination details.
-            oneOf:
-            - $ref: '#/components/schemas/PaginationResponse'
-    ErrorResponse:
-      type: object
-      description: Response representing error.
-      additionalProperties: false
-      required:
-      - error
-      properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
   responses:
     '400':
       description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'

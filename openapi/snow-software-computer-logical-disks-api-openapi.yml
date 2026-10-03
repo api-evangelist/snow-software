@@ -85,6 +85,38 @@ paths:
         - sam.computer.r
 components:
   schemas:
+    PaginationResponse:
+      type: object
+      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 10
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 240
     ComputerLogicalDisk:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -129,25 +161,6 @@ components:
             type: boolean
             description: '```true``` if the logical disk is updated; otherwise, ```false```.'
             example: true
-    FilteredResponseWithLinksOfComputerLogicalDisk:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Generic response class supporting filtering and including links.
-        additionalProperties: false
-        required:
-        - items
-        - pagination
-        properties:
-          items:
-            type: array
-            description: A collection of items returned in the response.
-            items:
-              $ref: '#/components/schemas/ComputerLogicalDisk'
-          pagination:
-            description: The pagination details.
-            oneOf:
-            - $ref: '#/components/schemas/PaginationResponse'
     ErrorContent:
       type: object
       description: Details of error.
@@ -167,6 +180,36 @@ components:
           - 'null'
           description: Additional error message.
           example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    FilteredResponseWithLinksOfComputerLogicalDisk:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerLogicalDisk'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
     BaseResponse:
       type: object
       description: Base response class.
@@ -198,49 +241,6 @@ components:
           type: string
           description: The method to access related resources.
           example: GET
-    PaginationResponse:
-      type: object
-      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 10
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 240
-    ErrorResponse:
-      type: object
-      description: Response representing error.
-      additionalProperties: false
-      required:
-      - error
-      properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
   responses:
     '400':
       description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'

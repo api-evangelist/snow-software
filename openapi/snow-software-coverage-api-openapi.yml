@@ -192,19 +192,68 @@ paths:
         - sam.license.r
 components:
   schemas:
-    ExtendedCoverageReason:
-      type: string
-      description: The extended coverage reason.
-      x-enumNames:
-      - Other
-      - Passive
-      - Disaster
-      - TestingOrDevelopment
-      enum:
-      - Other
-      - Passive
-      - Disaster
-      - TestingOrDevelopment
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 5
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 100
+    FilteredResponseOfExtendedCoverageType:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/ExtendedCoverageType'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    HateoasCollectionOfLicenseExtendedCoverage:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicenseExtendedCoverage'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
     FilteredResponseOfLicenseExtendedCoverage:
       type: object
       description: Filtered response.
@@ -222,9 +271,16 @@ components:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    HateoasCollectionOfLicenseExtendedCoverage:
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    HateoasCollectionOfExtendedCoverageType:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicenseExtendedCoverage'
+      - $ref: '#/components/schemas/FilteredResponseOfExtendedCoverageType'
       - type: object
         additionalProperties: false
         required:
@@ -246,6 +302,45 @@ components:
           description: A collection of links to related resources.
           items:
             $ref: '#/components/schemas/Link'
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    ExtendedCoverageReason:
+      type: string
+      description: The extended coverage reason.
+      x-enumNames:
+      - Other
+      - Passive
+      - Disaster
+      - TestingOrDevelopment
+      enum:
+      - Other
+      - Passive
+      - Disaster
+      - TestingOrDevelopment
+    ExtendedCoverageType:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          name:
+            type:
+            - string
+            - 'null'
+            description: The type of the extended coverage.
+            example: Passive
     LicenseExtendedCoverage:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -294,50 +389,6 @@ components:
             - 'null'
             description: The reason description.
             example: The recovery reason description
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    HateoasCollectionOfExtendedCoverageType:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfExtendedCoverageType'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    FilteredResponseOfExtendedCoverageType:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/ExtendedCoverageType'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
     Link:
       type: object
       description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
@@ -361,57 +412,6 @@ components:
           - 'null'
           description: The method to access related resources.
           example: GET
-    Pagination:
-      type: object
-      description: The pagination details.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 5
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 100
-    ExtendedCoverageType:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          name:
-            type:
-            - string
-            - 'null'
-            description: The type of the extended coverage.
-            example: Passive
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

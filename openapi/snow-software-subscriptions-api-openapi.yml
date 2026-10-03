@@ -148,7 +148,92 @@ paths:
       tags:
       - Subscriptions
 components:
+  parameters:
+    InsightRuleIdPath:
+      name: insightRuleId
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 577ee610-95f2-4883-abaa-d702e73c3a10
+      description: The unique ID of the insight.
+    PageSizeQuery:
+      name: page_size
+      description: The maximum number of items in the response.
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+    PageNumberQuery:
+      name: page_number
+      description: The page number.
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 1
+    SortQuery:
+      name: sort
+      in: query
+      description: For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results).
+      required: false
+      schema:
+        type: string
+        example: ?sort=field1:asc
+    FilterQuery:
+      name: filter
+      in: query
+      description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+      required: false
+      schema:
+        type: string
+        example: ?filter=field1 -eq 'abc'
+    UserIdsPath:
+      in: path
+      name: userIds
+      required: true
+      description: The unique ID of the of the subscriptions.
+      schema:
+        type: array
+        items:
+          type: string
+        example:
+        - d69809c5-e4c0-4d22-be9f-f541f6a265ee
+        - f90eeb4b-614b-432c-b506-4203a2db60c8
+    SubscriptionIdPath:
+      in: path
+      name: subscriptionId
+      required: true
+      schema:
+        type: string
+      example: a7a75b83-2690-4cc9-b652-a0fbe93dba4a
+      description: The unique ID of the subscription.
   schemas:
+    SubscriptionInsightUsersResponse:
+      title: SubscriptionInsightUsersResponse
+      description: A collection of users that relate to a subscription insight.
+      type: object
+      properties:
+        items:
+          description: A collection of the requested paginated items.
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/SubscriptionUser'
+            - properties:
+                details:
+                  type: array
+                  description: A collection of the user's subscriptions that related to the insight.
+                  items:
+                    $ref: '#/components/schemas/SubscriptionInsightsUserDetail'
+              required:
+              - details
+        pagination:
+          $ref: '#/components/schemas/PaginationResponse'
+      required:
+      - items
+      - pagination
     SubscriptionUser:
       title: User
       description: A discovered user in your SaaS estate.
@@ -261,60 +346,22 @@ components:
       - username
       - licenseCount
       - isOnline
-    SubscriptionInsightsUserDetail:
-      title: SubscriptionInsightsUserDetail
+    ErrorResponse:
+      description: Internal Server Error - Your request failed due to an internal error.
       type: object
       properties:
-        lastActive:
-          description: The date of last user activity in relevant subscription or application.
-          type: string
-          format: date-time
-        subscriptionId:
-          description: The unique ID of the subscription.
-          type: string
-          example: 1519f3e3-7e5a-466b-8a86-63ed2776f819
-        subscriptionName:
-          description: The name of the subscription.
-          type: string
-          example: Microsoft 365 E5
-        applicationId:
-          description: The unique ID of the application.
-          type: string
-          example: 3519f3f3-7e5a-e66b-8a86-63ed2776f618
-        applicationName:
-          description: The name of the application.
-          type: string
-          example: Microsoft Power BI
+        error:
+          $ref: '#/components/schemas/InternalError'
       required:
-      - subscriptionId
-      - subscriptionName
-      - lastActive
-    PaginationResponse:
-      description: The pagination details.
+      - error
+    NotFoundResponse:
+      description: The requested resource could not be found.
       type: object
-      required:
-      - page_size
-      - page_number
       properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          example: 100
-        page_number:
-          type: integer
-          format: int64
-          description: The page number you requested.
-          example: 1
-        total_pages:
-          type: integer
-          format: int64
-          description: The total number of pages.
-          example: 1
-        total_items:
-          type: integer
-          format: int64
-          description: The total number of items.
-          example: 1
+        error:
+          $ref: '#/components/schemas/NotFoundError'
+      required:
+      - error
     ValidationError:
       type: object
       description: Validation error.
@@ -328,87 +375,6 @@ components:
           type: string
           description: The error message.
           example: Filter field name needs to be formatted as a string.
-      required:
-      - code
-      - message
-    NotFoundResponse:
-      description: The requested resource could not be found.
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NotFoundError'
-      required:
-      - error
-    ErrorResponse:
-      description: Internal Server Error - Your request failed due to an internal error.
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/InternalError'
-      required:
-      - error
-    SubscriptionInsightUsersResponse:
-      title: SubscriptionInsightUsersResponse
-      description: A collection of users that relate to a subscription insight.
-      type: object
-      properties:
-        items:
-          description: A collection of the requested paginated items.
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/SubscriptionUser'
-            - properties:
-                details:
-                  type: array
-                  description: A collection of the user's subscriptions that related to the insight.
-                  items:
-                    $ref: '#/components/schemas/SubscriptionInsightsUserDetail'
-              required:
-              - details
-        pagination:
-          $ref: '#/components/schemas/PaginationResponse'
-      required:
-      - items
-      - pagination
-    ErrorValidationResponse:
-      title: ErrorValidationResponse
-      description: Bad Request - Your request is invalid or improperly formed. Consequently, the API server could not understand your request.
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationError'
-      required:
-      - error
-    NotFoundError:
-      type: object
-      description: Not found error.
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code.
-          format: int32
-          example: 404
-        message:
-          type: string
-          description: The error message.
-          example: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
-      required:
-      - code
-      - message
-    InternalError:
-      type: object
-      description: Internal error.
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code.
-          format: int32
-          example: 500
-        message:
-          type: string
-          description: The error message.
-          example: The service encountered an unexpected condition that prevented it from fulfilling the request.
       required:
       - code
       - message
@@ -551,76 +517,102 @@ components:
       - userCostPerMonth
       - username
       - envelopeusage
-  parameters:
-    SubscriptionIdPath:
-      in: path
-      name: subscriptionId
-      required: true
-      schema:
-        type: string
-      example: a7a75b83-2690-4cc9-b652-a0fbe93dba4a
-      description: The unique ID of the subscription.
-    PageSizeQuery:
-      name: page_size
-      description: The maximum number of items in the response.
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-    SortQuery:
-      name: sort
-      in: query
-      description: For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results).
-      required: false
-      schema:
-        type: string
-        example: ?sort=field1:asc
-    FilterQuery:
-      name: filter
-      in: query
-      description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
-      required: false
-      schema:
-        type: string
-        example: ?filter=field1 -eq 'abc'
-    UserIdsPath:
-      in: path
-      name: userIds
-      required: true
-      description: The unique ID of the of the subscriptions.
-      schema:
-        type: array
-        items:
+    SubscriptionInsightsUserDetail:
+      title: SubscriptionInsightsUserDetail
+      type: object
+      properties:
+        lastActive:
+          description: The date of last user activity in relevant subscription or application.
           type: string
-        example:
-        - d69809c5-e4c0-4d22-be9f-f541f6a265ee
-        - f90eeb4b-614b-432c-b506-4203a2db60c8
-    InsightRuleIdPath:
-      name: insightRuleId
-      in: path
-      required: true
-      schema:
-        type: string
-      example: 577ee610-95f2-4883-abaa-d702e73c3a10
-      description: The unique ID of the insight.
-    PageNumberQuery:
-      name: page_number
-      description: The page number.
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 1
+          format: date-time
+        subscriptionId:
+          description: The unique ID of the subscription.
+          type: string
+          example: 1519f3e3-7e5a-466b-8a86-63ed2776f819
+        subscriptionName:
+          description: The name of the subscription.
+          type: string
+          example: Microsoft 365 E5
+        applicationId:
+          description: The unique ID of the application.
+          type: string
+          example: 3519f3f3-7e5a-e66b-8a86-63ed2776f618
+        applicationName:
+          description: The name of the application.
+          type: string
+          example: Microsoft Power BI
+      required:
+      - subscriptionId
+      - subscriptionName
+      - lastActive
+    ErrorValidationResponse:
+      title: ErrorValidationResponse
+      description: Bad Request - Your request is invalid or improperly formed. Consequently, the API server could not understand your request.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationError'
+      required:
+      - error
+    NotFoundError:
+      type: object
+      description: Not found error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 404
+        message:
+          type: string
+          description: The error message.
+          example: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+      required:
+      - code
+      - message
+    InternalError:
+      type: object
+      description: Internal error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 500
+        message:
+          type: string
+          description: The error message.
+          example: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      required:
+      - code
+      - message
+    PaginationResponse:
+      description: The pagination details.
+      type: object
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          example: 100
+        page_number:
+          type: integer
+          format: int64
+          description: The page number you requested.
+          example: 1
+        total_pages:
+          type: integer
+          format: int64
+          description: The total number of pages.
+          example: 1
+        total_items:
+          type: integer
+          format: int64
+          description: The total number of items.
+          example: 1
   responses:
-    204Response:
-      description: 'No Content: Your request succeeded, but the response message was empty.'
-    500Response:
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     400Response:
       description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
       content:
@@ -633,6 +625,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/NotFoundResponse'
+    204Response:
+      description: 'No Content: Your request succeeded, but the response message was empty.'
+    500Response:
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http
