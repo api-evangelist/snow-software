@@ -85,6 +85,25 @@ paths:
         - sam.computer.r
 components:
   schemas:
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type:
+          - string
+          - 'null'
+          description: Additional error message.
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
     ComputerMonitor:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -114,25 +133,25 @@ components:
           isUpdated:
             type: boolean
             description: '```true``` if the computer monitor is updated; otherwise, ```false```.'
-    ErrorContent:
+    Link:
       type: object
-      description: Details of error.
-      additionalProperties: false
       required:
-      - code
-      - message
+      - href
+      - rel
+      - method
       properties:
-        code:
-          type: integer
-          description: Http error code.
-          format: int32
-          example: 400
-        message:
-          type:
-          - string
-          - 'null'
-          description: Additional error message.
-          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/computers/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
     ErrorResponse:
       type: object
       description: Response representing error.
@@ -156,46 +175,7 @@ components:
           description: A collection of links to related resources.
           items:
             $ref: '#/components/schemas/Link'
-    Link:
-      type: object
-      required:
-      - href
-      - rel
-      - method
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          example: api/computers/v1/...
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          example: GET
   responses:
-    '400':
-      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              message: Filter field name needs to be formatted as a string.
-    '500':
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
     '404':
       description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
       content:
@@ -206,6 +186,26 @@ components:
             error:
               code: 404
               message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
   securitySchemes:
     BearerAuth:
       type: http

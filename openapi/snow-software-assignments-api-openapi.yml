@@ -2038,9 +2038,26 @@ paths:
         - sam.license.crud
 components:
   schemas:
-    HateoasCollectionOfUserAssignment:
+    FilteredResponseOfAssignmentTypeCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/AssignmentTypeCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    HateoasCollectionOfDatacenterAssignment:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfUserAssignment'
+      - $ref: '#/components/schemas/FilteredResponseOfDatacenterAssignment'
       - type: object
         additionalProperties: false
         required:
@@ -2051,6 +2068,45 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
+    ListOfComputerAssignmentRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComputerAssignmentRequest'
+    OrganizationAssignment:
+      allOf:
+      - $ref: '#/components/schemas/CreatedHateoasResponse'
+      - type: object
+        description: The organization assignment.
+        additionalProperties: false
+        properties:
+          licenseId:
+            type: string
+            description: The unique ID of the license.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          applicationId:
+            type:
+            - string
+            - 'null'
+            description: The unique ID of the application.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          organizationId:
+            type: string
+            description: The unique ID of the organization.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          quantity:
+            type:
+            - integer
+            - 'null'
+            description: The assigned quantity of licenses.
+            format: int32
+            example: 1
+          isAutoAllocated:
+            type: boolean
+            description: '```true``` if has auto allocate selected; otherwise, ```false```.'
+            example: true
     FilteredResponseOfComputerAssignment:
       type: object
       description: Filtered response.
@@ -2068,6 +2124,74 @@ components:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
+    ComputerAssignmentRequest:
+      type: object
+      description: A collection of computer license assignments.
+      additionalProperties: false
+      properties:
+        computerId:
+          type: string
+          description: The unique ID of the computer.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The assigned quantity of licenses.
+          format: int32
+          example: 1
+        virtualMachines:
+          type:
+          - array
+          - 'null'
+          description: The list of virtual machines.
+          example:
+          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          items:
+            type: string
+            format: guid
+    UserAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        userId:
+          type: string
+          description: The unique ID of the user.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+    DatacenterAssignmentRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        datacenterId:
+          type: string
+          description: The unique ID of the DCC.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The assigned quantity of licenses.
+          format: int32
+          example: 1
+        virtualMachines:
+          type:
+          - array
+          - 'null'
+          description: The list of virtual machines.
+          example:
+          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          items:
+            type: string
+            format: guid
+    CreatedHateoasResponse:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResponse'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the resource.
+            format: guid
     ComputerAssignment:
       allOf:
       - $ref: '#/components/schemas/CreatedHateoasResponse'
@@ -2127,32 +2251,120 @@ components:
             items:
               type: string
               format: guid
-    ComputerAssignmentRequest:
+    InvalidAssignmentReasons:
+      type: integer
+      description: The invalid assignment reason.
+      x-enumFlags: true
+      x-enumNames:
+      - None
+      - SubscriptionExpired
+      - Unassigned
+      - ComputerMissing
+      - InactiveComputer
+      - UserMissing
+      - DatacenterMissing
+      - InvalidMetric
+      - NoEliglibleApplicationInstalled
+      - NoEligibleApplicationIsInstalledOnAnyComputerWhereUserIsPrimary
+      - UserHasNotUsedAnyEligibleApplication
+      - Incomplete
+      - OverAssignment
+      - InvalidQuantity
+      - UserHasNotUsedAnyEligibleApplicationWithinPeriod
+      - InvalidMetricGroup
+      - InvalidProcessorCount
+      enum:
+      - 0
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 32
+      - 64
+      - 128
+      - 256
+      - 512
+      - 1024
+      - 2048
+      - 4096
+      - 8192
+      - 16384
+      - 32768
+    HateoasCollectionOfComputerAssignment:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfComputerAssignment'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    Pagination:
       type: object
-      description: A collection of computer license assignments.
+      description: The pagination details.
       additionalProperties: false
+      required:
+      - page_size
+      - page_number
       properties:
-        computerId:
-          type: string
-          description: The unique ID of the computer.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        quantity:
+        page_size:
           type: integer
-          description: The assigned quantity of licenses.
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
           format: int32
           example: 1
-        virtualMachines:
+        total_pages:
           type:
-          - array
+          - integer
           - 'null'
-          description: The list of virtual machines.
-          example:
-          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
+          description: The total number of pages.
+          format: int32
+          example: 5
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 100
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
           items:
-            type: string
-            format: guid
-    FilteredResponseOfDatacenterAssignment:
+            $ref: '#/components/schemas/Link'
+    ListOfDatacenterAssignmentRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatacenterAssignmentRequest'
+    HateoasCollectionOfOrganizationAssignment:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfOrganizationAssignment'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    FilteredResponseOfUserAssignment:
       type: object
       description: Filtered response.
       additionalProperties: false
@@ -2164,102 +2376,38 @@ components:
           type: array
           description: A collection of items.
           items:
-            $ref: '#/components/schemas/DatacenterAssignment'
+            $ref: '#/components/schemas/UserAssignment'
         pagination:
           description: The pagination details.
           oneOf:
           - $ref: '#/components/schemas/Pagination'
-    SiteAssignmentRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        organizationId:
-          type: string
-          description: The unique ID of the organization.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    DatacenterAssignmentRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        datacenterId:
-          type: string
-          description: The unique ID of the DCC.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        quantity:
-          type: integer
-          description: The assigned quantity of licenses.
-          format: int32
-          example: 1
-        virtualMachines:
-          type:
-          - array
-          - 'null'
-          description: The list of virtual machines.
-          example:
-          - 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          items:
-            type: string
-            format: guid
-    SiteAssignment:
+    LicenseAssignmentDetails:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
       - type: object
-        description: The site assignment.
         additionalProperties: false
         properties:
-          id:
-            type: string
-            description: The unique ID of the assignment.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           licenseId:
             type: string
             description: The unique ID of the license.
             format: guid
             example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          applicationId:
-            type:
-            - string
-            - 'null'
-            description: The unique ID of the application.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          organizationId:
-            type: string
-            description: The unique ID of the organization.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          quantity:
-            type:
-            - integer
-            - 'null'
-            description: The assigned quantity of licenses.
-            format: int32
-            example: 1
-    AssignmentTypeCollection:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          assignmentType:
-            type: integer
-            description: The assignment type.
-            format: int32
-            example: 0
-          assignmentTypeId:
-            type: string
-            description: The unique ID of the assignment type.
-            format: guid
-            example: 8e5d8f69-c818-4575-9a91-aebae9a9eacc
-          name:
-            type:
-            - string
-            - 'null'
-            description: The name of the assignment type.
-            example: Organization
+          hasOrganizationAssignment:
+            type: boolean
+            description: '```true``` if has organization assignment; otherwise, ```false```.'
+            example: true
+          hasComputerAssignment:
+            type: boolean
+            description: '```true``` if has computer assignment; otherwise, ```false```.'
+            example: true
+          hasUserAssignment:
+            type: boolean
+            description: '```true``` if has user assignment; otherwise, ```false```.'
+            example: true
+          hasSiteAssignment:
+            type: boolean
+            description: '```true``` if has site assignment; otherwise, ```false```.'
+            example: true
     DatacenterAssignment:
       allOf:
       - $ref: '#/components/schemas/CreatedHateoasResponse'
@@ -2320,33 +2468,9 @@ components:
             items:
               type: string
               format: guid
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    FilteredResponseOfUserAssignment:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/UserAssignment'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    HateoasCollectionOfComputerAssignment:
+    HateoasCollectionOfAssignmentTypeCollection:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfComputerAssignment'
+      - $ref: '#/components/schemas/FilteredResponseOfAssignmentTypeCollection'
       - type: object
         additionalProperties: false
         required:
@@ -2357,6 +2481,39 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
+    AssignmentTypeCollection:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        additionalProperties: false
+        properties:
+          assignmentType:
+            type: integer
+            description: The assignment type.
+            format: int32
+            example: 0
+          assignmentTypeId:
+            type: string
+            description: The unique ID of the assignment type.
+            format: guid
+            example: 8e5d8f69-c818-4575-9a91-aebae9a9eacc
+          name:
+            type:
+            - string
+            - 'null'
+            description: The name of the assignment type.
+            example: Organization
+    HateoasResponse:
+      type: object
+      description: Abstract class for IResource.
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
     Error:
       description: The error details.
       type: object
@@ -2371,124 +2528,41 @@ components:
         message:
           type: string
           description: The error message.
-    UserAssignmentRequest:
+    HateoasCollectionOfUserAssignment:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfUserAssignment'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    FilteredResponseOfDatacenterAssignment:
       type: object
+      description: Filtered response.
       additionalProperties: false
+      required:
+      - items
+      - pagination
       properties:
-        userId:
-          type: string
-          description: The unique ID of the user.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    ListOfOrganizationAssignmentRequest:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/DatacenterAssignment'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    ListOfUserAssignmentRequest:
       type: array
       items:
-        $ref: '#/components/schemas/OrganizationAssignmentRequest'
-    HateoasCollectionOfAssignmentTypeCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfAssignmentTypeCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    HateoasResponse:
-      type: object
-      description: Abstract class for IResource.
-      x-abstract: true
-      additionalProperties: false
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    HateoasCollectionOfOrganizationAssignment:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfOrganizationAssignment'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    InvalidAssignmentReasons:
-      type: integer
-      description: The invalid assignment reason.
-      x-enumFlags: true
-      x-enumNames:
-      - None
-      - SubscriptionExpired
-      - Unassigned
-      - ComputerMissing
-      - InactiveComputer
-      - UserMissing
-      - DatacenterMissing
-      - InvalidMetric
-      - NoEliglibleApplicationInstalled
-      - NoEligibleApplicationIsInstalledOnAnyComputerWhereUserIsPrimary
-      - UserHasNotUsedAnyEligibleApplication
-      - Incomplete
-      - OverAssignment
-      - InvalidQuantity
-      - UserHasNotUsedAnyEligibleApplicationWithinPeriod
-      - InvalidMetricGroup
-      - InvalidProcessorCount
-      enum:
-      - 0
-      - 1
-      - 2
-      - 4
-      - 8
-      - 16
-      - 32
-      - 64
-      - 128
-      - 256
-      - 512
-      - 1024
-      - 2048
-      - 4096
-      - 8192
-      - 16384
-      - 32768
-    LicenseAssignmentDetails:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        additionalProperties: false
-        properties:
-          licenseId:
-            type: string
-            description: The unique ID of the license.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-          hasOrganizationAssignment:
-            type: boolean
-            description: '```true``` if has organization assignment; otherwise, ```false```.'
-            example: true
-          hasComputerAssignment:
-            type: boolean
-            description: '```true``` if has computer assignment; otherwise, ```false```.'
-            example: true
-          hasUserAssignment:
-            type: boolean
-            description: '```true``` if has user assignment; otherwise, ```false```.'
-            example: true
-          hasSiteAssignment:
-            type: boolean
-            description: '```true``` if has site assignment; otherwise, ```false```.'
-            example: true
-    OrganizationAssignmentRequest:
+        $ref: '#/components/schemas/UserAssignmentRequest'
+    SiteAssignmentRequest:
       type: object
       additionalProperties: false
       properties:
@@ -2497,21 +2571,29 @@ components:
           description: The unique ID of the organization.
           format: guid
           example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        quantity:
-          type: integer
-          description: The assigned quantity of licenses.
-          format: int32
-          example: 1
-    CreatedHateoasResponse:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResponse'
-      - type: object
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the resource.
-            format: guid
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
     UserAssignment:
       allOf:
       - $ref: '#/components/schemas/CreatedHateoasResponse'
@@ -2547,115 +2629,29 @@ components:
             - OverAssignment
             oneOf:
             - $ref: '#/components/schemas/InvalidAssignmentReasons'
-    ListOfDatacenterAssignmentRequest:
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    ListOfOrganizationAssignmentRequest:
       type: array
       items:
-        $ref: '#/components/schemas/DatacenterAssignmentRequest'
-    Pagination:
-      type: object
-      description: The pagination details.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 5
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 100
-    HateoasCollectionOfDatacenterAssignment:
+        $ref: '#/components/schemas/OrganizationAssignmentRequest'
+    SiteAssignment:
       allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfDatacenterAssignment'
+      - $ref: '#/components/schemas/HateoasResource'
       - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    ListOfComputerAssignmentRequest:
-      type: array
-      items:
-        $ref: '#/components/schemas/ComputerAssignmentRequest'
-    ListOfUserAssignmentRequest:
-      type: array
-      items:
-        $ref: '#/components/schemas/UserAssignmentRequest'
-    FilteredResponseOfOrganizationAssignment:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/OrganizationAssignment'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    FilteredResponseOfAssignmentTypeCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/AssignmentTypeCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    OrganizationAssignment:
-      allOf:
-      - $ref: '#/components/schemas/CreatedHateoasResponse'
-      - type: object
-        description: The organization assignment.
+        description: The site assignment.
         additionalProperties: false
         properties:
+          id:
+            type: string
+            description: The unique ID of the assignment.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
           licenseId:
             type: string
             description: The unique ID of the license.
@@ -2680,33 +2676,37 @@ components:
             description: The assigned quantity of licenses.
             format: int32
             example: 1
-          isAutoAllocated:
-            type: boolean
-            description: '```true``` if has auto allocate selected; otherwise, ```false```.'
-            example: true
-    Link:
+    FilteredResponseOfOrganizationAssignment:
       type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/OrganizationAssignment'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    OrganizationAssignmentRequest:
+      type: object
       additionalProperties: false
       properties:
-        href:
-          type:
-          - string
-          - 'null'
-          description: The associated relative URL.
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type:
-          - string
-          - 'null'
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type:
-          - string
-          - 'null'
-          description: The method to access related resources.
-          example: GET
+        organizationId:
+          type: string
+          description: The unique ID of the organization.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        quantity:
+          type: integer
+          description: The assigned quantity of licenses.
+          format: int32
+          example: 1
   securitySchemes:
     BearerAuth:
       type: http

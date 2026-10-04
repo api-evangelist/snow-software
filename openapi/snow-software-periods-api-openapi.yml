@@ -446,6 +446,58 @@ paths:
         - sam.license.crud
 components:
   schemas:
+    CreatedHateoasResponse:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResponse'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the resource.
+            format: guid
+    ListOfMaintenancePeriodRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/MaintenancePeriodRequest'
+    HateoasCollectionOfMaintenancePeriodCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfMaintenancePeriodCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    HateoasResponse:
+      type: object
+      description: Abstract class for IResource.
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
     Pagination:
       type: object
       description: The pagination details.
@@ -478,6 +530,119 @@ components:
           description: The total number of items.
           format: int32
           example: 100
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    FilteredResponseOfMaintenancePeriodCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/MaintenancePeriodCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    MaintenancePeriodRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        agreementPeriodId:
+          type:
+          - string
+          - 'null'
+          description: The unique ID of the agreement period.
+          format: guid
+          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
+        validFrom:
+          type:
+          - string
+          - 'null'
+          description: The valid form date.
+          format: date-time
+          example: '2024-01-01T00:00:00Z'
+        validTo:
+          type:
+          - string
+          - 'null'
+          description: The valid to date.
+          format: date-time
+          example: '2025-01-01T00:00:00Z'
+        hasUpgradeRights:
+          type: boolean
+          description: '```true``` if has upgrade rights; otherwise, ```false```.'
+          example: true
+        invoiceReference:
+          type:
+          - string
+          - 'null'
+          description: The invoice reference.
+          example: INV12345
+        notes:
+          type:
+          - string
+          - 'null'
+          description: The notes.
+          example: Notes
+        maintenanceCost:
+          type:
+          - number
+          - 'null'
+          description: The maintenance cost.
+          format: decimal
+          example: 1000
+        supportCost:
+          type:
+          - number
+          - 'null'
+          description: The support cost.
+          format: decimal
+          example: 1000
     MaintenancePeriodCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -553,17 +718,6 @@ components:
             - 'null'
             description: The purchase currency.
             example: USD
-    HateoasResponse:
-      type: object
-      description: Abstract class for IResource.
-      x-abstract: true
-      additionalProperties: false
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
     MaintenancePeriod:
       allOf:
       - $ref: '#/components/schemas/CreatedHateoasResponse'
@@ -620,160 +774,6 @@ components:
             - 'null'
             description: The notes.
             example: Notes
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    HateoasCollectionOfMaintenancePeriodCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfMaintenancePeriodCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    CreatedHateoasResponse:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResponse'
-      - type: object
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the resource.
-            format: guid
-    FilteredResponseOfMaintenancePeriodCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/MaintenancePeriodCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    MaintenancePeriodRequest:
-      type: object
-      additionalProperties: false
-      properties:
-        agreementPeriodId:
-          type:
-          - string
-          - 'null'
-          description: The unique ID of the agreement period.
-          format: guid
-          example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-        validFrom:
-          type:
-          - string
-          - 'null'
-          description: The valid form date.
-          format: date-time
-          example: '2024-01-01T00:00:00Z'
-        validTo:
-          type:
-          - string
-          - 'null'
-          description: The valid to date.
-          format: date-time
-          example: '2025-01-01T00:00:00Z'
-        hasUpgradeRights:
-          type: boolean
-          description: '```true``` if has upgrade rights; otherwise, ```false```.'
-          example: true
-        invoiceReference:
-          type:
-          - string
-          - 'null'
-          description: The invoice reference.
-          example: INV12345
-        notes:
-          type:
-          - string
-          - 'null'
-          description: The notes.
-          example: Notes
-        maintenanceCost:
-          type:
-          - number
-          - 'null'
-          description: The maintenance cost.
-          format: decimal
-          example: 1000
-        supportCost:
-          type:
-          - number
-          - 'null'
-          description: The support cost.
-          format: decimal
-          example: 1000
-    ListOfMaintenancePeriodRequest:
-      type: array
-      items:
-        $ref: '#/components/schemas/MaintenancePeriodRequest'
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-          description: The associated relative URL.
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type:
-          - string
-          - 'null'
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type:
-          - string
-          - 'null'
-          description: The method to access related resources.
-          example: GET
   securitySchemes:
     BearerAuth:
       type: http

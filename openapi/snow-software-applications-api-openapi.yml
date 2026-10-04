@@ -318,139 +318,65 @@ paths:
       tags:
       - Applications
 components:
-  schemas:
-    ApplicationMarkers:
-      description: The update to be applied to all IDs.
-      type: object
-      properties:
-        singleSignOn:
-          description: '```true``` if the application is marked as single sign-on only; otherwise, ```false```.'
-          type: boolean
-          example: true
-        approved:
-          description: '```true``` if the application is marked as for approved; otherwise, ```false```.'
-          type: boolean
-          example: true
-      required:
-      - singleSignOn
-      - approved
-    KpiPairInt:
-      title: KpiPairInt
-      description: KPI pair of values in integer format.
-      type: object
-      properties:
-        value30DaysAgo:
-          description: Value 30 days ago.
-          type: integer
-          format: int32
-          example: 20
-        valueCurrent:
-          description: Current value.
-          type: integer
-          format: int32
-          example: 10
-      required:
-      - valueCurrent
-      - value30DaysAgo
-    ApplicationPatchWebsite:
-      title: ApplicationPatchWebsite
-      type: object
-      properties:
-        website:
-          type: string
-          description: Website of application.
-          example: http://www.adobe.com/
-        privacyPolicy:
-          type: string
-          description: Location of the applications privacy policy.
-          example: https://www.adobe.com/privacy.html
-        categoryName:
-          type: string
-          description: Category of application.
-          example: Digital Content Editing Platform
-      required:
-      - website
-      - privacyPolicy
-      - categoryName
-    ApplicationCertifications:
-      type: array
-      description: A collection of application certifications from MSDefender connector.
-      items:
+  parameters:
+    PageNumberQuery:
+      name: page_number
+      description: The page number.
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 1
+    ToDateQuery:
+      required: true
+      in: query
+      name: toDate
+      description: Starting date until which to calculate KPI.
+      schema:
         type: string
-      example:
-      - SOC1
-      - ISO27001
-    BulkUpdateApplicationsResponse:
-      type: object
-      required:
-      - id
-      - _links
-      properties:
-        id:
-          description: The unique ID of the bulk operation.
-          type: string
-          example: 483c67cf-e247-4a82-bef7-b86a29560788
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-          example:
-          - href: api/saas/consolidated-view/v1/tasks/483c67cf-e247-4a82-bef7-b86a29560788
-            rel: self
-            method: GET
-    ApplicationsLookupValues:
-      type: object
-      properties:
-        certifications:
-          $ref: '#/components/schemas/ApplicationCertifications'
-      required:
-      - certifications
-    Total:
-      title: Total
-      description: Total number of applications from all vendors compared to 30 days. ago.
-      type: object
-      properties:
-        trend:
-          description: The change in the number of applications from all vendors compared. to 30 days ago.
-          type: integer
-          format: int32
-          example: -1000
-        value:
-          description: The number of applications from all vendors.
-          type: integer
-          format: int32
-          example: 250
-      required:
-      - value
-      - trend
-    Link:
-      type: object
-      required:
-      - href
-      - rel
-      - method
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          example: api/saas/consolidated-view/v1/...
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          example: GET
-    ErrorResponse:
-      description: Internal Server Error - Your request failed due to an internal error.
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/InternalError'
-      required:
-      - error
+        example: '2024-11-26'
+        format: date
+    FromDateQuery:
+      required: true
+      in: query
+      name: fromDate
+      description: Starting date from which to calculate KPI.
+      schema:
+        type: string
+        example: '2024-11-26'
+        format: date
+    ApplicationIdPath:
+      description: The unique ID of the application.
+      required: true
+      name: applicationId
+      in: path
+      schema:
+        type: string
+    PageSizeQuery:
+      name: page_size
+      description: The maximum number of items in the response.
+      in: query
+      schema:
+        type: integer
+        format: int32
+        default: 100
+    SortQuery:
+      name: sort
+      in: query
+      description: For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results).
+      required: false
+      schema:
+        type: string
+        example: ?sort=field1:asc
+    FilterQuery:
+      name: filter
+      in: query
+      description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+      required: false
+      schema:
+        type: string
+        example: ?filter=field1 -eq 'abc'
+  schemas:
     License:
       type: object
       properties:
@@ -478,6 +404,25 @@ components:
           example: 4770a19c-c789-4c10-82dd-062a4a23d6bb
       required:
       - id
+    BulkUpdateApplicationsResponse:
+      type: object
+      required:
+      - id
+      - _links
+      properties:
+        id:
+          description: The unique ID of the bulk operation.
+          type: string
+          example: 483c67cf-e247-4a82-bef7-b86a29560788
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+          example:
+          - href: api/saas/consolidated-view/v1/tasks/483c67cf-e247-4a82-bef7-b86a29560788
+            rel: self
+            method: GET
     KpiPairFloat:
       title: KpiPairFloat
       description: KPI pair of values in floating-point format.
@@ -496,6 +441,40 @@ components:
       required:
       - valueCurrent
       - value30DaysAgo
+    ApplicationsList:
+      type: object
+      properties:
+        items:
+          description: A collection of applications.
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+        pagination:
+          $ref: '#/components/schemas/PaginationResponse'
+      required:
+      - items
+      - pagination
+    ApplicationLookUpResponse:
+      title: ApplicationLookUpResponse
+      type: object
+      properties:
+        roles:
+          description: A collection of roles assigned to users.
+          type: array
+          items:
+            type: string
+            example: Role1
+      required:
+      - roles
+    ErrorValidationResponse:
+      title: ErrorValidationResponse
+      description: Bad Request - Your request is invalid or improperly formed. Consequently, the API server could not understand your request.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationError'
+      required:
+      - error
     Application:
       type: object
       properties:
@@ -654,42 +633,172 @@ components:
       - name
       - vendor
       - vendorId
-    NotFoundResponse:
-      description: The requested resource could not be found.
+    BulkUpdateApplicationsRequest:
+      type: object
+      required:
+      - scope
+      - body
+      properties:
+        filter:
+          description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+          type: string
+          example: name -eq Per
+        scope:
+          description: The scope of the update operation.
+          x-enumDescriptions:
+            Only: The operation is performed only on the applications whose IDs are specified.
+            All: The operation is performed on all applications.
+            AllExcept: The operation is performed on every application except those whose IDs are specified.
+          type: string
+          enum:
+          - Only
+          - All
+          - AllExcept
+          example: All
+        ids:
+          description: The IDs that the operation is performed on.
+          type: array
+          items:
+            type: string
+            example: 19bb4eb7-3012-435a-9845-55626ef40460
+        body:
+          $ref: '#/components/schemas/ApplicationMarkers'
+    ApplicationsKPI:
+      title: ApplicationsKPI
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/NotFoundError'
+        totalApplications:
+          type: integer
+          format: int32
+          description: Total number of applications.
+          example: 15
+        totalApplicationsTrend:
+          type: integer
+          format: int32
+          description: Trend of total number of applications.
+          example: 7
+        unsanctioned:
+          type: integer
+          format: int32
+          description: Number of unsanctioned applications.
+          example: 2
+        appCategories:
+          type: array
+          description: A collection of application categories.
+          items:
+            $ref: '#/components/schemas/ApplicationsCategory'
+        aiAppCategories:
+          type: array
+          description: A collection of application AI categories.
+          items:
+            $ref: '#/components/schemas/ApplicationsCategory'
+        appCategoriesUnsanctioned:
+          type: array
+          description: A collection of categories of unsanctioned applications.
+          items:
+            $ref: '#/components/schemas/ApplicationsCategory'
+        aiAppCategoriesUnsanctioned:
+          type: array
+          description: A collection of AI categories of unsanctioned applications.
+          items:
+            $ref: '#/components/schemas/ApplicationsCategory'
+        activeUserApplications:
+          type: array
+          description: A collection of user counts for each application.
+          items:
+            $ref: '#/components/schemas/ApplicationsUserCount'
+        activeUserApplicationsUnsanctioned:
+          type: array
+          description: A collection of user counts for each unsanctioned application.
+          items:
+            $ref: '#/components/schemas/ApplicationsUserCount'
       required:
-      - error
-    ValidationError:
+      - totalApplications
+      - totalApplicationsTrend
+      - unsanctioned
+      - appCategories
+      - aiAppCategories
+      - appCategoriesUnsanctioned
+      - aiAppCategoriesUnsanctioned
+      - activeUserApplications
+      - activeUserApplicationsUnsanctioned
+    ApplicationMarkers:
+      description: The update to be applied to all IDs.
       type: object
-      description: Validation error.
+      properties:
+        singleSignOn:
+          description: '```true``` if the application is marked as single sign-on only; otherwise, ```false```.'
+          type: boolean
+          example: true
+        approved:
+          description: '```true``` if the application is marked as for approved; otherwise, ```false```.'
+          type: boolean
+          example: true
+      required:
+      - singleSignOn
+      - approved
+    ApplicationPatchWebsite:
+      title: ApplicationPatchWebsite
+      type: object
+      properties:
+        website:
+          type: string
+          description: Website of application.
+          example: http://www.adobe.com/
+        privacyPolicy:
+          type: string
+          description: Location of the applications privacy policy.
+          example: https://www.adobe.com/privacy.html
+        categoryName:
+          type: string
+          description: Category of application.
+          example: Digital Content Editing Platform
+      required:
+      - website
+      - privacyPolicy
+      - categoryName
+    NotFoundError:
+      type: object
+      description: Not found error.
       properties:
         code:
           type: integer
           description: The HTTP status code.
           format: int32
-          example: 400
+          example: 404
         message:
           type: string
           description: The error message.
-          example: Filter field name needs to be formatted as a string.
+          example: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
       required:
       - code
       - message
-    ApplicationLookUpResponse:
-      title: ApplicationLookUpResponse
+    PaginationResponse:
+      description: The pagination details.
       type: object
-      properties:
-        roles:
-          description: A collection of roles assigned to users.
-          type: array
-          items:
-            type: string
-            example: Role1
       required:
-      - roles
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          example: 100
+        page_number:
+          type: integer
+          format: int64
+          description: The page number you requested.
+          example: 1
+        total_pages:
+          type: integer
+          format: int64
+          description: The total number of pages.
+          example: 1
+        total_items:
+          type: integer
+          format: int64
+          description: The total number of items.
+          example: 1
     User:
       title: User
       description: A discovered user in your SaaS estate.
@@ -825,90 +934,48 @@ components:
       - isOnline
       - totalDaysUsed
       - employmentStatus
-    ApplicationKPI:
-      title: ApplicationKPI
+    ApplicationPatch:
       type: object
       properties:
-        id:
+        primaryOwnerId:
           type: string
-          description: The unique ID of the application.
-          example: e5ea6f20-47ad-41be-a3c5-839409d89791
-        monthlyCost:
-          $ref: '#/components/schemas/KpiPairFloat'
-        subscriptionTypes:
-          $ref: '#/components/schemas/KpiPairInt'
-        subscriptions:
-          $ref: '#/components/schemas/KpiPairInt'
-        totalUsers:
-          $ref: '#/components/schemas/KpiPairInt'
-        unassignedSubscriptions:
-          $ref: '#/components/schemas/KpiPairInt'
+          description: The unique ID of the primary owner.
+          example: 906b7a69-597e-4e13-bbda-5fb2dd903cc6
+        sanctioned:
+          type: boolean
+          description: '```true``` if application is sanctioned; otherwise, ```false```.'
+          example: true
+        singleSignOn:
+          type: boolean
+          description: '```true``` if application has single sign on supported; otherwise, ```false```.'
+          example: true
+        notes:
+          type: string
+          description: Notes about the application.
+          example: Notes about Illustrator.
+        description:
+          type: string
+          description: Description of the application.
+          example: Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.
+        aiCategory:
+          type: string
+          description: AI category of the application.
+          example: Graphic Design
+        aiSubcategory:
+          type: string
+          description: AI sub-category of the application.
+          example: Vector Graphic Design
+        websiteDate:
+          $ref: '#/components/schemas/ApplicationPatchWebsite'
       required:
-      - id
-      - monthlyCost
-      - subscriptions
-      - subscriptionTypes
-      - totalUsers
-      - unassignedSubscriptions
-    ApplicationsKPI:
-      title: ApplicationsKPI
-      type: object
-      properties:
-        totalApplications:
-          type: integer
-          format: int32
-          description: Total number of applications.
-          example: 15
-        totalApplicationsTrend:
-          type: integer
-          format: int32
-          description: Trend of total number of applications.
-          example: 7
-        unsanctioned:
-          type: integer
-          format: int32
-          description: Number of unsanctioned applications.
-          example: 2
-        appCategories:
-          type: array
-          description: A collection of application categories.
-          items:
-            $ref: '#/components/schemas/ApplicationsCategory'
-        aiAppCategories:
-          type: array
-          description: A collection of application AI categories.
-          items:
-            $ref: '#/components/schemas/ApplicationsCategory'
-        appCategoriesUnsanctioned:
-          type: array
-          description: A collection of categories of unsanctioned applications.
-          items:
-            $ref: '#/components/schemas/ApplicationsCategory'
-        aiAppCategoriesUnsanctioned:
-          type: array
-          description: A collection of AI categories of unsanctioned applications.
-          items:
-            $ref: '#/components/schemas/ApplicationsCategory'
-        activeUserApplications:
-          type: array
-          description: A collection of user counts for each application.
-          items:
-            $ref: '#/components/schemas/ApplicationsUserCount'
-        activeUserApplicationsUnsanctioned:
-          type: array
-          description: A collection of user counts for each unsanctioned application.
-          items:
-            $ref: '#/components/schemas/ApplicationsUserCount'
-      required:
-      - totalApplications
-      - totalApplicationsTrend
-      - unsanctioned
-      - appCategories
-      - aiAppCategories
-      - appCategoriesUnsanctioned
-      - aiAppCategoriesUnsanctioned
-      - activeUserApplications
-      - activeUserApplicationsUnsanctioned
+      - primaryOwnerId
+      - sanctioned
+      - singleSignOn
+      - notes
+      - description
+      - aiCategory
+      - aiSubcategory
+      - websiteDate
     ApplicationUserConsumption:
       title: ApplicationUserConsumption
       type: object
@@ -1016,6 +1083,88 @@ components:
       - isQualified
       - potentialSavings
       - envelopeusage
+    KpiPairInt:
+      title: KpiPairInt
+      description: KPI pair of values in integer format.
+      type: object
+      properties:
+        value30DaysAgo:
+          description: Value 30 days ago.
+          type: integer
+          format: int32
+          example: 20
+        valueCurrent:
+          description: Current value.
+          type: integer
+          format: int32
+          example: 10
+      required:
+      - valueCurrent
+      - value30DaysAgo
+    ValidationError:
+      type: object
+      description: Validation error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 400
+        message:
+          type: string
+          description: The error message.
+          example: Filter field name needs to be formatted as a string.
+      required:
+      - code
+      - message
+    ApplicationsLookupValues:
+      type: object
+      properties:
+        certifications:
+          $ref: '#/components/schemas/ApplicationCertifications'
+      required:
+      - certifications
+    ApplicationKPI:
+      title: ApplicationKPI
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique ID of the application.
+          example: e5ea6f20-47ad-41be-a3c5-839409d89791
+        monthlyCost:
+          $ref: '#/components/schemas/KpiPairFloat'
+        subscriptionTypes:
+          $ref: '#/components/schemas/KpiPairInt'
+        subscriptions:
+          $ref: '#/components/schemas/KpiPairInt'
+        totalUsers:
+          $ref: '#/components/schemas/KpiPairInt'
+        unassignedSubscriptions:
+          $ref: '#/components/schemas/KpiPairInt'
+      required:
+      - id
+      - monthlyCost
+      - subscriptions
+      - subscriptionTypes
+      - totalUsers
+      - unassignedSubscriptions
+    InternalError:
+      type: object
+      description: Internal error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 500
+        message:
+          type: string
+          description: The error message.
+          example: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      required:
+      - code
+      - message
     ApplicationsUserCount:
       title: ApplicationsCategory
       type: object
@@ -1032,102 +1181,6 @@ components:
       required:
       - name
       - totalUsers
-    ErrorValidationResponse:
-      title: ErrorValidationResponse
-      description: Bad Request - Your request is invalid or improperly formed. Consequently, the API server could not understand your request.
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationError'
-      required:
-      - error
-    ApplicationsList:
-      type: object
-      properties:
-        items:
-          description: A collection of applications.
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
-        pagination:
-          $ref: '#/components/schemas/PaginationResponse'
-      required:
-      - items
-      - pagination
-    NotFoundError:
-      type: object
-      description: Not found error.
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code.
-          format: int32
-          example: 404
-        message:
-          type: string
-          description: The error message.
-          example: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
-      required:
-      - code
-      - message
-    ApplicationPatch:
-      type: object
-      properties:
-        primaryOwnerId:
-          type: string
-          description: The unique ID of the primary owner.
-          example: 906b7a69-597e-4e13-bbda-5fb2dd903cc6
-        sanctioned:
-          type: boolean
-          description: '```true``` if application is sanctioned; otherwise, ```false```.'
-          example: true
-        singleSignOn:
-          type: boolean
-          description: '```true``` if application has single sign on supported; otherwise, ```false```.'
-          example: true
-        notes:
-          type: string
-          description: Notes about the application.
-          example: Notes about Illustrator.
-        description:
-          type: string
-          description: Description of the application.
-          example: Illustrator CC is a vector graphics editor and design program used by professionals to create digital graphics, illustrations, and typography. It is part of the Adobe Creative Cloud suite and is widely used for creating high-quality artwork for various me.
-        aiCategory:
-          type: string
-          description: AI category of the application.
-          example: Graphic Design
-        aiSubcategory:
-          type: string
-          description: AI sub-category of the application.
-          example: Vector Graphic Design
-        websiteDate:
-          $ref: '#/components/schemas/ApplicationPatchWebsite'
-      required:
-      - primaryOwnerId
-      - sanctioned
-      - singleSignOn
-      - notes
-      - description
-      - aiCategory
-      - aiSubcategory
-      - websiteDate
-    ApplicationsCategory:
-      title: ApplicationsCategory
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of category.
-          example: Communication
-        total:
-          type: integer
-          format: int32
-          description: Total number of categories for stated application.
-          example: 10
-      required:
-      - name
-      - total
     ApplicationsOverviewKPI:
       title: ApplicationsOverviewKPI
       description: Overview of the application kpi.
@@ -1151,6 +1204,41 @@ components:
       - total
       - notApproved
       - applicationDiscoveryLastSevenDays
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/saas/consolidated-view/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
+    ErrorResponse:
+      description: Internal Server Error - Your request failed due to an internal error.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/InternalError'
+      required:
+      - error
+    NotFoundResponse:
+      description: The requested resource could not be found.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NotFoundError'
+      required:
+      - error
     ApplicationDiscoveryLastSevenDays:
       title: ApplicationDiscoveryLastSevenDays
       type: object
@@ -1192,136 +1280,48 @@ components:
       - date
       - connectorCount
       - manuallyAddedCount
-    InternalError:
+    Total:
+      title: Total
+      description: Total number of applications from all vendors compared to 30 days. ago.
       type: object
-      description: Internal error.
       properties:
-        code:
+        trend:
+          description: The change in the number of applications from all vendors compared. to 30 days ago.
           type: integer
-          description: The HTTP status code.
           format: int32
-          example: 500
-        message:
-          type: string
-          description: The error message.
-          example: The service encountered an unexpected condition that prevented it from fulfilling the request.
+          example: -1000
+        value:
+          description: The number of applications from all vendors.
+          type: integer
+          format: int32
+          example: 250
       required:
-      - code
-      - message
-    BulkUpdateApplicationsRequest:
+      - value
+      - trend
+    ApplicationCertifications:
+      type: array
+      description: A collection of application certifications from MSDefender connector.
+      items:
+        type: string
+      example:
+      - SOC1
+      - ISO27001
+    ApplicationsCategory:
+      title: ApplicationsCategory
       type: object
-      required:
-      - scope
-      - body
       properties:
-        filter:
-          description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
+        name:
           type: string
-          example: name -eq Per
-        scope:
-          description: The scope of the update operation.
-          x-enumDescriptions:
-            Only: The operation is performed only on the applications whose IDs are specified.
-            All: The operation is performed on all applications.
-            AllExcept: The operation is performed on every application except those whose IDs are specified.
-          type: string
-          enum:
-          - Only
-          - All
-          - AllExcept
-          example: All
-        ids:
-          description: The IDs that the operation is performed on.
-          type: array
-          items:
-            type: string
-            example: 19bb4eb7-3012-435a-9845-55626ef40460
-        body:
-          $ref: '#/components/schemas/ApplicationMarkers'
-    PaginationResponse:
-      description: The pagination details.
-      type: object
+          description: Name of category.
+          example: Communication
+        total:
+          type: integer
+          format: int32
+          description: Total number of categories for stated application.
+          example: 10
       required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          example: 100
-        page_number:
-          type: integer
-          format: int64
-          description: The page number you requested.
-          example: 1
-        total_pages:
-          type: integer
-          format: int64
-          description: The total number of pages.
-          example: 1
-        total_items:
-          type: integer
-          format: int64
-          description: The total number of items.
-          example: 1
-  parameters:
-    PageSizeQuery:
-      name: page_size
-      description: The maximum number of items in the response.
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 100
-    PageNumberQuery:
-      name: page_number
-      description: The page number.
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 1
-    FromDateQuery:
-      required: true
-      in: query
-      name: fromDate
-      description: Starting date from which to calculate KPI.
-      schema:
-        type: string
-        example: '2024-11-26'
-        format: date
-    SortQuery:
-      name: sort
-      in: query
-      description: For more information on sorting capability and examples, see [Sort API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#sort-api-call-results).
-      required: false
-      schema:
-        type: string
-        example: ?sort=field1:asc
-    ToDateQuery:
-      required: true
-      in: query
-      name: toDate
-      description: Starting date until which to calculate KPI.
-      schema:
-        type: string
-        example: '2024-11-26'
-        format: date
-    FilterQuery:
-      name: filter
-      in: query
-      description: For more information on the available operators and which data types those operators work on, see [Filter API call results](https://docs.snowsoftware.io/snow-atlas-api/resources/get-started-with-apis/api-conventions#filter-api-call-results).
-      required: false
-      schema:
-        type: string
-        example: ?filter=field1 -eq 'abc'
-    ApplicationIdPath:
-      description: The unique ID of the application.
-      required: true
-      name: applicationId
-      in: path
-      schema:
-        type: string
+      - name
+      - total
   responses:
     400Response:
       description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'

@@ -271,6 +271,58 @@ paths:
         - sam.license.r
 components:
   schemas:
+    HateoasCollectionOfPolicy:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfPolicy'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    HateoasCollectionOfLicensePolicyFieldCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfLicensePolicyFieldCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    Policy:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResource'
+      - type: object
+        description: The license policy.
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the license policy.
+            format: guid
+            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
     Pagination:
       type: object
       description: The pagination details.
@@ -303,6 +355,70 @@ components:
           description: The total number of items.
           format: int32
           example: 100
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
+    FilteredResponseOfLicensePolicyFieldCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicensePolicyFieldCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    FilteredResponseOfPolicy:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/Policy'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
     LicensePolicyFieldCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -347,43 +463,17 @@ components:
             - Item
             items:
               type: string
-    FilteredResponseOfLicensePolicyFieldCollection:
+    HateoasResource:
       type: object
-      description: Filtered response.
       additionalProperties: false
       required:
-      - items
-      - pagination
+      - _links
       properties:
-        items:
+        _links:
           type: array
-          description: A collection of items.
+          description: A collection of links to related resources.
           items:
-            $ref: '#/components/schemas/LicensePolicyFieldCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    HateoasCollectionOfLicensePolicyFieldCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfLicensePolicyFieldCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Link'
     LicensePolicyField:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -434,96 +524,6 @@ components:
             - Item
             items:
               type: string
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    Policy:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResource'
-      - type: object
-        description: The license policy.
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the license policy.
-            format: guid
-            example: 49cdd99f-bc16-40f9-ad40-48f12182fb30
-    HateoasCollectionOfPolicy:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfPolicy'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    FilteredResponseOfPolicy:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/Policy'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-          description: The associated relative URL.
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type:
-          - string
-          - 'null'
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type:
-          - string
-          - 'null'
-          description: The method to access related resources.
-          example: GET
   securitySchemes:
     BearerAuth:
       type: http

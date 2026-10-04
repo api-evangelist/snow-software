@@ -52,55 +52,20 @@ components:
       schema:
         type: string
       example: 5b35aa33-e7a8-47a3-b1b6-19099ebb6bfd
+  responses:
+    500Response:
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    404Response:
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundResponse'
   schemas:
-    NotFoundError:
-      type: object
-      description: Not found error.
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code.
-          format: int32
-          example: 404
-        message:
-          type: string
-          description: The error message.
-          example: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
-      required:
-      - code
-      - message
-    NotFoundResponse:
-      description: The requested resource could not be found.
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/NotFoundError'
-      required:
-      - error
-    ErrorResponse:
-      description: Internal Server Error - Your request failed due to an internal error.
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/InternalError'
-      required:
-      - error
-    InternalError:
-      type: object
-      description: Internal error.
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code.
-          format: int32
-          example: 500
-        message:
-          type: string
-          description: The error message.
-          example: The service encountered an unexpected condition that prevented it from fulfilling the request.
-      required:
-      - code
-      - message
     Task:
       type: object
       required:
@@ -157,19 +122,54 @@ components:
           type: string
           description: The method to access related resources.
           example: GET
-  responses:
-    500Response:
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    404Response:
-      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NotFoundResponse'
+    ErrorResponse:
+      description: Internal Server Error - Your request failed due to an internal error.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/InternalError'
+      required:
+      - error
+    NotFoundResponse:
+      description: The requested resource could not be found.
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/NotFoundError'
+      required:
+      - error
+    InternalError:
+      type: object
+      description: Internal error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 500
+        message:
+          type: string
+          description: The error message.
+          example: The service encountered an unexpected condition that prevented it from fulfilling the request.
+      required:
+      - code
+      - message
+    NotFoundError:
+      type: object
+      description: Not found error.
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          format: int32
+          example: 404
+        message:
+          type: string
+          description: The error message.
+          example: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
+      required:
+      - code
+      - message
   securitySchemes:
     bearerAuth:
       type: http
