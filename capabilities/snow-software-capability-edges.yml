@@ -1,0 +1,125 @@
+slug: snow-software
+provider: Snow Software
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Applications
+  spec_file: snow-software-applications-api-openapi.yml
+  capability_id: BC-600.60
+  capability_id_l1: BC-600
+  capability_name: IT Application Management
+  confidence: 0.8
+  evidence: GET /api/saas/consolidated-view/v1/applications  getApplications; getApplicationUsers; getSaasConsolidatedViewV1ApplicationUsersConsumption  Get
+    Application Users Consumptions; schemas Application, License
+  reason: Consolidated inventory of SaaS applications with licences, users and consumption KPIs — application
+    portfolio visibility and rationalisation, i.e. IT Application Management.
+- tag: Computers
+  spec_file: snow-software-computers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: '''Get Computer Details'', ''Update Computer Attributes'', ''Archive Computer'', ''Bulk Update
+    Status of Computers'''
+  reason: Full lifecycle management of computer asset records in the IT estate (create/update/archive/organisation
+    assignment) — hardware/compute asset and infrastructure management.
+- tag: Costs
+  spec_file: snow-software-costs-api-openapi.yml
+  capability_id: BC-600.80
+  capability_id_l1: BC-600
+  capability_name: IT Financial Management
+  confidence: 0.76
+  evidence: GET /api/sam/v1/licenses/{id}/costs  'Get License Costs'; 'Get a License Costs for an Organization';
+    schema LicenseCostSummary
+  reason: Software licence cost retrieval and per-organisation cost allocation/summary — IT spend visibility
+    and chargeback/showback, i.e. IT Financial Management rather than general accounting.
+- tag: Computer applications
+  spec_file: snow-software-computer-applications-api-openapi.yml
+  capability_id: BC-600.60
+  capability_id_l1: BC-600
+  capability_name: IT Application Management
+  confidence: 0.75
+  evidence: GET /api/sam/estate/v1/computers-applications  getComputersApplications; GET /api/sam/estate/v1/computers-application-usage  getApplicationUsages  Get
+    Application Usage Data
+  reason: Software asset management surface listing applications installed per computer and their usage
+    — application estate/lifecycle management within IT.
+- tag: Computer hardware
+  spec_file: snow-software-computer-hardware-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: GET /api/sam/estate/v1/computers/{id}/hardware  'Get Computer's Hardware Details'; schema
+    ComputerHardwareDetails
+  reason: Exposes hardware detail records for managed endpoints in the IT estate; this is IT infrastructure/hardware
+    asset visibility, not a line-of-business capability.
+- tag: Computer network adapters
+  spec_file: snow-software-computer-network-adapters-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.74
+  evidence: GET /api/sam/estate/v1/computers-networkadapters  'Get All Network Adapters'; schema ComputerNetworkAdapters
+  reason: Network hardware inventory across the managed estate — compute/network infrastructure visibility,
+    squarely IT Infrastructure Management.
+- tag: Computer processors
+  spec_file: snow-software-computer-processors-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.74
+  evidence: GET /api/sam/estate/v1/computers/{id}/hardware/cpu  'Get Computer's Processors'; 'Get Processor
+    Socket Details'
+  reason: CPU/socket inventory of managed machines (also the basis for license metrics); an IT infrastructure/hardware
+    estate capability.
+- tag: Computer virtual machines
+  spec_file: snow-software-computer-virtual-machines-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.74
+  evidence: GET /api/sam/estate/v1/computers/{id}/virtual-machines  'Get Computer's Virtual Machines';
+    schema ComputerVirtualMachineDetails
+  reason: Enumerates virtual machines hosted on a managed host — compute infrastructure inventory, not
+    a business-domain object.
+- tag: Computer drives
+  spec_file: snow-software-computer-drives-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: GET /api/sam/estate/v1/computers/{id}/hardware/harddrives  'Get Computer's Drives'; schema
+    ComputerDrive
+  reason: Read-only inventory of hardware components (hard and optical drives) discovered on managed computers
+    — part of Snow's IT hardware asset/estate visibility, best matched by IT Infrastructure Management
+    (compute/storage inventory). No business-domain reading fits.
+- tag: Computer logical disks
+  spec_file: snow-software-computer-logical-disks-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: GET /api/sam/estate/v1/computers/{id}/hardware/disks/logical  'Get Computer's Logical Disks';
+    schema ComputerLogicalDisk
+  reason: Storage configuration inventory for managed computers — IT infrastructure (storage) visibility
+    within the IT asset estate.
+- tag: Computer monitors
+  spec_file: snow-software-computer-monitors-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /api/sam/estate/v1/computers/{id}/hardware/monitors  'Get Computer's Monitors'; schema
+    ComputerMonitor
+  reason: Peripheral hardware inventory attached to managed computers; belongs to IT hardware/infrastructure
+    asset visibility.
