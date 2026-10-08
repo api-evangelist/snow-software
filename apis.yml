@@ -468,6 +468,12 @@ apis:
   - type: Documentation
     url: https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis
 common:
+  - type: Plans
+    url: plans/snow-software-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/snow-software-rate-limits.yml
+  - type: FinOps
+    url: finops/snow-software-finops.yml
   - type: CapabilityMap
     url: capabilities/snow-software-capability-edges.yml
     name: Snow Software Business Capability Map
