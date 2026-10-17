@@ -213,37 +213,6 @@ paths:
         - sam.license.r
 components:
   schemas:
-    FilteredResponseOfLicenseCost:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/LicenseCost'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
     Pagination:
       type: object
       description: The pagination details.
@@ -276,6 +245,53 @@ components:
           description: The total number of items.
           format: int32
           example: 100
+    Link:
+      type: object
+      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
+      additionalProperties: false
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+          description: The associated relative URL.
+          example: /api/custom-fields/v1/custom-fields
+        rel:
+          type:
+          - string
+          - 'null'
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type:
+          - string
+          - 'null'
+          description: The method to access related resources.
+          example: GET
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    FilteredResponseOfLicenseCost:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/LicenseCost'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
     LicenseCost:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -334,47 +350,20 @@ components:
             - 'null'
             description: The currency.
             example: USD
-    Link:
-      type: object
-      description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
-      additionalProperties: false
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-          description: The associated relative URL.
-          example: /api/custom-fields/v1/custom-fields
-        rel:
-          type:
-          - string
-          - 'null'
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type:
-          - string
-          - 'null'
-          description: The method to access related resources.
-          example: GET
-    ErrorResponse:
+    Error:
+      description: The error details.
       type: object
       required:
-      - error
+      - code
+      - message
       properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
     HateoasCollectionOfLicenseCost:
       allOf:
       - $ref: '#/components/schemas/FilteredResponseOfLicenseCost'
@@ -388,6 +377,17 @@ components:
             description: A collection of links to related resources.
             items:
               $ref: '#/components/schemas/Link'
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
     LicenseCostSummary:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'

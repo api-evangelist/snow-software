@@ -446,90 +446,6 @@ paths:
         - sam.license.crud
 components:
   schemas:
-    CreatedHateoasResponse:
-      allOf:
-      - $ref: '#/components/schemas/HateoasResponse'
-      - type: object
-        additionalProperties: false
-        properties:
-          id:
-            type: string
-            description: The unique ID of the resource.
-            format: guid
-    ListOfMaintenancePeriodRequest:
-      type: array
-      items:
-        $ref: '#/components/schemas/MaintenancePeriodRequest'
-    HateoasCollectionOfMaintenancePeriodCollection:
-      allOf:
-      - $ref: '#/components/schemas/FilteredResponseOfMaintenancePeriodCollection'
-      - type: object
-        additionalProperties: false
-        required:
-        - _links
-        properties:
-          _links:
-            type: array
-            description: A collection of links to related resources.
-            items:
-              $ref: '#/components/schemas/Link'
-    HateoasResponse:
-      type: object
-      description: Abstract class for IResource.
-      x-abstract: true
-      additionalProperties: false
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    Error:
-      description: The error details.
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The HTTP status code.
-        message:
-          type: string
-          description: The error message.
-    Pagination:
-      type: object
-      description: The pagination details.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 5
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 100
     Link:
       type: object
       description: Represents a hypermedia link referenced from a IResource, according to HATEOAS.
@@ -553,41 +469,6 @@ components:
           - 'null'
           description: The method to access related resources.
           example: GET
-    ErrorResponse:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-    FilteredResponseOfMaintenancePeriodCollection:
-      type: object
-      description: Filtered response.
-      additionalProperties: false
-      required:
-      - items
-      - pagination
-      properties:
-        items:
-          type: array
-          description: A collection of items.
-          items:
-            $ref: '#/components/schemas/MaintenancePeriodCollection'
-        pagination:
-          description: The pagination details.
-          oneOf:
-          - $ref: '#/components/schemas/Pagination'
-    HateoasResource:
-      type: object
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
     MaintenancePeriodRequest:
       type: object
       additionalProperties: false
@@ -643,6 +524,124 @@ components:
           description: The support cost.
           format: decimal
           example: 1000
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    HateoasResponse:
+      type: object
+      description: Abstract class for IResource.
+      x-abstract: true
+      additionalProperties: false
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    CreatedHateoasResponse:
+      allOf:
+      - $ref: '#/components/schemas/HateoasResponse'
+      - type: object
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+            description: The unique ID of the resource.
+            format: guid
+    ListOfMaintenancePeriodRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/MaintenancePeriodRequest'
+    HateoasCollectionOfMaintenancePeriodCollection:
+      allOf:
+      - $ref: '#/components/schemas/FilteredResponseOfMaintenancePeriodCollection'
+      - type: object
+        additionalProperties: false
+        required:
+        - _links
+        properties:
+          _links:
+            type: array
+            description: A collection of links to related resources.
+            items:
+              $ref: '#/components/schemas/Link'
+    FilteredResponseOfMaintenancePeriodCollection:
+      type: object
+      description: Filtered response.
+      additionalProperties: false
+      required:
+      - items
+      - pagination
+      properties:
+        items:
+          type: array
+          description: A collection of items.
+          items:
+            $ref: '#/components/schemas/MaintenancePeriodCollection'
+        pagination:
+          description: The pagination details.
+          oneOf:
+          - $ref: '#/components/schemas/Pagination'
+    MaintenancePeriod:
+      allOf:
+      - $ref: '#/components/schemas/CreatedHateoasResponse'
+      - type: object
+        additionalProperties: false
+        properties:
+          validFrom:
+            type:
+            - string
+            - 'null'
+            description: The valid form date.
+            format: date-time
+            example: '2024-01-01T00:00:00Z'
+          validTo:
+            type:
+            - string
+            - 'null'
+            description: The valid to date.
+            format: date-time
+            example: '2025-01-01T00:00:00Z'
+          hasUpgradeRights:
+            type: boolean
+            description: '```true``` if has upgrade rights; otherwise, ```false```.'
+            example: true
+          maintenanceCost:
+            type:
+            - number
+            - 'null'
+            description: The maintenance cost.
+            format: decimal
+            example: 1000
+          supportCost:
+            type:
+            - number
+            - 'null'
+            description: The support cost.
+            format: decimal
+            example: 1000
+          purchaseCurrency:
+            type:
+            - string
+            - 'null'
+            description: The purchase currency.
+            example: USD
+          invoiceReference:
+            type:
+            - string
+            - 'null'
+            description: The invoice reference.
+            example: INV12345
+          notes:
+            type:
+            - string
+            - 'null'
+            description: The notes.
+            example: Notes
     MaintenancePeriodCollection:
       allOf:
       - $ref: '#/components/schemas/HateoasResource'
@@ -718,62 +717,63 @@ components:
             - 'null'
             description: The purchase currency.
             example: USD
-    MaintenancePeriod:
-      allOf:
-      - $ref: '#/components/schemas/CreatedHateoasResponse'
-      - type: object
-        additionalProperties: false
-        properties:
-          validFrom:
-            type:
-            - string
-            - 'null'
-            description: The valid form date.
-            format: date-time
-            example: '2024-01-01T00:00:00Z'
-          validTo:
-            type:
-            - string
-            - 'null'
-            description: The valid to date.
-            format: date-time
-            example: '2025-01-01T00:00:00Z'
-          hasUpgradeRights:
-            type: boolean
-            description: '```true``` if has upgrade rights; otherwise, ```false```.'
-            example: true
-          maintenanceCost:
-            type:
-            - number
-            - 'null'
-            description: The maintenance cost.
-            format: decimal
-            example: 1000
-          supportCost:
-            type:
-            - number
-            - 'null'
-            description: The support cost.
-            format: decimal
-            example: 1000
-          purchaseCurrency:
-            type:
-            - string
-            - 'null'
-            description: The purchase currency.
-            example: USD
-          invoiceReference:
-            type:
-            - string
-            - 'null'
-            description: The invoice reference.
-            example: INV12345
-          notes:
-            type:
-            - string
-            - 'null'
-            description: The notes.
-            example: Notes
+    Error:
+      description: The error details.
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The HTTP status code.
+        message:
+          type: string
+          description: The error message.
+    HateoasResource:
+      type: object
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    Pagination:
+      type: object
+      description: The pagination details.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 5
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 100
   securitySchemes:
     BearerAuth:
       type: http

@@ -345,63 +345,6 @@ paths:
         - sam.computer.r
 components:
   schemas:
-    ErrorContent:
-      type: object
-      description: Details of error.
-      additionalProperties: false
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: Http error code.
-          format: int32
-          example: 400
-        message:
-          type:
-          - string
-          - 'null'
-          description: Additional error message.
-          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
-    FilteredResponseWithLinksOfUserApplicationUsage:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Generic response class supporting filtering and including links.
-        additionalProperties: false
-        required:
-        - items
-        - pagination
-        properties:
-          items:
-            type: array
-            description: A collection of items returned in the response.
-            items:
-              $ref: '#/components/schemas/UserApplicationUsage'
-          pagination:
-            description: The pagination details.
-            oneOf:
-            - $ref: '#/components/schemas/PaginationResponse'
-    FilteredResponseWithLinksOfComputerApplicationUsage:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Generic response class supporting filtering and including links.
-        additionalProperties: false
-        required:
-        - items
-        - pagination
-        properties:
-          items:
-            type: array
-            description: A collection of items returned in the response.
-            items:
-              $ref: '#/components/schemas/ComputerApplicationUsage'
-          pagination:
-            description: The pagination details.
-            oneOf:
-            - $ref: '#/components/schemas/PaginationResponse'
     Link:
       type: object
       required:
@@ -421,38 +364,6 @@ components:
           type: string
           description: The method to access related resources.
           example: GET
-    PaginationResponse:
-      type: object
-      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 10
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 240
     ErrorResponse:
       type: object
       description: Response representing error.
@@ -464,18 +375,6 @@ components:
           description: The error details.
           oneOf:
           - $ref: '#/components/schemas/ErrorContent'
-    BaseResponse:
-      type: object
-      description: Base response class.
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
     ComputerApplicationUsageSummary:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -505,25 +404,6 @@ components:
             description: The number of installations of the application.
             format: int32
             example: 10
-    FilteredResponseWithLinksOfComputerApplications:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Generic response class supporting filtering and including links.
-        additionalProperties: false
-        required:
-        - items
-        - pagination
-        properties:
-          items:
-            type: array
-            description: A collection of items returned in the response.
-            items:
-              $ref: '#/components/schemas/ComputerApplications'
-          pagination:
-            description: The pagination details.
-            oneOf:
-            - $ref: '#/components/schemas/PaginationResponse'
     ComputerApplicationUsage:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -593,25 +473,6 @@ components:
             - 'null'
             description: '```true``` if the application is installed on the computer; otherwise, ```false```.'
             example: true
-    FilteredResponseWithLinksOfComputerApplicationUsageSummary:
-      allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - type: object
-        description: Generic response class supporting filtering and including links.
-        additionalProperties: false
-        required:
-        - items
-        - pagination
-        properties:
-          items:
-            type: array
-            description: A collection of items returned in the response.
-            items:
-              $ref: '#/components/schemas/ComputerApplicationUsageSummary'
-          pagination:
-            description: The pagination details.
-            oneOf:
-            - $ref: '#/components/schemas/PaginationResponse'
     UserApplicationUsage:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -722,6 +583,126 @@ components:
             type: boolean
             description: '```true``` if the application is unbundled; otherwise, ```false```.'
             example: true
+    PaginationResponse:
+      type: object
+      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 10
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 240
+    FilteredResponseWithLinksOfUserApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/UserApplicationUsage'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    FilteredResponseWithLinksOfComputerApplications:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerApplications'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    FilteredResponseWithLinksOfComputerApplicationUsage:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerApplicationUsage'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
+    FilteredResponseWithLinksOfComputerApplicationUsageSummary:
+      allOf:
+      - $ref: '#/components/schemas/BaseResponse'
+      - type: object
+        description: Generic response class supporting filtering and including links.
+        additionalProperties: false
+        required:
+        - items
+        - pagination
+        properties:
+          items:
+            type: array
+            description: A collection of items returned in the response.
+            items:
+              $ref: '#/components/schemas/ComputerApplicationUsageSummary'
+          pagination:
+            description: The pagination details.
+            oneOf:
+            - $ref: '#/components/schemas/PaginationResponse'
     ComputerApplicationsDetails:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -852,17 +833,26 @@ components:
             type: boolean
             description: '```true``` if the application is licenced individualy; otherwise, ```false```.'
             example: true
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type:
+          - string
+          - 'null'
+          description: Additional error message.
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
   responses:
-    '404':
-      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
     '500':
       description: 'Internal Server Error: Your request failed due to an internal error.'
       content:
@@ -883,6 +873,16 @@ components:
             error:
               code: 400
               message: Filter field name needs to be formatted as a string.
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
   securitySchemes:
     BearerAuth:
       type: http

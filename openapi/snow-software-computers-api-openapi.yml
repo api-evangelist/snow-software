@@ -292,168 +292,40 @@ paths:
       x-operation-id-source: normalized
       x-operation-id-original: updateComputer
 components:
+  responses:
+    '400':
+      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 400
+              message: Filter field name needs to be formatted as a string.
+    '204':
+      description: 'No Content: Your request succeeded, but the response message was empty.'
+    '500':
+      description: 'Internal Server Error: Your request failed due to an internal error.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 500
+              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
+    '404':
+      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: 404
+              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
   schemas:
-    BaseResponse:
-      type: object
-      description: Base response class.
-      additionalProperties: false
-      required:
-      - _links
-      properties:
-        _links:
-          type: array
-          description: A collection of links to related resources.
-          items:
-            $ref: '#/components/schemas/Link'
-    ComputerStatusUpdateError:
-      type: object
-      properties:
-        Message:
-          type: string
-    ErrorContent:
-      type: object
-      description: Details of error.
-      additionalProperties: false
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: Http error code.
-          format: int32
-          example: 400
-        message:
-          type:
-          - string
-          - 'null'
-          description: Additional error message.
-          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
-    ComputerWrite:
-      type: object
-      properties:
-        purchaseDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date on which the computer was purchased.
-          example: '2024-03-24T12:52:20Z'
-        purchaseValue:
-          type:
-          - number
-          - 'null'
-          format: decimal
-          description: The amount for which the computer was purchased.
-          example: 2461.32
-        purchaseCurrency:
-          type:
-          - string
-          - 'null'
-          description: The currency in which the computer was purchased.
-          example: EUR
-        vendor:
-          type:
-          - string
-          - 'null'
-          description: The vendor of the computer.
-          example: Dell
-        invoiceReference:
-          type:
-          - string
-          - 'null'
-          description: The invoice reference for the purchase of the computer.
-          example: 2024/03/63729P
-        statusCode:
-          type:
-          - string
-          - 'null'
-          description: The status of the computer.
-          example: Active
-        organizationId:
-          type:
-          - string
-          - 'null'
-          format: guid
-          description: The unique ID of the organization to which the computer belongs.
-          example: 293cf227-bf7f-4919-b664-791f3f49e1ef
-        isQuarantineManagementDisabled:
-          type:
-          - boolean
-          - 'null'
-          description: '```true``` if the computer has quarantine management disabled; otherwise, ```false```.'
-          example: true
-        isAutoEditingDisabled:
-          type:
-          - boolean
-          - 'null'
-          description: '```true``` if the auto editing is disabled for the computer; otherwise, ```false```.'
-          example: false
-        socketCount:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          description: The number of sockets in the computer.
-          example: 2
-        hostComputerId:
-          type:
-          - string
-          - 'null'
-          format: guid
-          description: The unique ID of the host computer if present.
-          example: 8FD97CF1-FB71-469B-ACEA-39314EC26213
-        siblingComputerId:
-          type:
-          - string
-          - 'null'
-          format: guid
-          description: The unique ID of the sibling computer if present.
-          example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
-        isVirtual:
-          type:
-          - boolean
-          - 'null'
-          description: '```true``` if the computer is virtual; otherwise, ```false```.'
-          example: false
-        isSocketCountManualOverrideEnabled:
-          type:
-          - boolean
-          - 'null'
-          description: '```true``` if the socket count manual override of the computer is enabled; otherwise, ```false```.'
-          example: true
-        chipModulesPerProcessor:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          description: The number of chip modules per processor.
-          example: 2
-        notes:
-          type:
-          - string
-          - 'null'
-          description: The notes associated with the purchase of the computer.
-          example: Purchased in a set with printer
-        securityCode:
-          type:
-          - string
-          - 'null'
-          description: The security code for the computer.
-          example: A563Z
-        processorValueUnit:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          description: The processor value unit of the computer.
-          example: 32
-        biosSerialNumber:
-          type:
-          - string
-          - 'null'
-          description: The BIOS serial number of the computer.
-          example: 43-01-10-TX
     FilteredResponseWithLinksOfComputer:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -473,36 +345,6 @@ components:
             description: The pagination details.
             oneOf:
             - $ref: '#/components/schemas/PaginationResponse'
-    PatchRequest:
-      type: array
-      items:
-        oneOf:
-        - $ref: '#/components/schemas/JSONPatchRequestAddReplace'
-    BulkUpdateComputerStatusResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ComputerStatusUpdateError'
-        message:
-          type: string
-        processedCount:
-          type: integer
-        skippedCount:
-          type: integer
-    BulkUpdateComputerStatusBody:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - Active
-          - Inactive
-          - Quarantined
-          description: Target status value for the bulk update.
-      required:
-      - Status
     Computer:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -639,58 +481,19 @@ components:
             description: The number of cores in the computer.
             format: int32
             example: 8
-    PaginationResponse:
-      type: object
-      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
-      additionalProperties: false
-      required:
-      - page_size
-      - page_number
-      properties:
-        page_size:
-          type: integer
-          description: The page size you requested.
-          format: int32
-          example: 25
-        page_number:
-          type: integer
-          description: The page number you requested.
-          format: int32
-          example: 1
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: The total number of pages.
-          format: int32
-          example: 10
-        total_items:
-          type:
-          - integer
-          - 'null'
-          description: The total number of items.
-          format: int32
-          example: 240
-    BulkUpdateComputerStatusRequest:
+    BulkUpdateComputerStatusResponse:
       type: object
       properties:
-        scope:
-          type: string
-          enum:
-          - Only
-          description: Scope for the bulk status update. Must be 'Only'.
-        ids:
+        errors:
           type: array
           items:
-            type: string
-            format: uuid
-          description: List of computer IDs to update.
-        body:
-          $ref: '#/components/schemas/BulkUpdateComputerStatusBody'
-      required:
-      - scope
-      - ids
-      - body
+            $ref: '#/components/schemas/ComputerStatusUpdateError'
+        message:
+          type: string
+        processedCount:
+          type: integer
+        skippedCount:
+          type: integer
     JSONPatchRequestAddReplace:
       type: object
       properties:
@@ -717,36 +520,6 @@ components:
       - value
       - op
       - path
-    Link:
-      type: object
-      required:
-      - href
-      - rel
-      - method
-      properties:
-        href:
-          type: string
-          description: The associated relative URL.
-          example: api/computers/v1/...
-        rel:
-          type: string
-          description: Specifies the relationship between the current document and the linked document/resource.
-          example: self
-        method:
-          type: string
-          description: The method to access related resources.
-          example: GET
-    ErrorResponse:
-      type: object
-      description: Response representing error.
-      additionalProperties: false
-      required:
-      - error
-      properties:
-        error:
-          description: The error details.
-          oneOf:
-          - $ref: '#/components/schemas/ErrorContent'
     ComputerDetails:
       allOf:
       - $ref: '#/components/schemas/BaseResponse'
@@ -1087,39 +860,266 @@ components:
             description: The number of cores in the computer.
             format: int32
             example: 8
-  responses:
-    '404':
-      description: 'Not Found: The operation you requested failed because a resource associated with your request could not be found.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 404
-              message: Resource with ID '32aeda0a-80dc-475a-907f-2d250a3a8614' not found.
-    '204':
-      description: 'No Content: Your request succeeded, but the response message was empty.'
-    '500':
-      description: 'Internal Server Error: Your request failed due to an internal error.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 500
-              message: The service encountered an unexpected condition that prevented it from fulfilling the request.
-    '400':
-      description: 'Bad Request: Your request is invalid or improperly formed. Consequently, the API server could not understand your request.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error:
-              code: 400
-              message: Filter field name needs to be formatted as a string.
+    BulkUpdateComputerStatusBody:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Quarantined
+          description: Target status value for the bulk update.
+      required:
+      - Status
+    PatchRequest:
+      type: array
+      items:
+        oneOf:
+        - $ref: '#/components/schemas/JSONPatchRequestAddReplace'
+    ErrorResponse:
+      type: object
+      description: Response representing error.
+      additionalProperties: false
+      required:
+      - error
+      properties:
+        error:
+          description: The error details.
+          oneOf:
+          - $ref: '#/components/schemas/ErrorContent'
+    Link:
+      type: object
+      required:
+      - href
+      - rel
+      - method
+      properties:
+        href:
+          type: string
+          description: The associated relative URL.
+          example: api/computers/v1/...
+        rel:
+          type: string
+          description: Specifies the relationship between the current document and the linked document/resource.
+          example: self
+        method:
+          type: string
+          description: The method to access related resources.
+          example: GET
+    ComputerStatusUpdateError:
+      type: object
+      properties:
+        Message:
+          type: string
+    ComputerWrite:
+      type: object
+      properties:
+        purchaseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date on which the computer was purchased.
+          example: '2024-03-24T12:52:20Z'
+        purchaseValue:
+          type:
+          - number
+          - 'null'
+          format: decimal
+          description: The amount for which the computer was purchased.
+          example: 2461.32
+        purchaseCurrency:
+          type:
+          - string
+          - 'null'
+          description: The currency in which the computer was purchased.
+          example: EUR
+        vendor:
+          type:
+          - string
+          - 'null'
+          description: The vendor of the computer.
+          example: Dell
+        invoiceReference:
+          type:
+          - string
+          - 'null'
+          description: The invoice reference for the purchase of the computer.
+          example: 2024/03/63729P
+        statusCode:
+          type:
+          - string
+          - 'null'
+          description: The status of the computer.
+          example: Active
+        organizationId:
+          type:
+          - string
+          - 'null'
+          format: guid
+          description: The unique ID of the organization to which the computer belongs.
+          example: 293cf227-bf7f-4919-b664-791f3f49e1ef
+        isQuarantineManagementDisabled:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if the computer has quarantine management disabled; otherwise, ```false```.'
+          example: true
+        isAutoEditingDisabled:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if the auto editing is disabled for the computer; otherwise, ```false```.'
+          example: false
+        socketCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: The number of sockets in the computer.
+          example: 2
+        hostComputerId:
+          type:
+          - string
+          - 'null'
+          format: guid
+          description: The unique ID of the host computer if present.
+          example: 8FD97CF1-FB71-469B-ACEA-39314EC26213
+        siblingComputerId:
+          type:
+          - string
+          - 'null'
+          format: guid
+          description: The unique ID of the sibling computer if present.
+          example: f2c35e21-aba4-4e0d-8c14-f3033e7b1fb7
+        isVirtual:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if the computer is virtual; otherwise, ```false```.'
+          example: false
+        isSocketCountManualOverrideEnabled:
+          type:
+          - boolean
+          - 'null'
+          description: '```true``` if the socket count manual override of the computer is enabled; otherwise, ```false```.'
+          example: true
+        chipModulesPerProcessor:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: The number of chip modules per processor.
+          example: 2
+        notes:
+          type:
+          - string
+          - 'null'
+          description: The notes associated with the purchase of the computer.
+          example: Purchased in a set with printer
+        securityCode:
+          type:
+          - string
+          - 'null'
+          description: The security code for the computer.
+          example: A563Z
+        processorValueUnit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: The processor value unit of the computer.
+          example: 32
+        biosSerialNumber:
+          type:
+          - string
+          - 'null'
+          description: The BIOS serial number of the computer.
+          example: 43-01-10-TX
+    PaginationResponse:
+      type: object
+      description: Generic response class for the pagination part. Properties are annotated using DataMemberAttribute so that we're aligned with REST style guide regarding the json payload.
+      additionalProperties: false
+      required:
+      - page_size
+      - page_number
+      properties:
+        page_size:
+          type: integer
+          description: The page size you requested.
+          format: int32
+          example: 25
+        page_number:
+          type: integer
+          description: The page number you requested.
+          format: int32
+          example: 1
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: The total number of pages.
+          format: int32
+          example: 10
+        total_items:
+          type:
+          - integer
+          - 'null'
+          description: The total number of items.
+          format: int32
+          example: 240
+    BaseResponse:
+      type: object
+      description: Base response class.
+      additionalProperties: false
+      required:
+      - _links
+      properties:
+        _links:
+          type: array
+          description: A collection of links to related resources.
+          items:
+            $ref: '#/components/schemas/Link'
+    ErrorContent:
+      type: object
+      description: Details of error.
+      additionalProperties: false
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: Http error code.
+          format: int32
+          example: 400
+        message:
+          type:
+          - string
+          - 'null'
+          description: Additional error message.
+          example: 'Invalid GUID format: 123. All computer IDs must be in valid GUID format (00000000-0000-0000-0000-000000000000).'
+    BulkUpdateComputerStatusRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          enum:
+          - Only
+          description: Scope for the bulk status update. Must be 'Only'.
+        ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of computer IDs to update.
+        body:
+          $ref: '#/components/schemas/BulkUpdateComputerStatusBody'
+      required:
+      - scope
+      - ids
+      - body
   securitySchemes:
     BearerAuth:
       type: http
