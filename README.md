@@ -1,4 +1,4 @@
-# Snow Software (snow-software)
+# Snow Software
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,137 +66,217 @@
 
 Snow Software (now Flexera Snow) is an IT asset and SaaS management platform providing visibility into software licenses, cloud spend, SaaS usage, and hardware assets across the enterprise. Snow Atlas is the cloud-native platform offering SAM (Software Asset Management), SaaS Management, Cloud License Management, and Commander for hybrid IT. The Snow Atlas REST APIs enable programmatic access to licenses, computers, SaaS applications, subscriptions, user accounts, agreements, and audit logs.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/apis.yml)
+**Areas:** Cloud License Management · FinOps · IT Asset Management · SaaS Management · Software Asset Management
 
-## Scope
+## Snow Software on APIs.io
 
-- **Type:** Index
+Everything profiled for Snow Software is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/snow-software/](https://apis.io/providers/snow-software/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (31)
 
-- Cloud License Management
-- FinOps
-- IT Asset Management
-- SaaS Management
-- Software Asset Management
+- [Snow Software Applications API](https://apis.io/apis/snow-software/snow-software-applications-api/) — The Applications API from Snow Software — 10 operation(s) for applications.
+- [Snow Software Assignments API](https://apis.io/apis/snow-software/snow-software-assignments-api/) — The Assignments API from Snow Software — 12 operation(s) for assignments.
+- [Snow Software Compliance API](https://apis.io/apis/snow-software/snow-software-compliance-api/) — The Compliance API from Snow Software — 3 operation(s) for compliance.
+- [Snow Software Computer application metering API](https://apis.io/apis/snow-software/snow-software-computer-application-metering-api/) — The Computer application metering API from Snow Software — 2 operation(s) for computer application metering.
+- [Snow Software Computer applications API](https://apis.io/apis/snow-software/snow-software-computer-applications-api/) — The Computer applications API from Snow Software — 6 operation(s) for computer applications.
+- [Snow Software Computer contracts API](https://apis.io/apis/snow-software/snow-software-computer-contracts-api/) — The Computer contracts API from Snow Software — 1 operation(s) for computer contracts.
+- [Snow Software Computer costs API](https://apis.io/apis/snow-software/snow-software-computer-costs-api/) — The Computer costs API from Snow Software — 1 operation(s) for computer costs.
+- [Snow Software Computer display adapter API](https://apis.io/apis/snow-software/snow-software-computer-display-adapter-api/) — The Computer display adapter API from Snow Software — 1 operation(s) for computer display adapter.
+- [Snow Software Computer drives API](https://apis.io/apis/snow-software/snow-software-computer-drives-api/) — The Computer drives API from Snow Software — 2 operation(s) for computer drives.
+- [Snow Software Computer environment variables API](https://apis.io/apis/snow-software/snow-software-computer-environment-variables-api/) — The Computer environment variables API from Snow Software — 2 operation(s) for computer environment variables.
+- [Snow Software Computer hardware API](https://apis.io/apis/snow-software/snow-software-computer-hardware-api/) — The Computer hardware API from Snow Software — 1 operation(s) for computer hardware.
+- [Snow Software Computer logical disks API](https://apis.io/apis/snow-software/snow-software-computer-logical-disks-api/) — The Computer logical disks API from Snow Software — 1 operation(s) for computer logical disks.
+- [Snow Software Computer logon history API](https://apis.io/apis/snow-software/snow-software-computer-logon-history-api/) — The Computer logon history API from Snow Software — 3 operation(s) for computer logon history.
+- [Snow Software Computer monitors API](https://apis.io/apis/snow-software/snow-software-computer-monitors-api/) — The Computer monitors API from Snow Software — 1 operation(s) for computer monitors.
+- [Snow Software Computer network adapters API](https://apis.io/apis/snow-software/snow-software-computer-network-adapters-api/) — The Computer network adapters API from Snow Software — 2 operation(s) for computer network adapters.
+- [Snow Software Computer processors API](https://apis.io/apis/snow-software/snow-software-computer-processors-api/) — The Computer processors API from Snow Software — 2 operation(s) for computer processors.
+- [Snow Software Computer registries API](https://apis.io/apis/snow-software/snow-software-computer-registries-api/) — The Computer registries API from Snow Software — 1 operation(s) for computer registries.
+- [Snow Software Computer remote clients API](https://apis.io/apis/snow-software/snow-software-computer-remote-clients-api/) — The Computer remote clients API from Snow Software — 1 operation(s) for computer remote clients.
+- [Snow Software Computer virtual machines API](https://apis.io/apis/snow-software/snow-software-computer-virtual-machines-api/) — The Computer virtual machines API from Snow Software — 1 operation(s) for computer virtual machines.
+- [Snow Software Computers API](https://apis.io/apis/snow-software/snow-software-computers-api/) — The Computers API from Snow Software — 6 operation(s) for computers.
+- [Snow Software Costs API](https://apis.io/apis/snow-software/snow-software-costs-api/) — The Costs API from Snow Software — 3 operation(s) for costs.
+- [Snow Software Coverage API](https://apis.io/apis/snow-software/snow-software-coverage-api/) — The Coverage API from Snow Software — 3 operation(s) for coverage.
+- [Snow Software Entitlements API](https://apis.io/apis/snow-software/snow-software-entitlements-api/) — The Entitlements API from Snow Software — 4 operation(s) for entitlements.
+- [Snow Software Licenses API](https://apis.io/apis/snow-software/snow-software-licenses-api/) — The Licenses API from Snow Software — 3 operation(s) for licenses.
+- [Snow Software Periods API](https://apis.io/apis/snow-software/snow-software-periods-api/) — The Periods API from Snow Software — 3 operation(s) for periods.
+- [Snow Software Policies API](https://apis.io/apis/snow-software/snow-software-policies-api/) — The Policies API from Snow Software — 4 operation(s) for policies.
+- [Snow Software Subscriptions API](https://apis.io/apis/snow-software/snow-software-subscriptions-api/) — The Subscriptions API from Snow Software — 4 operation(s) for subscriptions.
+- [Snow Software Tasks API](https://apis.io/apis/snow-software/snow-software-tasks-api/) — The Tasks API from Snow Software — 1 operation(s) for tasks.
+- [Snow Software Tracking API](https://apis.io/apis/snow-software/snow-software-tracking-api/) — The Tracking API from Snow Software — 6 operation(s) for tracking.
+- [Snow Software Transfers API](https://apis.io/apis/snow-software/snow-software-transfers-api/) — The Transfers API from Snow Software — 7 operation(s) for transfers.
+- [Snow Software Upgrades API](https://apis.io/apis/snow-software/snow-software-upgrades-api/) — The Upgrades API from Snow Software — 2 operation(s) for upgrades.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-27
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Snow Atlas SAM Licenses API
+Model Context Protocol servers that expose the API to agents.
 
-The Snow Atlas SAM Licenses API provides programmatic access to software license data including license upgrades, application license transfers, computer license tracking, license policies, maintenance periods, purchase orders, and license metrics. Supports filtering and pagination.
+- [snow-software](https://apis.io/servers/snow-software/snow-software/)
 
-- **Human URL:** [https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis](https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis)
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- IT Asset Management
-- License Management
-- Software Asset Management
+- [Snow Software Agentic Access](https://apis.io/agentic-access/snow-software/snow-software-agentic-access/)
 
-#### Properties
+#### JSON Schema (2)
 
-- [Documentation](https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-licenses-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/snow-software-computers.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Postman Collection](collections/snow-software-licenses.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-licenses.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/snow-software-saas-applications.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-saas-applications.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/snow-software-saas-subscriptions.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-saas-subscriptions.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The data models the API reads and writes.
 
-### Snow Atlas SaaS Applications API
+- [Snow Atlas Software License](https://apis.io/schemas/snow-software/snow-software-license/)
+- [Snow Atlas SaaS Application](https://apis.io/schemas/snow-software/snow-software-saas-application/)
 
-The Snow Atlas SaaS Applications API provides visibility into SaaS applications in use across the organization. Enables listing, updating, and managing SaaS apps, application KPIs, users, and consumption data for SaaS spend optimization.
+#### JSON Structure (1)
 
-- **Human URL:** [https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis](https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis)
+Data models expressed in JSON Structure.
 
-#### Tags
+- [Snow Software Atlas Structure](https://apis.io/json-structure/snow-software/snow-software-atlas-structure/)
 
-- SaaS Management
-- Software Asset Management
-- Spend Optimization
+#### JSON-LD (1)
 
-#### Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Documentation](https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-saas-applications-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/snow-software-computers.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Postman Collection](collections/snow-software-licenses.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-licenses.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/snow-software-saas-applications.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-saas-applications.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/snow-software-saas-subscriptions.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-saas-subscriptions.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Snow Software Context](https://apis.io/jsonld/snow-software/snow-software-context/)
 
-### Snow Atlas SaaS Subscriptions API
+#### Vocabulary (1)
 
-The Snow Atlas SaaS Subscriptions API manages SaaS subscription data including subscription details, costs, renewal dates, and vendor information for enterprise SaaS portfolio management.
+The provider's domain terms, defined.
 
-- **Human URL:** [https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis](https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis)
+- [Snow Software Vocabulary](https://apis.io/vocabularies/snow-software/snow-software-vocabulary/)
 
-#### Tags
+#### Examples (1)
 
-- Contract Management
-- SaaS Management
-- Subscription Management
+Example requests and responses.
 
-#### Properties
+- [Snow Software Get Saas Applications Example](https://apis.io/examples/snow-software/snow-software-get-saas-applications-example/)
 
-- [Documentation](https://docs.flexera.com/snow-atlas/snow-atlas-api/saas-apis)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-saas-subscriptions-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/snow-software-computers.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Postman Collection](collections/snow-software-licenses.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-licenses.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/snow-software-saas-applications.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-saas-applications.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/snow-software-saas-subscriptions.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-saas-subscriptions.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Collections (34)
 
-### Snow Atlas SAM Computers API
+Postman and Open Collection request collections.
 
-The Snow Atlas SAM Computers API provides access to computer inventory data including hardware assets, application metering per computer, installed software, update history, custom values, and bulk status management for IT asset lifecycle management.
+- [SAM: Computers Applications API](https://apis.io/collections/snow-software/open-snow-software-applications-api/)
+- [SAM: Computers Applications Assignments API](https://apis.io/collections/snow-software/open-snow-software-assignments-api/)
+- [SAM: Computers Applications Compliance API](https://apis.io/collections/snow-software/open-snow-software-compliance-api/)
+- [SAM: Computers Applications Computer application metering API](https://apis.io/collections/snow-software/open-snow-software-computer-application-metering-api/)
+- [SAM: Computers Applications Computer applications API](https://apis.io/collections/snow-software/open-snow-software-computer-applications-api/)
+- [SAM: Computers Applications Computer contracts API](https://apis.io/collections/snow-software/open-snow-software-computer-contracts-api/)
+- [SAM: Computers Applications Computer costs API](https://apis.io/collections/snow-software/open-snow-software-computer-costs-api/)
+- [SAM: Computers Applications Computer display adapter API](https://apis.io/collections/snow-software/open-snow-software-computer-display-adapter-api/)
+- [SAM: Computers Applications Computer drives API](https://apis.io/collections/snow-software/open-snow-software-computer-drives-api/)
+- [SAM: Computers Applications Computer environment variables API](https://apis.io/collections/snow-software/open-snow-software-computer-environment-variables-api/)
+- [SAM: Computers Applications Computer hardware API](https://apis.io/collections/snow-software/open-snow-software-computer-hardware-api/)
+- [SAM: Computers Applications Computer logical disks API](https://apis.io/collections/snow-software/open-snow-software-computer-logical-disks-api/)
+- [SAM: Computers Applications Computer logon history API](https://apis.io/collections/snow-software/open-snow-software-computer-logon-history-api/)
+- [SAM: Computers Applications Computer monitors API](https://apis.io/collections/snow-software/open-snow-software-computer-monitors-api/)
+- [SAM: Computers Applications Computer network adapters API](https://apis.io/collections/snow-software/open-snow-software-computer-network-adapters-api/)
+- [SAM: Computers Applications Computer processors API](https://apis.io/collections/snow-software/open-snow-software-computer-processors-api/)
+- [SAM: Computers Applications Computer registries API](https://apis.io/collections/snow-software/open-snow-software-computer-registries-api/)
+- [SAM: Computers Applications Computer remote clients API](https://apis.io/collections/snow-software/open-snow-software-computer-remote-clients-api/)
+- [SAM: Computers Applications Computer virtual machines API](https://apis.io/collections/snow-software/open-snow-software-computer-virtual-machines-api/)
+- [SAM: Applications Computers API](https://apis.io/collections/snow-software/open-snow-software-computers-api/)
+- [SAM: Computers Applications Costs API](https://apis.io/collections/snow-software/open-snow-software-costs-api/)
+- [SAM: Computers Applications Coverage API](https://apis.io/collections/snow-software/open-snow-software-coverage-api/)
+- [SAM: Computers Applications Entitlements API](https://apis.io/collections/snow-software/open-snow-software-entitlements-api/)
+- [SAM: Licenses](https://apis.io/collections/snow-software/open-snow-software-licenses/)
+- [SAM: Computers Applications Licenses API](https://apis.io/collections/snow-software/open-snow-software-licenses-api/)
+- …and 9 more published on APIs.io
 
-- **Human URL:** [https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis](https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis)
+#### Governance rules (2)
 
-#### Tags
+Spectral rulesets for the provider's contracts.
 
-- Hardware Asset Management
-- IT Asset Management
-- Inventory
+- [Snow Software — jsonschema rules](https://apis.io/rules/snow-software/snow-software-jsonschema-spectral-rules/)
+- [Snow Software API Rules](https://apis.io/rules/snow-software/snow-software-rules/)
 
-#### Properties
+#### Security (2)
 
-- [Documentation](https://docs.flexera.com/snow-atlas/snow-atlas-api/sam-core-apis)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/snow-software/refs/heads/main/openapi/snow-software-computers-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/snow-software-computers.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Postman Collection](collections/snow-software-licenses.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-licenses.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/snow-software-saas-applications.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-saas-applications.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/snow-software-saas-subscriptions.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/snow-software-saas-subscriptions.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Snow Software Authentication](https://apis.io/security/snow-software/snow-software-authentication/)
+- [Snow Software Domain Security](https://apis.io/security/snow-software/snow-software-domain-security/)
 
-- [LinkedIn](https://www.linkedin.com/company/snow-software-ab)
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Snow Software Plans Pricing](https://apis.io/plans/snow-software/snow-software-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Snow Software Rate Limits](https://apis.io/rate-limits/snow-software/snow-software-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Snow Software Finops](https://apis.io/finops/snow-software/snow-software-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.snowsoftware.com)
 - [Documentation](https://docs.snowsoftware.com/)
-- [Developer Portal](https://docs.flexera.com/snow-atlas/snow-atlas-api/get-started-with-apis)
-- [GitHub Organization](https://github.com/SnowSoftware)
-- [Integrations](https://github.com/SnowSoftware/snowatlas-integrations)
-- [Blog](https://www.snowsoftware.com/blog)
 - [Support](https://community.snowsoftware.com)
-- [Login](https://app.snowsoftware.io)
-- [About](https://www.snowsoftware.com/company)
+- [Blog](https://www.snowsoftware.com/blog)
+- [GitHub](https://github.com/SnowSoftware)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.3** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 65.0 |
+| Contract quality | 61.4 |
+| Contract governance | 13.6 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 11.8 |
+
+**Agent readiness 48.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | mostly (partial credit) |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/snow-software/](https://apis.io/providers/snow-software/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Snow Software: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/snow-software/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
